@@ -13,7 +13,7 @@ function AdminSettings(){
     const [lname,setLName] = useState('')
     const [email, setEmail] = useState('')
     const [contactNo,setContactNo] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
     const [passwordRep,setPasswordRep] = useState('');
     const navigate = useNavigate();
     const loggedInUser = localStorage.getItem("token");

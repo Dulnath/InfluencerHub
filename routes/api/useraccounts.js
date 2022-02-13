@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserAccount = require('../../models/UserAccount');
+const { json } = require('body-parser');
 
 router.get('/',(req,res) => {
     UserAccount.find()
@@ -22,6 +23,7 @@ router.post('/', async (req, res) => {
             phoneNo: req.body.contactNo,
             type:'admin',
             isActive:'true',
+			isFirstLogin:'true',
 			password: newPassword,
 		})
 		res.json({ status: 'ok' })
@@ -31,15 +33,14 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-	const user = await UserAccount.findOne({
+	const user = await UserAccount.find({
 		email: req.body.email,
-		userName: req.body.firstName
+		userName: req.body.firstName,
 	})
 
 	if (!user) {
 		return { status: 'error', error: 'Invalid login' }
 	}
-
 	const isPasswordValid = await bcrypt.compare(
 		req.body.password,
 		user.password
@@ -48,16 +49,32 @@ router.post('/login', async (req, res) => {
 	if (isPasswordValid) {
 		const token = jwt.sign(
 			{
-				name: user.firstName,
+				name: user.userName,
 				email: user.email,
 			},
 			'secret123'
 		)
-
-		return res.json({ status: 'ok', user: token })
+		return res.json({ status: 'ok', user: token})
 	} else {
-		return res.json({ status: 'error', user: false })
+		return res.json({ status: 'error', user: false})
 	}
+})
+
+router.put('/update/:id',async(req,res,next)=>{
+	const newPassword = await bcrypt.hash(req.body.password, 10);
+	UserAccount.findByIdAndUpdate(req.params.id,{
+		$set: {
+			'password':newPassword,
+			'isFirstLogin':'false'
+		}
+	},(error,data)=>{
+		if(error){
+			return next(error);
+		}else{
+			res.json(data);
+			console.log('Password updated');
+		}
+	})
 })
 
 module.exports = router;

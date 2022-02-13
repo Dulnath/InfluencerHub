@@ -29,10 +29,12 @@ function AdminLogin(){
 		const data = await response.json()
 
 		if (data.user) {
+            console.log(data.user);
             const currentPath = window.location.pathname;
 			localStorage.setItem('token', data.user)
 			alert('Login successful')
-			if(currentPath === '/dashboard'){
+
+            if(currentPath === '/dashboard'){
                 refreshPage();
             }else{
                 navigate('/dashboard');

@@ -19,7 +19,6 @@ class Home extends React.Component{
         if(loggedInUser){
             console.log('user is logged in');
             this.setState({isLogged:true});
-            console.log(this.isLogged);
         }
     }
     

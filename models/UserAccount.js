@@ -42,6 +42,10 @@ const UserAccountSchema = new Schema({
         type:String,
         required:false
     },
+    isFirstLogin:{
+        type:Boolean,
+        required:true
+    },
     isActive:{
         type:Boolean,
         required:true
