@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Container, Button, Form} from 'react-bootstrap'
-import mongoose from 'mongoose'
+
 
 function FirstLogin(){
     const navigate = useNavigate();
@@ -22,7 +22,9 @@ function FirstLogin(){
 
         const userToken = localStorage.getItem("token");
         const user = parseJwt(userToken);
+        localStorage.clear();
         const id = user.id;
+        const email = user.email;
         console.log(id);
         
         const response = await fetch('http://localhost:5000/api/useraccounts/firstlogin/'+id, {
@@ -31,7 +33,8 @@ function FirstLogin(){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    password
+                    password,
+                    email
                 }),
         })
 
@@ -39,8 +42,13 @@ function FirstLogin(){
         
 
         if (data.status === 'ok') {
+            navigate('/'); 
             console.log('password updated');
-            navigate('../dashboard');  
+        }else if(data.status === 'duplicate'){
+            console.log('new password cannot be same as old password') 
+            navigate('/');
+            alert('new password cannot be same as old password');
+            
         }else{
             console.log('could not update password')
         }

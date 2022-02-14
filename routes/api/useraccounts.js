@@ -42,7 +42,7 @@ router.post('/login', async (req, res) => {
 	})
 
 	if (!user) {
-		return { status: 'error', error: 'Invalid login' }
+		return res.json({ status: 'error', error: 'Invalid login' })
 	}
 
 	const isPasswordValid = await bcrypt.compare(
@@ -70,20 +70,38 @@ router.post('/login', async (req, res) => {
 router.put('/firstlogin/:id',async (req,res) =>{
 	try{
 		const password = req.body.password;
-		console.log(password);
-		const salt = bcrypt.genSaltSync(10);
-		const newPassword = await bcrypt.hash(password, salt);
-		console.log(newPassword);
-		await UserAccount.findByIdAndUpdate(req.params.id,{
-			password: newPassword,
-			isFirstLogin:'false'
-		},res.json({ status: 'ok' }))
+
+		const user = await UserAccount.findOne({
+			email: req.body.email,
+		})
+
+		if (!user) {
+			return { status: 'error', error: 'Invalid login' }
+		}
+
+		const isPasswordValid = await bcrypt.compare(
+			req.body.password,
+			user.password
+		);
+
+
+		if(isPasswordValid){
+			console.log('duplicate password');
+			return res.json({ status: 'duplicate', error: 'duplicate password' });
+		}else{
+			console.log(password);
+			const salt = bcrypt.genSaltSync(10);
+			const newPassword = await bcrypt.hash(password, salt);
+			console.log(newPassword);
+			await UserAccount.findByIdAndUpdate(req.params.id,{
+				password: newPassword,
+				isFirstLogin:'false'
+			},res.json({ status: 'ok' }))
+		}
 	}catch(err){
 		res.json({ status: 'error'});
 		console.log(err);
 	}
-	
-		
 })
 
 module.exports = router;
