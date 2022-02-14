@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserAccount = require('../../models/UserAccount');
-const { json } = require('body-parser');
+
 
 router.get('/',(req,res) => {
     UserAccount.find()
@@ -14,7 +14,9 @@ router.get('/',(req,res) => {
 router.post('/', async (req, res) => {
 	console.log(req.body)
 	try {
-		const newPassword = await bcrypt.hash(req.body.password, 10);
+		const nupassword = req.body.password;
+		const salt = bcrypt.genSaltSync(11);
+		const newPassword = await bcrypt.hash(nupassword, salt);
         console.log(newPassword);
 		await UserAccount.create({
 			firstName: req.body.fname,
@@ -28,53 +30,60 @@ router.post('/', async (req, res) => {
 		})
 		res.json({ status: 'ok' })
 	} catch (err) {
-		res.json({ status: 'error', error: 'Duplicate email' });
+		res.json({ status: 'error'});
+		console.log(err);
 	}
 })
 
 router.post('/login', async (req, res) => {
-	const user = await UserAccount.find({
+	const user = await UserAccount.findOne({
 		email: req.body.email,
-		userName: req.body.firstName,
+		userName: req.body.firstName
 	})
 
 	if (!user) {
 		return { status: 'error', error: 'Invalid login' }
 	}
+
 	const isPasswordValid = await bcrypt.compare(
 		req.body.password,
 		user.password
 	);
 
 	if (isPasswordValid) {
+		const login = user.isFirstLogin;
 		const token = jwt.sign(
 			{
-				name: user.userName,
+				id: user._id,
+				name: user.firstName,
 				email: user.email,
 			},
 			'secret123'
 		)
-		return res.json({ status: 'ok', user: token})
+
+		return res.json({ status: 'ok', user: token, test: login})
 	} else {
-		return res.json({ status: 'error', user: false})
+		return res.json({ status: 'error', user: false })
 	}
 })
 
-router.put('/update/:id',async(req,res,next)=>{
-	const newPassword = await bcrypt.hash(req.body.password, 10);
-	UserAccount.findByIdAndUpdate(req.params.id,{
-		$set: {
-			'password':newPassword,
-			'isFirstLogin':'false'
-		}
-	},(error,data)=>{
-		if(error){
-			return next(error);
-		}else{
-			res.json(data);
-			console.log('Password updated');
-		}
-	})
+router.put('/firstlogin/:id',async (req,res) =>{
+	try{
+		const password = req.body.password;
+		console.log(password);
+		const salt = bcrypt.genSaltSync(10);
+		const newPassword = await bcrypt.hash(password, salt);
+		console.log(newPassword);
+		await UserAccount.findByIdAndUpdate(req.params.id,{
+			password: newPassword,
+			isFirstLogin:'false'
+		},res.json({ status: 'ok' }))
+	}catch(err){
+		res.json({ status: 'error'});
+		console.log(err);
+	}
+	
+		
 })
 
 module.exports = router;

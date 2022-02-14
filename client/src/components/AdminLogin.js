@@ -15,26 +15,32 @@ function AdminLogin(){
 	async function loginUser(event) {
 		event.preventDefault()
 
-		const response = await fetch('http://localhost:5000/api/useraccounts/login', {
+		const response = await fetch('http://localhost:5000/api/useraccounts/login', {//https://localhost:5000/postNotification
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({
+			body: JSON.stringify({//convert email, password form items to json
 				email,
 				password
 			}),
-		})
+		})//send post request
 
 		const data = await response.json()
 
 		if (data.user) {
-            console.log(data.user);
+            console.log(data.test);
             const currentPath = window.location.pathname;
 			localStorage.setItem('token', data.user)
-			alert('Login successful')
 
-            if(currentPath === '/dashboard'){
+            if(data.test){
+                console.log('first login');
+                navigate('/firstlogin');
+                return;
+            }
+
+			alert('Login successful')
+			if(currentPath === '/dashboard'){
                 refreshPage();
             }else{
                 navigate('/dashboard');
