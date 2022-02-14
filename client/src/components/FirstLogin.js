@@ -1,39 +1,56 @@
-import React from 'react'
-import {Form,Button,Container} from 'react-bootstrap'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'
+import {Container, Button, Form} from 'react-bootstrap'
+import mongoose from 'mongoose'
 
 function FirstLogin(){
     const navigate = useNavigate();
-	const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('')
 
-    async function updatePasswrd(e){
-        e.preventDefault();
-        const response = await fetch('http://localhost:5000/api/useraccounts/login', {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				password
-			}),
-		})
+    function parseJwt (token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        return JSON.parse(jsonPayload);
+    };
+
+    async function updatePassoword(event){
+        event.preventDefault()
+
+        const userToken = localStorage.getItem("token");
+        const user = parseJwt(userToken);
+        const id = user.id;
+        console.log(id);
+        
+        const response = await fetch('http://localhost:5000/api/useraccounts/firstlogin/'+id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    password
+                }),
+        })
 
         const data = await response.json()
+        
 
         if (data.status === 'ok') {
-            console.log('password updated')
+            console.log('password updated');
             navigate('../dashboard');  
         }else{
-            alert('Could not update Password');
+            console.log('could not update password')
         }
     }
 
     return(
         <div>
             <Container className="text-center col-md-3 border border-dark rounded-3" style={{marginTop:"300px"}}>
-                <h4 style={{paddingTop:"40px"}} className="danger">Enter new Password</h4>
-                <Form style={{padding:"40px"}} onSubmit={updatePasswrd}>
+                <h4 style={{paddingTop:"40px"}} className='text-danger'>New Password</h4>
+                <Form style={{padding:"40px"}} onSubmit={updatePassoword}>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Control
                         value={password}
@@ -43,7 +60,7 @@ function FirstLogin(){
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Update Password
+                        Login
                     </Button>
                 </Form>
             </Container>
