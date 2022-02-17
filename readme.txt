@@ -27,6 +27,23 @@ For server
     "react-router-dom": "^6.2.1",
 
     In addition need to enter a valid gmail addrress and password in .env file.
+    Need to create .env file inside server folder
 
+    .env should contain......................................................................................................................................................................................................
+
+                                DB=
+                                JWTPRIVATEKEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                                SALT=10
+                                BASE_URL = http://localhost:3000/
+
+                                HOST = smtp.gmail.com
+                                SERVICE = gmail
+                                EMAIL_PORT =587
+                                SECURE = true
+                                USER = 
+                                PASS = 
+...............................................................................................................................................................................................................................
     It is better to turn off 2-factor authentication for the above gmail
     and allow less secure apps:On https://myaccount.google.com/lesssecureapps
+
+
