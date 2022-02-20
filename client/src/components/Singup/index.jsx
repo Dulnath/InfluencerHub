@@ -85,6 +85,52 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
+
+<input
+							type="text"
+							placeholder="District"
+							name="distirct"
+							onChange={handleChange}
+							value={data.district}
+							required
+							className={styles.input}
+						/>
+									<input
+							type="text"
+							placeholder="city"
+							name="city"
+							onChange={handleChange}
+							value={data.city}
+							required
+							className={styles.input}
+						/>
+									<input
+							type="number"
+							placeholder="phone number"
+							name="phoneNo"
+							onChange={handleChange}
+							value={data.phoneNo}
+							required
+							className={styles.input}
+						/>
+										<input
+							type="number"
+							placeholder="phone number"
+							name="phoneNo"
+							onChange={handleChange}
+							value={data.phoneNo}
+							required
+							className={styles.input}
+						/>
+							<input
+							type="text"
+							placeholder="description"
+							name="description"
+							onChange={handleChange}
+							value={data.description}
+							required
+							className={styles.input}
+						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg  && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
