@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Comments = require('../../models/NewUsers');
+const NewUsers = require('../../models/NewUsers');
 
 router.get('/',(req,res) => {
-    Comments.find()
+    NewUsers.find()
         .sort({date:-1})
         .then(items => res.json(items))
 });

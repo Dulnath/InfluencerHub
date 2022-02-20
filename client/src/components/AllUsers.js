@@ -48,17 +48,23 @@ class AllUsers extends React.Component{
                         }}
                         >
                         {this.state.data.map(data => {
-                                return(
-                                    <React.Fragment>
-                                        <Container fluid="md" className='p-3 mb-2 border border-primary rounded'>
-                                            <Row>
-                                                <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                                <Col xs={6} md={4}><b>Type </b> : {data.type}</Col>
-                                                <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
-                                            </Row>
-                                        </Container>
-                                    </React.Fragment>
-                                );
+                                if(data.isActive){
+                                    return(
+                                        <React.Fragment>
+                                            <Container fluid="md" className='p-3 mb-2 border border-primary rounded'>
+                                                <Row>
+                                                    <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                    <Col xs={6} md={4}><b>Type </b> : {data.type}</Col>
+                                                    <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                </Row>
+                                            </Container>
+                                        </React.Fragment>
+                                    );
+                                }else{
+                                    return(
+                                        <div></div>
+                                    );
+                                }
                             })}
                         </div>
                     </div>

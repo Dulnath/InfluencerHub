@@ -3,8 +3,6 @@ import graph from '../images/graph.png'
 import Menu from './Menu';
 import AdminLogin from './AdminLogin';
 
-
-
 class Home extends React.Component{
     
     constructor(props){
