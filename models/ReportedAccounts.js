@@ -45,3 +45,4 @@ const ReportedAccountSchema = new Schema({
 });
 
 module.exports = ReportedAccounts = mongoose.model('ReportedAccounts',ReportedAccountSchema);
+

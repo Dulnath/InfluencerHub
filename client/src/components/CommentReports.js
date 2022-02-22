@@ -59,9 +59,9 @@ class CommentReports extends React.Component{
                                             <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
                                         </Row>
                                         <Row>
-                                            <Col sm={10}></Col>
+                                            <Col sm={9}></Col>
                                             <Col>
-                                                <Button variant="danger" as={Col} className="mx-3">Suspend</Button>
+                                                <Button variant="primary" as={Col} className="mx-3">Delete</Button>
                                                 <Button variant="danger" as={Col} className="mx-3">Dismiss</Button>
                                             </Col>
                                         </Row>

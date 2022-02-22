@@ -66,14 +66,21 @@ class AccountReports extends React.Component{
                             <Card className='p-3 mb-2 border border-secondary'>
                                 <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                 <Card.Body>
+                                        <RenderType userType={data.type}></RenderType>
+                                        <Row>
+                                                <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
+                                        </Row>
+                                        <Row>
+                                            <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
+                                        </Row>
                                         <Row>
                                             <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
                                         </Row>
                                         <Row>
-                                            <Col sm={10}></Col>
+                                            <Col sm={9}></Col>
                                             <Col>
-                                                <Button variant="danger" as={Col} className="mx-3">Suspend</Button>
-                                                <Button variant="danger" as={Col} className="mx-3">Dismiss</Button>
+                                                <Button variant="primary" as={Col} className="mx-2">Suspend</Button>
+                                                <Button variant="danger" as={Col} className="mx-2">Dismiss</Button>
                                             </Col>
                                         </Row>
                                 </Card.Body>
