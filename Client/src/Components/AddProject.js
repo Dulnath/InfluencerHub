@@ -29,7 +29,7 @@ function AddProject() {
                     <Card.Header>
                         <div className="projectCardHeader">
                             Create a Project
-                            <CloseButton id="closeButton" onClick={() => { navigate("/allProjects") }} />
+                            <CloseButton className="closeButton" onClick={() => { navigate("/allProjects") }} />
                         </div>
                     </Card.Header>
                     <Card.Body>

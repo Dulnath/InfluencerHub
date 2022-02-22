@@ -10,7 +10,7 @@
     font-size: 200%;
 }
 
-#closeButton{
+.closeButton{
     float: right; 
     font-size: 60%;
 }
