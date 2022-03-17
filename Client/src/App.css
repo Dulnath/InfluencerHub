@@ -28,9 +28,18 @@
     margin-right: 10px;
 }
 
-#projectDetailsCard{
+.detailsCard{
     padding: 2%; 
     padding-top: 3%;
     padding-bottom: 3%;
+}
+
+#allEvents{
+    padding: 2%;
+}
+
+.projectButton{
+    float: right;
+    margin-left: 1%;
 }
 

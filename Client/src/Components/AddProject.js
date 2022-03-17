@@ -10,17 +10,25 @@ function AddProject() {
     const [projectEndDate, setprojectEndDate] = useState("");
 
     const createProject = () => {
-        Axios.post("http://localhost:5000/createProject", {
+        Axios.post("/createProject", {
             projectName,
             projectDescription,
             projectStartDate,
             projectEndDate
         }).then((res) => {
+            alert("Project created successfully");
             console.log("Project created");
         });
     }
 
     let navigate = useNavigate();
+    const navAllProjects = () => { navigate("/allProjects") }
+
+    /* eslint-disable no-unused-expressions */
+    // function multipleEvents(){
+    //     navAllProjects
+    //     createProject
+    // }
 
     return (
         <div>
@@ -29,7 +37,7 @@ function AddProject() {
                     <Card.Header>
                         <div className="projectCardHeader">
                             Create a Project
-                            <CloseButton className="closeButton" onClick={() => { navigate("/allProjects") }} />
+                            <CloseButton className="closeButton" onClick={navAllProjects} />
                         </div>
                     </Card.Header>
                     <Card.Body>

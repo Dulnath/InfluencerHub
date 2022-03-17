@@ -1,76 +1,26 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const mongoose = require("mongoose");
-const projectModel = require('./models/Projects');
-const eventModel = require('./models/Events');
-
+const mongoose = require('mongoose');
 const cors = require('cors');
+
+const projectRoutes = require('./routes/projects');
+const eventRoutes = require('./routes/events');
 
 app.use(express.json());
 app.use(cors());
+
+app.use(projectRoutes);
+app.use(eventRoutes);
 
 app.get("/", (req, res) => {
     res.send("Hello world");
 }
 );
 
-app.get("/getProject", (req, res) => {
-    projectModel.find({}, (err, result) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
-});
-
-app.get("/getEvent", (req, res) => {
-    eventModel.find({}, (err, result) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
-});
-
-// app.get("/getEvent", (req,res) => {
-//     eventModel.find({}, (err,result) => {
-//         if(err) {
-//             res.json(err);
-//         } else {
-//             res.json(result);
-//         }
-//     });
-// });
-
-app.post("/createProject", async (req, res) => {
-    const project = req.body;
-    const newProject = new projectModel(project);
-    await newProject.save();
-
-    res.json(project);
-});
-
-app.post("/createEvent", async (req, res) => {
-    const event = req.body;
-    const newEvent = new eventModel(event);
-    await newEvent.save();
-
-    res.json(event);
-});
-
-// app.post("/createEvent", async (req,res) => {
-//     const event = req.body;
-//     const newEvent = new eventModel(event);
-//     await newEvent.save();
-
-//     res.json(event);
-// });
-
 const DB_URL = 'mongodb+srv://Samith_Ailapperuma:MDluFKQbOeXitDXF@cluster0.pl5a6.mongodb.net/AddProject?retryWrites=true&w=majority';
 
-mongoose.connect(DB_URL)
+mongoose
+.connect(DB_URL)
 .then(() => {
     console.log('MongoDB connected');
 })

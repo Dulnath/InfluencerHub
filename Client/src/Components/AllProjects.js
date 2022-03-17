@@ -7,7 +7,7 @@ function AllProjects() {
     const [listOfProjects, setListOfProjects] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:5000/getProject").then((response) => {
+        Axios.get("/getProjects").then((response) => {
             setListOfProjects(response.data);
         })
     }, [])
@@ -20,7 +20,7 @@ function AllProjects() {
 
             {listOfProjects.map((project) => {
                 return (
-                    <Card id="projectDetailsCard" border="dark">
+                    <Card className="detailsCard" border="dark">
                         <div className="details">
                             <span class="title">Project Name:</span>
                             <span class="data">{project.projectName}</span>
@@ -39,9 +39,9 @@ function AllProjects() {
                         </div>
                         <div>
                             <Button variant="success" size="sm" type="submit" onClick={() => {navigate("/addEvents")}}>Add Event</Button>
+                            <Button className="projectButton" variant="warning" size="sm" type="submit" onClick={() => {navigate(`/editProject/${project._id}`)}}>Edit Project</Button>
+                            <Button className="projectButton" variant="danger" size="sm" type="submit" onClick={""}>Delete Project</Button>
                         </div>
-
-
                     </Card>
                 );
             })}

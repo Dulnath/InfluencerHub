@@ -10,12 +10,13 @@ function AddEvents() {
     const [eventEndDate,setEventEndDate] = useState("");
 
     const createEvent = () => {
-        Axios.post("http://localhost:5000/createEvent",{
+        Axios.post("/createEvent",{
             eventName,
             eventDescription,
             eventStartDate,
             eventEndDate
         }).then((res) => {
+            alert("Event created successfully");
             console.log("Event created");
         });
     }
@@ -29,7 +30,7 @@ function AddEvents() {
                     <Card.Header>
                         <div className="projectCardHeader">
                             Add Event
-                            <CloseButton className="closeButton" onClick={() => { navigate("") }} />
+                            <CloseButton className="closeButton" onClick={() => { navigate("/allEvents") }} />
                         </div>
                     </Card.Header>
                     <Card.Body>
@@ -69,7 +70,7 @@ function AddEvents() {
 
                         </Form>
                         <Card.Footer style={{ paddingLeft: '50%' }}>
-                            <Button variant="primary" size="lg" type="submit" onClick={createEvent}>Add Event</Button>
+                            <Button variant="success" size="lg" type="submit" onClick={createEvent}>Add Event</Button>
                         </Card.Footer>
 
                     </Card.Body>
