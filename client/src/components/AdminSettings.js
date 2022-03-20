@@ -35,35 +35,39 @@ function AdminSettings(){
     async function registerUser(event) {
         event.preventDefault()
 
-        
-        if(password === passwordRep){
-            const response = await fetch('http://localhost:5000/api/useraccounts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    fname,
-                    lname,
-                    email,
-                    contactNo,
-                    password
-                }),
-            })
-
-            const data = await response.json()
-
-            if (data.status === 'ok') {
-                console.log('data submitted')
-                navigate('../dashboard');
-                alert('Sucessfully registered New Admin')   
-            }else{
-                alert('Registration Error!');
-            }
+        if(!password||!fname||!lname||!contactNo||!email||!passwordRep){
+            alert('Please fill all fields!');
         }else{
-            alert('Passwords do not match!!!');
-        }
+            if(password === passwordRep){
 
+                const response = await fetch('http://localhost:5000/api/useraccounts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        fname,
+                        lname,
+                        email,
+                        contactNo,
+                        password
+                    }),
+                })
+    
+                const data = await response.json()
+    
+                if (data.status === 'ok') {
+                    sendEmail(event);
+                    console.log('data submitted')
+                    navigate('../dashboard');
+                    alert('Sucessfully registered New Admin')   
+                }else{
+                    alert('Registration Error!');
+                }
+            }else{
+                alert('Passwords do not match!!!');
+            }
+        }       
         
     }
 
@@ -72,7 +76,18 @@ function AdminSettings(){
     if(loggedInUser){
         return(
             <div>
-                <Menu/>
+            <Menu/>
+            <div className="container" style={{marginTop:"30px"}}>    
+                    <div
+                  className="container"
+                  style={{
+                    position: "absolute",
+                    marginTop: "10px",
+                    paddingTop:"5px"
+                  }}
+                >
+                <h3>Settings</h3>
+                <hr />
                 <Accordion defaultActiveKey="1" style={{padding:"10px 40px 0px 40px"}}>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header className="text-decoration-none text-dark">Register new Admin</Accordion.Header>
@@ -80,7 +95,6 @@ function AdminSettings(){
                             <Container>
                                 <Form ref={form} onSubmit={(e)=>{
                                     registerUser(e)
-                                    sendEmail(e)
                                 }}>
                                     <Row>
                                         <Col>
@@ -154,8 +168,10 @@ function AdminSettings(){
                             </Container>
                         </Accordion.Body>
                     </Accordion.Item>
-                </Accordion> 
-            </div>       
+                </Accordion>
+                </div> 
+            </div>
+        </div>       
         )
     }else{
         return(

@@ -37,16 +37,17 @@ class AllUsers extends React.Component{
             return(
                 <div>
                     <Menu/>
-                    <div className="container-fluid" style={{marginTop:"30px"}}>
+                    <div className="container" style={{marginTop:"30px"}}>
                         <div
-                        className="container-fluid"
+                        className="container"
                         style={{
                             position: "absolute",
-                            textAlign: "center",
                             marginTop: "10px",
                             paddingTop:"5px"
                         }}
                         >
+                        <h3>All Users</h3>
+                        <hr />
                         {this.state.data.map(data => {
                                 if(data.isActive){
                                     return(

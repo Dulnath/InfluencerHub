@@ -60,11 +60,13 @@ class SuspendedUsers extends React.Component{
                     paddingTop:"5px"
                   }}
                 >
+                <h3>Suspended Users</h3>
+                <hr />
                 <Container className="p-10 mb-2" fluid="md">
                    {this.state.data.map(data => {
                         if(!data.isActive){
                             return(
-                                <React.Fragment style={{padding:"10px"}}>
+                                <React.Fragment style={{padding:"10px"}} key={data._id}>
                                     <Card className='p-3 mb-2 border border-secondary'>
                                         <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                         <Card.Body>

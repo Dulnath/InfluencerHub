@@ -4,13 +4,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserAccount = require('../../models/UserAccount');
 
-
+//display all users
 router.get('/',(req,res) => {
     UserAccount.find()
         .sort({date:-1})
         .then(items => res.json(items))
 });
 
+//register new Admin
 router.post('/', async (req, res) => {
 	console.log(req.body)
 	try {
@@ -34,6 +35,26 @@ router.post('/', async (req, res) => {
 		console.log(err);
 	}
 })
+
+router.post('/approveuser',async(req,res)=>{
+	try{
+		await UserAccount.create({
+			firstName:req.body.firstName,
+			lastName:req.body.lastName,
+			email:req.body.email,
+			phoneNo:req.body.phoneNo,
+			type:req.body.type,
+			isActive:req.body.isActive,
+			password:req.body.password,
+			isFirstLogin:'false'
+		})
+		res.json({status:'ok'})
+	}catch (err){
+		res.json({status:'error'});
+		console.log(err);
+	}
+})
+
 
 router.post('/login', async (req, res) => {
 	const user = await UserAccount.findOne({
@@ -67,6 +88,7 @@ router.post('/login', async (req, res) => {
 	}
 })
 
+//innitial admin login
 router.put('/firstlogin/:id',async (req,res) =>{
 	try{
 		const password = req.body.password;
