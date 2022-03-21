@@ -142,6 +142,7 @@ router.get('/:id',async(req,res)=>{
 	}
 })
 
+//edit account
 router.put('/updateaccount/:id',async(req,res)=>{
 	if(req.body.password){
 		try{
