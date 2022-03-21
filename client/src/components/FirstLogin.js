@@ -1,33 +1,25 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Container, Button, Form} from 'react-bootstrap'
-
+import ParseJwt from '../utilities/ParseJwt';
 
 function FirstLogin(){
     const navigate = useNavigate();
-    const [password, setPassword] = useState('')
-
-    function parseJwt (token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-    
-        return JSON.parse(jsonPayload);
-    };
+    const [password, setPassword] = useState('');
+    const [passwordRep, setPasswordRep] = useState('');
 
     async function updatePassoword(event){
         event.preventDefault()
 
         const userToken = localStorage.getItem("token");
-        const user = parseJwt(userToken);
+        const user = ParseJwt(userToken);
         localStorage.clear();
         const id = user.id;
         const email = user.email;
         console.log(id);
         
-        const response = await fetch('http://localhost:5000/api/useraccounts/firstlogin/'+id, {
+        if(password===passwordRep){
+            const response = await fetch('http://localhost:5000/api/useraccounts/firstlogin/'+id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,21 +28,24 @@ function FirstLogin(){
                     password,
                     email
                 }),
-        })
-
-        const data = await response.json()
+            })
+            const data = await response.json()
         
 
-        if (data.status === 'ok') {
-            navigate('/'); 
-            console.log('password updated');
-        }else if(data.status === 'duplicate'){
-            console.log('new password cannot be same as old password') 
-            navigate('/');
-            alert('new password cannot be same as old password');
-            
+            if (data.status === 'ok') {
+                navigate('/'); 
+                console.log('password updated');
+            }else if(data.status === 'duplicate'){
+                console.log('new password cannot be same as old password') 
+                navigate('/');
+                alert('new password cannot be same as old password');
+                
+            }else{
+                console.log('could not update password')
+            }
+
         }else{
-            console.log('could not update password')
+            alert('Passwords do not Match!');
         }
     }
 
@@ -65,6 +60,14 @@ function FirstLogin(){
                         onChange={(e)=>setPassword(e.target.value)} 
                         type="password" 
                         placeholder="Password" 
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword2">
+                        <Form.Control
+                        value={password}
+                        onChange={(e)=>setPasswordRep(e.target.value)} 
+                        type="password" 
+                        placeholder="Re-Enter Password" 
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit">

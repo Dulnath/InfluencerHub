@@ -5,6 +5,7 @@ import Menu from './Menu'
 import {Accordion,Container,Row,Col,Form,Button} from 'react-bootstrap'
 import AdminLogin from './AdminLogin';
 import emailjs from '@emailjs/browser';
+import { Outlet, Link } from "react-router-dom";
 
 
 function AdminSettings(){
@@ -88,7 +89,7 @@ function AdminSettings(){
                 >
                 <h3>Settings</h3>
                 <hr />
-                <Accordion defaultActiveKey="1" style={{padding:"10px 40px 0px 40px"}}>
+                <Accordion defaultActiveKey="1" style={{padding:"10px 0px 10px 0px"}}>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header className="text-decoration-none text-dark">Register new Admin</Accordion.Header>
                         <Accordion.Body>
@@ -169,8 +170,16 @@ function AdminSettings(){
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
-                </div> 
-            </div>
+                <Link to='/editaccount' className='text-decoration-none'>
+                <div className="d-grid gap-2">
+                        <Button variant="outline-dark" size="lg">
+                            Edit Account
+                        </Button>
+                </div>
+                </Link>
+                <Outlet/>                                          
+                </div>
+            </div> 
         </div>       
         )
     }else{

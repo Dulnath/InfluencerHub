@@ -1,12 +1,26 @@
 import React from "react";
 import {Nav,NavDropdown,Navbar,Container} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
+import ParseJwt from "../utilities/ParseJwt";
 
 const handleLogout = () => {
     localStorage.clear();
   };
 
-function Menu(){
+function Menu(props){
+
+    function getUserName(){
+        const userToken = localStorage.getItem("token");
+        if(userToken){
+            const user = ParseJwt(userToken);
+            return user.name;
+        }else{
+            return `Admin`;
+        }
+    }
+
+    const userName = getUserName();
+
     return(
         <div>
         <Navbar bg="light" variant="light" expand="lg">
@@ -26,6 +40,7 @@ function Menu(){
                             <Nav.Link><Link to='/adminSettings' className="text-decoration-none text-dark">Settings</Link></Nav.Link>
                             <Nav.Link onClick={handleLogout}><Link to='/' className="text-decoration-none text-dark">Log out</Link></Nav.Link>
                         </Nav>
+                        <Navbar.Brand Style={"padding:0px 0px 0px 450px"}>{userName}</Navbar.Brand>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

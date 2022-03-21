@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserAccount = require('../../models/UserAccount');
+const { json } = require('express/lib/response');
 
 //display all users
 router.get('/',(req,res) => {
@@ -58,13 +59,13 @@ router.post('/approveuser',async(req,res)=>{
 
 router.post('/login', async (req, res) => {
 	const user = await UserAccount.findOne({
-		email: req.body.email,
-		userName: req.body.firstName
+		email: req.body.email
 	})
 
 	if (!user) {
 		return res.json({ status: 'error', error: 'Invalid login' })
 	}
+	
 
 	const isPasswordValid = await bcrypt.compare(
 		req.body.password,
@@ -123,6 +124,54 @@ router.put('/firstlogin/:id',async (req,res) =>{
 	}catch(err){
 		res.json({ status: 'error'});
 		console.log(err);
+	}
+})
+
+router.get('/:id',async(req,res)=>{
+	try{
+		UserAccount.findById(req.params.id,(result,err)=>{
+			if (err) {
+				res.json(err);
+			}else{
+				res.json(result.data);
+			}
+	
+		});
+	}catch(err){
+		res.json(err);
+	}
+})
+
+router.put('/updateaccount/:id',async(req,res)=>{
+	if(req.body.password){
+		try{
+			console.log('password');
+			const salt = bcrypt.genSaltSync(10);
+			const newPassword = await bcrypt.hash(req.body.password, salt);
+			await UserAccount.findByIdAndUpdate(req.params.id,{
+				firstName:req.body.fname,
+				lastName:req.body.lname,
+				email:req.body.email,
+				phoneNo:req.body.contactNo,
+				password: newPassword
+			},res.json({ status: 'ok' }))
+		}catch(err){
+			console.log(err);
+			res.json({status:'error'});
+		}
+	}else{
+		try{
+			console.log('no password');
+			await UserAccount.findByIdAndUpdate(req.params.id,{
+				firstName:req.body.fname,
+				lastName:req.body.lname,
+				email:req.body.email,
+				phoneNo:req.body.contactNo
+			},res.json({ status: 'ok' }))
+		}catch(err){
+			console.log(err);
+			res.json({status:'error'});	
+		}
 	}
 })
 
