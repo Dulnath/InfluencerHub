@@ -20,7 +20,7 @@ class CommentReports extends React.Component{
         if(loggedInUser){
             this.setState({isLogged:true});
 
-            axios.get('http://localhost:5000/api/reports/commentreports').then(res => {
+            axios.get('http://localhost:5000/api/reports/reportedcomments').then(res => {
             this.setState({
                 data: res.data
             });
@@ -42,10 +42,12 @@ class CommentReports extends React.Component{
                     paddingTop:"5px"
                   }}
                 >
+                <h3>Comment Reports</h3>
+                <hr />
                 <Container className="p-10 mb-2" fluid="md">
                    {this.state.data.map(data => {
                        return(
-                        <React.Fragment style={{padding:"10px"}}>
+                        <React.Fragment style={{padding:"10px"}} key={data._id}>
                             <Card className='p-3 mb-2 border border-secondary'>
                                 <Card.Header> <b>{data.cFname + " " + data.cLname}</b> </Card.Header>
                                 <Card.Body>

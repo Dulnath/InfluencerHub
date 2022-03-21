@@ -24,7 +24,9 @@ class Home extends React.Component{
         if(this.state.isLogged){
             return(
                 <div>
+                    
                     <Menu/>
+                    <hr />
                     <div className="border-secondary text-center">
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2" style={{paddingLeft:"20px"}}>Dashboard</h1>

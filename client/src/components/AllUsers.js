@@ -2,51 +2,36 @@ import React from 'react'
 import Menu from './Menu'
 import axios from "axios"
 import {Container,Row,Col} from 'react-bootstrap'
+import { useState,useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
 
-class AllUsers extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            data:[],
-            isLogged:false
-        };
-    }
 
-    componentDidMount(){
-        const loggedInUser = localStorage.getItem("token");
-        if(loggedInUser){
+function AllUsers(){
+    const [apiData,setApiData] = useState([]);
+    const loggedInUser = localStorage.getItem("token");
 
-            console.log('user is logged in');
-            this.setState({isLogged:true});
-            console.log(this.isLogged);
+    useEffect(()=>{        
+        axios.get('http://localhost:5000/api/useraccounts').then(res=>{
+            setApiData(res.data);
+        })
+    },[])
 
-            axios.get('http://localhost:5000/api/useraccounts').then(res => {
-            this.setState({
-                data: res.data
-            });
-        });
-        }
-        
-    }
-
-    render(){
-        if(this.state.isLogged){
+    if(loggedInUser){
             return(
                 <div>
                     <Menu/>
-                    <div className="container-fluid" style={{marginTop:"30px"}}>
+                    <div className="container" style={{marginTop:"30px"}}>
                         <div
-                        className="container-fluid"
+                        className="container"
                         style={{
                             position: "absolute",
-                            textAlign: "center",
                             marginTop: "10px",
                             paddingTop:"5px"
                         }}
                         >
+<<<<<<< HEAD
                         {this.state.data.map(data => {
                                 if(data.isActive){
                                     return(
@@ -66,6 +51,23 @@ class AllUsers extends React.Component{
                                     );
                                 }
                             })}
+=======
+                        <h3>All Users</h3>
+                        <hr />
+                        {apiData.map((data)=>{
+                            return(
+                                <React.Fragment>
+                                <Container fluid="md" className='p-3 mb-2 border border-primary rounded'  key={data._id}>
+                                    <Row>
+                                        <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                        <Col xs={6} md={4}><b>Type </b> : {data.type}</Col>
+                                        <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                    </Row>
+                                </Container>
+                                </React.Fragment>
+                            )
+                        })}
+>>>>>>> 20570e65919e749d4d42d2332d2b6d1c83c99fca
                         </div>
                     </div>
                 </div>       
@@ -75,9 +77,7 @@ class AllUsers extends React.Component{
                 <div>
                     <AdminLogin></AdminLogin>
                 </div>  
-            )
-        }
-        
+        )
     }
 }
 

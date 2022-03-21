@@ -23,26 +23,62 @@ function RenderType(props){
     }
  }
 
+ 
+
 class NewUsers extends React.Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        //this.approveUser = new approveUser.bind(this);
         this.state = {
             data:[],
             isLogged:false
         };
     }
 
-    componentDidMount(){
-        const loggedInUser = localStorage.getItem("token");
-        if(loggedInUser){
-            this.setState({isLogged:true});
+    approveUser(data){
+        axios.post('http://localhost:5000/api/useraccounts/approveuser',{
+            firstName:data.firstName,
+            lastName:data.lastName,
+            isActive: 'true',
+            type: data.type,
+            password: data.password,
+            phoneNo:data.phoneNo,
+            email:data.email,
+            description:data.description
+        }).then((response) => {
+            console.log('request Sent');
+            console.log(response);
+            this.deleteNewUsers(data)
+        }).then(
+            this.loadNewUsers()
+        ).catch(function (error){
+            console.log(error);
+        })
+    }
 
-            axios.get('http://localhost:5000/api/newuser').then(res => {
+    deleteNewUsers(data){
+        axios.delete('http://localhost:5000/api/newuser/'+data._id)
+            .then((res)=>{
+                console.log('new user removed')
+            }).catch((error)=>{
+                console.log(error);
+            })
+    }
+    
+    loadNewUsers(){
+        axios.get('http://localhost:5000/api/newuser').then(res => {
             this.setState({
                 data: res.data
             });
         });
+    }
+    
+    componentDidMount(){
+        const loggedInUser = localStorage.getItem("token");
+        if(loggedInUser){
+            this.setState({isLogged:true});
+            this.loadNewUsers();
         }   
     }
 
@@ -60,11 +96,13 @@ class NewUsers extends React.Component{
                     paddingTop:"5px"
                   }}
                 >
+                <h3>New Users</h3>
+                <hr />
                 <Container className="p-10 mb-2" fluid="md">
                    {this.state.data.map(data => {
                         return(
-                            <React.Fragment style={{padding:"10px"}}>
-                                <Card className='p-3 mb-2 border border-secondary'>
+                            <React.Fragment key={data._id}>
+                                <Card className='p-3 mb-2 border border-secondary' >
                                     <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                     <Card.Body>
                                            <RenderType userType={data.type}/>
@@ -80,8 +118,8 @@ class NewUsers extends React.Component{
                                             <Row>
                                                 <Col sm={9}></Col>
                                                 <Col>
-                                                    <Button variant="danger" as={Col} className="mx-2">Reject</Button>
-                                                    <Button variant="primary" as={Col} className="mx-2">Approve</Button>
+                                                    <Button variant="danger" as={Col} className="mx-2" onClick={()=>this.deleteNewUsers(data)}>Reject</Button>
+                                                    <Button variant="primary" as={Col} className="mx-2" onClick={()=>this.approveUser(data)}>Approve</Button>
                                                 </Col>
                                             </Row>
                                     </Card.Body>

@@ -14,6 +14,7 @@ import AccountReports from './components/AccountReports';
 import SuspendedUsers from './components/SuspendedUsers'
 import AdminSettings from './components/AdminSettings'
 import FirstLogin from './components/FirstLogin'
+import EditAccount from './components/EditAccount'
 
 ReactDOM.render(
   <BrowserRouter>
@@ -28,6 +29,7 @@ ReactDOM.render(
           <Route path="suspendedusers" element={<SuspendedUsers />} />
           <Route path="adminsettings" element={<AdminSettings />} />
           <Route path="firstlogin" element={<FirstLogin/>}/>
+          <Route path="editaccount" element={<EditAccount/>}/>
           </Route>
       </Routes>
     </BrowserRouter>,

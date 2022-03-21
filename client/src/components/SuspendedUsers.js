@@ -60,6 +60,8 @@ class SuspendedUsers extends React.Component{
                     paddingTop:"5px"
                   }}
                 >
+                <h3>Suspended Users</h3>
+                <hr />
                 <Container className="p-10 mb-2" fluid="md">
                    {this.state.data.map(data => {
                         if(!data.isActive){

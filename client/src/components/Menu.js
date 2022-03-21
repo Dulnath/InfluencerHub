@@ -1,12 +1,30 @@
+import axios from "axios";
 import React from "react";
 import {Nav,NavDropdown,Navbar,Container} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
+import ParseJwt from "../utilities/ParseJwt";
+import { useState,useEffect } from 'react'
 
 const handleLogout = () => {
     localStorage.clear();
   };
 
-function Menu(){
+function Menu(props){
+    const [fname,setUserName] = useState('');
+
+    useEffect(()=>{
+        const userToken = localStorage.getItem("token");
+        const user = ParseJwt(userToken);
+        if(userToken){
+            const response = axios.get('http://localhost:5000/api/useraccounts/'+user.id).then(res=>{
+                setUserName(res.data.firstName);
+            })
+            if(response.staus!=='ok'){
+                setUserName('Admin');
+            }
+        }
+    },[])
+
     return(
         <div>
         <Navbar bg="light" variant="light" expand="lg">
@@ -26,6 +44,7 @@ function Menu(){
                             <Nav.Link><Link to='/adminSettings' className="text-decoration-none text-dark">Settings</Link></Nav.Link>
                             <Nav.Link onClick={handleLogout}><Link to='/' className="text-decoration-none text-dark">Log out</Link></Nav.Link>
                         </Nav>
+                        <Navbar.Brand Style={"padding:0px 0px 0px 450px"}>{fname}</Navbar.Brand>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

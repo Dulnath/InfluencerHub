@@ -3,14 +3,16 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserAccount = require('../../models/UserAccount');
+const { json } = require('express/lib/response');
 
-
+//display all users
 router.get('/',(req,res) => {
     UserAccount.find()
         .sort({date:-1})
         .then(items => res.json(items))
 });
 
+//register new Admin
 router.post('/', async (req, res) => {
 	console.log(req.body)
 	try {
@@ -35,15 +37,35 @@ router.post('/', async (req, res) => {
 	}
 })
 
+router.post('/approveuser',async(req,res)=>{
+	try{
+		await UserAccount.create({
+			firstName:req.body.firstName,
+			lastName:req.body.lastName,
+			email:req.body.email,
+			phoneNo:req.body.phoneNo,
+			type:req.body.type,
+			isActive:req.body.isActive,
+			password:req.body.password,
+			isFirstLogin:'false'
+		})
+		res.json({status:'ok'})
+	}catch (err){
+		res.json({status:'error'});
+		console.log(err);
+	}
+})
+
+
 router.post('/login', async (req, res) => {
 	const user = await UserAccount.findOne({
-		email: req.body.email,
-		userName: req.body.firstName
+		email: req.body.email
 	})
 
 	if (!user) {
 		return res.json({ status: 'error', error: 'Invalid login' })
 	}
+	
 
 	const isPasswordValid = await bcrypt.compare(
 		req.body.password,
@@ -67,6 +89,7 @@ router.post('/login', async (req, res) => {
 	}
 })
 
+//innitial admin login
 router.put('/firstlogin/:id',async (req,res) =>{
 	try{
 		const password = req.body.password;
@@ -101,6 +124,55 @@ router.put('/firstlogin/:id',async (req,res) =>{
 	}catch(err){
 		res.json({ status: 'error'});
 		console.log(err);
+	}
+})
+
+router.get('/:id',async(req,res)=>{
+	try{
+		UserAccount.findById(req.params.id,(result,err)=>{
+			if (err) {
+				res.json(err);
+			}else{
+				res.json(result.data);
+			}
+	
+		});
+	}catch(err){
+		res.json(err);
+	}
+})
+
+//edit account
+router.put('/updateaccount/:id',async(req,res)=>{
+	if(req.body.password){
+		try{
+			console.log('password');
+			const salt = bcrypt.genSaltSync(10);
+			const newPassword = await bcrypt.hash(req.body.password, salt);
+			await UserAccount.findByIdAndUpdate(req.params.id,{
+				firstName:req.body.fname,
+				lastName:req.body.lname,
+				email:req.body.email,
+				phoneNo:req.body.contactNo,
+				password: newPassword
+			},res.json({ status: 'ok' }))
+		}catch(err){
+			console.log(err);
+			res.json({status:'error'});
+		}
+	}else{
+		try{
+			console.log('no password');
+			await UserAccount.findByIdAndUpdate(req.params.id,{
+				firstName:req.body.fname,
+				lastName:req.body.lname,
+				email:req.body.email,
+				phoneNo:req.body.contactNo
+			},res.json({ status: 'ok' }))
+		}catch(err){
+			console.log(err);
+			res.json({status:'error'});	
+		}
 	}
 })
 
