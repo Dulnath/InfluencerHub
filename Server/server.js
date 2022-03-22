@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 }
 );
 
-const DB_URL = 'mongodb+srv://Samith_Ailapperuma:MDluFKQbOeXitDXF@cluster0.pl5a6.mongodb.net/AddProject?retryWrites=true&w=majority';
+const DB_URL = 'mongodb+srv://Kumuthu:omega123@cluster0.ehhq0.mongodb.net/influencer_hub?retryWrites=true&w=majority';
 
 mongoose
 .connect(DB_URL)

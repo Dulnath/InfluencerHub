@@ -21,21 +21,27 @@ router.get('/getProjects', (req, res) => {
 });
 
 router.put('/updateProject/:id', (req,res) => {
-    projectModel.findByIdAndUpdate(
-        req.params.id,
-        {
-            $set:req.body
-        },
-        (err,updatedProject) => {
-            if(err){
-                return res.status(400).json({error:err});
+    try{
+        projectModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set:req.body
+            },
+            (err,updatedProject) => {
+                if(err){
+                    return res.status(400).json({error:err});
+                }
+    
+                return res.status(200).json({
+                    success:"Updated succesfully"
+                });
             }
-
-            return res.status(200).json({
-                success:"Updated succesfully"
-            });
-        }
-    );
+        );
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+    
 });
 
 router.delete('/deleteProject/:id',(req,res) => {

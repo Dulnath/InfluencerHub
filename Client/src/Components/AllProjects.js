@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,10 +7,22 @@ function AllProjects() {
     const [listOfProjects, setListOfProjects] = useState([]);
 
     useEffect(() => {
-        Axios.get("/getProjects").then((response) => {
+        axios.get("/getProjects").then((response) => {
             setListOfProjects(response.data);
         })
     }, [])
+
+    function handleDelete(_id){
+        axios.delete(`/deleteProject/${_id}`)
+        .then((res) => {
+            console.log(res);
+            console.log(res.data);
+        })
+
+        const newList = listOfProjects.filter((project) => project._id !== _id);
+        alert("Project was deleted");
+        setListOfProjects(newList);
+    }
 
     let navigate = useNavigate();
 
@@ -40,7 +52,7 @@ function AllProjects() {
                         <div>
                             <Button variant="success" size="sm" type="submit" onClick={() => {navigate("/addEvents")}}>Add Event</Button>
                             <Button className="projectButton" variant="warning" size="sm" type="submit" onClick={() => {navigate(`/editProject/${project._id}`)}}>Edit Project</Button>
-                            <Button className="projectButton" variant="danger" size="sm" type="submit" onClick={""}>Delete Project</Button>
+                            <Button className="projectButton" variant="danger" size="sm" type="submit" onClick={() => handleDelete(project._id)}>Delete Project</Button>
                         </div>
                     </Card>
                 );

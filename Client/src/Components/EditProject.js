@@ -14,7 +14,7 @@ function EditProject(){
     let navigate = useNavigate();
 
     const editProject = () => {
-        axios.put(`/updateEvent/${id}`, {
+        axios.put(`/updateProject/${id}`, {
             projectName,
             projectDescription,
             projectStartDate,
@@ -32,7 +32,7 @@ function EditProject(){
             setProjectEndDate(res.data.project.projectEndDate);
             console.log("ProjectData",res.data.project);
         });
-    },);
+    },[]);
 
     return(
         <div>
@@ -62,7 +62,7 @@ function EditProject(){
                                     rows={3}
                                     placeholder='Add Project Description'
                                     value = {projectDescription}
-                                    onChange={(event) => { setProjectDescription(event.target.value) }}>
+                                    onChange={(event) => { setProjectDescription(event.target.value)}}>
                                 </Form.Control><br />
                             </Form.Group>
 

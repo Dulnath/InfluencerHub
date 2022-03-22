@@ -7,7 +7,7 @@ import AllProjects from './Components/AllProjects';
 import AddEvents from './Components/AddEvents';
 import AllEvents from './Components/AllEvents';
 import EditProject from './Components/EditProject';
-import ProjectDetails from './ProjectDetails';
+import ProjectDetails from './Components/ProjectDetails';
 import EventCard from './Components/EventCard';
 
 function App() {
