@@ -172,9 +172,11 @@ function AdminSettings(){
                 </Accordion>
                 <Link to='/editaccount' className='text-decoration-none'>
                 <div className="d-grid gap-2">
-                        <Button variant="outline-dark" size="lg">
-                            Edit Account
-                        </Button>
+                    <Container fluid="md" className='p-3 mb-2 border border-primary rounded dark'>
+                        <Row>
+                            <b>Edit Account</b>
+                        </Row>
+                    </Container>
                 </div>
                 </Link>
                 <Outlet/>                                          

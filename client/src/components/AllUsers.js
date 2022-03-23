@@ -31,27 +31,6 @@ function AllUsers(){
                             paddingTop:"5px"
                         }}
                         >
-<<<<<<< HEAD
-                        {this.state.data.map(data => {
-                                if(data.isActive){
-                                    return(
-                                        <React.Fragment key={data._id}>
-                                            <Container fluid="md" className='p-3 mb-2 border border-primary rounded'>
-                                                <Row>
-                                                    <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                                    <Col xs={6} md={4}><b>Type </b> : {data.type}</Col>
-                                                    <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
-                                                </Row>
-                                            </Container>
-                                        </React.Fragment>
-                                    );
-                                }else{
-                                    return(
-                                        <div></div>
-                                    );
-                                }
-                            })}
-=======
                         <h3>All Users</h3>
                         <hr />
                         {apiData.map((data)=>{
@@ -67,7 +46,6 @@ function AllUsers(){
                                 </React.Fragment>
                             )
                         })}
->>>>>>> 20570e65919e749d4d42d2332d2b6d1c83c99fca
                         </div>
                     </div>
                 </div>       
