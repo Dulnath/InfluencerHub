@@ -14,17 +14,36 @@ function AdminSettings(){
     const [lname,setLName] = useState('')
     const [email, setEmail] = useState('')
     const [contactNo,setContactNo] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordRep,setPasswordRep] = useState('');
+    const [password] = useState(generateP());
     const navigate = useNavigate();
     const loggedInUser = localStorage.getItem("token");
     const form = useRef();
 
+    function generateP() {
+        var pass = '';
+        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
+                'abcdefghijklmnopqrstuvwxyz0123456789@#$';
+          
+        for (let i = 1; i <= 8; i++) {
+            var char = Math.floor(Math.random()
+                        * str.length + 1);
+              
+            pass += str.charAt(char)
+        }
+          
+        return pass;
+    }
+
     function sendEmail(e){
         
         e.preventDefault();
-
-        emailjs.sendForm('gmail', 'template_x894tin', form.current, 'user_n4zSmO5iVS8LRqNYkq1XA')
+        let data = {
+            firstName:fname,
+            lastName:lname,
+            Email:email,
+            pswrd:password
+        }
+        emailjs.send('gmail', 'template_x894tin', data, 'user_n4zSmO5iVS8LRqNYkq1XA')
         .then((result) => {
             console.log(result.text);
             console.log('Sent Mail')
@@ -34,14 +53,17 @@ function AdminSettings(){
     }
 
     async function registerUser(event) {
-        event.preventDefault()
-
-        if(!password||!fname||!lname||!contactNo||!email||!passwordRep){
+        event.preventDefault();
+        
+        if(!fname||!lname||!contactNo||!email){
             alert('Please fill all fields!');
         }else{
-            if(password === passwordRep){
-
-                const response = await fetch('http://localhost:5000/api/useraccounts', {
+            console.log(password);
+            if(!password){
+                alert('There is no password');
+                return;
+            }
+            const response = await fetch('http://localhost:5000/api/useraccounts', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,9 +87,6 @@ function AdminSettings(){
                 }else{
                     alert('Registration Error!');
                 }
-            }else{
-                alert('Passwords do not match!!!');
-            }
         }       
         
     }
@@ -142,26 +161,7 @@ function AdminSettings(){
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col>
-                                            <Form.Group className="mb-3" controlId="formPassword">
-                                                <Form.Control 
-                                                value={password}
-                                                onChange={(e)=>setPassword(e.target.value)}
-                                                type="password"
-                                                name='password' 
-                                                placeholder="Password" />
-                                            </Form.Group>
-                                        </Col>
-                                        <Col>
-                                            <Form.Group className="mb-3" controlId="formPasswordRep">
-                                                <Form.Control
-                                                value={passwordRep}
-                                                onChange={(e)=>setPasswordRep(e.target.value)} 
-                                                type="password" 
-                                                placeholder="Repeat Password" />
-                                            </Form.Group>
-                                        </Col>
-                                        <Button variant="primary" type="submit">
+                                        <Button variant="primary" type="submit"> 
                                             Register
                                         </Button>
                                     </Row>

@@ -9,9 +9,9 @@ import ParseJwt from '../utilities/ParseJwt';
 
 function EditAccount(){
     const loggedInUser = localStorage.getItem("token");
-    const [fname, setFName] = useState('')
-    const [lname,setLName] = useState('')
-    const [email, setEmail] = useState('')
+    const [fname, setFName] = useState('');
+    const [lname,setLName] = useState('');
+    const [email, setEmail] = useState('');
     const [contactNo,setContactNo] = useState('');
     const [password, setPassword] = useState('');
     const [passwordRep,setPasswordRep] = useState('');
@@ -35,6 +35,12 @@ function EditAccount(){
         event.preventDefault();
         const user = ParseJwt(localStorage.getItem('token'))
         if(password===passwordRep&&password!==''){
+
+            if(!email){
+                alert('Enter a new email!');
+                return;
+            }
+
             const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
                 method: 'PUT',
                 headers: {
@@ -59,6 +65,10 @@ function EditAccount(){
             alert('Passwords do not Match!');
             return;
         }else{
+            if(!email){
+                alert('Enter a new email!');
+                return;
+            }
             const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
                 method: 'PUT',
                 headers: {
