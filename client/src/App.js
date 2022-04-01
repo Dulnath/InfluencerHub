@@ -5,6 +5,7 @@ import EditPost from "./components/EditPost";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import PostDetails from "./components/PostDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class App extends Component {
   render() {

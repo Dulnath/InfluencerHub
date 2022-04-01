@@ -8,7 +8,6 @@ export default class Home extends Component {
       posts: [],
     };
   }
-
   componentDidMount() {
     this.retrievePosts();
   }
@@ -44,9 +43,7 @@ export default class Home extends Component {
                 <td>
                   <a
                     href={`/post/${posts._id}`}
-                    style={{ textDecoration: "none" }} /*<Switch>
-                    <Route path="/:id" component={SecondPage} /></Switch>
-               */
+                    style={{ textDecoration: "none" }}
                   >
                     {posts.topic}
                   </a>
@@ -55,7 +52,15 @@ export default class Home extends Component {
                 <td>{posts.description}</td>
                 <td>{posts.postCategory}</td>
                 <td>
-                  <a className="btn btn-warning" href="#">
+                  <a className="btn btn-warning" href="/edit/:id">
+                    <button className="btn btn-success">
+                      <a
+                        href="/add"
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        Create New Post
+                      </a>
+                    </button>
                     <i className="fas fa-edit"></i>&nbsp;Edit
                   </a>
                   &nbsp;
