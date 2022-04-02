@@ -52,15 +52,7 @@ export default class Home extends Component {
                 <td>{posts.description}</td>
                 <td>{posts.postCategory}</td>
                 <td>
-                  <a className="btn btn-warning" href="/edit/:id">
-                    <button className="btn btn-success">
-                      <a
-                        href="/add"
-                        style={{ textDecoration: "none", color: "white" }}
-                      >
-                        Create New Post
-                      </a>
-                    </button>
+                  <a className="btn btn-warning" href={`/edit/${posts._id}`}>
                     <i className="fas fa-edit"></i>&nbsp;Edit
                   </a>
                   &nbsp;
