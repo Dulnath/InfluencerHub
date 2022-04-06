@@ -9,6 +9,7 @@ const Signup = () => {
 		lastName: "",
 		email: "",
 		password: "",
+		category: "",
 	});
 	const [error, setError] = useState("");
 	const [msg, setMsg] = useState("");
@@ -84,7 +85,15 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
-						
+						<input
+							type="text"
+							placeholder="Category"
+							name="category"
+							onChange={handleChange}
+							value={data.category}
+							required
+							className={styles.input}
+						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
