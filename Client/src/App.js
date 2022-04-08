@@ -9,18 +9,20 @@ import AllEvents from './Components/AllEvents';
 import EditProject from './Components/EditProject';
 import ProjectDetails from './Components/ProjectDetails';
 import EventCard from './Components/EventCard';
+import EditEvent from './Components/EditEvent';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<AddProject />} />
+        <Route path="/" element={<AddProject />} />      
         <Route path="/allProjects" element={<AllProjects />} />
-        <Route path="/addEvents" element={<AddEvents />} />
-        <Route path="/allEvents" element={<AllEvents />} />
+        <Route path="/addEvents/:projectName" element={<AddEvents />} />
+        <Route path="/allEvents/:projectName" element={<AllEvents />} />
         <Route path="/editProject/:id" element={<EditProject />} />
         <Route Path="/project/:id" element={<ProjectDetails />} />
         <Route Path="/event/:id" element={<EventCard />} />
+        <Route Path="/editEvent/:id" element={<EditEvent/>} />
       </Routes>
     </Router>
   );

@@ -22,6 +22,7 @@ function AddProject() {
     }
 
     let navigate = useNavigate();
+    
     const navAllProjects = () => { navigate("/allProjects") }
 
     /* eslint-disable no-unused-expressions */

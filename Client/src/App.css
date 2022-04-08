@@ -1,10 +1,10 @@
-.projectCard{
+.projectCard,.eventCard{
     padding: 10%; 
     padding-top: 1.5%;
     padding-bottom: 3%;
 }
 
-.projectCardHeader{
+.projectCardHeader,.eventCardHeader{
     text-align: center; 
     font-weight: bold; 
     font-size: 200%;
@@ -38,7 +38,17 @@
     padding: 2%;
 }
 
-.projectButton{
+.projectButton1{
+    float: left;
+    margin-right: 1%;
+}
+
+.projectButton2{
+    float: right;
+    margin-left: 1%;
+}
+
+.eventButton{
     float: right;
     margin-left: 1%;
 }

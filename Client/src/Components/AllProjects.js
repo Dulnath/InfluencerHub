@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function AllProjects() {
+function AllProjects({project}) {
     const [listOfProjects, setListOfProjects] = useState([]);
 
     useEffect(() => {
@@ -34,25 +34,26 @@ function AllProjects() {
                 return (
                     <Card className="detailsCard" border="dark">
                         <div className="details">
-                            <span class="title">Project Name:</span>
-                            <span class="data">{project.projectName}</span>
+                            <span className="title">Project Name:</span>
+                            <span className="data">{project.projectName}</span>
                         </div>
                         <div className="details">
-                            <span class="title">Project Description:</span>
-                            <span class="data">{project.projectDescription}</span>
+                            <span className="title">Project Description:</span>
+                            <span className="data">{project.projectDescription}</span>
                         </div>
                         <div className="details">
-                            <span class="title">Project Start Date:</span>
-                            <span class="data">{project.projectStartDate}</span>
+                            <span className="title">Project Start Date:</span>
+                            <span className="data">{project.projectStartDate}</span>
                         </div>
                         <div className="details">
-                            <span class="title">Project End Date:</span>
-                            <span class="data">{project.projectEndDate}</span>
+                            <span className="title">Project End Date:</span>
+                            <span className="data">{project.projectEndDate}</span>
                         </div>
                         <div>
-                            <Button variant="success" size="sm" type="submit" onClick={() => {navigate("/addEvents")}}>Add Event</Button>
-                            <Button className="projectButton" variant="warning" size="sm" type="submit" onClick={() => {navigate(`/editProject/${project._id}`)}}>Edit Project</Button>
-                            <Button className="projectButton" variant="danger" size="sm" type="submit" onClick={() => handleDelete(project._id)}>Delete Project</Button>
+                            <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => {navigate(`/allEvents/${project.projectName}`)}}>View all events</Button>
+                            <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => {navigate(`/addEvents/${project.projectName}`)}}>Add Event</Button>
+                            <Button className="projectButton2" variant="warning" size="sm" type="submit" onClick={() => {navigate(`/editProject/${project._id}`)}}>Edit Project</Button>
+                            <Button className="projectButton2" variant="danger" size="sm" type="submit" onClick={() => handleDelete(project._id)}>Delete Project</Button>
                         </div>
                     </Card>
                 );

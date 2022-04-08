@@ -25,6 +25,14 @@ const ProjectSchema = new mongoose.Schema({
         type: Date,
         required: false,
     },
+    influencerEmail: {
+        type: String,
+        required: false,
+    },
+    businessEmail: {
+        type: String,
+        required: false,
+    }
 });
 
 module.exports = ProjectModule = mongoose.model("addprojects", ProjectSchema);
