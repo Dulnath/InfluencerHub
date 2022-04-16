@@ -13,6 +13,7 @@ function EditAccount(){
     const [lname,setLName] = useState('');
     const [email, setEmail] = useState('');
     const [contactNo,setContactNo] = useState('');
+    const [oldPassword,setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordRep,setPasswordRep] = useState('');
 
@@ -20,7 +21,7 @@ function EditAccount(){
     useEffect(()=>{
         const userToken = localStorage.getItem('token');
         const user = ParseJwt(userToken)
-
+        
         if(userToken){
             axios.get('http://localhost:5000/api/useraccounts/'+user.id).then(res=>{
             setFName(res.data.firstName);
@@ -91,13 +92,12 @@ function EditAccount(){
         }
         
     }
-
     if(loggedInUser){
         return(
             <div>
                 <Menu></Menu>
                 <div className="container" style={{marginTop:"30px"}}>
-                <h3>Account Settings</h3>
+                <h3>Edit Account Information</h3>
                 <hr />
                 <Form>
                     <Row className="mb-3">
@@ -115,7 +115,7 @@ function EditAccount(){
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="Email">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                        <Form.Control type="email" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)} disabled/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="contactNo">
@@ -123,15 +123,22 @@ function EditAccount(){
                         <Form.Control type="text" placeholder='Contact No' value={contactNo} onChange={(e)=>setContactNo(e.target.value)}/>
                         </Form.Group>
                     </Row>
-
+                    <br />
+                    <h3>Change Password</h3>
+                    <hr />
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="Password">
+                            <Form.Control type="password" placeholder="Old Password" value={oldPassword} onChange={(e)=>setOldPassword(e.target.value)}/>
+                        </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="Password">
+                            <Form.Control type="password" placeholder="New Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                        </Form.Group>
+                    </Row>
                     <Row className="mb-3">
                     <Form.Group as={Col} controlId="Password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="Password">
-                        <Form.Label>Repeat Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" value={passwordRep} onChange={(e)=>setPasswordRep(e.target.value)}/>
+                        <Form.Control type="password" placeholder="Repeat New Password" value={passwordRep} onChange={(e)=>setPasswordRep(e.target.value)}/>
                     </Form.Group>
                     </Row>
 
