@@ -1,6 +1,7 @@
 const express = require("express");
 const Posts = require("../models/posts");
-
+const session = require("express-session");
+const app = express();
 const router = express.Router();
 
 //save posts

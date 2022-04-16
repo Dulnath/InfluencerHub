@@ -10,8 +10,6 @@ function EditPost() {
 
   const { id } = useParams();
 
-  //let navigate = useNavigate();
-
   const EditPost = () => {
     axios
       .put(`/post/update/${id}`, {
@@ -21,7 +19,6 @@ function EditPost() {
       })
       .then((res) => {
         alert("Post edited successfully");
-        //console.log("Post edited");
       });
   };
   useEffect(() => {

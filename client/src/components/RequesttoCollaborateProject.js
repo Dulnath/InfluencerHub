@@ -1,7 +1,7 @@
 import emailjs from "emailjs-com";
 import React from "react";
 
-export default function ContactForm() {
+export default function Collaborate() {
   function sendEmail(e) {
     e.preventDefault();
 
@@ -14,8 +14,7 @@ export default function ContactForm() {
       )
       .then(
         (result) => {
-          console.log(result.text);
-          console.log("Sent Mail");
+          alert("Collaboration request sent successfully");
         },
         (error) => {
           console.log(error.text);
@@ -32,15 +31,23 @@ export default function ContactForm() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Name"
-                name="name"
+                placeholder="Enter Business Name"
+                name="Business Name"
+              />
+            </div>
+            <div className="col-8 form-group mx-auto">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Influencer Name"
+                name="Influencer Name"
               />
             </div>
             <div className="col-8 form-group mx-auto">
               <input
                 type="email"
                 className="form-control"
-                placeholder="Email Address"
+                placeholder="Enter Influencer Email Address"
                 name="email"
               />
             </div>
@@ -48,8 +55,8 @@ export default function ContactForm() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Subject"
-                name="subject"
+                placeholder="Enter Project Name"
+                name="Project Name"
               />
             </div>
             <div className="col-8 form-group mx-auto">
@@ -58,15 +65,15 @@ export default function ContactForm() {
                 id=""
                 cols="30"
                 rows="8"
-                placeholder="Your message"
-                name="message"
+                placeholder="Type your message"
+                name="Message"
               ></textarea>
             </div>
             <div className="col-8 pt-3 mx-auto">
               <input
                 type="submit"
                 className="btn btn-info"
-                value="Send Message"
+                value="Request to collaborate"
               ></input>
             </div>
           </div>
