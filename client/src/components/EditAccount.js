@@ -37,11 +37,11 @@ function EditAccount(){
         const user = ParseJwt(localStorage.getItem('token'))
         if(password===passwordRep&&password!==''){
 
-            if(!email){
-                alert('Enter a new email!');
+            if(!oldPassword){
+                alert('Must Enter Old Password!');
                 return;
             }
-
+            console.log(password);
             const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
                 method: 'PUT',
                 headers: {
@@ -52,6 +52,7 @@ function EditAccount(){
                     lname,
                     email,
                     contactNo,
+                    oldPassword,
                     password
                 }),
             })
@@ -59,17 +60,15 @@ function EditAccount(){
             console.log(data.status);
             if (data.status === 'ok') { 
                 alert('Account Information has been updated');
+            }else if(!data.user){
+                alert('Old Password is incorrect');
             }else{
-                console.log('could not update user account')
+                console.log('could not update user account');
             }
         }else if(password!==passwordRep && password!==''){
             alert('Passwords do not Match!');
             return;
         }else{
-            if(!email){
-                alert('Enter a new email!');
-                return;
-            }
             const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
                 method: 'PUT',
                 headers: {
@@ -89,8 +88,8 @@ function EditAccount(){
             }else{
                 console.log('could not update user account')
             }
+           
         }
-        
     }
     if(loggedInUser){
         return(

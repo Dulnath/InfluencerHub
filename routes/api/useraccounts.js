@@ -77,7 +77,7 @@ router.post('/login', async(req, res) => {
         const token = jwt.sign({
                 id: user._id,
                 name: user.firstName,
-                email: user.email,
+                email: user.email
             },
             'secret123'
         )
@@ -145,16 +145,37 @@ router.get('/:id', async(req, res) => {
 router.put('/updateaccount/:id', async(req, res) => {
     if (req.body.password) {
         try {
-            console.log('password');
-            const salt = bcrypt.genSaltSync(10);
-            const newPassword = await bcrypt.hash(req.body.password, salt);
-            await UserAccount.findByIdAndUpdate(req.params.id, {
-                firstName: req.body.fname,
-                lastName: req.body.lname,
-                email: req.body.email,
-                phoneNo: req.body.contactNo,
-                password: newPassword
-            }, res.json({ status: 'ok' }))
+            console.log(req.body.email);
+            
+            const user = await UserAccount.findOne({
+                email: req.body.email
+            })
+        
+            if (!user) {
+                return res.json({ status: 'error', error: 'Invalid login' })
+            }
+        
+            const isPasswordValid = await bcrypt.compare(
+                req.body.oldPassword,
+                user.password
+            );
+            console.log(isPasswordValid);
+            
+            if (isPasswordValid) {
+                console.log('correct old password');
+                const salt = bcrypt.genSaltSync(10);
+                const newPassword = await bcrypt.hash(req.body.password, salt);
+                await UserAccount.findByIdAndUpdate(req.params.id, {
+                    firstName: req.body.fname,
+                    lastName: req.body.lname,
+                    email: req.body.email,
+                    phoneNo: req.body.contactNo,
+                    password: newPassword
+                }, res.json({ status: 'ok' }))
+
+            }else{
+                return res.json({ status: 'error', user: false })
+            }
         } catch (err) {
             console.log(err);
             res.json({ status: 'error' });
