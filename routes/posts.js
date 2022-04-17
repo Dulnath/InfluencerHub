@@ -1,7 +1,5 @@
 const express = require("express");
 const Posts = require("../models/posts");
-const session = require("express-session");
-const app = express();
 const router = express.Router();
 
 //save posts
@@ -17,6 +15,10 @@ router.post("/post/save", (req, res) => {
       success: "Posts saved successfully",
     });
   });
+});
+
+router.get("/", (req, res) => {
+  res.render("index", { title: "Home Page" });
 });
 //retrieve posts
 router.get("/posts", (req, res) => {
