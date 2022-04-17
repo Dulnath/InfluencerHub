@@ -1,20 +1,26 @@
 import emailjs from "emailjs-com";
 import React from "react";
+import { Button } from "react-bootstrap";
 
-export default function Collaborate() {
+export default function RequesttoCollaborateProject() {
   function sendEmail(e) {
     e.preventDefault();
 
+    let data = {
+      Subject:
+        "Dummy Influencer Name is asking you to collaborate on Dummy Project Name",
+      InfluencerName: "Dummy Influencer Name",
+      Email: "veenaka.official@gmail.com",
+      Message:
+        "Dummy Business Name is asking you to collaborate on Dummy Project Name. Login to InfluencerHub for more details.",
+    };
     emailjs
-      .sendForm(
-        "service_9rzf7v8",
-        "template_c400xbq",
-        e.target,
-        "boORYqYrAEoh981w7"
-      )
+      .send("service_9rzf7v8", "template_c400xbq", data, "boORYqYrAEoh981w7")
       .then(
         (result) => {
-          alert("Collaboration request sent successfully");
+          alert(
+            "Your request to collaborate on the project was sent to the Influencer"
+          );
         },
         (error) => {
           console.log(error.text);
@@ -24,61 +30,9 @@ export default function Collaborate() {
   }
   return (
     <div>
-      <div className="container">
-        <form onSubmit={sendEmail}>
-          <div className="row pt-5 mx-auto">
-            <div className="col-8 form-group mx-auto">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Business Name"
-                name="Business Name"
-              />
-            </div>
-            <div className="col-8 form-group mx-auto">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Influencer Name"
-                name="Influencer Name"
-              />
-            </div>
-            <div className="col-8 form-group mx-auto">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter Influencer Email Address"
-                name="email"
-              />
-            </div>
-            <div className="col-8 form-group mx-auto">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Project Name"
-                name="Project Name"
-              />
-            </div>
-            <div className="col-8 form-group mx-auto">
-              <textarea
-                className="form-control"
-                id=""
-                cols="30"
-                rows="8"
-                placeholder="Type your message"
-                name="Message"
-              ></textarea>
-            </div>
-            <div className="col-8 pt-3 mx-auto">
-              <input
-                type="submit"
-                className="btn btn-info"
-                value="Request to collaborate"
-              ></input>
-            </div>
-          </div>
-        </form>
-      </div>
+      <Button variant="primary" type="submit" onClick={sendEmail}>
+        Request to Collaborate on the project
+      </Button>
     </div>
   );
 }
