@@ -4,6 +4,8 @@ import Signup from "./components/Singup";
 import Login from "./components/Login";
 import Signupb from "./components/Singup/indexb";
 import Category from "./components/Category/category";
+import ForgotPassword from "./components/ForgotPassword";
+import PasswordReset from "./components/PasswordReset";
 
 function App() {
 	const user = localStorage.getItem("token");
@@ -16,6 +18,8 @@ function App() {
 			<Route path="/category" exact element={<Category />} />
 			<Route path="/login" exact element={<Login />} />
 			<Route path="/" element={<Navigate replace to="/login" />} />
+			<Route path="/forgot-password" element={<ForgotPassword/>} />
+			<Route path="/password-reset/:id/:token" element={<PasswordReset/>} />
 		</Routes>
 	);
 }
