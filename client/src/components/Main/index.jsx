@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Main = () => {
@@ -13,6 +14,13 @@ const Main = () => {
 				<button className={styles.white_btn} onClick={handleLogout}>
 					Logout
 				</button>
+				<Link to="/detail">
+				<button className={styles.white_btn} ></button>
+				</Link>
+				
+			
+		
+
 				
 			</nav>
 		</div>
