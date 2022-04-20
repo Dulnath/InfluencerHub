@@ -1,15 +1,11 @@
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
-  topic: {
+  PostTopic: {
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  postCategory: {
+  Postdescription: {
     type: String,
     required: true,
   },

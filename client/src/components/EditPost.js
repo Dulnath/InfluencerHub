@@ -4,18 +4,16 @@ import { Button, CloseButton, Form, Card } from "react-bootstrap";
 import axios from "axios";
 
 function EditPost() {
-  const [topic, setTopic] = useState();
-  const [description, setDescription] = useState();
-  const [postCategory, setCategory] = useState();
+  const [PostTopic, setTopic] = useState();
+  const [Postdescription, setDescription] = useState();
 
   const { id } = useParams();
 
   const EditPost = () => {
     axios
       .put(`/post/update/${id}`, {
-        topic,
-        description,
-        postCategory,
+        PostTopic,
+        Postdescription,
       })
       .then((res) => {
         alert("Post edited successfully");
@@ -23,9 +21,9 @@ function EditPost() {
   };
   useEffect(() => {
     axios.get(`/post/${id}`).then((res) => {
-      setTopic(res.data.post.topic);
-      setDescription(res.data.post.description);
-      setCategory(res.data.post.postCategory);
+      setTopic(res.data.post.PostTopic);
+      setDescription(res.data.post.Postdescription);
+
       console.log("PostData", res.data.post);
     });
   }, []);
@@ -38,7 +36,7 @@ function EditPost() {
             as="textarea"
             rows={1}
             placeholder="Edit Post topic"
-            value={topic}
+            value={PostTopic}
             onChange={(event) => {
               setTopic(event.target.value);
             }}
@@ -47,18 +45,9 @@ function EditPost() {
             as="textarea"
             rows={4}
             placeholder="Edit Post Description"
-            value={description}
+            value={Postdescription}
             onChange={(event) => {
               setDescription(event.target.value);
-            }}
-          ></Form.Control>
-          <Form.Control
-            as="textarea"
-            rows={1}
-            placeholder="Edit Post Category"
-            value={postCategory}
-            onChange={(event) => {
-              setCategory(event.target.value);
             }}
           ></Form.Control>
         </Form.Group>

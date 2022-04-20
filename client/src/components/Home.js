@@ -39,8 +39,8 @@ export default class Home extends Component {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Topic</th>
+
               <th scope="col">Description</th>
-              <th scope="col">Post Category</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -53,12 +53,11 @@ export default class Home extends Component {
                     href={`/post/${posts._id}`}
                     style={{ textDecoration: "none" }}
                   >
-                    {posts.topic}
+                    {posts.PostTopic}
                   </a>
                 </td>
-                <td>{posts.topic}</td>
-                <td>{posts.description}</td>
-                <td>{posts.postCategory}</td>
+
+                <td>{posts.Postdescription}</td>
                 <td>
                   <a className="btn btn-warning" href={`/edit/${posts._id}`}>
                     <i className="fas fa-edit"></i>&nbsp;Edit

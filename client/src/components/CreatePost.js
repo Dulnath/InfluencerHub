@@ -3,15 +3,13 @@ import Axios from "axios";
 import { Form, Button } from "react-bootstrap";
 
 function CreatePost() {
-  const [topic, setTopic] = useState();
-  const [description, setDescription] = useState();
-  const [postCategory, setCategory] = useState();
+  const [PostTopic, setTopic] = useState();
+  const [Postdescription, setDescription] = useState();
 
   const CreatePost = () => {
     Axios.post("/post/save", {
-      topic,
-      description,
-      postCategory,
+      PostTopic,
+      Postdescription,
     }).then((res) => {
       alert("Post created successfully");
       console.log("Post created");
@@ -36,14 +34,6 @@ function CreatePost() {
             placeholder="Add Post Description"
             onChange={(event) => {
               setDescription(event.target.value);
-            }}
-          ></Form.Control>
-          <Form.Control
-            as="textarea"
-            rows={1}
-            placeholder="Add Post Category"
-            onChange={(event) => {
-              setCategory(event.target.value);
             }}
           ></Form.Control>
         </Form.Group>
