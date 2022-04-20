@@ -18,7 +18,7 @@ const Main = () => {
 					Logout
 				</button>
 				<Link to="/detail">
-				<button className={styles.white_btn} ></button>
+				<button className={styles.white_btn} >View Users</button>
 				</Link>
 				
 			
