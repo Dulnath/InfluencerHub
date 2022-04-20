@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const UserAccount = require('../../models/UserAccount');
+const UserAccount = require('../models/UserAccount');
 const { json } = require('express/lib/response');
 
 //display all users
@@ -45,7 +45,7 @@ router.post('/approveuser', async(req, res) => {
             email: req.body.email,
             phoneNo: req.body.phoneNo,
             type: req.body.type,
-            isActive: req.body.isActive,
+            isActive: req.body.isActive,//false -> suspended / not approved
             password: req.body.password,
             isFirstLogin: 'false'
         })

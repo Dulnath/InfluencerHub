@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const ReportedAccounts = require('../../models/ReportedAccounts');
-const ReportedComments = require('../../models/ReportedComments');
+const ReportedAccounts = require('../models/ReportedAccounts');
+const ReportedComments = require('../models/ReportedComments');
 
 //display reported accounts
 router.get('/reportedaccounts',(req,res) => {

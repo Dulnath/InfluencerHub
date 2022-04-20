@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const UserAccount = require('./models/UserAccount');
 const UserCount = require('./models/UserCount');
-const useraccounts = require('./routes/api/useraccounts');
-const newuser = require('./routes/api/newuser');
-const reports = require('./routes/api/reports');
-const usercount = require('./routes/api/usercount');
+const useraccounts = require('./routes/useraccounts');
+const newuser = require('./routes/newuser');
+const reports = require('./routes/reports');
+const usercount = require('./routes/usercount');
 const req = require('express/lib/request');
 
 const app = express();
