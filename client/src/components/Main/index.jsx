@@ -13,6 +13,7 @@ const Main = () => {
 				<button className={styles.white_btn} onClick={handleLogout}>
 					Logout
 				</button>
+				
 			</nav>
 		</div>
 	);
