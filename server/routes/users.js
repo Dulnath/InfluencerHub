@@ -46,3 +46,52 @@ router.post("/", async (req, res) => {
 });
 
 module.exports = router;
+router.get('/getUsers', (req, res) => {
+    User.find()
+        .sort({ date: -1 })
+        .then(items => res.json(items))
+});
+/*
+// get individual user
+router.get("/viewUsers/:id",(req,res) => {
+    
+    let userId = req.params.id;
+    User.findById(userId,(err,user) => {
+        if(err){
+            return res.status(400).json({success:false, err});
+        }
+        return res.status(200).json({
+            success:true,
+            user
+        });
+    });
+});*/
+
+// get individual user
+/*
+router.get(`/getuser/${id}`,async(req,res)=>{
+    try {
+        console.log(req.params);
+        const {id} = req.params;
+        const userindividual = await User.findById({_id:id});
+        console.log(userindividual);
+        res.status(201).json(userindividual)
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+})
+*/
+
+//individual
+router.get("/getuser/:id", (req, res) => {
+	let userID = req.params.id;
+	User.findById(userID, (err, user) => {
+	  if (err) {
+		return res.status(400).json({ success: false, err });
+	  }
+	  return res.status(200).json({
+		success: true,
+		user,
+	  });
+	});
+  });
