@@ -2,10 +2,9 @@ const express  = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const UserAccount = require('./models/UserAccount');
+const { User } = require("./models/user");
 const UserCount = require('./models/UserCount');
 const useraccounts = require('./routes/useraccounts');
-const newuser = require('./routes/newuser');
 const reports = require('./routes/reports');
 const usercount = require('./routes/usercount');
 const req = require('express/lib/request');
@@ -22,14 +21,13 @@ mongoose
 
 //use api
 app.use('/api/useraccounts',useraccounts);
-app.use('/api/newuser',newuser);
 app.use('/api/reports',reports);
 app.use('/api/usercount', usercount);
 
 const port = process.env.PORT || 5000;
 
 function getUserCount(){
-    var query = UserAccount.find();
+    var query = User.find();
     var timeNow = FormatDate(Date.now());
     query.count(function (err, count) {
     if (err){

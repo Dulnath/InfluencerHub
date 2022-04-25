@@ -37,10 +37,11 @@ class NewUsers extends React.Component{
     }
 
     approveUser(data){
-        axios.post('http://localhost:5000/api/useraccounts/approveuser',{
+        axios.put('http://localhost:5000/api/useraccounts/approveuser',{
             firstName:data.firstName,
             lastName:data.lastName,
             isActive: 'true',
+            adminVerified:'true',
             type: data.type,
             password: data.password,
             phoneNo:data.phoneNo,
@@ -58,7 +59,7 @@ class NewUsers extends React.Component{
     }
 
     deleteNewUsers(data){
-        axios.delete('http://localhost:5000/api/newuser/'+data._id)
+        axios.delete('http://localhost:5000/api/useaccounts/'+data._id)
             .then((res)=>{
                 console.log('new user removed')
             }).catch((error)=>{
@@ -67,7 +68,7 @@ class NewUsers extends React.Component{
     }
     
     loadNewUsers(){
-        axios.get('http://localhost:5000/api/newuser').then(res => {
+        axios.get('http://localhost:5000/api/useraccounts').then(res => {
             this.setState({
                 data: res.data
             });
@@ -99,33 +100,35 @@ class NewUsers extends React.Component{
                 <h3>New Users</h3>
                 <hr />
                 <Container className="p-10 mb-2" fluid="md">
-                   {this.state.data.map(data => {
-                        return(
-                            <React.Fragment key={data._id}>
-                                <Card className='p-3 mb-2 border border-secondary' >
-                                    <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
-                                    <Card.Body>
-                                           <RenderType userType={data.type}/>
-                                            <Row>
-                                                <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
-                                            </Row>
-                                            <Row>
-                                                <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
-                                            </Row>
-                                            <Row>
-                                            <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
-                                            </Row>
-                                            <Row>
-                                                <Col sm={9}></Col>
-                                                <Col>
-                                                    <Button variant="danger" as={Col} className="mx-2" onClick={()=>this.deleteNewUsers(data)}>Reject</Button>
-                                                    <Button variant="primary" as={Col} className="mx-2" onClick={()=>this.approveUser(data)}>Approve</Button>
-                                                </Col>
-                                            </Row>
-                                    </Card.Body>
-                                </Card>
-                            </React.Fragment>
-                        );
+                   {this.state.data.map((data) => {
+                        if(!data.adminVerified){
+                            return(
+                                <React.Fragment key={data._id}>
+                                    <Card className='p-3 mb-2 border border-secondary' >
+                                        <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
+                                        <Card.Body>
+                                               <RenderType userType={data.type}/>
+                                                <Row>
+                                                    <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
+                                                </Row>
+                                                <Row>
+                                                    <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
+                                                </Row>
+                                                <Row>
+                                                <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
+                                                </Row>
+                                                <Row>
+                                                    <Col sm={9}></Col>
+                                                    <Col>
+                                                        <Button variant="danger" as={Col} className="mx-2" onClick={()=>this.deleteNewUsers(data)}>Reject</Button>
+                                                        <Button variant="primary" as={Col} className="mx-2" onClick={()=>this.approveUser(data)}>Approve</Button>
+                                                    </Col>
+                                                </Row>
+                                        </Card.Body>
+                                    </Card>
+                                </React.Fragment>
+                            );
+                        }
                     })}
                 </Container>
                 </div>

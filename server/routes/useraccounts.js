@@ -2,15 +2,28 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const UserAccount = require('../models/UserAccount');
+const { User } = require("../models/user");
 const { json } = require('express/lib/response');
 
 //display all users
 router.get('/', (req, res) => {
-    UserAccount.find()
+    User.find()
         .sort({ date: -1 })
         .then(items => res.json(items))
 });
+
+router.delete('/delete/:id',(req,res,next) => {
+    NewUsers.findByIdAndRemove(req.params.id,(error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+        }
+    })
+});
+
 
 //register new Admin
 router.post('/', async(req, res) => {
@@ -20,13 +33,15 @@ router.post('/', async(req, res) => {
         const salt = bcrypt.genSaltSync(11);
         const newPassword = await bcrypt.hash(nupassword, salt);
         console.log(newPassword);
-        await UserAccount.create({
+        await User.create({
             firstName: req.body.fname,
             lastName: req.body.lname,
             email: req.body.email,
             phoneNo: req.body.contactNo,
-            type: 'admin',
+            category: 'admin',
             isActive: 'true',
+            isVerified: 'true',
+            adminVerified:'true',
             isFirstLogin: 'true',
             password: newPassword,
         })
@@ -39,7 +54,7 @@ router.post('/', async(req, res) => {
 
 router.post('/approveuser', async(req, res) => {
     try {
-        await UserAccount.create({
+        await User.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -58,7 +73,7 @@ router.post('/approveuser', async(req, res) => {
 
 
 router.post('/login', async(req, res) => {
-    const user = await UserAccount.findOne({
+    const user = await User.findOne({
         email: req.body.email
     })
 
@@ -93,7 +108,7 @@ router.put('/firstlogin/:id', async(req, res) => {
     try {
         const password = req.body.passwordNew;
 
-        const user = await UserAccount.findOne({
+        const user = await User.findOne({
             email: req.body.email,
         })
 
@@ -115,7 +130,7 @@ router.put('/firstlogin/:id', async(req, res) => {
             const salt = bcrypt.genSaltSync(10);
             const newPassword = await bcrypt.hash(password, salt);
             console.log(newPassword);
-            await UserAccount.findByIdAndUpdate(req.params.id, {
+            await User.findByIdAndUpdate(req.params.id, {
                 password: newPassword,
                 isFirstLogin: 'false'
             }, res.json({ status: 'ok' }))
@@ -128,7 +143,7 @@ router.put('/firstlogin/:id', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
     try {
-        UserAccount.findById(req.params.id, (result, err) => {
+        User.findById(req.params.id, (result, err) => {
             if (err) {
                 res.json(err);
             } else {
@@ -147,7 +162,7 @@ router.put('/updateaccount/:id', async(req, res) => {
         try {
             console.log(req.body.email);
             
-            const user = await UserAccount.findOne({
+            const user = await User.findOne({
                 email: req.body.email
             })
         
@@ -165,7 +180,7 @@ router.put('/updateaccount/:id', async(req, res) => {
                 console.log('correct old password');
                 const salt = bcrypt.genSaltSync(10);
                 const newPassword = await bcrypt.hash(req.body.password, salt);
-                await UserAccount.findByIdAndUpdate(req.params.id, {
+                await User.findByIdAndUpdate(req.params.id, {
                     firstName: req.body.fname,
                     lastName: req.body.lname,
                     email: req.body.email,
@@ -183,7 +198,7 @@ router.put('/updateaccount/:id', async(req, res) => {
     } else {
         try {
             console.log('no password');
-            await UserAccount.findByIdAndUpdate(req.params.id, {
+            await User.findByIdAndUpdate(req.params.id, {
                 firstName: req.body.fname,
                 lastName: req.body.lname,
                 email: req.body.email,

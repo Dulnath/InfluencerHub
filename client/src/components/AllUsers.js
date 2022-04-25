@@ -39,7 +39,7 @@ function AllUsers(){
                                     <Container fluid="md" className='p-3 mb-2 border border-primary rounded'  key={data._id}>
                                         <Row>
                                             <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                            <Col xs={6} md={4}><b>Type </b> : {data.type}</Col>
+                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
                                             <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
                                         </Row>
                                     </Container>

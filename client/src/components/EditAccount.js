@@ -19,8 +19,8 @@ function EditAccount(){
 
 
     useEffect(()=>{
-        const userToken = localStorage.getItem('token');
-        const user = ParseJwt(userToken)
+        const userToken = localStorage.getItem('token');//dasojdiofos.asdokfndo.dcacd432r
+        const user = ParseJwt(userToken)//id.email.fname
         
         if(userToken){
             axios.get('http://localhost:5000/api/useraccounts/'+user.id).then(res=>{
