@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+//import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signup = () => {
@@ -13,7 +13,7 @@ const Signup = () => {
 		category:"influencer"
 	});
 	const [error, setError] = useState("");
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -24,7 +24,7 @@ const Signup = () => {
 		try {
 			const url = "http://localhost:8080/api/users";
 			const { data: res } = await axios.post(url, data);
-			navigate("/login");
+		//	navigate("/login");
 			console.log(res.message);
 		} catch (error) {
 			if (
