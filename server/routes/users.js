@@ -16,32 +16,35 @@ router.post("/", async (req, res) => {
 
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
+		let userRes = {
+			email: req.body.email,
+			password: hashPassword,
+			category:req.body.category
+		};
+	
 		if(req.body.category==="influencer")
+
 		{
-			await new User({
+			userRes = {
+				...userRes,
 				firstName: req.body.firstName,
 				lastName: req.body.lastName,
-				email: req.body.email,
-				password: hashPassword,
-				category:req.body.category
-			 }).save();
-			res.status(201).send({ message: "User created successfully" });
+			}
 		}
 		else if(req.body.category==="business")
 		{
-			await new User({
+			userRes = {
+				...userRes,
 				businessName: req.body.businessName,
 				businessAddress: req.body.businessAddress,
-				email: req.body.email,
-				password: hashPassword,
-				category:req.body.category
-			 }).save();
-			res.status(201).send({ message: "User created successfully" });
-
+			 }
 		}
+		console.log("error")
+		await new User(userRes).save();
+		res.status(201).send({ message: "User created successfully" });
 	
 	} catch (error) {
-		res.status(500).send({ message: "Internal Server Error" });
+		res.status(500).send({ message: "Internal Serversdfsadf Error",error });
 	}
 });
 
