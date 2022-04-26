@@ -8,6 +8,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
 import Detail from "./components/Detail";
 import View from "./components/View";
+import Payment from "./components/Payment";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 			<Route path="/password-reset/:id/:token" element={<PasswordReset/>} />
 			<Route path="/detail" exact element={<Detail />} />
 			<Route path="/view/:id" exact element={<View />} />
+			<Route path ="/payment" exact element={<Payment/>}/>
 
 		</Routes>
 	);

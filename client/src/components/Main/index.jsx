@@ -31,6 +31,13 @@ const Main = () => {
                         >View
                         
                     </button>
+					<button  className="btn btn-success"
+					onClick={()=>{navigate(`/payment/`)}}
+					
+					>
+
+					Payment
+					</button>
 		</div>
 	);
 };
