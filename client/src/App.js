@@ -9,7 +9,7 @@ import PasswordReset from "./components/PasswordReset";
 import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
-
+import Filter from "./components/Filter";
 
 
 function App() {
@@ -27,6 +27,8 @@ function App() {
 			<Route path="/detail" exact element={<Detail />} />
 			<Route path="/search" exact element={<Search />} />
 			<Route path="/view/:id" exact element={<View />} />
+			<Route path="/filter" exact element={<Filter />} />
+
 		</Routes>
 	);
 }

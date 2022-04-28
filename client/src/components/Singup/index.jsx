@@ -10,6 +10,7 @@ const Signup = () => {
 		email: "",
 		password: "",
 		category: "",
+		status: "",
 	});
 	const [error, setError] = useState("");
 	const [msg, setMsg] = useState("");
@@ -92,6 +93,16 @@ const Signup = () => {
 							name="category"
 							onChange={handleChange}
 							value={data.category}
+							required
+							className={styles.input}
+						/>
+
+<input
+							type="text"
+							placeholder="Status"
+							name="status"
+							onChange={handleChange}
+							value={data.status}
 							required
 							className={styles.input}
 						/>

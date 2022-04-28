@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+import Search from "../Search";
 
 const Main = () => {
 	const handleLogout = () => {
@@ -14,6 +15,7 @@ const Main = () => {
 					Logout
 				</button>
 			</nav>
+			<Search />
 		</div>
 	);
 };

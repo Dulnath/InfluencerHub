@@ -128,6 +128,37 @@ router.get("/getuser/:id", (req, res) => {
 	  });
 	});
   });
+/*
+  export const getSearchUsers = async (req, res) => {
+	const { id } = req.params;
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+	  return res.status(404).json({ message: "User doesn't exist" });
+	}
+	const userSearch = await User.find({ creator: id });
+	res.status(200).json(userSearch);
+  };*/
   
+  //http://localhost:8080/api/users/getUsers?q=${value}&_start=${start}&_end=${end}
+/*
+  router.get('/search', function(req,res){
+    var regex = new RegExp('ama', 'i');  // 'i' makes it case insensitive
+    return User.find({text: regex}, function(err,q){
+        return res.send(q);
+    });
+});
+*/
+
+router.get("/search/:key",async(req,res)=>{
+	//console.log(req.params.key)
+	let data = await User.find(
+		{
+			"$or":[
+				{firstName:{$regex:req.params.key}},
+				{category:{$regex:req.params.key}}
+			]
+		}
+	)
+	res.send(data)
+})
 
 module.exports = router;

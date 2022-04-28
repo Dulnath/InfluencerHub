@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "mdb-react-ui-kit/dist/css/mdb.min.css"
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>

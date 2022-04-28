@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
 	password: { type: String, required: true },
 	category: { type: String, required: true },
 	verified: { type: Boolean, default: true },
+	status:{ type: String, required: true },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -28,6 +29,7 @@ const validate = (data) => {
 		email: Joi.string().email().required().label("Email"),
 		password: passwordComplexity().required().label("Password"),
 		category:Joi.string().required().label("Category"),
+		status: Joi.string().required().label("Status"),
 	});
 	return schema.validate(data);
 };
