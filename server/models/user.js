@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	category:{ type: String, required: true },
+	verified:{type:Boolean,default:false},
+	isActive:{type:Boolean,default:true}
+
 	
 });
 
@@ -32,6 +35,8 @@ const validate = (data) => {
 		email: Joi.string().email().label("Email"),
 		password: passwordComplexity().label("Password"),
 		category: Joi.string().label("Category"),
+		verified:Joi.string().label("Verified"),
+		isActive:Joi.string().label("Active")
 	});
 	return schema.validate(data);
 };
