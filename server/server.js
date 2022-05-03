@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { User } = require("./models/user");
 const UserCount = require('./models/UserCount');
+const NVUserCount = require('./models/NonVerifiedUserCount');
 const useraccounts = require('./routes/useraccounts');
 const reports = require('./routes/reports');
 const usercount = require('./routes/usercount');
@@ -26,10 +27,11 @@ app.use('/api/usercount', usercount);
 
 const port = process.env.PORT || 5000;
 
+
 function getUserCount(){
-    var query = User.find();
+    var query1 = User.find()
     var timeNow = FormatDate(Date.now());
-    query.count(function (err, count) {
+    query1.count(function (err, count) {
     if (err){
         console.log(err);
     } else{
@@ -42,8 +44,24 @@ function getUserCount(){
             console.log(err);
         }
         console.log("Count is", count)
+        
     } 
 });
+    User.count({adminVerified:false},function(err,count){
+    if (err){
+        console.log(err);
+    } else{
+        try{
+            NVUserCount.create({
+                userCount:count,
+                time:timeNow
+            })
+        }catch(err){
+            console.log(err);
+        }
+        console.log("NVCount is", count)
+    } 
+})
 }
 
 function FormatDate(date) {

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
-import {Nav,NavDropdown,Navbar,Container} from 'react-bootstrap'
+import {Nav,Navbar,Container} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
 import ParseJwt from "../utilities/ParseJwt";
-import { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react';
+import styles from '../styles/styles.module.css';
 
 const handleLogout = () => {
     localStorage.clear();
@@ -27,24 +28,27 @@ function Menu(props){
 
     return(
         <div>
-        <Navbar bg="light" variant="light" expand="lg">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Container>
-                        <Navbar.Brand><Link to='/dashboard' className="text-decoration-none text-dark">InfluencerHub</Link></Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="justify-content-center">
-                            <Nav.Link><Link to='/dashboard'  className="text-decoration-none text-dark">Home</Link></Nav.Link>
-                            <Nav.Link><Link to='/allUsers'className="text-decoration-none text-dark"> All Users</Link></Nav.Link>
-                            <Nav.Link><Link to='/newUsers' className="text-decoration-none text-dark">New Users</Link></Nav.Link>
-                            <NavDropdown title="Reports" id="basic-nav-dropdown">
-                            <NavDropdown.Item ><Link to='/accountReports' className="text-decoration-none text-dark">Account Reports</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link to='/commentReports' className="text-decoration-none text-dark">Comment Reports</Link></NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link><Link to='/suspendedUsers' className="text-decoration-none text-dark">Suspended Users</Link></Nav.Link>
-                            <Nav.Link><Link to='/adminSettings' className="text-decoration-none text-dark">Settings</Link></Nav.Link>
-                            <Nav.Link onClick={handleLogout}><Link to='/' className="text-decoration-none text-dark">Log out</Link></Nav.Link>
+                        <Navbar.Brand><Link to='/dashboard' className="text-decoration-none text-light">InfluencerHub</Link></Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link><Link to='/dashboard'  className={styles.menu_item}>Home</Link></Nav.Link>
+                            <Nav.Link><Link to='/allUsers'className={styles.menu_item}> All Users</Link></Nav.Link>
+                            <Nav.Link><Link to='/newUsers' className={styles.menu_item}>New Users</Link></Nav.Link>
+                            <div className="btn-group">
+                                <Nav.Link className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Reports</Nav.Link>
+                                <ul className="dropdown-menu dropdown-menu-end">
+                                    <li className="dropdown-item"><Link to='/accountReports' className="text-decoration-none text-dark">Account Reports</Link></li>
+                                    <li className="dropdown-item"><Link to='/commentReports' className="text-decoration-none text-dark">Comment Reports</Link></li>
+                                </ul>
+                            </div>
+                            <Nav.Link><Link to='/suspendedUsers' className={styles.menu_item}>Suspended Users</Link></Nav.Link>
+                            <Nav.Link><Link to='/adminSettings' className={styles.menu_item}>Settings</Link></Nav.Link>
+                            <Nav.Link onClick={handleLogout}><Link to='/' className={styles.menu_item}>Log out</Link></Nav.Link>
                         </Nav>
-                        <Navbar.Brand Style={"padding:0px 0px 0px 450px"}>{fname}</Navbar.Brand>
+                        <Navbar.Brand Style={"padding:0px 0px 0px 450px; color:white"}>{fname}</Navbar.Brand>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

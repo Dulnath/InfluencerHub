@@ -7,7 +7,7 @@ function NonApproved(){
     const [data, setData] = useState([]);
 
     async function asyncFetch(){
-        fetch('http://localhost:5000/api/usercount')
+        fetch('http://localhost:5000/api/usercount/nonapproved')
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => {

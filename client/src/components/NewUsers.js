@@ -5,6 +5,7 @@ import {Container,Card,Button,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
+import styles from '../styles/styles.module.css';
 
 function RenderType(props){
     let type = props.userType
@@ -84,65 +85,58 @@ class NewUsers extends React.Component{
     }
 
     render(){
-        if(this.state.isLogged){
-            return(
-                <div>
-                    <Menu/>
-                    <div className="container" style={{marginTop:"30px"}}>
-                    <div
-                  className="container"
-                  style={{
-                    position: "absolute",
-                    marginTop: "10px",
-                    paddingTop:"5px"
-                  }}
-                >
-                <h3>New Users</h3>
-                <hr />
-                <Container className="p-10 mb-2" fluid="md">
-                   {this.state.data.map((data) => {
-                        if(!data.adminVerified){
-                            return(
-                                <React.Fragment key={data._id}>
-                                    <Card className='p-3 mb-2 border border-secondary' >
-                                        <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
-                                        <Card.Body>
-                                               <RenderType userType={data.type}/>
-                                                <Row>
-                                                    <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
-                                                </Row>
-                                                <Row>
-                                                    <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
-                                                </Row>
-                                                <Row>
-                                                <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
-                                                </Row>
-                                                <Row>
-                                                    <Col sm={9}></Col>
-                                                    <Col>
-                                                        <Button variant="danger" as={Col} className="mx-2" onClick={()=>this.deleteNewUsers(data)}>Reject</Button>
-                                                        <Button variant="primary" as={Col} className="mx-2" onClick={()=>this.approveUser(data)}>Approve</Button>
-                                                    </Col>
-                                                </Row>
-                                        </Card.Body>
-                                    </Card>
-                                </React.Fragment>
-                            );
-                        }
-                    })}
-                </Container>
+        if (this.state.isLogged) {
+            return (
+                <div className={styles.background}>
+                    <Menu />
+                    <div className={styles.heading}>
+                            <h3>New Users</h3>
+                            <hr />
+                    </div>
+                    <div className={styles.scrollbox}>
+                    <Container className="p-10 mb-2" fluid="md">
+                                {this.state.data.map((data) => {
+                                    if (!data.adminVerified) {
+                                        return (
+                                            <React.Fragment key={data._id}>
+                                                <Card className={styles.record} >
+                                                    <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
+                                                    <Card.Body>
+                                                        <RenderType userType={data.category} />
+                                                        <Row>
+                                                            <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
+                                                        </Row>
+                                                        <Row>
+                                                            <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
+                                                        </Row>
+                                                        <Row>
+                                                            <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col sm={9}></Col>
+                                                            <Col>
+                                                                <span className={styles.btnRed}>Reject</span>
+                                                                <span className={styles.btnGreen}>Approve</span>
+                                                            </Col>
+                                                        </Row>
+                                                    </Card.Body>
+                                                </Card>
+                                            </React.Fragment>
+                                        );
+                                    }
+                                })}
+                        </Container>
+                    </div>
                 </div>
-                </div>
-                </div>       
             )
-        }else{
-            return(
+        } else {
+            return (
                 <div>
                     <AdminLogin></AdminLogin>
-                </div>  
+                </div>
             )
         }
-        
+
     }
 }
 

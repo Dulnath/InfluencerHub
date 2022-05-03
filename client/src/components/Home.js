@@ -1,41 +1,35 @@
 import React from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Menu from './Menu';
 import AdminLogin from './AdminLogin';
 import UserCount from './UserCount';
 import NonApproved from './NonApproved';
+import styles from '../styles/styles.module.css';
 
 function Home() {
     const loggedInUser = localStorage.getItem("token");
 
     if(loggedInUser){
         return(
-            <div>                
+            <div className={styles.background}>                
                 <Menu/>
-                <Container>
+                <div className={styles.heading}>
+                    <h1 class="h2">Dashboard</h1>
                     <hr />
-                        <div className="home border-secondary text-center">
-                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2" style={{paddingLeft:"20px"}}>Dashboard</h1>
-                            <div class="btn-toolbar mb-2 mb-md-0">
-                            <div style={{paddingRight:"20px"}}>
-                            </div>
-                            </div>
-                        </div>
-                    <Container>
-                        <Row>
-                            <Col>
-                            <UserCount/>
+                </div>
+                <div className="home border-secondary text-center">
+                    <Container className={styles.container_main}>
+                        
+                        <div className={styles.card}>
+                            <UserCount />
                             <h2>Total Users</h2>
-                            </Col>
-                            <Col>
-                            <NonApproved/>
-                            <h2>New Users</h2>
-                            </Col>
-                        </Row>
+                        </div>
+                        <div className={styles.card}>
+                            <NonApproved />
+                            <h2>New Applicants</h2>
+                        </div>
                     </Container>
-                    </div>
-                </Container>
+                </div>
             </div> 
             )
     }else{

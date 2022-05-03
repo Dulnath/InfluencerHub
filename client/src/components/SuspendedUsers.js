@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import Menu from './Menu';
 import {Container,Card,Button,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
+import styles from '../styles/styles.module.css';
 
 function RenderType(props){
     let type = props.userType
@@ -21,56 +22,38 @@ function RenderType(props){
             </Row>
         );
     }
- }
+}
 
-class SuspendedUsers extends React.Component{
+function SuspendedUsers(){
+    const [data,setData] = useState([]);
+    const loggedInUser = localStorage.getItem("token");
 
-    constructor(){
-        super();
-        this.state = {
-            data:[],
-            isLogged:false
-        };
-    }
+    
+    
 
-    componentDidMount(){
-        const loggedInUser = localStorage.getItem("token");
-        if(loggedInUser){
-            this.setState({isLogged:true});
-
-            axios.get('http://localhost:5000/api/useraccounts').then(res => {
-            this.setState({
-                data: res.data
-            });
+    useEffect(()=>{
+        axios.get('http://localhost:5000/api/useraccounts').then(res => {
+            setData(res.data);
         });
-        }   
-    }
+    },[])
 
-    render(){
-        if(this.state.isLogged){
-            return(
-                <div>
+    if(loggedInUser){
+        return(
+            <div className={styles.background}>
                     <Menu/>
-                    <div className="container" style={{marginTop:"30px"}}>
-                    <div
-                  className="container"
-                  style={{
-                    position: "absolute",
-                    marginTop: "10px",
-                    paddingTop:"5px"
-                  }}
-                >
+                <div className={styles.heading}>
                 <h3>Suspended Users</h3>
                 <hr />
+                </div>
                 <Container className="p-10 mb-2" fluid="md">
-                   {this.state.data.map(data => {
+                   {data.map(data => {
                         if(!data.isActive){
                             return(
                                 <React.Fragment style={{padding:"10px"}} key={data._id}>
-                                    <Card className='p-3 mb-2 border border-secondary'>
+                                    <Card className={styles.record}>
                                         <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                         <Card.Body>
-                                               <RenderType userType={data.type}/>
+                                               <RenderType userType={data.category}/>
                                                 <Row>
                                                     <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                                 </Row>
@@ -80,32 +63,24 @@ class SuspendedUsers extends React.Component{
                                                 <Row>
                                                     <Col sm={10}></Col>
                                                     <Col>
-                                                        <Button variant="danger" as={Col} className="mx-3">Restore</Button>
+                                                        <span className={styles.btnGreen}>Restore</span>
                                                     </Col>
                                                 </Row>
                                         </Card.Body>
                                     </Card>
                                 </React.Fragment>
                             );
-                        }else{
-                            return(
-                                <div></div>
-                            )
                         }
                     })}
                 </Container>
-                </div>
-                </div>
-                </div>       
-            )
-        }else{
-            return(
-                <div>
-                    <AdminLogin></AdminLogin>
                 </div>  
-            )
-        }
-        
+        )
+    }else{
+        return(
+            <div>
+                <AdminLogin></AdminLogin>
+            </div>  
+        )
     }
 }
 

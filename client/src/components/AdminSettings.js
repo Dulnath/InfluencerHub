@@ -1,12 +1,11 @@
 import React,{useRef} from 'react'
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import Menu from './Menu'
 import {Accordion,Container,Row,Col,Form,Button} from 'react-bootstrap'
 import AdminLogin from './AdminLogin';
 import emailjs from '@emailjs/browser';
 import { Outlet, Link } from "react-router-dom";
-
+import styles from '../styles/styles.module.css';
 
 function AdminSettings(){
 
@@ -15,9 +14,10 @@ function AdminSettings(){
     const [email, setEmail] = useState('')
     const [contactNo,setContactNo] = useState('');
     const [password] = useState(generateP());
-    const navigate = useNavigate();
     const loggedInUser = localStorage.getItem("token");
     const form = useRef();
+    const [error, setErrorMsg] = useState('');
+    const [success,setSuccessMsg] = useState('');
 
     function generateP() {
         var pass = '';
@@ -56,13 +56,9 @@ function AdminSettings(){
         event.preventDefault();
         
         if(!fname||!lname||!contactNo||!email){
-            alert('Please fill all fields!');
+            setErrorMsg('Please fill all fields!');
         }else{
             console.log(password);
-            if(!password){
-                alert('There is no password');
-                return;
-            }
             const response = await fetch('http://localhost:5000/api/useraccounts', {
                     method: 'POST',
                     headers: {
@@ -82,10 +78,12 @@ function AdminSettings(){
                 if (data.status === 'ok') {
                     sendEmail(event);
                     console.log('data submitted')
-                    navigate('../dashboard');
-                    alert('Sucessfully registered New Admin')   
+                   // navigate('../dashboard');
+                    setSuccessMsg('Sucessfully registered New Admin');
+                    setFName('');setLName('');setEmail('');setContactNo('');
+
                 }else{
-                    alert('Registration Error!');
+                    setErrorMsg('Registration Error');
                 }
         }       
         
@@ -95,22 +93,16 @@ function AdminSettings(){
 
     if(loggedInUser){
         return(
-            <div>
+            <div className={styles.background}>
             <Menu/>
-            <div className="container" style={{marginTop:"30px"}}>    
-                    <div
-                  className="container"
-                  style={{
-                    position: "absolute",
-                    marginTop: "10px",
-                    paddingTop:"5px"
-                  }}
-                >
-                <h3>Settings</h3>
+            <div className={styles.heading}>
+            <h3>Settings</h3>
                 <hr />
-                <Accordion defaultActiveKey="1" style={{padding:"10px 0px 10px 0px"}}>
+            </div>
+                <Container>
+                    <Accordion defaultActiveKey="1" className={styles.accordion}>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header className="text-decoration-none text-dark">Register new Admin</Accordion.Header>
+                        <Accordion.Header >Register new Admin</Accordion.Header>
                         <Accordion.Body>
                             <Container>
                                 <Form ref={form} onSubmit={(e)=>{
@@ -165,23 +157,27 @@ function AdminSettings(){
                                             Register
                                         </Button>
                                     </Row>
+                                    <Row className={styles.form_container}>
+                                        {error && <div className={styles.error_msg}>{error}</div>}
+                                        {success && <div className={styles.success_msg}>{success}</div>}   
+                                    </Row>
                                 </Form>
                             </Container>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
+                
                 <Link to='/editaccount' className='text-decoration-none'>
                 <div className="d-grid gap-2">
-                    <Container fluid="md" className='p-3 mb-2 border border-primary rounded dark'>
+                    <Container fluid="md" className={styles.item}>
                         <Row>
                             <b>Edit Account</b>
                         </Row>
                     </Container>
                 </div>
                 </Link>
-                <Outlet/>                                          
-                </div>
-            </div> 
+                <Outlet/> 
+                </Container>
         </div>       
         )
     }else{
