@@ -3,6 +3,7 @@ const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
 const Token = require("../models/token");
 const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 //signup
 router.post("/", async (req, res) => {
 	try {
@@ -10,7 +11,7 @@ router.post("/", async (req, res) => {
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
-		const user = await User.findOne({ email: req.body.email });
+		let user = await User.findOne({ email: req.body.email });
 		if (user)
 			return res
 				.status(409)
@@ -18,12 +19,7 @@ router.post("/", async (req, res) => {
 
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
-		const token = await new Token({
-			userId: user._id,
-			token: crypto.randomBytes(32).toString("hex"),
-		}).save();
-		const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
-		await sendEmail(user.email, "Verify Email", url);
+	
 
 		let userRes = {
 			email: req.body.email,
@@ -49,19 +45,28 @@ router.post("/", async (req, res) => {
 			 }
 		}
 		//console.log("error")
-		await new User(userRes).save();
-		
+		 user =  await new User(userRes).save();
+		//await new User(userRes).save();
+		console.log("Print user")
+		console.log(user);
+		const token = await new Token({
+			userId: user._id,
+			token: crypto.randomBytes(32).toString("hex"),
+		}).save();
+		const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+		 await sendEmail(user.email, "Verify Email", url);
 		res
 			.status(201)
 			.send({ message: "An Email sent to your account please verify" });
 	//	res.status(201).send({ message: "User created successfully" });
 	
 	} catch (error) {
+		console.log(error);
 		res.status(500).send({ message: "Internal Serversdfsadf Error",error });
 	}
 });
 
-module.exports = router;
+
 router.get('/getUsers', (req, res) => {
     User.find()
         .sort({ date: -1 })
@@ -131,3 +136,5 @@ router.get("/getuser/:id", (req, res) => {
 	  });
 	});
   });
+
+  module.exports = router;
