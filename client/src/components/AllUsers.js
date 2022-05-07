@@ -30,7 +30,7 @@ function AllUsers(){
                         <Container>
                             <div>
                                 {apiData.map((data) => {
-                                    if(data.adminVerified){
+                                    if(data.adminVerified&&data.isActive){
                                         return (
                                             <React.Fragment key={data._id}>
                                                 <Container fluid="md" className={styles.record} >
@@ -42,6 +42,10 @@ function AllUsers(){
                                                 </Container>
                                             </React.Fragment>
                                         )
+                                    }else{
+                                        return(
+                                            <div></div>
+                                        );
                                     }
                                 })}
                             </div>
@@ -54,7 +58,7 @@ function AllUsers(){
                 <div>
                     <AdminLogin></AdminLogin>
                 </div>  
-        )
+            )
     }
 }
 

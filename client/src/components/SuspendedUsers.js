@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import Menu from './Menu';
-import {Container,Card,Button,Col,Row} from 'react-bootstrap'
+import {Container,Card,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
@@ -69,6 +69,10 @@ function SuspendedUsers(){
                                         </Card.Body>
                                     </Card>
                                 </React.Fragment>
+                            );
+                        }else{
+                            return (
+                                <div></div>
                             );
                         }
                     })}

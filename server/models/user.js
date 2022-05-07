@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
 	category:{ type: String, required: true },
 	isFirstLogin:{type:Boolean,required:false},
 	adminVerified:{type:Boolean,default:false},
+	suspendedDate:{type:Date,required:false},
+	restoreDate:{type:Date,required:false},
 	verified:{type:Boolean,default:false},
 	isActive:{type:Boolean,default:true}
 
