@@ -10,11 +10,15 @@ import styles from '../styles/styles.module.css';
 function CommentReports(){
     const [data, setApiData] = useState([]);
     const loggedInUser = localStorage.getItem("token");
-
-    useEffect(() => {
+    
+    async function loadData(){
         axios.get('http://localhost:5000/api/reports/reportedcomments').then(res => {
             setApiData(res.data);
         })
+    }
+
+    useEffect(() => {
+        loadData();
     }, [])
 
     if(loggedInUser){

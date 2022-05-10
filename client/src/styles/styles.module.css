@@ -64,6 +64,18 @@
 	animation: showNotification 2000ms ease-out forwards;
 }
 
+.success_msg_permenant {
+	padding: 5px;
+	margin: 10px 0;
+	font-size: 20px;
+	font-weight: 500;
+	background-color: #33c53f;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+}
+
+
 @keyframes showNotification {
 	0% {
 		display: none;

@@ -115,7 +115,7 @@ class NewUsers extends React.Component{
                                                         <Row>
                                                             <Col sm={9}></Col>
                                                             <Col>
-                                                                <span className={styles.btnRed}>Reject</span>
+                                                                <span className={styles.btnRed} >Reject</span>
                                                                 <span className={styles.btnGreen}>Approve</span>
                                                             </Col>
                                                         </Row>

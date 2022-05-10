@@ -226,4 +226,16 @@ router.put('/suspendaccount/:id', async(req,res)=>{
     }
 })
 
+//restore account
+router.put('/restoreaccount/:id', async(req,res)=>{
+    try{
+        console.log('account restored');
+        await User.findByIdAndUpdate(req.params.id,{
+            isActive:req.body.isActive
+        }), res.json({status: 'ok'})
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+})
 module.exports = router;

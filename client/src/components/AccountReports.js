@@ -35,6 +35,18 @@ function AccountReports() {
         })
     }
 
+    async function deleteReport(id) {
+        axios.delete('http://localhost:5000/api/reports/reportedaccounts/delete/' + id)
+            .then((res) => {
+                console.log(res.status);
+                console.log('Report Deleted');
+                loadData();
+            }).catch((error) => {
+                console.log(error);
+                alert('problem deleting report');
+            });
+    }
+
     async function suspendAccount(id, repId) {
 
         console.log(id);
@@ -42,7 +54,7 @@ function AccountReports() {
 
         const today = new Date(FormatDate(Date.now()));
         const restoreDay = new Date(today);
-        restoreDay.setDate(restoreDay.getDate() + 26);
+        restoreDay.setDate(restoreDay.getDate() + 7);
         console.log(today);
         console.log(restoreDay);
 
@@ -60,15 +72,7 @@ function AccountReports() {
         const data = await response.json();
         console.log(data.status);
         if (data.status === 'ok') {
-            axios.delete('http://localhost:5000/api/reports/reportedaccounts/delete/' + repId)
-                .then((res) => {
-                    console.log(res.status);
-                    console.log('Report Deleted');
-                    loadData();
-                }).catch((error) => {
-                    console.log(error);
-                    console.log('problem deleting report');
-                });
+            deleteReport(repId);
         } else {
             console.log('oops! something went wrong');
         }
@@ -108,7 +112,7 @@ function AccountReports() {
                                             <Col sm={8}></Col>
                                             <Col>
                                                 <span className={styles.btnRed} onClick={() => suspendAccount(data.accountID, data._id)}>Suspend</span>
-                                                <span className={styles.btnGreen}>Dismiss</span>
+                                                <span className={styles.btnGreen} onClick={()=>deleteReport(data._id)}>Dismiss</span>
                                             </Col>
                                         </Row>
                                     </Card.Body>
