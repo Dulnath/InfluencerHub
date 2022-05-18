@@ -12,11 +12,11 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
-router.delete('/delete/:id',(req,res,next) => {
-    NewUsers.findByIdAndRemove(req.params.id,(error,data)=>{
-        if(error){
+router.delete('/delete/:id', (req, res, next) => {
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
             return next(error);
-        }else{
+        } else {
             res.status(200).json({
                 msg: data
             })
@@ -41,7 +41,7 @@ router.post('/', async(req, res) => {
             category: 'admin',
             isActive: 'true',
             isVerified: 'true',
-            adminVerified:'true',
+            adminVerified: 'true',
             isFirstLogin: 'true',
             password: newPassword,
         })
@@ -60,7 +60,7 @@ router.post('/approveuser', async(req, res) => {
             email: req.body.email,
             phoneNo: req.body.phoneNo,
             type: req.body.type,
-            isActive: req.body.isActive,//false -> suspended / not approved
+            isActive: req.body.isActive, //false -> suspended / not approved
             password: req.body.password,
             isFirstLogin: 'false'
         })
@@ -161,21 +161,21 @@ router.put('/updateaccount/:id', async(req, res) => {
     if (req.body.password) {
         try {
             console.log(req.body.email);
-            
+
             const user = await User.findOne({
                 email: req.body.email
             })
-        
+
             if (!user) {
                 return res.json({ status: 'error', error: 'Invalid login' })
             }
-        
+
             const isPasswordValid = await bcrypt.compare(
                 req.body.oldPassword,
                 user.password
             );
             console.log(isPasswordValid);
-            
+
             if (isPasswordValid) {
                 console.log('correct old password');
                 const salt = bcrypt.genSaltSync(10);
@@ -188,7 +188,7 @@ router.put('/updateaccount/:id', async(req, res) => {
                     password: newPassword
                 }, res.json({ status: 'ok' }))
 
-            }else{
+            } else {
                 return res.json({ status: 'error', user: false })
             }
         } catch (err) {

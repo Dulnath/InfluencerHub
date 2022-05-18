@@ -1,10 +1,10 @@
-const express  = require('express');
+const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { User } = require("./models/user");
 const UserCount = require('./models/UserCount');
-const useraccounts = require('./routes/useraccounts');
+const useraccounts = require('./routes/user');
 const reports = require('./routes/reports');
 const usercount = require('./routes/usercount');
 const req = require('express/lib/request');
@@ -16,34 +16,34 @@ const db = require('./config/keys').mongoURI;
 
 mongoose
     .connect(db)
-    .then(()=>console.log('MongoDB Connected....'))
+    .then(() => console.log('MongoDB Connected....'))
     .catch(err => console.log(err));
 
 //use api
-app.use('/api/useraccounts',useraccounts);
-app.use('/api/reports',reports);
+app.use('/api/useraccounts', useraccounts);
+app.use('/api/reports', reports);
 app.use('/api/usercount', usercount);
 
 const port = process.env.PORT || 5000;
 
-function getUserCount(){
+function getUserCount() {
     var query = User.find();
     var timeNow = FormatDate(Date.now());
-    query.count(function (err, count) {
-    if (err){
-        console.log(err);
-    } else{
-        try{
-            UserCount.create({
-                userCount:count,
-                time:timeNow
-            })
-        }catch(err){
+    query.count(function(err, count) {
+        if (err) {
             console.log(err);
+        } else {
+            try {
+                UserCount.create({
+                    userCount: count,
+                    time: timeNow
+                })
+            } catch (err) {
+                console.log(err);
+            }
+            console.log("Count is", count)
         }
-        console.log("Count is", count)
-    } 
-});
+    });
 }
 
 function FormatDate(date) {
@@ -60,12 +60,11 @@ function FormatDate(date) {
 }
 
 
-app.get("/",function(req,res){
-    res.json({message:"Greetings from the server"}); 
+app.get("/", function(req, res) {
+    res.json({ message: "Greetings from the server" });
 })
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`server started on port ${port}`);
     //setInterval(getUserCount,60000);
 });
-
