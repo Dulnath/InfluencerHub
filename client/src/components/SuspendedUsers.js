@@ -30,7 +30,20 @@ function RenderType(props){
 function SuspendedUsers(){
     const [data,setData] = useState([]);
     const loggedInUser = localStorage.getItem("token");
-    //const [message, setMessage] = useState('');
+    
+    function RenderRestoreBtn(props){
+        const today = new Date(FormatDate(Date.now()));
+        const restoreDate = new Date(props.uRestoreDate);
+        if(restoreDate > today){
+            return(
+                <span className={styles.btnDisable}>Restore</span>
+            );
+        }else{
+            return(
+                <span className={styles.btnGreen} onClick={() => restoreAccount(props.uid)}>Restore</span>
+            );
+        }
+    }
 
     function loadData(){
         axios.get('http://localhost:5000/api/useraccounts').then(res => {
@@ -98,6 +111,7 @@ function SuspendedUsers(){
                 <h3>Suspended Users</h3>
                 <hr />
                 </div>
+                <div className={styles.scrollbox}>
                 <Container className="p-10 mb-2" fluid="md">
                    {data.map(data => {
                         if(!data.isActive){
@@ -117,7 +131,7 @@ function SuspendedUsers(){
                                                 <Row>
                                                     <Col sm={10}></Col>
                                                     <Col>
-                                                        <span className={styles.btnGreen} onClick={() => restoreAccount(data._id)}>Restore</span>
+                                                        <RenderRestoreBtn uid={data._id} uRestoreDate={data.restoreDate}/>
                                                     </Col>
                                                 </Row>
                                                 
@@ -132,6 +146,7 @@ function SuspendedUsers(){
                         }
                     })}
                 </Container>
+                </div>
                 </div>  
         )
     }else{

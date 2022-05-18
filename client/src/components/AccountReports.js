@@ -91,6 +91,7 @@ function AccountReports() {
                     <hr />
                 </div>
 
+                <div className={styles.scrollbox}>
                 <Container className="p-10 mb-2" fluid="md">
                     {data.map(data => {
                         return (
@@ -121,6 +122,7 @@ function AccountReports() {
                         );
                     })}
                 </Container>
+                </div>
             </div>
         )
     } else {

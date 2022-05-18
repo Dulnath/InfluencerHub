@@ -1,230 +1,230 @@
 .home {
-	margin: '50px';
-	padding: '0px 100px 0px 100px';
+    margin: '50px';
+    padding: '0px 100px 0px 100px';
 }
 
 .menu_item {
-	color: #d1d1d1;
-	text-decoration: none;
+    color: #d1d1d1;
+    text-decoration: none;
 }
 
 .menu_item:hover {
-	color: white;
+    color: white;
 }
 
 .background {
-	height: 100vh;
-	background-size: cover;
-	background-image: linear-gradient(-45deg,
-			#3bade3 0%,
-			#5ccbff 25%,
-			#2d7db3 51%,
-			#2164d1 100%);
-	animation: AnimateBG 20s ease infinite;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+    height: 100vh;
+    background-size: cover;
+    background-image: linear-gradient(-45deg, #3bade3 0%, #5ccbff 25%, #2d7db3 51%, #2164d1 100%);
+    animation: AnimateBG 20s ease infinite;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 @keyframes AnimateBG {
-	0% {
-		background-position: 0% 50%
-	}
-
-	50% {
-		background-position: 100% 50%
-	}
-
-	100% {
-		background-position: 0% 50%
-	}
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
 }
 
 .error_msg {
-	width: 370px;
-	padding: 15px;
-	margin: 10px 0;
-	font-size: 14px;
-	background-color: #f34646;
-	color: white;
-	border-radius: 5px;
-	text-align: center;
+    width: 370px;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 14px;
+    background-color: #f34646;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .success_msg {
-	width: 370px;
-	padding: 15px;
-	margin: 10px 0;
-	font-size: 14px;
-	background-color: #29c743;
-	color: white;
-	border-radius: 5px;
-	text-align: center;
-	animation: showNotification 2000ms ease-out forwards;
+    width: 370px;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 14px;
+    background-color: #29c743;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    animation: showNotification 2000ms ease-out forwards;
 }
 
 .success_msg_permenant {
-	padding: 5px;
-	margin: 10px 0;
-	font-size: 20px;
-	font-weight: 500;
-	background-color: #33c53f;
-	color: white;
-	border-radius: 5px;
-	text-align: center;
+    padding: 5px;
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #33c53f;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
 }
-
 
 @keyframes showNotification {
-	0% {
-		display: none;
-		opacity: 1;
-	}
-
-	50% {
-		display: none;
-		opacity: 1;
-	}
-
-	100% {
-		display: block;
-		opacity: 0;
-	}
+    0% {
+        display: none;
+        opacity: 1;
+    }
+    50% {
+        display: none;
+        opacity: 1;
+    }
+    100% {
+        display: block;
+        opacity: 0;
+    }
 }
 
-
 .form_container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container {
-	border-radius: 20px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	background-color: #ffffff;
-	padding: 50px;
-	margin: 0px 20px 20px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #ffffff;
+    padding: 50px;
+    margin: 0px 20px 20px 20px;
 }
 
-.scrollbox{
-	height:80vh;
-	overflow:auto;
+.scrollbox {
+    height: 80vh;
+    overflow: auto;
 }
 
 .container_main {
-	width: 100%;
-	display: flex;
+    width: 100%;
+    display: flex;
 }
 
-.container_trans{
-	margin: auto;
+.container_trans {
+    margin: auto;
 }
 
 .card {
-	background-color: rgb(255, 255, 255);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	border-radius: 20px;
-	padding: 40px;
-	width: 70%;
-	margin: 0px 10px 5px 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    padding: 40px;
+    width: 70%;
+    margin: 0px 10px 5px 10px;
 }
 
 .heading {
-	align-items: center;
-	padding: 20px 18% 20px 18%;
-	color: #e2e2e2;
-	font-weight: 400;
+    align-items: center;
+    padding: 20px 18% 20px 18%;
+    color: #e2e2e2;
+    font-weight: 400;
 }
 
 .heading_settings {
-	align-items: center;
-	padding: 20px 0px 20px 0px;
-	color: #e2e2e2;
-	font-weight: 400;
+    align-items: center;
+    padding: 20px 0px 20px 0px;
+    color: #e2e2e2;
+    font-weight: 400;
 }
 
 .record {
-	border-radius: 8px;
-	padding: 20px;
-	margin: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(255, 255, 255);
 }
 
 .item {
-	border-radius: 8px;
-	padding: 20px;
-	margin: 10px 0 10px 0;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0 10px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(255, 255, 255);
 }
 
 .item:hover {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	animation-name: example;
-	animation-duration: 0.25s;
-	border-left: 8px solid #273792;
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border-left: 8px solid #273792;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .accordion {
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .record:hover {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	animation-name: example;
-	animation-duration: 0.25s;
-	border-left: 8px solid #273792;
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border-left: 8px solid #273792;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-
 .link_wrapper {
-	position: relative;
-	align-content: center;
+    position: relative;
+    align-content: center;
 }
 
 .btnGreen {
-	border-radius: 5px;
-	padding: 10px 25px;
-	font-size: 15px;
-	text-decoration: none;
-	margin: 20px;
-	color: #fff;
-	position: relative;
-	display: inline-block;
-	background-color: #29af61;
-	box-shadow: 0px 3px 0px 0px #108541;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    background-color: #29af61;
+}
+
+.btnDisable {
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    background-color: #727272;
 }
 
 .btnRed {
-	border-radius: 5px;
-	padding: 10px 25px;
-	font-size: 15px;
-	text-decoration: none;
-	margin: 20px;
-	color: #fff;
-	position: relative;
-	display: inline-block;
-	background-color: #eb1700;
-	box-shadow: 0px 3px 0px 0px #851c10;	
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    background-color: #eb1700;
 }
 
 .btnGreen:hover {
-	background-color: #48E68B;
+    background-color: #48E68B;
 }
 
 .btnRed:hover {
-	background-color: #FF6656;
+    background-color: #FF6656;
 }
 
-.btnGreen:active,.btnRed:active {
-	transform: translate(0px, 5px);
-	-webkit-transform: translate(0px, 5px);
-	box-shadow: 0px 1px 0px 0px;
+.btnGreen:active,
+.btnRed:active {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    box-shadow: 0px 1px 0px 0px;
 }
