@@ -6,6 +6,7 @@ import Menu from './Menu'
 import {Row,Col,Form,Button} from 'react-bootstrap'
 import AdminLogin from './AdminLogin';
 import ParseJwt from '../utilities/ParseJwt';
+import styles from '../styles/styles.module.css';
 
 function EditAccount(){
     const loggedInUser = localStorage.getItem("token");
@@ -16,10 +17,19 @@ function EditAccount(){
     const [oldPassword,setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordRep,setPasswordRep] = useState('');
+    const [error, setErrorMsg] = useState('');
+    const [success,setSuccessMsg] = useState('');
 
 
     useEffect(()=>{
-        const userToken = localStorage.getItem('token');//dasojdiofos.asdokfndo.dcacd432r
+        const userToken = localStorage.getItem('token');
+        if(!userToken){
+            return(
+                <div>
+                    <AdminLogin/>
+                </div>
+            )
+        }//dasojdiofos.asdokfndo.dcacd432r
         const user = ParseJwt(userToken)//id.email.fname
         
         if(userToken){
@@ -35,12 +45,11 @@ function EditAccount(){
     async function updateUserAccount(event){
         event.preventDefault();
         const user = ParseJwt(localStorage.getItem('token'))
+        if(password&&!oldPassword){
+            setErrorMsg('Must Enter Old Password!');
+            return;
+        }
         if(password===passwordRep&&password!==''){
-
-            if(!oldPassword){
-                alert('Must Enter Old Password!');
-                return;
-            }
             console.log(password);
             const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
                 method: 'PUT',
@@ -59,14 +68,14 @@ function EditAccount(){
             const data = await response.json();
             console.log(data.status);
             if (data.status === 'ok') { 
-                alert('Account Information has been updated');
+                setErrorMsg('Account Information has been updated');
             }else if(!data.user){
-                alert('Old Password is incorrect');
+                setErrorMsg('Old Password is incorrect');
             }else{
                 console.log('could not update user account');
             }
         }else if(password!==passwordRep && password!==''){
-            alert('Passwords do not Match!');
+            setErrorMsg('Passwords do not Match!');
             return;
         }else{
             const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
@@ -84,21 +93,22 @@ function EditAccount(){
             const data = await response.json();
             console.log(data.status);
             if (data.status === 'ok') { 
-                alert('Account Information has been updated');
+                setSuccessMsg('Account Information has been updated')
             }else{
-                console.log('could not update user account')
+                setErrorMsg('Sorry. Could not update user account')
             }
            
         }
     }
     if(loggedInUser){
         return(
-            <div>
+            <div className={styles.background}>
                 <Menu></Menu>
                 <div className="container" style={{marginTop:"30px"}}>
-                <h3>Edit Account Information</h3>
-                <hr />
                 <Form>
+                    <div className={styles.container}>
+                    <h3>Edit Account Information</h3>
+                <hr />
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="fName">
                         <Form.Label>First Name</Form.Label>
@@ -122,7 +132,8 @@ function EditAccount(){
                         <Form.Control type="text" placeholder='Contact No' value={contactNo} onChange={(e)=>setContactNo(e.target.value)}/>
                         </Form.Group>
                     </Row>
-                    <br />
+                    </div>
+                    <div className={styles.container}>
                     <h3>Change Password</h3>
                     <hr />
                     <Row className="mb-3">
@@ -158,6 +169,11 @@ function EditAccount(){
                         <Outlet/>
                         </Col>
                     </Row>
+                    <Row className={styles.form_container}>
+                    {error && <div className={styles.error_msg}>{error}</div>}
+                    {success && <div className={styles.success_msg}>{success}</div>}
+                    </Row> 
+                    </div>
                     </Form>
                 </div>
             </div>

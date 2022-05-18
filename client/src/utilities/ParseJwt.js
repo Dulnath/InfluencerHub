@@ -8,4 +8,5 @@ function ParseJwt (token) {
     return JSON.parse(jsonPayload);
 };
 
+
 export default ParseJwt;

@@ -8,13 +8,15 @@ const userSchema = new mongoose.Schema({
 	firstName: { type: String, required: false },
 	businessName: { type: String, required: false },
 	businessAddress: { type: String, required: false },
-	lastName: { type: String, required: false },
+	lastName: { type: String, default:'' },
 	email: { type: String, required: true },
 	phoneNo:{type:String, required:true},
 	password: { type: String, required: true },
 	category:{ type: String, required: true },
 	isFirstLogin:{type:Boolean,required:false},
 	adminVerified:{type:Boolean,default:false},
+	suspendedDate:{type:Date,required:false},
+	restoreDate:{type:Date,required:false},
 	verified:{type:Boolean,default:false},
 	isActive:{type:Boolean,default:true}
 

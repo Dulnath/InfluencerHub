@@ -2,11 +2,13 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import {Form,Button,Container} from 'react-bootstrap'
 import { useState } from 'react'
+import styles from '../styles/styles.module.css';
 
 function AdminLogin(){
     const navigate = useNavigate();
-    const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+    const [error, setErrorMsg] = useState('');
 
     function refreshPage() {
         window.location.reload(false);
@@ -38,15 +40,13 @@ function AdminLogin(){
                 navigate('/firstlogin');
                 return;
             }
-
-			alert('Login successful')
 			if(currentPath === '/dashboard'){
                 refreshPage();
             }else{
                 navigate('/dashboard');
             }
 		} else {
-			alert('Please check your username and password')
+            setErrorMsg('Please check your username and password');
 		}
 	}
 
@@ -71,10 +71,11 @@ function AdminLogin(){
                         placeholder="Password" 
                         />
                     </Form.Group>
+                    {error && <div className={styles.error_msg}>{error}</div>}
                     <Button variant="primary" type="submit">
                         Login
                     </Button>
-                </Form>
+                </Form>    
             </Container>
         </div>
     )
