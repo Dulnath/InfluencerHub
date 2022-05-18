@@ -16,10 +16,10 @@
 	height: 100vh;
 	background-size: cover;
 	background-image: linear-gradient(-45deg,
-			rgba(59, 173, 227, 1) 0%,
-			rgb(68, 204, 186) 25%,
-			rgb(68, 183, 116) 51%,
-			rgb(9, 185, 118) 100%);
+			#3bade3 0%,
+			#5ccbff 25%,
+			#2d7db3 51%,
+			#2164d1 100%);
 	animation: AnimateBG 20s ease infinite;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -57,7 +57,7 @@
 	padding: 15px;
 	margin: 10px 0;
 	font-size: 14px;
-	background-color: #33c53f;
+	background-color: #29c743;
 	color: white;
 	border-radius: 5px;
 	text-align: center;
@@ -166,7 +166,7 @@
 	border-bottom-left-radius: 10px;
 	animation-name: example;
 	animation-duration: 0.25s;
-	border-left: 8px solid #3bb19b;
+	border-left: 8px solid #273792;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -179,7 +179,7 @@
 	border-bottom-left-radius: 10px;
 	animation-name: example;
 	animation-duration: 0.25s;
-	border-left: 8px solid #3bb19b;
+	border-left: 8px solid #273792;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -199,7 +199,7 @@
 	position: relative;
 	display: inline-block;
 	background-color: #29af61;
-	box-shadow: 0px 3px 0px 0px #108541
+	box-shadow: 0px 3px 0px 0px #108541;
 }
 
 .btnRed {

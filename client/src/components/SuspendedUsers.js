@@ -91,9 +91,9 @@ function SuspendedUsers(){
     },[])
 
     if(loggedInUser){
-        return(
+       return(
             <div className={styles.background}>
-                    <Menu/>
+                     <Menu/>
                 <div className={styles.heading}>
                 <h3>Suspended Users</h3>
                 <hr />
@@ -106,7 +106,7 @@ function SuspendedUsers(){
                                     <Card className={styles.record}>
                                         <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                         <Card.Body>
-                                                <RenderMessage uRestoreDate={data.restoreDate}/>
+                                               <RenderMessage uRestoreDate={data.restoreDate}/>
                                                <RenderType userType={data.category}/>
                                                 <Row>
                                                     <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
