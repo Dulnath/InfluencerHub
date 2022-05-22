@@ -17,6 +17,16 @@ router.get('/reportedcomments',(req,res) => {
         .then(items => res.json(items))
 });
 
+router.delete('/reportedcomments/delete/:id',(req,res)=>{
+    ReportedComments.findByIdAndDelete(req.params.id, (err)=>{
+        if(err){
+            res.json({status:'error'});
+        }else{
+            res.json({status:'ok'});
+        }
+    })
+})
+
 //delete accountReport
 router.delete('/reportedaccounts/delete/:id',(req,res)=>{
     ReportedAccounts.findByIdAndDelete(req.params.id, (err)=>{

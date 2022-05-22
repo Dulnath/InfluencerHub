@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
 import styles from '../styles/styles.module.css';
 import FormatDate from '../utilities/FormatDate';
+import emailjs from '@emailjs/browser';
 
 function RenderType(props){
     let type = props.userType
@@ -30,6 +31,16 @@ function RenderType(props){
 function SuspendedUsers(){
     const [data,setData] = useState([]);
     const loggedInUser = localStorage.getItem("token");
+
+    function sendEmail(fname,email){
+        let data = {
+            firstName:uFname,
+            Email:uEmail,
+            Subject:"influencerHub account restored",
+            Message:"This is to inform you that your account has been restored. You may now log into your account as you wish"
+        }
+        console.log(data);
+    }
     
     function RenderRestoreBtn(props){
         const today = new Date(FormatDate(Date.now()));
@@ -40,7 +51,7 @@ function SuspendedUsers(){
             );
         }else{
             return(
-                <span className={styles.btnGreen} onClick={() => restoreAccount(props.uid)}>Restore</span>
+                <span className={styles.btnGreen} onClick={() => restoreAccount(props.uid,props.uFname,props.uEmail)}>Restore</span>
             );
         }
     }
@@ -76,7 +87,7 @@ function SuspendedUsers(){
 
     
 
-    async function restoreAccount(id) {
+    async function restoreAccount(id,fname,email) {
 
         console.log(id);
 
@@ -89,11 +100,12 @@ function SuspendedUsers(){
                 isActive: true
             }),
         })
-        const data = await response.json();
-        console.log(data.status);
-        if (data.status === 'ok') {
+        const resData = await response.json();
+        console.log(resData.status);
+        if (resData.status === 'ok') {
             alert('Account Restored');
-            loadData();
+            sendEmail(data);
+            loadData(fname,email);
         } else {
             console.log('oops! something went wrong');
         }
@@ -131,7 +143,7 @@ function SuspendedUsers(){
                                                 <Row>
                                                     <Col sm={10}></Col>
                                                     <Col>
-                                                        <RenderRestoreBtn uid={data._id} uRestoreDate={data.restoreDate}/>
+                                                        <RenderRestoreBtn uid={data._id} uRestoreDate={data.restoreDate} uFname={data.firstName} uEmail={data.Email}/>
                                                     </Col>
                                                 </Row>
                                                 

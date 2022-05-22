@@ -12,18 +12,16 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
-router.delete('/delete/:id', (req, res, next) => {
-    User.findByIdAndRemove(req.params.id, (error, data) => {
-        if (error) {
-            return next(error);
-        } else {
-            res.status(200).json({
-                msg: data
-            })
+//delete user
+router.delete('/delete/:id',(req,res)=>{
+    User.findByIdAndDelete(req.params.id, (err)=>{
+        if(err){
+            res.json({status:'error'});
+        }else{
+            res.json({status:'ok'});
         }
     })
-});
-
+})
 
 //register new Admin
 router.post('/', async(req, res) => {
@@ -51,26 +49,6 @@ router.post('/', async(req, res) => {
         console.log(err);
     }
 })
-
-router.post('/approveuser', async(req, res) => {
-    try {
-        await User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            phoneNo: req.body.phoneNo,
-            type: req.body.type,
-            isActive: req.body.isActive, //false -> suspended / not approved
-            password: req.body.password,
-            isFirstLogin: 'false'
-        })
-        res.json({ status: 'ok' })
-    } catch (err) {
-        res.json({ status: 'error' });
-        console.log(err);
-    }
-})
-
 
 router.post('/login', async(req, res) => {
     const user = await User.findOne({
@@ -238,4 +216,20 @@ router.put('/restoreaccount/:id', async(req,res)=>{
         res.json({status:'error'});
     }
 })
+
+//approve user
+router.put('/approveuser/:id', async(req, res) => {
+    try{
+        console.log('account approved');
+        await User.findByIdAndUpdate(req.params.id,{
+            isActive:req.body.isActive,
+            adminVerified:req.body.adminVerified,
+            isFirstLogin:'false'
+        }), res.json({status: 'ok'})
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+})
+
 module.exports = router;

@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
 import styles from '../styles/styles.module.css';
 import FormatDate from '../utilities/FormatDate';
+import emailjs from '@emailjs/browser';
 
 function RenderType(props) {
     let type = props.userType
@@ -29,6 +30,23 @@ function AccountReports() {
     const [data, setApiData] = useState([]);
     const loggedInUser = localStorage.getItem("token");
 
+    function sendEmail(uData){
+        let data = {
+            firstName:uData.firstName,
+            lastName:uData.lastName,
+            Email:uData.email,
+            Subject:"IncluencerHub Account Suspension",
+            Message:"This is to inform you that your influencerHub account has been suspended for 1 week"
+        }
+        emailjs.send('gmail', 'template_kr4q4vl', data, 'user_n4zSmO5iVS8LRqNYkq1XA')
+        .then((result) => {
+            console.log(result.text);
+            console.log('Sent Mail')
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
+
     async function loadData() {
         axios.get('http://localhost:5000/api/reports/reportedaccounts').then(res => {
             setApiData(res.data);
@@ -47,10 +65,10 @@ function AccountReports() {
             });
     }
 
-    async function suspendAccount(id, repId) {
+    async function suspendAccount(data) {
 
-        console.log(id);
-        console.log(repId);
+        console.log(data._id);
+        console.log(data.accountID);
 
         const today = new Date(FormatDate(Date.now()));
         const restoreDay = new Date(today);
@@ -58,7 +76,7 @@ function AccountReports() {
         console.log(today);
         console.log(restoreDay);
 
-        const response = await fetch('http://localhost:5000/api/useraccounts/suspendaccount/' + id, {
+        const response = await fetch('http://localhost:5000/api/useraccounts/suspendaccount/' + data.accountID, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,10 +87,11 @@ function AccountReports() {
                 isActive: false
             }),
         })
-        const data = await response.json();
-        console.log(data.status);
-        if (data.status === 'ok') {
-            deleteReport(repId);
+        const resData = await response.json();
+        console.log(resData.status);
+        if (resData.status === 'ok') {
+            deleteReport(data._id);
+            sendEmail(data);
         } else {
             console.log('oops! something went wrong');
         }
@@ -112,7 +131,7 @@ function AccountReports() {
                                         <Row>
                                             <Col sm={8}></Col>
                                             <Col>
-                                                <span className={styles.btnRed} onClick={() => suspendAccount(data.accountID, data._id)}>Suspend</span>
+                                                <span className={styles.btnRed} onClick={() => suspendAccount(data)}>Suspend</span>
                                                 <span className={styles.btnGreen} onClick={()=>deleteReport(data._id)}>Dismiss</span>
                                             </Col>
                                         </Row>

@@ -17,6 +17,18 @@ function CommentReports(){
         })
     }
 
+    async function deleteReport(rid) {
+        axios.delete('http://localhost:5000/api/reports/reportedcomments/delete/' + rid)
+            .then((res) => {
+                console.log(res.status);
+                console.log('Report Deleted');
+                loadData();
+            }).catch((error) => {
+                console.log(error);
+                alert('problem deleting report');
+            });
+    }
+
     useEffect(() => {
         loadData();
     }, [])
