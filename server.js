@@ -3,28 +3,36 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const session = require("express-session");
+//const session = require("express-session");
 
 //middlewares
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "50mb" }));
+app.use(
+  express.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
+app.use(cors());
 app.use(express.json());
 
-app.use(
+/*app.use(
   session({
     secret: "my secret key",
     saveUninitialized: true,
     resave: false,
   })
-);
+);*/
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.locals.message = req.session.message;
   delete req.session.message;
   next();
-});
+});*/
 
 //set template engine
-app.set("view engine", "ejs");
+//app.set("view engine", "ejs");
 
 const PORT = 5000;
 const DB_URL =
@@ -42,8 +50,6 @@ mongoose
 
 //import routes
 const postRoutes = require("./routes/posts");
-app.use(bodyParser.json());
-app.use(cors());
 
 app.use(postRoutes);
 

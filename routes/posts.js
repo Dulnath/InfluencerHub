@@ -5,7 +5,8 @@ const router = express.Router();
 //save posts
 router.post("/post/save", (req, res) => {
   let newPost = new Posts(req.body);
-  newPost.save((err) => {
+  newPost.save((err, post) => {
+    //console.log(post._id);
     if (err) {
       return res.status(400).json({
         error: err,
@@ -17,9 +18,9 @@ router.post("/post/save", (req, res) => {
   });
 });
 
-router.get("/", (req, res) => {
+/*router.get("/", (req, res) => {
   res.render("index", { title: "Home Page" });
-});
+});*/
 //retrieve posts
 router.get("/posts", (req, res) => {
   Posts.find().exec((err, posts) => {

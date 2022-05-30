@@ -75,7 +75,6 @@ export default class Home extends Component {
             ))}
           </tbody>
         </table>
-
         <button className="btn btn-success">
           <a href="/add" style={{ textDecoration: "none", color: "white" }}>
             Create New Post

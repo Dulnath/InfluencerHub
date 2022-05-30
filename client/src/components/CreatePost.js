@@ -5,11 +5,13 @@ import { Form, Button } from "react-bootstrap";
 function CreatePost() {
   const [PostTopic, setTopic] = useState();
   const [Postdescription, setDescription] = useState();
+  const [PostImage, setPostImage] = useState();
 
   const CreatePost = () => {
     Axios.post("/post/save", {
       PostTopic,
       Postdescription,
+      PostImage,
     }).then((res) => {
       alert("Post created successfully");
       console.log("Post created");
@@ -36,6 +38,21 @@ function CreatePost() {
               setDescription(event.target.value);
             }}
           ></Form.Control>
+          <input
+            type="file"
+            onChange={(event) => {
+              const files = event.target.files;
+              if (files.length === 1) {
+                const fr = new FileReader();
+                fr.readAsDataURL(files[0]);
+                fr.onload = () => {
+                  console.log(fr.result);
+                  const base64 = fr.result;
+                  setPostImage({ ...PostImage, base64 });
+                };
+              }
+            }}
+          />
         </Form.Group>
       </Form>
       <Button variant="primary" type="submit" onClick={CreatePost}>
