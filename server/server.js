@@ -3,28 +3,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-//const session = require("express-session");
+app.use(bodyParser.json());
+app.use(cors());
 
-//middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-/*app.use(
-  session({
-    secret: "my secret key",
-    saveUninitialized: true,
-    resave: false,
-  })
-);*/
-
-/*app.use((req, res, next) => {
-  res.locals.message = req.session.message;
-  delete req.session.message;
-  next();
-});*/
-
-//set template engine
-//app.set("view engine", "ejs");
 
 const PORT = 5000;
 const DB_URL =
@@ -41,11 +24,10 @@ mongoose
   .catch((err) => console.log("DB connection error", err));
 
 //import routes
-const notificationRoutes = require("./routes/Notificationapi");
-app.use(bodyParser.json());
-app.use(cors());
-
-app.use(notificationRoutes);
+const projectnotificationroutes = require("./routes/projectnotificationroutes");
+const eventnotificationroutes = require("./routes/eventnotificationroutes");
+app.use(projectnotificationroutes);
+app.use(eventnotificationroutes);
 
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);

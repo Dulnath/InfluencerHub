@@ -1,12 +1,13 @@
 const express = require("express");
-const Notifications = require("../models/Notification");
+const projectnotification = require("../models/notifications");
 const router = express.Router();
 
-//save notifications
-router.post("/notification/save", (req, res) => {
-  let newNotification = new Notifications(req.body);
+//save project notifications
+router.post("/createProject", (req, res) => {
+  let newNotification = new projectnotification(req.body);
   newNotification.save((err) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({
         error: err,
       });
@@ -17,13 +18,9 @@ router.post("/notification/save", (req, res) => {
   });
 });
 
-/*router.get("/", (req, res) => {
-  res.render("index", { title: "Home Page" });
-});*/
-
 //retrieve notifications
 router.get("/notifications", (req, res) => {
-  Notifications.find().exec((err, notifications) => {
+  projectnotification.find().exec((err, notifications) => {
     if (err) {
       res.status(400).json({ error: err });
     }
@@ -37,7 +34,7 @@ router.get("/notifications", (req, res) => {
 //get a specific notification
 router.get("/notification/:id", (req, res) => {
   let notificationID = req.params.id;
-  Notifications.findById(notificationID, (err, notification) => {
+  projectnotification.findById(notificationID, (err, notification) => {
     if (err) {
       return res.status(400).json({ success: false, err });
     }
