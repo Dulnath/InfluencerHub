@@ -7,7 +7,7 @@ function CreatePost() {
   const [Postdescription, setDescription] = useState();
   const [PostImage, setPostImage] = useState();
 
-  const CreatePost = () => {
+  const CreatePost = async () => {
     Axios.post("/post/save", {
       PostTopic,
       Postdescription,
@@ -46,9 +46,7 @@ function CreatePost() {
                 const fr = new FileReader();
                 fr.readAsDataURL(files[0]);
                 fr.onload = () => {
-                  console.log(fr.result);
-                  const base64 = fr.result;
-                  setPostImage({ ...PostImage, base64 });
+                  setPostImage(fr.result);
                 };
               }
             }}

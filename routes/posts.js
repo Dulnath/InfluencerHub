@@ -18,10 +18,6 @@ router.post("/post/save", (req, res) => {
   });
 });
 
-/*router.get("/", (req, res) => {
-  res.render("index", { title: "Home Page" });
-});*/
-//retrieve posts
 router.get("/posts", (req, res) => {
   Posts.find().exec((err, posts) => {
     if (err) {
