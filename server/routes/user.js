@@ -12,6 +12,17 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
+router.get('/newusrcount', (req, res) =>{
+    var query = User.find({adminVerified:'false'})
+    query.count(function(err, count) {
+        if (err) {
+            console.log(err);
+        } else {
+           res.json({count});
+        }
+    });
+})
+
 //delete user
 router.delete('/delete/:id',(req,res)=>{
     User.findByIdAndDelete(req.params.id, (err)=>{
@@ -80,6 +91,8 @@ router.post('/login', async(req, res) => {
         return res.json({ status: 'error', user: false })
     }
 })
+
+
 
 //innitial admin login
 router.put('/firstlogin/:id', async(req, res) => {
@@ -231,5 +244,7 @@ router.put('/approveuser/:id', async(req, res) => {
         res.json({status:'error'});
     }
 })
+
+
 
 module.exports = router;

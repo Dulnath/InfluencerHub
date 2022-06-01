@@ -9,6 +9,17 @@ router.get('/reportedaccounts',(req,res) => {
         .then(items => res.json(items))
 });
 
+router.get('/accrepcount', (req, res) =>{
+    var query = ReportedAccounts.find()
+    query.count(function(err, count) {
+        if (err) {
+            console.log(err);
+        } else {
+           res.json({count});
+        }
+    });
+})
+
 //delete accountReport
 router.delete('/reportedaccounts/delete/:id',(req,res)=>{
     ReportedAccounts.findByIdAndDelete(req.params.id, (err)=>{

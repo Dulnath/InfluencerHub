@@ -1,3 +1,4 @@
+const e = require('cors');
 const express = require('express');
 const router = express.Router();
 const Comments = require('../models/Comments')
@@ -8,6 +9,17 @@ router.get('/reportedcomments',(req,res) => {
         .sort({date:-1})
         .then(items => res.json(items))
 });
+
+router.get('/comrepcount', (req, res) =>{
+    var query = Comments.find({isVisible:'false'})
+    query.count(function(err, count) {
+        if (err) {
+            console.log(err);
+        } else {
+           res.json({count});
+        }
+    });
+})
 
 router.put('/restorecomment/:id', async (req,res)=>{
     try{
