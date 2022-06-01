@@ -12,13 +12,13 @@ function CommentReports(){
     const loggedInUser = localStorage.getItem("token");
     
     async function loadData(){
-        axios.get('http://localhost:5000/api/reports/reportedcomments').then(res => {
+        axios.get('http://localhost:5000/api/comments/reportedcomments').then(res => {
             setApiData(res.data);
         })
     }
 
     async function deleteReport(rid) {
-        axios.delete('http://localhost:5000/api/reports/reportedcomments/delete/' + rid)
+        axios.delete('http://localhost:5000/api/comments/reportedcomments/delete/' + rid)
             .then((res) => {
                 console.log(res.status);
                 console.log('Report Deleted');
@@ -27,6 +27,26 @@ function CommentReports(){
                 console.log(error);
                 alert('problem deleting report');
             });
+    }
+
+    async function dismissReport(rid){
+        const response = await fetch('http://localhost:5000/api/comments/restorecomment/'+rid, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    isVisible:'true'
+                }),
+            })
+            const data = await response.json();
+            console.log(data.status);
+            loadData();
+            if (data.status === 'ok') { 
+                console.log('Comment has been restored')
+            }else{
+                console.log('Sorry. Could not restore comment')
+            }
     }
 
     useEffect(() => {
@@ -43,31 +63,30 @@ function CommentReports(){
             </div>
             <Container className="p-10 mb-2" fluid="md">
                {data.map(data => {
-                   return(
-                    <React.Fragment key={data._id}>
-                        <Card className={styles.record}>
-                            <Card.Header> <b>{data.cFname + " " + data.cLname}</b> </Card.Header>
-                            <Card.Body>
-                                    <Row>
-                                        <Card.Text as={Col}><b>Comment </b> : {data.text}</Card.Text>
-                                    </Row>
-                                    <Row>
-                                        <Card.Text as={Col}><b>Reported Because of </b> : {data.repType}</Card.Text>
-                                    </Row>
-                                    <Row>
-                                        <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
-                                    </Row>
-                                    <Row>
-                                        <Col sm={8}></Col>
-                                        <Col>
-                                                <span className={styles.btnRed}>Delete</span>
-                                                <span className={styles.btnGreen}>Dismiss</span>
-                                        </Col>
-                                    </Row>
-                            </Card.Body>
-                        </Card>
-                    </React.Fragment>
-                );
+                   if(!data.isVisible){
+                    return(
+                        <React.Fragment key={data._id}>
+                            <Card className={styles.record}>
+                                <Card.Header> <b>{data.commentAuthor}</b> </Card.Header>
+                                <Card.Body>
+                                        <Row>
+                                            <Card.Text as={Col}><b>Comment </b> : {data.comment}</Card.Text>
+                                        </Row>
+                                        <Row>
+                                            <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
+                                        </Row>
+                                        <Row>
+                                            <Col sm={8}></Col>
+                                            <Col>
+                                                    <span className={styles.btnRed} onClick={()=>{deleteReport(data._id)}}>Delete</span>
+                                                    <span className={styles.btnGreen} onClick={()=>{dismissReport(data._id)}}>Dismiss</span>
+                                            </Col>
+                                        </Row>
+                                </Card.Body>
+                            </Card>
+                        </React.Fragment>
+                    );
+                   }
                 })}
             </Container>
             </div>       

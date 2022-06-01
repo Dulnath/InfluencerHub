@@ -34,12 +34,18 @@ function SuspendedUsers(){
 
     function sendEmail(fname,email){
         let data = {
-            firstName:uFname,
-            Email:uEmail,
+            firstName:fname,
+            Email:email,
             Subject:"influencerHub account restored",
             Message:"This is to inform you that your account has been restored. You may now log into your account as you wish"
         }
-        console.log(data);
+        emailjs.send('gmail', 'template_kr4q4vl', data, 'user_n4zSmO5iVS8LRqNYkq1XA')
+        .then((result) => {
+            console.log(result.text);
+            console.log('Sent Mail')
+        }, (error) => {
+            console.log(error.text);
+        });
     }
     
     function RenderRestoreBtn(props){
@@ -89,8 +95,9 @@ function SuspendedUsers(){
 
     async function restoreAccount(id,fname,email) {
 
-        console.log(id);
-
+        console.log(id+" | "+fname+" | "+email);
+        sendEmail(fname,email);
+        /*
         const response = await fetch('http://localhost:5000/api/useraccounts/restoreaccount/' + id, {
             method: 'PUT',
             headers: {
@@ -104,11 +111,12 @@ function SuspendedUsers(){
         console.log(resData.status);
         if (resData.status === 'ok') {
             alert('Account Restored');
-            sendEmail(data);
-            loadData(fname,email);
+            
+            loadData();
         } else {
             console.log('oops! something went wrong');
         }
+        */
     }
 
     useEffect(()=>{
@@ -143,7 +151,7 @@ function SuspendedUsers(){
                                                 <Row>
                                                     <Col sm={10}></Col>
                                                     <Col>
-                                                        <RenderRestoreBtn uid={data._id} uRestoreDate={data.restoreDate} uFname={data.firstName} uEmail={data.Email}/>
+                                                        <RenderRestoreBtn uid={data._id} uRestoreDate={data.restoreDate} uFname={data.firstName} uEmail={data.email}/>
                                                     </Col>
                                                 </Row>
                                                 

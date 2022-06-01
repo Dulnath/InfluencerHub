@@ -28,7 +28,7 @@ function Menu(props){
 
     return(
         <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" style={{backgroundColor:'#273792'}} variant="dark">
                     <Container>
                         <Navbar.Brand><Link to='/dashboard' className="text-decoration-none text-light">InfluencerHub</Link></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

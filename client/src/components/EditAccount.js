@@ -22,7 +22,7 @@ function EditAccount(){
 
 
     useEffect(()=>{
-        const userToken = localStorage.getItem('token');
+        const userToken = localStorage.getItem('token');//dpasfjfwa.adaisoixfn.sdfawsfcopi
         if(!userToken){
             return(
                 <div>
@@ -30,7 +30,7 @@ function EditAccount(){
                 </div>
             )
         }//dasojdiofos.asdokfndo.dcacd432r
-        const user = ParseJwt(userToken)//id.email.fname
+        const user = ParseJwt(userToken)//{id=d12313123jop121o,email='kumuthu@gmail.com', fname="kumuthu"}
         
         if(userToken){
             axios.get('http://localhost:5000/api/useraccounts/'+user.id).then(res=>{

@@ -7,6 +7,7 @@ const UserCount = require('./models/UserCount');
 const useraccounts = require('./routes/user');
 const reports = require('./routes/reports');
 const usercount = require('./routes/usercount');
+const comments = require('./routes/comments')
 const req = require('express/lib/request');
 
 const app = express();
@@ -22,6 +23,7 @@ mongoose
 //use api
 app.use('/api/useraccounts', useraccounts);
 app.use('/api/reports', reports);
+app.use('/api/comments',comments);
 app.use('/api/usercount', usercount);
 
 const port = process.env.PORT || 5000;
