@@ -46,6 +46,7 @@ function CreatePost() {
                 const fr = new FileReader();
                 fr.readAsDataURL(files[0]);
                 fr.onload = () => {
+                  console.log(fr.result);
                   setPostImage(fr.result);
                 };
               }
