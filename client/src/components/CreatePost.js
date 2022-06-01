@@ -40,13 +40,13 @@ function CreatePost() {
           ></Form.Control>
           <input
             type="file"
+            accept=".jpeg, .png, .jpg"
             onChange={(event) => {
               const files = event.target.files;
               if (files.length === 1) {
                 const fr = new FileReader();
                 fr.readAsDataURL(files[0]);
                 fr.onload = () => {
-                  console.log(fr.result);
                   setPostImage(fr.result);
                 };
               }

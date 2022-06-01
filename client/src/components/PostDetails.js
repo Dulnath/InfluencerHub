@@ -14,13 +14,19 @@ export default function PostDetails() {
       setDescription(res.data.post.Postdescription);
       setPostImage(res.data.post.PostImage);
     });
-  }, []);
+  });
 
   return (
     <div>
       <h2>Topic: {PostTopic}</h2>
       <h2>Description: {Postdescription}</h2>
-      <img src={`${PostImage}`}></img>
+      <img
+        src={`${PostImage}`}
+        alt=""
+        width="500"
+        height="300"
+        loading="eager"
+      ></img>
     </div>
   );
 }
