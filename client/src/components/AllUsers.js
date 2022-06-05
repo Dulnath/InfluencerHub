@@ -28,26 +28,94 @@ function AllUsers(){
                         </div>
                         <div className={styles.scrollbox}>
                         <Container>
+                            <h4>influencers</h4>
+                            <hr />
                             <div>
+                                <div className={styles.scrollbox_small}>
                                 {apiData.map((data) => {
                                     if(data.adminVerified&&data.isActive){
-                                        return (
-                                            <React.Fragment key={data._id}>
-                                                <Container fluid="md" className={styles.record} >
-                                                    <Row>
-                                                        <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                                        <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
-                                                        <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
-                                                    </Row>
-                                                </Container>
-                                            </React.Fragment>
-                                        )
+                                        if(data.category==='influencer'){
+                                            return (
+                                                <React.Fragment key={data._id}>
+                                                    <Container fluid="md" className={styles.record} >
+                                                        <Row>
+                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
+                                                            <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                        </Row>
+                                                    </Container>
+                                                </React.Fragment>
+                                            )
+                                        }else{
+                                            return (
+                                                ''
+                                            )
+                                        }
                                     }else{
-                                        return(
-                                            <div></div>
-                                        );
+                                        return (
+                                            ''
+                                        )
                                     }
                                 })}
+                                </div>
+                                <h4>Businesses</h4>
+                                <hr />
+                                <div className={styles.scrollbox_small}>
+                                {apiData.map((data) => {
+                                    if(data.adminVerified&&data.isActive){
+                                        if(data.category==='business'){
+                                            return (
+                                                <React.Fragment key={data._id}>
+                                                    <Container fluid="md" className={styles.record} >
+                                                        <Row>
+                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
+                                                            <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                        </Row>
+                                                    </Container>
+                                                </React.Fragment>
+                                            )
+                                        }else{
+                                            return (
+                                                ' '
+                                            )
+                                        }
+                                    }else{
+                                        return (
+                                            ''
+                                        )
+                                    }
+                                })}
+                                </div>
+                                <h4>Administrators</h4>
+                                <hr />
+                                <div className={styles.scrollbox_small}>
+                                {apiData.map((data) => {
+                                    if(data.adminVerified&&data.isActive){
+                                        if(data.category==='business'){
+                                            return (
+                                                <React.Fragment key={data._id}>
+                                                    <Container fluid="md" className={styles.record} >
+                                                        <Row>
+                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
+                                                            <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                        </Row>
+                                                    </Container>
+                                                </React.Fragment>
+                                            )
+                                        }else{
+                                            return (
+                                                ' '
+                                            )
+                                        }
+                                    }else{
+                                        return (
+                                            ''
+                                        )
+                                    }
+                                })}
+                                </div>
                             </div>
                         </Container>
                         </div>

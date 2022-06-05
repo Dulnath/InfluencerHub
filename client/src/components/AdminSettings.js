@@ -34,6 +34,24 @@ function AdminSettings(){
         return pass;
     }
 
+    function fieldValidation(){
+        let emailRegex = new RegExp(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+        let phoneRegex = new RegExp(/^[0-9\b]+$/)
+        let emailValid = emailRegex.test(email)
+        let phoneValid = phoneRegex.test(contactNo)
+        console.log(emailValid+" "+phoneValid)
+
+        if(!phoneValid){
+            setErrorMsg('phone number invalid')
+        }
+
+        if(emailValid && phoneValid){
+            return true
+        }else{
+            return false
+        }
+    }
+
     function sendEmail(e){
         
         e.preventDefault();
@@ -54,7 +72,13 @@ function AdminSettings(){
 
     async function registerUser(event) {
         event.preventDefault();
-        
+
+        let formValid = fieldValidation()
+
+        if(!formValid){
+            return
+        }
+    
         if(!fname||!lname||!contactNo||!email){
             setErrorMsg('Please fill all fields!');
         }else{

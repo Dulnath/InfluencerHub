@@ -97,7 +97,7 @@ function SuspendedUsers(){
 
         console.log(id+" | "+fname+" | "+email);
         sendEmail(fname,email);
-        /*
+        
         const response = await fetch('http://localhost:5000/api/useraccounts/restoreaccount/' + id, {
             method: 'PUT',
             headers: {
@@ -116,7 +116,6 @@ function SuspendedUsers(){
         } else {
             console.log('oops! something went wrong');
         }
-        */
     }
 
     useEffect(()=>{

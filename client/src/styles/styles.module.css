@@ -38,6 +38,7 @@
     color: white;
     border-radius: 5px;
     text-align: center;
+    animation: showNotification 10000ms ease-out forwards;
 }
 
 .success_msg {
@@ -97,6 +98,12 @@
     overflow: auto;
 }
 
+.scrollbox_small{
+    height: 20vh;
+    width: 110%;
+    overflow: auto;
+}
+
 .container_main {
     width: 100%;
     display: flex;
@@ -120,6 +127,10 @@
     font-size: 40px;
     font-weight: 600;
     color: #273792;
+}
+
+.table{
+    border:0px solid white;
 }
 
 .labels{

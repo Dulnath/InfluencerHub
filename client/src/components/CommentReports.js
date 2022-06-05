@@ -86,7 +86,11 @@ function CommentReports(){
                             </Card>
                         </React.Fragment>
                     );
-                   }
+                   }else{
+                    return (
+                        ''
+                    )
+                }
                 })}
             </Container>
             </div>       

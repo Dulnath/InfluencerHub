@@ -20,7 +20,6 @@ function EditAccount(){
     const [error, setErrorMsg] = useState('');
     const [success,setSuccessMsg] = useState('');
 
-
     useEffect(()=>{
         const userToken = localStorage.getItem('token');//dpasfjfwa.adaisoixfn.sdfawsfcopi
         if(!userToken){
@@ -42,9 +41,49 @@ function EditAccount(){
         }
     },[])
 
+    function fieldValidation(){
+        let strongRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)
+        let phoneRegex = new RegExp(/^[0-9\b]+$/)
+
+        let passwordValid = false
+        if(!password){
+            console.log('password empty')
+            passwordValid = true
+            console.log(passwordValid)
+        }else{
+            console.log('testing password')
+            passwordValid = strongRegex.test(password)
+        }
+        let phoneValid = phoneRegex.test(contactNo)
+
+        if(!phoneValid){
+            setErrorMsg('phone number invalid')
+        }
+        if(!passwordValid){
+            setErrorMsg('password must contain upper-case, lowe-case and numbers')
+        }
+
+        if(!passwordValid && !phoneValid){
+            setErrorMsg('Both phone number and new password is not valid')
+        }
+
+        if(passwordValid && phoneValid){
+            return true
+        }else{
+            return false
+        }
+    }
+
     async function updateUserAccount(event){
         event.preventDefault();
+        let formValid = fieldValidation()
+        if(!formValid){
+            return
+        }
+
         const user = ParseJwt(localStorage.getItem('token'))
+        
+
         if(password&&!oldPassword){
             setErrorMsg('Must Enter Old Password!');
             return;
