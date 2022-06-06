@@ -1,20 +1,19 @@
 import { React, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, CloseButton, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card } from 'react-bootstrap'
 import axios from "axios";
 
-function EditProject() {
+function EditProject(props) {
     const [projectName, setProjectName] = useState();
     const [projectDescription, setProjectDescription] = useState();
     const [projectStartDate, setProjectStartDate] = useState();
     const [projectEndDate, setProjectEndDate] = useState();
 
-    const { id } = useParams();
+    //const { id } = useParams();
 
-    let navigate = useNavigate();
+    //let navigate = useNavigate();
 
     const editProject = () => {
-        axios.put(`/updateProject/${id}`, {
+        axios.put(`/updateProject/${props.projectID}`, {
             projectName,
             projectDescription,
             projectStartDate,
@@ -26,7 +25,7 @@ function EditProject() {
     }
 
     useEffect(() => {
-        axios.get(`/getProject/${id}`).then((res) => {
+        axios.get(`/getProject/${props.projectID}`).then((res) => {
             setProjectName(res.data.project.projectName);
             setProjectDescription(res.data.project.projectDescription);
             setProjectStartDate(res.data.project.projectStartDate);
@@ -42,7 +41,6 @@ function EditProject() {
                 <Card.Header>
                     <div className="projectCardHeader">
                         Edit a Project
-                        <CloseButton className="closeButton" onClick={() => { navigate("/allProjects") }} />
                     </div>
                 </Card.Header>
                 <Card.Body>

@@ -10,12 +10,13 @@ import EditProject from './Components/EditProject';
 import ProjectDetails from './Components/ProjectDetails';
 import EventCard from './Components/EventCard';
 import EditEvent from './Components/EditEvent';
+import { NoMatch } from './Components/NoMatch';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AddProject />} />      
+        <Route path="/" element={<AddProject />} />    
         <Route path="/allProjects" element={<AllProjects />} />
         <Route path="/addEvents/:projectName" element={<AddEvents />} />
         <Route path="/allEvents/:projectName" element={<AllEvents />} />
@@ -23,6 +24,7 @@ function App() {
         <Route Path="/project/:id" element={<ProjectDetails />} />
         <Route Path="/event/:id" element={<EventCard />} />
         <Route Path="/editEvent/:id" element={<EditEvent/>} />
+        <Route Path='*' element={<NoMatch/>}></Route>
       </Routes>
     </Router>
   );

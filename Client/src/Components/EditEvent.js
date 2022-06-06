@@ -1,20 +1,15 @@
 import { React, useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Form, Card, Button,CloseButton } from 'react-bootstrap';
+import { Form, Card, Button } from 'react-bootstrap';
 import axios from "axios";
 
-function EditEvent() {
+function EditEvent(props) {
     const [eventName, setEventName] = useState();
     const [eventDescription, setEventDescription] = useState();
     const [eventStartDate, setEventStartDate] = useState();
     const [eventEndDate, setEventEndDate] = useState();
 
-    const { id } = useParams();
-
-    let navigate = useNavigate();
-
     const editEvent = () => {
-        axios.put(`/updateEvent/${id}`, {
+        axios.put(`/updateEvent/${props.eventID}`, {
             eventName,
             eventDescription,
             eventStartDate,
@@ -26,12 +21,12 @@ function EditEvent() {
     }
 
     useEffect(() => {
-        axios.get(`/getEvent/${id}`).then((res) => {
-            setEventName(res.data.events.eventName);
-            setEventDescription(res.data.events.eventDescription);
-            setEventStartDate(res.data.events.eventStartDate);
-            setEventEndDate(res.data.events.setEventEndDate);
-            console.log(res.data.events);
+        axios.get(`/getEvent/${props.eventID}`).then((res) => {
+            setEventName(res.data.event.eventName);
+            setEventDescription(res.data.event.eventDescription);
+            setEventStartDate(res.data.event.eventStartDate);
+            setEventEndDate(res.data.event.setEventEndDate);
+            console.log(res.data.event);
         });
         // eslint-disable-next-line
     }, []);
@@ -42,8 +37,7 @@ function EditEvent() {
                 <Card border="dark" >
                     <Card.Header>
                         <div className="eventCardHeader">
-                            Edit an Event
-                            <CloseButton className="closeButton" onClick={() => { navigate("/allEvents") }} />
+                            Edit an Event         
                         </div>
                     </Card.Header>
                     <Card.Body>
