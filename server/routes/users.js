@@ -150,15 +150,68 @@ router.get("/getuser/:id", (req, res) => {
 
 router.get("/search/:key",async(req,res)=>{
 	//console.log(req.params.key)
+
 	let data = await User.find(
 		{
 			"$or":[
-				{firstName:{$regex:req.params.key}},
-				{category:{$regex:req.params.key}}
+			{firstName :{$regex:req.params.key,$options:'i'}},
+				//{category:{$regex:req.params.key.toLowerCase()}}
 			]
 		}
 	)
 	res.send(data)
+
+	
 })
 
+router.get("/search/:key",async(req,res)=>{
+	//console.log(req.params.key)
+
+	let data = await User.find(
+		{
+			"$or":[
+			{firstName :{$regex:req.params.key,$options:'i'}},
+				//{category:{$regex:req.params.key.toLowerCase()}}
+			]
+		}
+	)
+	res.send(data)
+
+	
+})
+
+router.get("/search1/:key",async(req,res)=>{
+	//console.log(req.params.key)
+
+	let data = await User.find(
+		{
+			"$or":[
+				{ category: "Influencer" || "influencer"} 
+				//{category:{$regex:req.params.key.toLowerCase()}}
+			]
+		}
+	)
+	res.send(data)
+
+	
+})
+
+router.get('/:id', async(req, res) => {
+    try {
+        User.findById(req.params.id, (result, err) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(result.data);
+            }
+
+        });
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+
+
+//User.find( { $or: [ { category: "Influencer" || "influencer"} ] } )
 module.exports = router;

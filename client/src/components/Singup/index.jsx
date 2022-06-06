@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import FileInput from "../FileInput";
 
 const Signup = () => {
 	const [data, setData] = useState({
@@ -11,12 +12,17 @@ const Signup = () => {
 		password: "",
 		category: "",
 		status: "",
+		img:""
 	});
 	const [error, setError] = useState("");
 	const [msg, setMsg] = useState("");
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
+	};
+
+	const handleInputState = (name, value) => {
+		setData((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = async (e) => {
@@ -106,6 +112,15 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
+
+<FileInput
+					name="img"
+					label="Choose Image"
+					handleInputState={handleInputState}
+					type="image"
+					value={data.img}
+				/>
+
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>

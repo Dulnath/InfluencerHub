@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
 	category: { type: String, required: true },
 	verified: { type: Boolean, default: true },
 	status:{ type: String, required: true },
+	img:{ type: String, required: true },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -30,6 +31,7 @@ const validate = (data) => {
 		password: passwordComplexity().required().label("Password"),
 		category:Joi.string().required().label("Category"),
 		status: Joi.string().required().label("Status"),
+		img: Joi.string().required().label("Image"),
 	});
 	return schema.validate(data);
 };
