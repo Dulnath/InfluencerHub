@@ -7,11 +7,13 @@ const userSchema = new mongoose.Schema({
 	firstName: { type: String, required: false },
 	businessName: { type: String, required: false },
 	businessAddress: { type: String, required: false },
-
 	lastName: { type: String, required: false },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	category:{ type: String, required: true },
+	verified:{type:Boolean,default:false},
+	isActive:{type:Boolean,default:true}
+
 	
 });
 
@@ -33,8 +35,13 @@ const validate = (data) => {
 		email: Joi.string().email().label("Email"),
 		password: passwordComplexity().label("Password"),
 		category: Joi.string().label("Category"),
+		verified:Joi.string().label("Verified"),
+		isActive:Joi.string().label("Active")
 	});
 	return schema.validate(data);
 };
 
-module.exports = { User, validate };
+module.exports = { User:User
+	, validate
+};
+

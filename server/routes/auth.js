@@ -2,16 +2,22 @@ const router = require("express").Router();
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-//
+//login
 router.post("/", async (req, res) => {
 	try {
 		const { error } = validate(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
+			
 
 		const user = await User.findOne({ email: req.body.email });
 		if (!user)
 			return res.status(401).send({ message: "Invalid Email or Password" });
+		
+			if (!user.verified){
+				console.log("Restricted user");
+				return res.status(401).send({ message: "Invalid Email or Password" });
+		}
 
 		const validPassword = await bcrypt.compare(
 			req.body.password,
