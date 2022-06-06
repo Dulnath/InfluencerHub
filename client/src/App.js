@@ -10,6 +10,7 @@ import Detail from "./components/Detail";
 import View from "./components/View";
 import Payment from "./components/Payment";
 import EmailVerify from "./components/EmailVerify";
+import Business from "./components/business";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 			<Route path="/view/:id" exact element={<View />} />
 			<Route path ="/payment" exact element={<Payment/>}/>
 			<Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+			<Route path ="/business" element={<Business/>}/>
 
 		</Routes>
 	);

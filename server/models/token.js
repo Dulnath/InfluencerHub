@@ -7,6 +7,12 @@ const tokenSchema = new Schema({
 		required: true,
 		ref: "user",
 		unique: true,
+		
+	},
+	category:{
+		type:String,
+		required:true,
+	
 	},
 	token: { type: String, required: true },
 	createdAt: { type: Date, default: Date.now, expires: 3600 },

@@ -124,17 +124,20 @@ router.get("/:id/verify/:token/", async (req, res) => {
 	}
 });
 //individual
-router.get("/getuser/:id", (req, res) => {
-	let userID = req.params.id;
-	User.findById(userID, (err, user) => {
-	  if (err) {
-		return res.status(400).json({ success: false, err });
-	  }
-	  return res.status(200).json({
-		success: true,
-		user,
-	  });
-	});
+router.get("/getuser/:id",async(req, res) => {
+	try {
+        User.findById(req.params.id, (result, err) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(result.data);
+            }
+
+        });
+    } catch (err) {
+        res.json(err);
+    }
+
   });
 
   module.exports = router;
