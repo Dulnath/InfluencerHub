@@ -92,7 +92,7 @@ function AllUsers(){
                                 <div className={styles.scrollbox_small}>
                                 {apiData.map((data) => {
                                     if(data.adminVerified&&data.isActive){
-                                        if(data.category==='business'){
+                                        if(data.category==='admin'){
                                             return (
                                                 <React.Fragment key={data._id}>
                                                     <Container fluid="md" className={styles.record} >

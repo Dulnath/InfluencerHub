@@ -17,7 +17,7 @@ import EditAccount from './components/EditAccount'
 function App() {
   return (
     <Routes>
-          <Route path="/" element={<AdminLogin />}></Route>
+          <Route path="adminlogin" element={<AdminLogin />}></Route>
           <Route>
           <Route path="dashboard" element={<Home />} />
           <Route path="allUsers" element={<AllUsers />} />

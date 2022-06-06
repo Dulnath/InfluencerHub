@@ -49,7 +49,7 @@ router.post('/', async(req, res) => {
             phoneNo: req.body.contactNo,
             category: 'admin',
             isActive: 'true',
-            isVerified: 'true',
+            verified: 'true',
             adminVerified: 'true',
             isFirstLogin: 'true',
             password: newPassword,
