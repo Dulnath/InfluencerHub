@@ -1,9 +1,9 @@
-import { useState,React } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import React from "react";
 import ParseJwt from "../../utilities/ParseJwt";
-
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
@@ -18,15 +18,15 @@ const Login = () => {
 			const url = "http://localhost:5000/api/auth";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
-			window.location = "/";
-			const token = localStorage.getItem("token")
-			const user = ParseJwt(token)
-			if(user.category === 'influencer'){
-				window.location = "/"
-			}else if(user.category === 'admin'){
-				window.location = "/dashboard"
-			}else{
-				window.location = "/"
+			const token = localStorage.getItem('token')
+			const user = ParseJwt("token")
+			console.log(user);
+			if(user.category==='Influencer'){
+				window.location = "/";
+			}else if(user.category==='business'){
+				window.location = "/";
+			}else if(user.category==='admin'){
+				window.location = "/dashboard";
 			}
 			
 		} catch (error) {

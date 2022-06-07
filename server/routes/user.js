@@ -38,9 +38,8 @@ router.delete('/delete/:id',(req,res)=>{
 router.post('/', async(req, res) => {
     console.log(req.body)
     try {
-        const nupassword = req.body.password;
-        const salt = bcrypt.genSaltSync(11);
-        const newPassword = await bcrypt.hash(nupassword, salt);
+        const salt = await bcrypt.genSalt(Number(process.env.SALT));
+		const newPassword = await bcrypt.hash(req.body.password, salt);
         console.log(newPassword);
         await User.create({
             firstName: req.body.fname,
@@ -75,7 +74,6 @@ router.post('/login', async(req, res) => {
         req.body.password,
         user.password
     );
-
     if (isPasswordValid) {
         const login = user.isFirstLogin;
         const token = jwt.sign({
@@ -88,6 +86,7 @@ router.post('/login', async(req, res) => {
 
         return res.json({ status: 'ok', user: token, test: login })
     } else {
+        console.log('invalid password')
         return res.json({ status: 'error', user: false })
     }
 })
