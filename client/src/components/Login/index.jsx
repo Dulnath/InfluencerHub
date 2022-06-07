@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -7,6 +8,7 @@ import ParseJwt from "../../utilities/ParseJwt";
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -19,14 +21,14 @@ const Login = () => {
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
 			const token = localStorage.getItem('token')
-			const user = ParseJwt("token")
+			const user = ParseJwt(token)
 			console.log(user);
 			if(user.category==='Influencer'){
 				window.location = "/";
 			}else if(user.category==='business'){
 				window.location = "/";
 			}else if(user.category==='admin'){
-				window.location = "/dashboard";
+				navigate('/dashboard')
 			}
 			
 		} catch (error) {
