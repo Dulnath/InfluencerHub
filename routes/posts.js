@@ -19,6 +19,16 @@ router.post("/post/save", (req, res) => {
 });
 
 router.get("/posts", (req, res) => {
+  Posts.find({}, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+/*router.get("/posts", (req, res) => {
   Posts.find().exec((err, posts) => {
     if (err) {
       res.status(400).json({ error: err });
@@ -28,7 +38,7 @@ router.get("/posts", (req, res) => {
       existingPosts: posts,
     });
   });
-});
+});*/
 
 //get a specific post
 router.get("/post/:id", (req, res) => {
