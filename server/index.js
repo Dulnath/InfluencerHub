@@ -20,4 +20,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/password-reset",passwordResetRoutes);
 
 const port = process.env.PORT || 8080;
-app.listen(port, console.log(`Listening on port ${port}...`));
+app.listen(port, console.log(`Server Working on port ${port}...`));
