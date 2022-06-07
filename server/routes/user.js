@@ -40,7 +40,11 @@ router.post('/', async(req, res) => {
     try {
         const nupassword = req.body.password;
         const newPassword = await bcrypt.hashSync(nupassword, salt);
-        console.log(newPassword);
+        const isPasswordValid = await bcrypt.compareSync(
+            req.body.password,
+            newPassword
+        );
+        console.log(isPasswordValid)
         await User.create({
             firstName: req.body.fname,
             lastName: req.body.lname,
@@ -69,10 +73,11 @@ router.post('/login', async(req, res) => {
         return res.json({ status: 'error', error: 'Invalid login' })
     }
 
+    const oldpsw = user.password
 
     const isPasswordValid = await bcrypt.compareSync(
         req.body.password,
-        user.password
+        oldpsw
     );
     console.log(isPasswordValid)
     if (isPasswordValid) {
