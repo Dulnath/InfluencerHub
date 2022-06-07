@@ -5,8 +5,8 @@ import axios from "axios"
 import Menu from './Menu'
 import {Row,Col,Form,Button} from 'react-bootstrap'
 import AdminLogin from './AdminLogin';
-import ParseJwt from '../utilities/ParseJwt';
-import styles from '../styles/styles.module.css';
+import ParseJwt from '../../utilities/ParseJwt';
+import styles from '../../styles/styles.module.css';
 
 function EditAccount(){
     const loggedInUser = localStorage.getItem("token");

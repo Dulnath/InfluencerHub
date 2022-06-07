@@ -5,8 +5,8 @@ import { Container, Card, Col, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
-import styles from '../styles/styles.module.css';
-import FormatDate from '../utilities/FormatDate';
+import styles from '../../styles/styles.module.css';
+import FormatDate from '../../utilities/FormatDate';
 import emailjs from '@emailjs/browser';
 
 function RenderType(props) {

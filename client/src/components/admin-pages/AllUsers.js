@@ -6,7 +6,7 @@ import { useState,useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
-import styles from '../styles/styles.module.css';
+import styles from '../../styles/styles.module.css';
 
 function AllUsers(){
     const [apiData,setApiData] = useState([]);

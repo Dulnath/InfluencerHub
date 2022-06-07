@@ -2,10 +2,9 @@ import axios from "axios";
 import React from "react";
 import {Nav,Navbar,Container} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
-import ParseJwt from "../utilities/ParseJwt";
+import ParseJwt from "../../utilities/ParseJwt";
 import { useState,useEffect } from 'react';
-import styles from '../styles/styles.module.css';
-
+import styles from '../../styles/styles.module.css';
 const handleLogout = () => {
     localStorage.clear();
   };
@@ -28,17 +27,17 @@ function Menu(props){
 
     return(
         <div>
-        <Navbar collapseOnSelect expand="lg" style={{backgroundColor:'#273792'}} variant="dark">
+        <Navbar collapseOnSelect expand="lg" style={{backgroundColor:'#46B47F'}} variant="dark">
                     <Container>
-                        <Navbar.Brand><Link to='/dashboard' className="text-decoration-none text-light">InfluencerHub</Link></Navbar.Brand>
+                        <Navbar.Brand><Link to='/dashboard' className="text-decoration-none text-light" style={{color:'#f0f0f0'}}>InfluencerHub</Link></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link><Link to='/dashboard'  className={styles.menu_item}>Home</Link></Nav.Link>
                             <Nav.Link><Link to='/allUsers'className={styles.menu_item}> All Users</Link></Nav.Link>
                             <Nav.Link><Link to='/newUsers' className={styles.menu_item}>New Users</Link></Nav.Link>
-                            <div className="btn-group">
-                                <Nav.Link className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Reports</Nav.Link>
+                            <div className="btn-group" >
+                                <Nav.Link className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" ><span  className={styles.menu_item}>Reports</span></Nav.Link>
                                 <ul className="dropdown-menu dropdown-menu-end">
                                     <li className="dropdown-item"><Link to='/accountReports' className="text-decoration-none text-dark">Account Reports</Link></li>
                                     <li className="dropdown-item"><Link to='/commentReports' className="text-decoration-none text-dark">Comment Reports</Link></li>
@@ -48,7 +47,7 @@ function Menu(props){
                             <Nav.Link><Link to='/adminSettings' className={styles.menu_item}>Settings</Link></Nav.Link>
                             <Nav.Link onClick={handleLogout}><Link to='/' className={styles.menu_item}>Log out</Link></Nav.Link>
                         </Nav>
-                        <Navbar.Brand Style={"padding:0px 0px 0px 450px; color:white"}>{fname}</Navbar.Brand>
+                        <Navbar.Brand Style={"padding:0px 0px 0px 450px; color:#f0f0f0"}>{fname}</Navbar.Brand>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

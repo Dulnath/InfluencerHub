@@ -5,8 +5,7 @@ import {Accordion,Container,Row,Col,Form,Button} from 'react-bootstrap'
 import AdminLogin from './AdminLogin';
 import emailjs from '@emailjs/browser';
 import { Outlet, Link } from "react-router-dom";
-import styles from '../styles/styles.module.css';
-
+import styles from '../../styles/styles.module.css';
 function AdminSettings(){
 
     const [fname, setFName] = useState('')
@@ -193,10 +192,8 @@ function AdminSettings(){
                 
                 <Link to='/editaccount' className='text-decoration-none'>
                 <div className="d-grid gap-2">
-                    <Container fluid="md" className={styles.item}>
-                        <Row>
-                            <b>Edit Account</b>
-                        </Row>
+                    <Container fluid="md" className={styles.editAccount}>
+                            Edit Account
                     </Container>
                 </div>
                 </Link>

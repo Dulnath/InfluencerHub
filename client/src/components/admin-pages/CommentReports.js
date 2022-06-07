@@ -5,7 +5,7 @@ import {Container,Card,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from './AdminLogin';
-import styles from '../styles/styles.module.css';
+import styles from '../../styles/styles.module.css';
 
 function CommentReports(){
     const [data, setApiData] = useState([]);

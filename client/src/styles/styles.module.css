@@ -4,12 +4,12 @@
 }
 
 .menu_item {
-    color: #d1d1d1;
+    color: #f0f0f0;
     text-decoration: none;
 }
 
 .menu_item:hover {
-    color: white;
+    color: #2b2b2b;
 }
 
 .background {
@@ -126,7 +126,7 @@
 .notifications{
     font-size: 40px;
     font-weight: 600;
-    color: #273792;
+    color: #46B47F;
 }
 
 .table{
@@ -142,7 +142,7 @@
 
 .labels:hover{
     cursor: pointer;
-    color: #273792;
+    color: #6DD19C;
 }
 
 
@@ -190,7 +190,7 @@
     border-bottom-left-radius: 10px;
     animation-name: example;
     animation-duration: 0.25s;
-    border-left: 8px solid #273792;
+    border-left: 8px solid #46B47F;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -203,7 +203,7 @@
     border-bottom-left-radius: 10px;
     animation-name: example;
     animation-duration: 0.25s;
-    border-left: 8px solid #273792;
+    border-left: 8px solid #46B47F;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -222,7 +222,7 @@
     color: #fff;
     position: relative;
     display: inline-block;
-    background-color: #273792;
+    background-color: #46B47F;
 }
 
 .btnDisable {
@@ -251,7 +251,8 @@
 }
 
 .btnGreen:hover {
-    background-color: #4a5cc0;
+    background-color: #6DD19C;
+    color:#2b2b2b;
 }
 
 .btnRed:hover {
@@ -263,4 +264,23 @@
     transform: translate(0px, 5px);
     -webkit-transform: translate(0px, 5px);
     box-shadow: 0px 1px 0px 0px;
+}
+
+.editAccount{
+    color:#2b2b2b;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0 10px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(255, 255, 255);
+}
+
+.editAccount:hover {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border-left: 8px solid #46B47F;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }

@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Container, Button, Form} from 'react-bootstrap'
-import ParseJwt from '../utilities/ParseJwt';
+import ParseJwt from '../../utilities/ParseJwt';
 
 function FirstLogin(){
     const navigate = useNavigate();

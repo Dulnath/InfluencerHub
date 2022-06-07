@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import {Form,Button,Container} from 'react-bootstrap'
 import { useState } from 'react'
-import styles from '../styles/styles.module.css';
+import styles from '../../styles/styles.module.css';
 
 function AdminLogin(){
     const navigate = useNavigate();
