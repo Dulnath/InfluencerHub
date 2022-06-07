@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+require("dotenv").config();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { User } = require("./models/user");
@@ -9,22 +9,21 @@ const reports = require('./routes/reports');
 const usercount = require('./routes/usercount');
 const comments = require('./routes/comments')
 const req = require('express/lib/request');
+const connection = require("./db");
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-const db = require('./config/keys').mongoURI;
 
-mongoose
-    .connect(db)
-    .then(() => console.log('MongoDB Connected....'))
-    .catch(err => console.log(err));
+connection();
 
 //use api
 app.use('/api/useraccounts', useraccounts);
 app.use('/api/reports', reports);
 app.use('/api/comments',comments);
 app.use('/api/usercount', usercount);
+app.use(express.json());
+app.use(cors())
 
 const port = process.env.PORT || 5000;
 
