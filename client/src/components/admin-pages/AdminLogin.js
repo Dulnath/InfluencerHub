@@ -1,83 +1,91 @@
-import React from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import {Form,Button,Container} from 'react-bootstrap'
-import { useState } from 'react'
-import styles from '../../styles/styles.module.css';
-
-function AdminLogin(){
+import axios from "axios";
+import { Link } from "react-router-dom";
+import styles from "../Login/styles.module.css";
+import React from "react";
+const AdminLogin = () => {
+	const [data, setData] = useState({ email: "", password: "" });
+	const [error, setError] = useState("");
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-    const [error, setErrorMsg] = useState('');
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
 
     function refreshPage() {
         window.location.reload(false);
     }
 
-	async function loginUser(event) {
-		event.preventDefault()
-
-		const response = await fetch('http://localhost:5000/api/useraccounts/login', {//https://localhost:5000/postNotification
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({//convert email, password form items to json
-				email,
-				password
-			}),
-		})//send post request
-
-		const data = await response.json()
-
-		if (data.user) {
-            console.log(data.test);
-            const currentPath = window.location.pathname;
-			localStorage.setItem('token', data.user)
-
-            if(data.test){
-                console.log('first login');
-                navigate('/firstlogin');
-                return;
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:5000/api/useraccounts/login";
+			const resData = await axios.post(url, data);
+			console.log(resData)
+			if (resData.data.status === 'ok') {
+                console.log(resData.data.test);
+                const currentPath = window.location.pathname;
+                localStorage.setItem('token', resData.data.user)
+                if(resData.data.test){
+                    console.log('first login');
+                    navigate('/firstlogin');
+                    return;
+                }
+                if(currentPath === '/dashboard'){
+                    refreshPage();
+                }else{
+                    navigate('/dashboard');
+                }
+            } else {
+                setError('Please check your username and password');
             }
-			if(currentPath === '/dashboard'){
-                refreshPage();
-            }else{
-                navigate('/dashboard');
-            }
-		} else {
-            setErrorMsg('Please check your username and password');
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
 		}
-	}
+	};
 
-    return(
-        <div>
-            <Container className="text-center col-md-3 border border-dark rounded-3" style={{marginTop:"300px"}}>
-                <h2 style={{paddingTop:"40px"}}>Admin Login</h2>
-                <Form style={{padding:"40px"}} onSubmit={loginUser}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
-                        value={email}
-                        onChange={(e)=>setEmail(e.target.value)} 
-                        type="email" 
-                        placeholder="Enter email" 
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)} 
-                        type="password" 
-                        placeholder="Password" 
-                        />
-                    </Form.Group>
-                    {error && <div className={styles.error_msg}>{error}</div>}
-                    <Button variant="primary" type="submit">
-                        Login
-                    </Button>
-                </Form>    
-            </Container>
-        </div>
-    )
-}
+	return (
+		<div className={styles.login_container}>
+			<div className={styles.login_form_container}>
+				<div className={styles.left}>
+					<form className={styles.form_container} onSubmit={handleSubmit}>
+						<h1>Login to Your Account</h1>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleChange}
+							value={data.email}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={handleChange}
+							value={data.password}
+							required
+							className={styles.input}
+						/>
+						<Link to="/forgot-password" style={{ alignSelf: "flex-start" }}>
+							<p style={{ padding: "0 15px" }}>Forgot Password ?</p>
+						</Link>
+						{error && <div className={styles.error_msg}>{error}</div>}
+						<button type="submit" className={styles.green_btn}>
+							Sign In
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 export default AdminLogin;

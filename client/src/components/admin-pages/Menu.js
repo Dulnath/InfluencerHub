@@ -1,15 +1,20 @@
 import axios from "axios";
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import {Nav,Navbar,Container} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
 import ParseJwt from "../../utilities/ParseJwt";
 import { useState,useEffect } from 'react';
 import styles from '../../styles/styles.module.css';
-const handleLogout = () => {
-    localStorage.clear();
-  };
+
 
 function Menu(props){
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate('/adminlogin');
+      };
+    
     const [fname,setUserName] = useState('');
 
     useEffect(()=>{

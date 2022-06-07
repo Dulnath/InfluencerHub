@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require("../models/user");
 const { json } = require('express/lib/response');
-
+const salt = bcrypt.genSaltSync(Number(process.env.SALT));
 //display all users
 router.get('/', (req, res) => {
     User.find()
@@ -38,7 +38,6 @@ router.delete('/delete/:id',(req,res)=>{
 router.post('/', async(req, res) => {
     console.log(req.body)
     try {
-        const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const newPassword = await bcrypt.hash(req.body.password, salt);
         console.log(newPassword);
         await User.create({
@@ -70,7 +69,7 @@ router.post('/login', async(req, res) => {
     }
 
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await bcrypt.compareSync(
         req.body.password,
         user.password
     );
