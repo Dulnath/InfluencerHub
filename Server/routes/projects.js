@@ -9,7 +9,6 @@ router.post("/createProject", async (req, res) => {
     await newProject.save();
 
     res.json(project);
-    res.redirect('/getProjects');
 });
 
 // Retrieve all projects

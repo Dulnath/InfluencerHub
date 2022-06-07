@@ -22,11 +22,9 @@ function AddProject() {
     }
 
     let navigate = useNavigate();
-    
+
     const navAllProjects = () => { navigate("/allProjects") }
 
-    /* eslint-disable no-unused-expressions */
-    
     // function multipleEvents(){
     //     navAllProjects
     //     createProject
@@ -65,19 +63,26 @@ function AddProject() {
                             <h5>Project Duration</h5>
 
                             <Form.Label>Start Date</Form.Label><br />
-                            <input
-                                type="date"
-                                min={new Date().toISOString().split('T')[0]}
-                                max="2030-12-31"
-                                onChange={(event) => { setprojectStartDate(event.target.value) }} /><br />
-                            <Form.Label>End Date</Form.Label><br />
-                            <input
-                                type="date"
-                                min={new Date().toISOString().split('T')[0]}
-                                max="2030-12-31"
-                                onChange={(event) => { setprojectEndDate(event.target.value) }} /><br />
+                            <div>
+                                <input
+                                    type="date"
+                                    min={new Date().toISOString().split('T')[0]}
+                                    max="2030-12-31"
+                                    value={projectStartDate}
+                                    onChange={(event) => { setprojectStartDate(event.target.value) }} />
+                            </div><br />
 
+                            <Form.Label>End Date</Form.Label><br />
+                            <div>
+                                <input
+                                    type="date"
+                                    min={new Date().toISOString().split('T')[0]}
+                                    max="2030-12-31"
+                                    value={projectEndDate}
+                                    onChange={(event) => { setprojectEndDate(event.target.value) }} />
+                            </div><br />
                         </Form>
+
                         <Card.Footer style={{ paddingLeft: '50%' }}>
                             <Button variant="primary" size="lg" type="submit" onClick={createProject}>Add Project</Button>
                         </Card.Footer>

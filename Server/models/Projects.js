@@ -18,11 +18,11 @@ const ProjectSchema = new mongoose.Schema({
         required: true,
     },
     projectStartDate: {
-        type: Date,
+        type: String,
         required: false,
     },
     projectEndDate: {
-        type: Date,
+        type: String,
         required: false,
     },
     influencerEmail: {

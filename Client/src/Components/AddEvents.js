@@ -1,5 +1,5 @@
-import { React,useState } from 'react';
-import { Card,CloseButton,Form,Button } from 'react-bootstrap';
+import { React, useState } from 'react';
+import { Card, CloseButton, Form, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 
@@ -7,12 +7,12 @@ function AddEvents() {
     const [eventName, setEventName] = useState("");
     const [eventDescription, setEventDescription] = useState("");
     const [eventStartDate, setEventStartDate] = useState("");
-    const [eventEndDate,setEventEndDate] = useState("");
+    const [eventEndDate, setEventEndDate] = useState("");
 
     const { projectName } = useParams();
 
     const createEvent = () => {
-        Axios.post("/createEvent",{
+        Axios.post("/createEvent", {
             projectName,
             eventName,
             eventDescription,
@@ -59,17 +59,24 @@ function AddEvents() {
                             <h5>Event Duration</h5>
 
                             <Form.Label>Start Date</Form.Label><br />
-                            <input
-                                type="date"
-                                min={new Date().toISOString().split('T')[0]}
-                                max="2030-12-31"
-                                onChange={(event) => { setEventStartDate(event.target.value) }} /><br />
+                            <div>
+                                <input
+                                    type="date"
+                                    min={new Date().toISOString().split('T')[0]}
+                                    max="2030-12-31"
+                                    value={eventStartDate}
+                                    onChange={(event) => { setEventStartDate(event.target.value) }} />
+                            </div><br />
+
                             <Form.Label>End Date</Form.Label><br />
-                            <input
-                                type="date"
-                                min={new Date().toISOString().split('T')[0]}
-                                max="2030-12-31"
-                                onChange={(event) => { setEventEndDate(event.target.value) }} /><br />
+                            <div>
+                                <input
+                                    type="date"
+                                    min={new Date().toISOString().split('T')[0]}
+                                    max="2030-12-31"
+                                    value={eventEndDate}
+                                    onChange={(event) => { setEventEndDate(event.target.value) }} />
+                            </div><br />
 
                         </Form>
                         <Card.Footer style={{ paddingLeft: '50%' }}>

@@ -1,16 +1,13 @@
 import { React, useEffect, useState } from "react";
 import { Button, Form, Card } from 'react-bootstrap'
 import axios from "axios";
+import FormatDateTime from "../Utilities/FormatDateTime";
 
 function EditProject(props) {
     const [projectName, setProjectName] = useState();
     const [projectDescription, setProjectDescription] = useState();
     const [projectStartDate, setProjectStartDate] = useState();
     const [projectEndDate, setProjectEndDate] = useState();
-
-    //const { id } = useParams();
-
-    //let navigate = useNavigate();
 
     const editProject = () => {
         axios.put(`/updateProject/${props.projectID}`, {
@@ -67,25 +64,45 @@ function EditProject(props) {
 
                         <h5>Edit Project Duration</h5>
 
-                        <Form.Label>Start Date</Form.Label><br />
-                        <input
-                            type="date"
-                            min={new Date().toISOString().split('T')[0]}
-                            max="2030-12-31"
-                            value={projectStartDate}
-                            onChange={(event) => { setProjectStartDate(event.target.value) }} /><br />
-                        <Form.Label>End Date</Form.Label><br />
-                        <input
-                            type="date"
-                            min={new Date().toISOString().split('T')[0]}
-                            max="2030-12-31"
-                            value={projectEndDate}
-                            onChange={(event) => { setProjectEndDate(event.target.value) }} /><br />
+                        <div>
+                            <div className="dates">
+                                <Form.Label>Start Date</Form.Label><br />
+                                <Form.Control as="textarea"
+                                    rows={1}
+                                    value={FormatDateTime(projectStartDate)}>
+                                </Form.Control>
+                            </div>
+
+                            <input
+                                type="date"
+                                min={new Date().toISOString().split('T')[0]}
+                                max="2030-12-31"
+                                value={projectStartDate}
+                                onChange={(event) => { setProjectStartDate(event.target.value) }} />
+                        </div><br />
+
+                        <div>
+                            <div className="dates">
+                                <Form.Label>End Date</Form.Label><br />
+                                <Form.Control as="textarea"
+                                    rows={1}
+                                    value={FormatDateTime(projectEndDate)}>
+                                </Form.Control>
+                            </div>
+
+                            <input
+                                type="date"
+                                min={new Date().toISOString().split('T')[0]}
+                                max="2030-12-31"
+                                value={projectEndDate}
+                                onChange={(event) => { setProjectEndDate(event.target.value) }} />
+                        </div><br />
                     </Form>
+
                     <Card.Footer style={{ paddingLeft: '50%' }}>
                         <Button variant="warning" size="lg" type="submit" onClick={editProject}>Edit Project</Button>
                     </Card.Footer>
-
+                    
                 </Card.Body>
             </Card>
 

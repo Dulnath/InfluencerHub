@@ -22,13 +22,13 @@ const EventSchema = new mongoose.Schema({
         required: true,
     },
     eventStartDate: {
-        type: Date,
+        type: String,
         required: false,
     },
     eventEndDate: {
-        type: Date,
+        type: String,
         required: false,
-    },
+    }
 });
 
 module.exports = EventModule = mongoose.model("addevents", EventSchema);
