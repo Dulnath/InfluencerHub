@@ -10,6 +10,9 @@ const usercount = require('./routes/usercount');
 const comments = require('./routes/comments')
 const req = require('express/lib/request');
 const connection = require("./db");
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const passwordResetRoutes = require("./routes/passwordReset");
 
 const app = express();
 app.use(bodyParser.json());
@@ -22,6 +25,9 @@ app.use('/api/useraccounts', useraccounts);
 app.use('/api/reports', reports);
 app.use('/api/comments',comments);
 app.use('/api/usercount', usercount);
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/password-reset",passwordResetRoutes);
 app.use(express.json());
 app.use(cors())
 
@@ -69,3 +75,6 @@ app.listen(port, () => {
     console.log(`server started on port ${port}`);
     //setInterval(getUserCount,60000);
 });
+
+
+
