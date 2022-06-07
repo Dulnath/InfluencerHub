@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require("../models/user");
 const { json } = require('express/lib/response');
-
+const salt = bcrypt.genSaltSync(Number(process.env.SALT));
 //display all users
 router.get('/', (req, res) => {
     User.find()
@@ -39,8 +39,7 @@ router.post('/', async(req, res) => {
     console.log(req.body)
     try {
         const nupassword = req.body.password;
-        const salt = bcrypt.genSaltSync(11);
-        const newPassword = await bcrypt.hash(nupassword, salt);
+        const newPassword = await bcrypt.hashSync(nupassword, salt);
         console.log(newPassword);
         await User.create({
             firstName: req.body.fname,
@@ -71,11 +70,11 @@ router.post('/login', async(req, res) => {
     }
 
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await bcrypt.compareSync(
         req.body.password,
         user.password
     );
-
+    console.log(isPasswordValid)
     if (isPasswordValid) {
         const login = user.isFirstLogin;
         const token = jwt.sign({
@@ -88,6 +87,7 @@ router.post('/login', async(req, res) => {
 
         return res.json({ status: 'ok', user: token, test: login })
     } else {
+        console.log('wrong password')
         return res.json({ status: 'error', user: false })
     }
 })
