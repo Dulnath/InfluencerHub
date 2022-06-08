@@ -12,7 +12,7 @@ function Menu(props){
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.clear();
-        navigate('/adminlogin');
+        navigate('/login');
       };
     
     const [fname,setUserName] = useState('');
