@@ -47,3 +47,9 @@
     margin-left: 700px;
     margin-top: 50px;
 }
+
+.image1_img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+  }

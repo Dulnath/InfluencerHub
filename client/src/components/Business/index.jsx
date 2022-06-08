@@ -13,6 +13,7 @@ import CardContent from 'react-bootstrap/Card';
 import { Row, Col, NavLink } from 'react-bootstrap'
 import Login from '../Login';
 import { useParams, useNavigate} from "react-router-dom";
+import image from "../../images/user.jpg";
 
 
 function Business(props) {
@@ -51,6 +52,7 @@ function Business(props) {
 			<nav className={styles.navbar}>
 				<h1>InfluencerHub</h1>
 				<h2> User:{fname}</h2>
+                <img src={image} className={styles.image1_img} alt="..."/>
 				<button className={styles.white_btn} onClick={handleLogout}>
 					Logout
 				</button>
