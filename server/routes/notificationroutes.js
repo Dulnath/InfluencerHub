@@ -99,14 +99,12 @@ router.post("/requestrefund", (req, res) => {
 });
 //retrieve notifications
 router.get("/notifications", (req, res) => {
-  notification.find().exec((err, notifications) => {
+  notification.find({}, (err, result) => {
     if (err) {
-      res.status(400).json({ error: err });
+      res.json(err);
+    } else {
+      res.json(result);
     }
-    return res.status(200).json({
-      success: true,
-      existingNotifications: notifications,
-    });
   });
 });
 

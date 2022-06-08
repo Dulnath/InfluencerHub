@@ -1,7 +1,10 @@
 import styles from "./styles.module.css";
 import Search from "../Search";
 import { BsBellFill } from "react-icons/bs";
+import ViewNotifications from "../Notifications";
 import { useNavigate } from "react-router-dom";
+
+
 
 const Main = () => {
 	const handleLogout = () => {
@@ -9,7 +12,7 @@ const Main = () => {
 		window.location.reload();
 	};
 
-	let navigate = useNavigate();	
+	let navigate = useNavigate();
 
 	return (
 		<div className={styles.main_container}>			
