@@ -1,14 +1,18 @@
 const router = require("express").Router();
 const { User, validate } = require("../models/user");
+const Token = require("../models/token");
+const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
 const bcrypt = require("bcrypt");
-//signup
+const userModel= require("../models/user");
+
 router.post("/", async (req, res) => {
 	try {
 		const { error } = validate(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
-		const user = await User.findOne({ email: req.body.email });
+		let user = await User.findOne({ email: req.body.email });
 		if (user)
 			return res
 				.status(409)
@@ -16,46 +20,67 @@ router.post("/", async (req, res) => {
 
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
-		let userRes = {
-			email: req.body.email,
-			password: hashPassword,
-			category:req.body.category
-		};
-	
-		if(req.body.category==="influencer")
 
-		{
-			userRes = {
-				...userRes,
-				firstName: req.body.firstName,
-				lastName: req.body.lastName,
-			}
-		}
-		else if(req.body.category==="business")
-		{
-			userRes = {
-				...userRes,
-				businessName: req.body.businessName,
-				businessAddress: req.body.businessAddress,
-			 }
-		}
-		console.log("error")
-		await new User(userRes).save();
-		res.status(201).send({ message: "User created successfully" });
-	
+		user = await new User({ ...req.body, password: hashPassword }).save();
+
+		const token = await new Token({
+			userId: user._id,
+			token: crypto.randomBytes(32).toString("hex"),
+		}).save();
+		const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+		await sendEmail(user.email, "Verify Email", url);
+
+		res
+			.status(201)
+			.send({ message: "An Email sent to your account please verify" });
 	} catch (error) {
-		res.status(500).send({ message: "Internal Serversdfsadf Error",error });
+		console.log(error);
+		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
 
-module.exports = router;
+router.get("/:id/verify/:token/", async (req, res) => {
+	try {
+		const user = await User.findOne({ _id: req.params.id });
+		if (!user) return res.status(400).send({ message: "Invalid link" });
+
+		const token = await Token.findOne({
+			userId: user._id,
+			token: req.params.token,
+		});
+		if (!token) return res.status(400).send({ message: "Invalid link" });
+
+		await User.updateOne({ _id: user._id, verified: true });
+		await token.remove();
+
+		res.status(200).send({ message: "Email verified successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+/*router.get('/getUsers', (req, res) => {
+    userModel.find({}, (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
+});*/
+
+/*router.get('/getUsers', (req, res) => {
+    userModel.find()
+        .then(items => res.json(items))
+});*/
+
+
 router.get('/getUsers', (req, res) => {
     User.find()
         .sort({ date: -1 })
         .then(items => res.json(items))
 });
-/*
-// get individual user
+
 router.get("/viewUsers/:id",(req,res) => {
     
     let userId = req.params.id;
@@ -68,22 +93,7 @@ router.get("/viewUsers/:id",(req,res) => {
             user
         });
     });
-});*/
-
-// get individual user
-/*
-router.get(`/getuser/${id}`,async(req,res)=>{
-    try {
-        console.log(req.params);
-        const {id} = req.params;
-        const userindividual = await User.findById({_id:id});
-        console.log(userindividual);
-        res.status(201).json(userindividual)
-    } catch (error) {
-        res.status(500).send({ message: "Internal Server Error" });
-    }
-})
-*/
+});
 
 //individual
 router.get("/getuser/:id", (req, res) => {
@@ -98,3 +108,90 @@ router.get("/getuser/:id", (req, res) => {
 	  });
 	});
   });
+/*
+  export const getSearchUsers = async (req, res) => {
+	const { id } = req.params;
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+	  return res.status(404).json({ message: "User doesn't exist" });
+	}
+	const userSearch = await User.find({ creator: id });
+	res.status(200).json(userSearch);
+  };*/
+  
+  //http://localhost:8080/api/users/getUsers?q=${value}&_start=${start}&_end=${end}
+/*
+  router.get('/search', function(req,res){
+    var regex = new RegExp('ama', 'i');  // 'i' makes it case insensitive
+    return User.find({text: regex}, function(err,q){
+        return res.send(q);
+    });
+});
+*/
+
+router.get("/search/:key",async(req,res)=>{
+	//console.log(req.params.key)
+
+	let data = await User.find(
+		{
+			"$or":[
+			{firstName :{$regex:req.params.key,$options:'i'}},
+				//{category:{$regex:req.params.key.toLowerCase()}}
+			]
+		}
+	)
+	res.send(data)
+
+	
+})
+
+router.get("/search/:key",async(req,res)=>{
+	//console.log(req.params.key)
+
+	let data = await User.find(
+		{
+			"$or":[
+			{firstName :{$regex:req.params.key,$options:'i'}},
+				//{category:{$regex:req.params.key.toLowerCase()}}
+			]
+		}
+	)
+	res.send(data)
+
+	
+})
+
+router.get("/search1/:key",async(req,res)=>{
+	//console.log(req.params.key)
+
+	let data = await User.find(
+		{
+			"$or":[
+				{ category: "Influencer" || "influencer"} 
+				//{category:{$regex:req.params.key.toLowerCase()}}
+			]
+		}
+	)
+	res.send(data)
+
+	
+})
+
+router.get('/:id', async(req, res) => {
+    try {
+        User.findById(req.params.id, (result, err) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(result.data);
+            }
+
+        });
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+
+
+//User.find( { $or: [ { category: "Influencer" || "influencer"} ] } )
+module.exports = router;

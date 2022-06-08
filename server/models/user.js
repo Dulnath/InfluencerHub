@@ -19,9 +19,9 @@ const userSchema = new mongoose.Schema({
 	suspendedDate:{type:Date,required:false},
 	restoreDate:{type:Date,required:false},
 	verified:{type:Boolean,default:false},
-	isActive:{type:Boolean,default:true}
-
-	
+	isActive:{type:Boolean,default:true},
+	status:{ type: String, required: true },
+	img:{ type: String, required: true },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -31,21 +31,27 @@ userSchema.methods.generateAuthToken = function () {
 	return token;
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 const validate = (data) => {
 	const schema = Joi.object({
-		firstName: Joi.string().label("First Name"),
-		businessName: Joi.string().label("Business Name"),
-		businessAddress: Joi.string().label("Business Address"),
-		lastName: Joi.string().label("Last Name"),
-		email: Joi.string().email().label("Email"),
-		password: passwordComplexity().label("Password"),
-		category: Joi.string().label("Category"),
-		verified:Joi.string().label("Verified"),
-		isActive:Joi.string().label("Active")
+		firstName: Joi.string().required().label("First Name"),
+		lastName: Joi.string().required().label("Last Name"),
+		email: Joi.string().email().required().label("Email"),
+		password: passwordComplexity().required().label("Password"),
+		category:Joi.string().required().label("Category"),
+		status: Joi.string().required().label("Status"),
+		img: Joi.string().required().label("Image"),
 	});
 	return schema.validate(data);
 };
 
-module.exports = { User, validate };
+
+
+module.exports = { User:User
+	, validate
+};
+
+//module.exports = User = mongoose.model('user',userSchema);
+//module.exports = User, {validate};
+

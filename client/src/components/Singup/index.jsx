@@ -1,22 +1,28 @@
-import React,{ useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-
+import FileInput from "../FileInput";
+import React from "react";
 const Signup = () => {
-	const [repassword,setRepassword] = useState({});
 	const [data, setData] = useState({
 		firstName: "",
 		lastName: "",
 		email: "",
 		password: "",
-		category:"influencer"
+		category: "",
+		status: "",
+		img:""
 	});
 	const [error, setError] = useState("");
-	const navigate = useNavigate();
+	const [msg, setMsg] = useState("");
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
+	};
+
+	const handleInputState = (name, value) => {
+		setData((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = async (e) => {
@@ -24,8 +30,7 @@ const Signup = () => {
 		try {
 			const url = "http://localhost:5000/api/users";
 			const { data: res } = await axios.post(url, data);
-			navigate("/login");
-			console.log(res.message);
+			setMsg(res.message);
 		} catch (error) {
 			if (
 				error.response &&
@@ -42,11 +47,15 @@ const Signup = () => {
 			<div className={styles.signup_form_container}>
 				<div className={styles.left}>
 					<h1>Welcome Back</h1>
-					
+					<Link to="/login">
+						<button type="button" className={styles.white_btn}>
+							Sign in
+						</button>
+					</Link>
 				</div>
 				<div className={styles.right}>
 					<form className={styles.form_container} onSubmit={handleSubmit}>
-						<h1>Create Inflencer account</h1>
+						<h1>Create Account</h1>
 						<input
 							type="text"
 							placeholder="First Name"
@@ -83,16 +92,37 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
-							<input
-							type="password"
-							placeholder="Confirm Password"
-							name="repassword"
-							onChange={(e)=>setRepassword(e.target.value)}
-							value={repassword}
+
+<input
+							type="text"
+							placeholder="Category"
+							name="category"
+							onChange={handleChange}
+							value={data.category}
 							required
 							className={styles.input}
 						/>
+
+<input
+							type="text"
+							placeholder="Status"
+							name="status"
+							onChange={handleChange}
+							value={data.status}
+							required
+							className={styles.input}
+						/>
+
+<FileInput
+					name="img"
+					label="Choose Image"
+					handleInputState={handleInputState}
+					type="image"
+					value={data.img}
+				/>
+
 						{error && <div className={styles.error_msg}>{error}</div>}
+						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>

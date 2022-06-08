@@ -57,7 +57,6 @@ router.get("/:id/:token", async (req, res) => {
 		res.status(200).send("Valid Url");
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
-		
 	}
 });
 

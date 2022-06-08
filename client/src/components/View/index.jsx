@@ -4,12 +4,9 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import { Container, Row, Col, NavLink } from 'react-bootstrap'
-import Login from '../Login';
 import { useParams, useNavigate} from "react-router-dom";
 
 
-
-//new one
 function View() {
     const loggedInUser = localStorage.getItem("token");
     const [listOfUsers, setListOfUsers] = useState([]);
@@ -26,10 +23,8 @@ function View() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/users/getuser/${id}`).then((response) => {
+        axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
         
-          
-
             setFirstName(response.data.user.firstName);
             setLastName(response.data.user.lastName);
            setUserEmail(response.data.user.email);

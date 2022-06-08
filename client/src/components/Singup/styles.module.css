@@ -67,7 +67,8 @@
 	font-size: 14px;
 }
 
-.error_msg {
+.error_msg,
+.success_msg {
 	width: 370px;
 	padding: 15px;
 	margin: 5px 0;
@@ -76,6 +77,10 @@
 	color: white;
 	border-radius: 5px;
 	text-align: center;
+}
+
+.success_msg {
+	background-color: #5cdd5c;
 }
 
 .white_btn,
@@ -89,7 +94,6 @@
 	font-weight: bold;
 	font-size: 14px;
 	cursor: pointer;
-	margin-top:10px;
 }
 
 .green_btn {

@@ -4,11 +4,16 @@ import axios, { Axios } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
-import {Container,Row,Col} from 'react-bootstrap'
+//import Card from 'react-bootstrap/Card';
+import {Container,Row,Col,Card,CardGroup} from 'react-bootstrap'
 import Login from '../Login';
 import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+
+//import { uuid } from "uuidv4";
+import uuid from 'react-uuid';
+import View from '../View';
+//import { User } from '../../../../server/models/user';
 
 function Search() {
     const [listOfUsers, setListOfUsers] = useState([]);
@@ -22,14 +27,15 @@ function Search() {
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
-        axios.get("http://localhost:8080/api/users/getUsers").then((response) => {
+        axios.get("http://localhost:5000/api/users/getUsers").then((response) => {
              setListOfUsers(response.data);
         })
     }, [])
 
-
-    if(loggedInUser){
-        //if(category=="Influencer"){
+//   {listOfUsers.filter((user)=>user.category.includes("Business")).map((user,id) =>
+    
+if(loggedInUser){
+      
     return (
       
     
@@ -49,8 +55,11 @@ function Search() {
 
             {listOfUsers.map((user,id) => {
                 return (
+                    
                     <React.Fragment>
-      <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{border:'2px solid #000000', paddingTop:"5px", paddingBottom:"5px" ,paddingLeft:"5px"}} key={user._id}>
+                        <CardGroup>
+                            <Card>
+                        <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{border:'2px solid #000000', paddingTop:"5px", paddingBottom:"5px" ,paddingLeft:"5px"}} key={user._id}>
                                     <Row>
                                     <Col xs={4} md={3}><b>Id </b> : {user._id}</Col>
                                         <Col xs={4} md={3}><b>Name </b> : {user.firstName + " " + user.lastName}</Col>
@@ -69,7 +78,10 @@ function Search() {
                                     </Row>
                                     
                                 </Container>
-</React.Fragment>
+                                </Card>
+                        </CardGroup>
+                        </React.Fragment>
+      
 
 
 
@@ -88,7 +100,7 @@ function Search() {
                 </div>  
         )
     }
-
+    
 };
 
 export default Search;
