@@ -33,7 +33,7 @@ function Search() {
     }, [])
 
 //   {listOfUsers.filter((user)=>user.category.includes("Business")).map((user,id) =>
-    
+    console.log(listOfUsers)
 if(loggedInUser){
       
     return (
@@ -54,6 +54,7 @@ if(loggedInUser){
     
 
             {listOfUsers.map((user,id) => {
+               if(user.category==="influencer"){
                 return (
                     
                     <React.Fragment>
@@ -94,6 +95,7 @@ if(loggedInUser){
 
 
                 );
+               }
             })}
         </div >
 </div >
