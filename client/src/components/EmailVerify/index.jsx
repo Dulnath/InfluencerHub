@@ -4,7 +4,7 @@ import axios from "axios";
 import success from "../../images/success.png";
 import styles from "./styles.module.css";
 import { Fragment } from "react/cjs/react.production.min";
-
+import React from "react";
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(false);
 	const param = useParams();
@@ -12,7 +12,7 @@ const EmailVerify = () => {
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			try {
-				const url = `http://localhost:8080/api/users/${param.id}/verify/${param.token}`;
+				const url = `http://localhost:5000/api/users/${param.id}/verify/${param.token}`;
 				const { data } = await axios.get(url);
 				console.log(data);
 				setValidUrl(true);

@@ -42,7 +42,7 @@ function Menu(props){
                             <Nav.Link><Link to='/allUsers'className={styles.menu_item}> All Users</Link></Nav.Link>
                             <Nav.Link><Link to='/newUsers' className={styles.menu_item}>New Users</Link></Nav.Link>
                             <div className="btn-group" >
-                                <Nav.Link className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" ><span  className={styles.menu_item}>Reports</span></Nav.Link>
+                                <Nav.Link className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Reports</Nav.Link>
                                 <ul className="dropdown-menu dropdown-menu-end">
                                     <li className="dropdown-item"><Link to='/accountReports' className="text-decoration-none text-dark">Account Reports</Link></li>
                                     <li className="dropdown-item"><Link to='/commentReports' className="text-decoration-none text-dark">Comment Reports</Link></li>

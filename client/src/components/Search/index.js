@@ -27,7 +27,7 @@ function Search() {
        let newval= value.toLowerCase();
         return await axios
           .get(
-            `http://localhost:8080/api/users/search/${newval}`
+            `http://localhost:5000/api/users/search/${newval}`
            
           )
           .then((response) =>  setData(response.data))
@@ -44,7 +44,7 @@ function Search() {
     e.preventDefault();
     let newval= value.toLowerCase();
     return await axios
-    .get(`http://localhost:8080/api/users/search/${newval}`)
+    .get(`http://localhost:5000/api/users/search/${newval}`)
     .then((response)=>{
       setData(response.data)
       //setValue("");
