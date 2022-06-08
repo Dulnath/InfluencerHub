@@ -18,7 +18,7 @@ import { useParams, useNavigate} from "react-router-dom";
 function Main(props) {
     const loggedInUser = localStorage.getItem("token");
     const [fname, setUserName] = useState('');
-   
+    const navigate = useNavigate();
 
 		const handleLogout = () => {
 			localStorage.removeItem("token");
@@ -56,6 +56,11 @@ function Main(props) {
 				</button>
 				
 			</nav>
+
+			<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+					View All influencers
+				</button></h2>
+
 			<Search />
 	
 		</div>
