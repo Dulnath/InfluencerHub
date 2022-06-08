@@ -11,8 +11,10 @@ const ForgotPassword = () => {
 		e.preventDefault();
 		try {
 			const url = `http://localhost:8080/api/password-reset`;
+			
 			const { data } = await axios.post(url, { email });
 			setMsg(data.message);
+			
 			setError("");
 		} catch (error) {
 			if (
@@ -20,6 +22,7 @@ const ForgotPassword = () => {
 				error.response.status >= 400 &&
 				error.response.status <= 500
 			) {
+				console.log("1");
 				setError(error.response.data.message);
 				setMsg("");
 			}
