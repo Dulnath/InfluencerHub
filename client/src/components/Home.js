@@ -75,6 +75,9 @@ function AllPosts() {
                 >
                   Delete Post
                 </Button>
+                <Button
+                  size="sm"
+                  type="submit">Add Comment</Button>
               </div>
             </Card>
           </div>
