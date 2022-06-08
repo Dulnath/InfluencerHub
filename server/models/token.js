@@ -10,7 +10,7 @@ const tokenSchema = new Schema({
 	},
 	category:{
 		type: String,
-		required: true,
+		required: false,
 	},
 	token: { type: String, required: true },
 	createdAt: { type: Date, default: Date.now, expires: 3600 },
