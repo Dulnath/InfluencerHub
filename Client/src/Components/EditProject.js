@@ -76,7 +76,7 @@ function EditProject(props) {
                             <input
                                 type="date"
                                 min={new Date().toISOString().split('T')[0]}
-                                max="2030-12-31"
+                                max={projectEndDate}
                                 value={projectStartDate}
                                 onChange={(event) => { setProjectStartDate(event.target.value) }} />
                         </div><br />
@@ -93,7 +93,6 @@ function EditProject(props) {
                             <input
                                 type="date"
                                 min={projectStartDate}
-                                max="2030-12-31"
                                 value={projectEndDate}
                                 onChange={(event) => { setProjectEndDate(event.target.value) }} />
                         </div><br />

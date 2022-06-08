@@ -17,7 +17,7 @@ function AllEvents() {
         })
     }, []);
 
-    const { projectName } = useParams();
+    const { projectName, projectID } = useParams();
 
     const editWindow = (id) => {
         setSelected(id);
@@ -79,7 +79,7 @@ function AllEvents() {
                         {(selected === events._id) ?
                             openEdit &&
                             <div>
-                                <EditEvent eventID={events._id}/>
+                                <EditEvent eventID={events._id} projectID={projectID}/>
                             </div> : null
                         }
 

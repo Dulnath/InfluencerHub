@@ -14,8 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<AddProject />} />    
         <Route path="/allProjects" element={<AllProjects />} />
-        <Route path="/addEvents/:projectName" element={<AddEvents />} />
-        <Route path="/allEvents/:projectName" element={<AllEvents />} />
+        <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
+        <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
         <Route Path='*' element={<NoMatch/>}></Route>
       </Routes>
     </Router>

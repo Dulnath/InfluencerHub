@@ -8,6 +8,8 @@ function EditEvent(props) {
     const [eventDescription, setEventDescription] = useState();
     const [eventStartDate, setEventStartDate] = useState();
     const [eventEndDate, setEventEndDate] = useState();
+    const [projectStartDate, setProjectStartDate] = useState();
+    const [projectEndDate, setProjectEndDate] = useState();
 
     const editEvent = () => {
         axios.put(`/updateEvent/${props.eventID}`, {
@@ -29,6 +31,10 @@ function EditEvent(props) {
             setEventEndDate(res.data.event.eventEndDate);
             console.log(res.data.event);
         });
+        axios.get(`/getProject/${props.projectID}`).then((response) => {
+            setProjectStartDate(response.data.project.projectStartDate);
+            setProjectEndDate(response.data.project.projectEndDate);
+        })
         // eslint-disable-next-line
     }, []);
 
@@ -69,14 +75,14 @@ function EditEvent(props) {
                                     <Form.Label>Start Date</Form.Label><br />
                                     <Form.Control as="textarea"
                                         rows={1}
-                                        value={FormatDateTime(eventStartDate)}>                                        
+                                        value={FormatDateTime(eventStartDate)}>
                                     </Form.Control>
                                 </div>
 
                                 <input
                                     type="date"
-                                    min={new Date().toISOString().split('T')[0]}
-                                    max="2030-12-31"
+                                    min={projectStartDate}
+                                    max={eventEndDate}
                                     value={eventStartDate}
                                     onChange={(event) => { setEventStartDate(event.target.value) }} />
                             </div><br />
@@ -92,8 +98,8 @@ function EditEvent(props) {
 
                                 <input
                                     type="date"
-                                    min={eventEndDate}
-                                    max="2030-12-31"
+                                    min={eventStartDate}
+                                    max={projectEndDate}
                                     value={eventEndDate}
                                     onChange={(event) => { setEventEndDate(event.target.value) }} />
                             </div><br />

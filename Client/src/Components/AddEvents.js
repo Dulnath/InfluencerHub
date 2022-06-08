@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Card, CloseButton, Form, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
@@ -8,8 +8,10 @@ function AddEvents() {
     const [eventDescription, setEventDescription] = useState("");
     const [eventStartDate, setEventStartDate] = useState("");
     const [eventEndDate, setEventEndDate] = useState("");
+    const [projectStartDate, setProjectStartDate] = useState("");
+    const [projectEndDate, setProjectEndDate] = useState("");
 
-    const { projectName } = useParams();
+    const { projectName, projectID } = useParams();
 
     const createEvent = () => {
         Axios.post("/createEvent", {
@@ -24,6 +26,14 @@ function AddEvents() {
         });
     }
 
+    useEffect(() => {
+        Axios.get(`/getProject/${projectID}`).then((response) => {
+            setProjectStartDate(response.data.project.projectStartDate);
+            setProjectEndDate(response.data.project.projectEndDate);
+        })
+        // eslint-disable-next-line
+    }, []);
+
     let navigate = useNavigate();
 
     return (
@@ -33,7 +43,7 @@ function AddEvents() {
                     <Card.Header>
                         <div className="projectCardHeader">
                             Add Event
-                            <CloseButton className="closeButton" onClick={() => { navigate(`/allEvents/${projectName}`) }} />
+                            <CloseButton className="closeButton" onClick={() => { navigate(`/allEvents/${projectName}/${projectID}`) }} />
                         </div>
                     </Card.Header>
                     <Card.Body>
@@ -62,8 +72,8 @@ function AddEvents() {
                             <div>
                                 <input
                                     type="date"
-                                    min={new Date().toISOString().split('T')[0]}
-                                    max="2030-12-31"
+                                    min={projectStartDate}
+                                    max={eventEndDate}
                                     value={eventStartDate}
                                     onChange={(event) => { setEventStartDate(event.target.value) }} />
                             </div><br />
@@ -73,7 +83,7 @@ function AddEvents() {
                                 <input
                                     type="date"
                                     min={eventStartDate}
-                                    max="2030-12-31"
+                                    max={projectEndDate}
                                     value={eventEndDate}
                                     onChange={(event) => { setEventEndDate(event.target.value) }} />
                             </div><br />
