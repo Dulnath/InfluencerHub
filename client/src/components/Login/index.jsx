@@ -22,7 +22,12 @@ const Login = () => {
 			const user=	ParseJwt(token);
 			console.log(user._id);
 			console.log(user.category);
-			window.location = "/";
+			if(user.category==="influencer"){
+				window.location = "/";
+				}
+			else if(user.category==="business"){
+				window.location = "/business";
+			}
 		} catch (error) {
 			if (
 				error.response &&

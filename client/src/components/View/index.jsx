@@ -8,6 +8,8 @@ import CardContent from 'react-bootstrap/Card';
 import { Container, Row, Col, NavLink } from 'react-bootstrap'
 import Login from '../Login';
 import { useParams, useNavigate} from "react-router-dom";
+import image from "../../images/user.jpg";
+import styles from "./styles.module.css";
 
 
 function View() {
@@ -63,23 +65,37 @@ function View() {
                         }}
                     ></div>
                     
-                    <h1> HI </h1>
-
-
-
+                    
 
                     <React.Fragment>
                         <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} >
-                            <Row>
-                                <Col xs={4} md={3}><b>Name </b> : {firstName} </Col>
-                                <Col xs={4} md={3}><b>Email </b> : {email}</Col>
+                        <div class="card-deck">
+                  <div class="card">
+   
+                  <div class="card-body">  
+                 
+                     <img src={image} className={styles.image_img} alt="..."/>
+                     <h3 class="card-title">{firstName+" "+ lastName}</h3>
+                   <Row> <h5>{category}</h5></Row> 
+                   <Row> <h10>{email}</h10></Row> 
+                   <Row><p>A paragraph is a series of sentences that are organized and coherent, and are all related to a single topic. 
+                       Almost every piece of writing you do that is longer than a few sentences should be organized into paragraphs. 
+                       This is because paragraphs show a reader where the subdivisions of an essay begin and end, and thus help the reader 
+                       see the organization of the essay and grasp its main points.
 
-                                <Col xs={4} md={3}><b>Category </b> : {category}</Col>
 
-
-                                <Col xs={3} md={2}><b>  <Button variant="danger" className="mx-3">Follow</Button></b></Col>
-
-                            </Row>
+                       Paragraphs can contain many different kinds of information. A paragraph could contain a series of brief examples or
+                        a single long illustration of a general point. It might describe a place, character, or process; narrate a series 
+                        of events; compare or contrast two or more things; classify items into categories; or describe causes and effects. 
+                        Regardless of the kind of information they contain, all paragraphs share certain characteristics. One of the most 
+                        important of these is a topic sentence.</p></Row> 
+                   <button className={styles.button}>
+                       Follow
+                        
+                    </button> 
+                  </div>
+                  </div>
+                  </div>
 
                         </Container>
                     </React.Fragment>

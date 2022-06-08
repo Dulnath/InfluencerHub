@@ -2,22 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import axios, { Axios } from "axios";
-import {
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBRow,
-  MDBCol,
-  MDBContainer,
-  MDBBtn,
- 
-} from "mdb-react-ui-kit";
 //import "./App.css";
+import image from "../../images/user.jpg";
+import { button , Table,Row} from "react-bootstrap";
+import styles from "./styles.module.css";
+import { useNavigate } from 'react-router-dom';
 
 function Search() {
   const [data, setData] = useState([]);
   const [value, setValue] = useState("");
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadUsersData();
@@ -47,7 +41,7 @@ function Search() {
     .get(`http://localhost:8080/api/users/search/${newval}`)
     .then((response)=>{
       setData(response.data)
-      //setValue("");
+      setValue("");
     })
     .catch((err)=>console.log(err));
   };
@@ -55,7 +49,7 @@ function Search() {
 
  
   return (
-    <MDBContainer>
+    <div class ="container">
       <form
         style={{
           margin: "auto",
@@ -73,53 +67,48 @@ function Search() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-
-        <MDBBtn type="submit" color="dark">
-          Search
-        </MDBBtn>
-        <MDBBtn className="mx-2" color="info" onClick={() => handleReset()}>
+<button type="submit" class="btn btn-success">Search</button>
+        
+        <button type="submit" class="btn btn-primary" onClick={() => handleReset()}>
           Reset
-        </MDBBtn>
+        </button>
       </form>
       <div style={{ marginTop: "100px" }}>
-        <MDBRow>
-          <MDBCol size="12">
-            <MDBTable>
-              <MDBTableHead dark>
-                <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Last Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Category</th>
-               
-                </tr>
-              </MDBTableHead>
+     
+ 
               {data.length === 0 ? (
-                <MDBTableBody className="align-center mb-0">
+                <Table className="align-center mb-0">
                   <tr>
                     <td colSpan={8} className="text-center mb-0">
                       No Data Found
                     </td>
                   </tr>
-                </MDBTableBody>
+                </Table>
               ) : (
                 data.map((item, index) => (
-                  <MDBTableBody key={index}>
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>{item.firstName}</td>
-                      <td>{item.lastName}</td>
-                      <td>{item.email}</td>
-                      <td>{item.category}</td>
-                      
-                    </tr>
-                  </MDBTableBody>
+                  <div class="card-deck">
+                  <div class="card">
+   
+                  <div class="card-body">  
+                 
+                     <img src={image} className={styles.image_img} alt="..."/>
+                     <h3 class="card-title">{item.firstName+" "+item.lastName}</h3>
+                   <Row> <h5>{item.category}</h5></Row> 
+                    <Row> <h10>{item.email}</h10></Row>  
+                      <button className={styles.button}
+                        onClick={() => {navigate(`/view/${item._id}`)}}
+                        >View
+                        
+                    </button>
+                       
+                  </div>
+                  </div>
+                  </div>
                 ))
               )}
-            </MDBTable>
-          </MDBCol>
-        </MDBRow>
+          
+ 
+
         <div
           style={{
             margin: "auto",
@@ -132,7 +121,7 @@ function Search() {
         </div>
       </div>
      
-    </MDBContainer>
+    </div>
   );
   
 

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from "./components/Main";
 import Signup from "./components/Singup";
 import Login from "./components/Login";
+import Business from "./components/Business"
 import EmailVerify from "./components/EmailVerify";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
@@ -31,7 +32,7 @@ function App() {
 			<Route path="/view/:id" exact element={<View />} />
 			<Route path="/filter" exact element={<Filter />} />
 			<Route path="/topbar" exact element={<Topbar />} />
-
+            <Route path="/business" exact element={<Business />} />
 		</Routes>
 	);
 }
