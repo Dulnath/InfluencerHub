@@ -1,39 +1,105 @@
-import { React, useEffect, useState } from "react";
-import {  useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { CloseButton } from 'react-bootstrap';
+// import { React, useEffect, useState } from "react";
+// import {  useParams, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { CloseButton } from 'react-bootstrap';
 
- function EventCard(){
-    const [eventName,setEventName] = useState();
-    const [eventDescription,setEventDescription] = useState();
-    const [eventStartDate,setEventStartDate] = useState();
-    const [eventEndDate,setEventEndDate] = useState();
+//  function EventCard(){
+//     const [eventName,setEventName] = useState();
+//     const [eventDescription,setEventDescription] = useState();
+//     const [eventStartDate,setEventStartDate] = useState();
+//     const [eventEndDate,setEventEndDate] = useState();
 
-    const { id } = useParams();
+//     const { id } = useParams();
 
-    let navigate = useNavigate();
+//     let navigate = useNavigate();
 
-    useEffect(() =>{
-        axios.get(`/getEvent/${id}`).then((res) => {
-            console.log("Hello");
+//     useEffect(() =>{
+//         axios.get(`/getEvent/${id}`).then((res) => {
+//             console.log("Hello");
+//             setEventName(res.data.event.eventName);
+//             setEventDescription(res.data.event.eventDescription);
+//             setEventStartDate(res.data.event.eventStartDate);
+//             setEventEndDate(res.data.event.eventEndDate);
+//             console.log("EventData",res.data.event);
+//         });
+//     // eslint-disable-next-line
+//     },[]);
+
+//     return(
+//         <div>
+//             <CloseButton className="closeButton" onClick={() => { navigate("/allProjects") }} />
+//             {eventName}
+//             {eventDescription}
+//             {eventStartDate}
+//             {eventEndDate}
+//         </div>
+//     );  
+//  }
+
+//  export default EventCard;
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Card } from 'react-bootstrap';
+
+function EventCard(props) {
+
+    const [projectName, setProjectName] = useState("");
+    const [eventName, setEventName] = useState("");
+    const [eventDescription, setEventDescription] = useState("");
+    const [eventStartDate, setEventStartDate] = useState("");
+    const [eventEndDate, setEventEndDate] = useState("");
+
+    //  const {id} = useParams();
+
+
+    useEffect(() => {
+        axios.get(`/getEvent/${props.eventID}`).then((res) => {
+            setProjectName(res.data.event.projectName);
             setEventName(res.data.event.eventName);
             setEventDescription(res.data.event.eventDescription);
             setEventStartDate(res.data.event.eventStartDate);
             setEventEndDate(res.data.event.eventEndDate);
-            console.log("EventData",res.data.event);
         });
-    // eslint-disable-next-line
-    },[]);
+        // eslint-disable-next-line
+    }, []);
 
-    return(
-        <div>
-            <CloseButton className="closeButton" onClick={() => { navigate("/allProjects") }} />
-            {eventName}
-            {eventDescription}
-            {eventStartDate}
-            {eventEndDate}
+    console.log(props.eventID);
+    return (
+        <div >
+            <Card border="dark" className="eventCard">
+                <h2 style={{ textAlign: "center" }}>Event Card</h2><br/>
+                <table id="table">
+                    <tr>
+                        <td style={{fontWeight:"500"}}>Project Name</td>
+                        <td>{projectName}</td>
+                    </tr>
+                    <tr>
+                        <td style={{fontWeight:"500"}}>Event Name</td>
+                        <td>{eventName}</td>
+                    </tr>
+                    <tr>
+                        <td style={{fontWeight:"500"}}>Event Description</td>
+                        <td>{eventDescription}</td>
+                    </tr>
+                    <tr>
+                        <td style={{fontWeight:"500"}}>Event Start Date</td>
+                        <td>{eventStartDate}</td>
+                    </tr>
+                    <tr>
+                        <td style={{fontWeight:"500"}}>Event End Date</td>
+                        <td>{eventEndDate}</td>
+                    </tr>
+                    <tr>
+                        <td style={{fontWeight:"500"}}>Event Duration</td>
+                        <td>{ eventEndDate } - { eventStartDate }</td>
+                    </tr>
+        
+                </table>
+            </Card>
+
         </div>
-    );  
- }
+    );
+}
 
- export default EventCard;
+export default EventCard;

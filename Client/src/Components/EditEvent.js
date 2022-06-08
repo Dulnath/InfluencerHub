@@ -92,7 +92,7 @@ function EditEvent(props) {
 
                                 <input
                                     type="date"
-                                    min={new Date().toISOString().split('T')[0]}
+                                    min={eventEndDate}
                                     max="2030-12-31"
                                     value={eventEndDate}
                                     onChange={(event) => { setEventEndDate(event.target.value) }} />

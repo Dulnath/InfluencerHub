@@ -72,7 +72,7 @@ function AddEvents() {
                             <div>
                                 <input
                                     type="date"
-                                    min={new Date().toISOString().split('T')[0]}
+                                    min={eventStartDate}
                                     max="2030-12-31"
                                     value={eventEndDate}
                                     onChange={(event) => { setEventEndDate(event.target.value) }} />

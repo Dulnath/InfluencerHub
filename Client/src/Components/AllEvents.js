@@ -3,11 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card } from 'react-bootstrap';
 import axios from "axios";
 import EditEvent from './EditEvent';
+import EventCard from "./EventCard";
 
 function AllEvents() {
     const [listOfEvents, setListOfEvents] = useState([]);
     const [openEdit, setOpenEdit] = useState();
     const [selected, setSelected] = useState();
+    const [openEventCard, setOpenEventCard] = useState();
 
     useEffect(() => {
         axios.get("/getEvent").then((response) => {
@@ -20,6 +22,11 @@ function AllEvents() {
     const editWindow = (id) => {
         setSelected(id);
         setOpenEdit(!openEdit);
+    }
+
+    const eventCard = (id) => {
+        setSelected(id);
+        setOpenEventCard(!openEventCard);
     }
 
     const handleDelete = (_id) => {
@@ -63,7 +70,7 @@ function AllEvents() {
                                 <span className="data">{events.eventEndDate}</span>
                             </div>
                             <div>
-                                <Button variant="success" size="sm" type="submit" onClick={() => { navigate(`/event/${events._id}`) }}>View Event Card</Button>
+                                <Button variant="success" size="sm" type="submit" onClick={() => { eventCard(events._id) }}>View Event Card</Button>
                                 <Button className="eventButton" variant="warning" size="sm" type="submit" onClick={() => { editWindow(events._id) }}>Edit Event</Button>
                                 <Button className="eventButton" variant="danger" size="sm" type="submit" onClick={() => { handleDelete(events._id) }}>Delete Event</Button>
                             </div>
@@ -72,7 +79,14 @@ function AllEvents() {
                         {(selected === events._id) ?
                             openEdit &&
                             <div>
-                                <EditEvent eventID={events._id} projectName={projectName}/>
+                                <EditEvent eventID={events._id}/>
+                            </div> : null
+                        }
+
+                        {(selected === events._id) ?
+                            openEventCard &&
+                            <div>
+                                <EventCard eventID={events._id}/>
                             </div> : null
                         }
 
@@ -87,6 +101,7 @@ function AllEvents() {
 
             <br />
             <Button variant="secondary" size="lg" onClick={() => { navigate(`/addEvents/${projectName}`) }}>Add new event</Button>
+
         </div>
     );
 }
