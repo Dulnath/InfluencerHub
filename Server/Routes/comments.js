@@ -6,6 +6,7 @@ const CommentsModel = require('../Models/Comments');
 router.post('/addComment', async (req, res) => {
     try {
         await CommentsModel.create({
+            postId: req.body.postID,
             responseTo: req.body.responseTo,
             comment: req.body.comment,
             time: req.body.commentTime

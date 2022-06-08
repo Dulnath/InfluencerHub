@@ -6,7 +6,7 @@ import ReportDescription from './ReportDescription';
 import EditComment from './EditComment';
 import ReplyList from './ReplyList';
 
-function CommentList() {
+function CommentList(props) {
     const [commentList, setCommentList] = useState([]);
     const [openReplyWindow, setOpenReplyWindow] = useState(false);
     const [openReplies, setOpenReplies] = useState(false);
@@ -56,11 +56,10 @@ function CommentList() {
         })
     }, [])
 
-    //Test
     return (
         <div>
             <div className="commentList">
-                {commentList.filter((comments) => comments.responseTo === null && comments.isVisible === true).map((comments, index) => {
+                {commentList.filter((comments) => comments.responseTo === null && comments.isVisible === true && comments.postId === props.postID).map((comments, index) => {
                     return (
                         <div>
                             <Card className="comment">

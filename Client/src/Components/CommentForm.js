@@ -3,15 +3,17 @@ import { Button, Card, Form } from 'react-bootstrap';
 import axios from 'axios';
 import CommentList from "./CommentList";
 
-function CommentForm() {
+function CommentForm(props) {
     const [comment, setComment] = useState();
 
     const addComment = (event) => {
         event.preventDefault();
 
         let commentTime = new Date().toLocaleString();
+        let postID = props.postID;
         
         axios.post('http://localhost:5000/addComment', {
+            postID,
             comment,
             commentTime
         }).then((res) => {
@@ -33,10 +35,7 @@ function CommentForm() {
                         <Button className="float-end" variant="dark" onClick={addComment}>Add comment</Button>
                     </Form.Group>
                 </Form>
-            </Card>
-            <div>
-                <CommentList />
-            </div>
+            </Card>           
         </div >
     );
 }
