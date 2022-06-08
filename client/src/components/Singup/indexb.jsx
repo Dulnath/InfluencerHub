@@ -1,4 +1,4 @@
-import { useState,React } from "react";
+import React,{ useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -24,7 +24,7 @@ const Signupb = () => {
 		if(data.password===repassword)
 		{
 			try {
-				const url = "http://localhost:8080/api/users";
+				const url = "http://localhost:5000/api/users";
 				const { data: res } = await axios.post(url, data);
 				navigate("/login");
 				console.log(res.message);

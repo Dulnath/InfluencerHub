@@ -1,8 +1,6 @@
-/*
-
-import { useRef, useState } from "react";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import storage from "../../firebase";
+import React,{ useRef, useState } from "react";
+//import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+//import storage from "../../firebase";
 
 import styles from "./styles.module.css";
 
@@ -11,6 +9,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
 	const [progress, setProgress] = useState(0);
 	const [progressShow, setProgressShow] = useState(false);
 
+	/*
 	const handleUpload = () => {
 		setProgressShow(true);
 		const fileName = new Date().getTime() + value.name;
@@ -36,7 +35,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
 				});
 			}
 		);
-	};
+	};*/
 
 	return (
 		<div className={styles.container}>
@@ -64,7 +63,7 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
 			)}
 			
 			{value !== null && !progressShow && typeof value !== "string" && (
-				<button onClick={handleUpload} className={styles.button}>
+				<button className={styles.button}>
 					Upload
 				</button>
 			)}
@@ -79,4 +78,3 @@ const FileInput = ({ name, label, value, type, handleInputState, ...rest }) => {
 };
 
 export default FileInput;
-*/

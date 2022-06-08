@@ -93,7 +93,7 @@ const Signup = () => {
 							className={styles.input}
 						/>
 
-<input
+						<input
 							type="text"
 							placeholder="Category"
 							name="category"
@@ -103,7 +103,7 @@ const Signup = () => {
 							className={styles.input}
 						/>
 
-<input
+						<input
 							type="text"
 							placeholder="Status"
 							name="status"
@@ -113,13 +113,13 @@ const Signup = () => {
 							className={styles.input}
 						/>
 
-<FileInput
-					name="img"
-					label="Choose Image"
-					handleInputState={handleInputState}
-					type="image"
-					value={data.img}
-				/>
+						<FileInput
+							name="img"
+							label="Choose Image"
+							handleInputState={handleInputState}
+							type="image"
+							value={data.img}
+						/>
 
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}

@@ -43,7 +43,7 @@ function Home() {
             <div className={styles.background}>
                 <Menu />
                 <div className={styles.heading}>
-                    <h1 class="h2">Dashboard</h1>
+                    <h2>Dashboard</h2>
                     <hr />
                 </div>
                 <div className="home border-secondary text-center">
