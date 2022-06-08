@@ -5,12 +5,19 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import CardContent from 'react-bootstrap/Card';
+import { Row, Col, NavLink } from 'react-bootstrap'
+import Login from '../Login';
+import { useParams, useNavigate} from "react-router-dom";
+import image from "../../images/user.jpg";
 
 
 function Main(props) {
     const loggedInUser = localStorage.getItem("token");
     const [fname, setUserName] = useState('');
-   
+    const navigate = useNavigate();
 
 		const handleLogout = () => {
 			localStorage.removeItem("token");
@@ -43,11 +50,17 @@ function Main(props) {
 			<nav className={styles.navbar}>
 				<h1>InfluencerHub</h1>
 				<h2> User:{fname}</h2>
+				<img src={image} className={styles.image1_img} alt="..."/>
 				<button className={styles.white_btn} onClick={handleLogout}>
 					Logout
 				</button>
 				
 			</nav>
+
+			<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+					View All influencers
+				</button></h2>
+
 			<Search />
 	
 		</div>

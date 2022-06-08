@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import { Fragment } from "react/cjs/react.production.min";
 import React from "react";
 const EmailVerify = () => {
-	const [validUrl, setValidUrl] = useState(false);
+	const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
 
 	useEffect(() => {

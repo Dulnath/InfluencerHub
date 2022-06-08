@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import FileInput from "../FileInput";
-import React from "react";
+
+
 const Signup = () => {
 	const [data, setData] = useState({
 		firstName: "",
@@ -113,13 +113,6 @@ const Signup = () => {
 							className={styles.input}
 						/>
 
-						<FileInput
-							name="img"
-							label="Choose Image"
-							handleInputState={handleInputState}
-							type="image"
-							value={data.img}
-						/>
 
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}

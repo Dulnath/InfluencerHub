@@ -24,9 +24,9 @@ const Login = () => {
 			const user = ParseJwt(token)
 			console.log(user);
 			if(user.category==='Influencer'){
-				window.location = "/";
+				navigate('/')
 			}else if(user.category==='business'){
-				window.location = "/";
+				navigate('/business')
 			}else if(user.category==='admin'){
 				navigate('/dashboard')
 			}

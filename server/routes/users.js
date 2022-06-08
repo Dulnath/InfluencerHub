@@ -6,6 +6,8 @@ const sendEmail = require("../utils/sendEmail");
 const bcrypt = require("bcrypt");
 const userModel= require("../models/user");
 
+
+//signup
 router.post("/", async (req, res) => {
 	try {
 		const { error } = validate(req.body);
@@ -59,43 +61,16 @@ router.get("/:id/verify/:token/", async (req, res) => {
 	}
 });
 
-/*router.get('/getUsers', (req, res) => {
-    userModel.find({}, (err, result) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
-});*/
 
-/*router.get('/getUsers', (req, res) => {
-    userModel.find()
-        .then(items => res.json(items))
-});*/
-
-
+//get all the users
 router.get('/getUsers', (req, res) => {
     User.find()
         .sort({ date: -1 })
         .then(items => res.json(items))
 });
 
-router.get("/viewUsers/:id",(req,res) => {
-    
-    let userId = req.params.id;
-    User.findById(userId,(err,user) => {
-        if(err){
-            return res.status(400).json({success:false, err});
-        }
-        return res.status(200).json({
-            success:true,
-            user
-        });
-    });
-});
 
-//individual
+//get individual user
 router.get("/getuser/:id", (req, res) => {
 	let userID = req.params.id;
 	User.findById(userID, (err, user) => {
@@ -108,25 +83,7 @@ router.get("/getuser/:id", (req, res) => {
 	  });
 	});
   });
-/*
-  export const getSearchUsers = async (req, res) => {
-	const { id } = req.params;
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-	  return res.status(404).json({ message: "User doesn't exist" });
-	}
-	const userSearch = await User.find({ creator: id });
-	res.status(200).json(userSearch);
-  };*/
-  
-  //http://localhost:8080/api/users/getUsers?q=${value}&_start=${start}&_end=${end}
-/*
-  router.get('/search', function(req,res){
-    var regex = new RegExp('ama', 'i');  // 'i' makes it case insensitive
-    return User.find({text: regex}, function(err,q){
-        return res.send(q);
-    });
-});
-*/
+
 
 router.get("/search/:key",async(req,res)=>{
 	//console.log(req.params.key)
