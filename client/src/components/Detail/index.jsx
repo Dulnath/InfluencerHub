@@ -10,11 +10,10 @@ import {Container,Row,Col,Card,CardGroup} from 'react-bootstrap'
 import Login from '../Login';
 import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import image from "../../images/user.jpg";
+import styles from "./styles.module.css";
 
-//import { uuid } from "uuidv4";
-import uuid from 'react-uuid';
-import View from '../View';
-//import { User } from '../../../../server/models/user';
+
 
 function Search() {
     const [listOfUsers, setListOfUsers] = useState([]);
@@ -61,22 +60,28 @@ if(loggedInUser){
                         <CardGroup>
                             <Card>
                         <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{border:'2px solid #000000', paddingTop:"5px", paddingBottom:"5px" ,paddingLeft:"5px"}} key={user._id}>
-                                    <Row>
-                                    <Col xs={4} md={3}><b>Id </b> : {user._id}</Col>
-                                        <Col xs={4} md={3}><b>Name </b> : {user.firstName + " " + user.lastName}</Col>
-                                        <Col xs={4} md={3}><b>Email </b> : {user.email}</Col>
-                                        
-                                        <Col xs={4} md={3}><b>Category </b> : {user.category}</Col>
-            
-                                        <Col xs={3} md={2}><b> <button className="btn btn-success"
+                                    
+                                    <div class="card-deck">
+                  <div class="card">
+   
+                  <div class="card-body">  
+                 
+                     <img src={image} className={styles.image_img} alt="..."/>
+                     <h3 class="card-title">{user.firstName+" "+user.lastName}</h3>
+                   <Row> <h5>{user.category}</h5></Row> 
+                    <Row> <h10>{user.email}</h10></Row>  
+                   <Row>
+                    <Col xs={3} md={2}><b> <button className="btn btn-success"
                         onClick={() => {navigate(`/view/${user._id}`)}}
-                        >View
-                        
+                        >View 
                     </button> </b></Col>
-                                        
-                                        <Col xs={3} md={2}><b>  <Button variant="danger" className="mx-3">Follow</Button></b></Col>
+                    </Row>
+                  </div>
+                  </div>
+                  </div>
+                                   
                                        
-                                    </Row>
+                                   
                                     
                                 </Container>
                                 </Card>
