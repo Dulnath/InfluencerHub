@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
 	lastName: { type: String, required: false },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
-	category:{ type: String, required: true },
+	category:{ type: String, required: false },
 	verified:{type:Boolean,default:false},
 	isActive:{type:Boolean,default:true}
 

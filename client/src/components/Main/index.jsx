@@ -25,6 +25,7 @@ import axios from "axios";
 
 
 
+
 const Main = () => {
 
 	const navigate = useNavigate();
@@ -87,10 +88,26 @@ useEffect(()=>{
 					</button>
 
 
+				
+					<div  style={{"height":"500px","backgroundColor":"#fefae0","display":"flex"}}> 
+					<div  className="container" style={{"height":"300px","width":"300px","backgroundColor":"#f2fa40","marginTop":"50px","padding":"20px"}}>
+				
+					
+					</div>
+					<div style={{"marginTop":"50px","padding":"20px"}}>
 					<h4>{fname}</h4>
 					<h4>{lname}</h4>
 					<h4>{email}</h4>
-					<h4>{contactNo}</h4>
+					<h4>{contactNo}</h4></div>
+					<div>
+					<button>
+					Edit profile
+					</button>
+					</div>
+				
+					</div>
+				
+					
 		</div>
 	);
 };
