@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Col, Row } from "react-bootstrap";
 import styles from "./styles.module.css";
 
 function AllPosts() {
@@ -29,38 +29,36 @@ function AllPosts() {
   return (
     <div className={styles.background}>
       <h1>All posts</h1>
-      <button className="btn btn-success">
+      <button className={styles.btnGreen}>
         <a href="/add" style={{ textDecoration: "none", color: "white" }}>
           Create New Post
         </a>
       </button>
       {listOfPosts.map((posts) => {
         return (
-          <div className={styles.background}>
-            <Card className={styles.background} border="dark">
-              <div className="details">
-                <span className="title">Post Topic:</span>
-                <span className="data">{posts.PostTopic}</span>
-              </div>
-              <div className="details">
-                <span className="title">Post Description:</span>
-                <span className="data">{posts.Postdescription}</span>
-              </div>
-              <div className="details">
-                <span className="title">Post Image:</span>
-                <span className="data">
-                  {
-                    <img
-                      src={`${posts.PostImage}`}
-                      alt=""
-                      width="500"
-                      height="300"
-                      loading="eager"
-                    ></img>
-                  }
-                </span>
-              </div>
-              <div>
+          <div>
+            <Card className={styles.record}>
+              <a href={`/post/${posts._id}`}>
+                <Card.Header>
+                  <b>{posts.PostTopic}</b>
+                </Card.Header>
+              </a>
+              <Card.Body>
+                <Row>
+                  <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
+                </Row>
+                <br />
+
+                <img
+                  src={`${posts.PostImage}`}
+                  alt=""
+                  width="500"
+                  height="300"
+                  loading="eager"
+                ></img>
+                <br />
+                <br />
+
                 <Button
                   className="postButton2"
                   variant="warning"
@@ -72,6 +70,8 @@ function AllPosts() {
                 >
                   Edit Post
                 </Button>
+                <br />
+                <br />
                 <Button
                   className="postButton2"
                   variant="danger"
@@ -81,7 +81,8 @@ function AllPosts() {
                 >
                   Delete Post
                 </Button>
-              </div>
+                <br />
+              </Card.Body>
             </Card>
           </div>
         );
