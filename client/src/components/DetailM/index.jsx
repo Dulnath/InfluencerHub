@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {useState, useEffect } from 'react';
 import axios, { Axios } from 'axios';
@@ -15,7 +14,7 @@ import styles from "./styles.module.css";
 
 
 
-function Detail() {
+function DetailM() {
     const [listOfUsers, setListOfUsers] = useState([]);
     const loggedInUser = localStorage.getItem("token");
     const [searchTerm,setSearchTerm] = useState('');
@@ -54,7 +53,7 @@ if(loggedInUser){
     
 
             {listOfUsers.map((user,id) => {
-               if(user.category==="influencer"){
+               if(user.category==="business"){
                 return (
                     
                     <React.Fragment>
@@ -111,4 +110,4 @@ if(loggedInUser){
     
 };
 
-export default Detail;
+export default DetailM;

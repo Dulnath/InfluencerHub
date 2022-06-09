@@ -10,9 +10,9 @@ import PasswordReset from "./components/PasswordReset";
 import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
+import SearchM from "./components/SearchM";
 import Filter from "./components/Filter";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import DetailM from "./components/DetailM";
 
 function App() {
 	const user = localStorage.getItem("token");
@@ -31,6 +31,8 @@ function App() {
 			<Route path="/view/:id" exact element={<View />} />
 			<Route path="/filter" exact element={<Filter />} />
             <Route path="/business" exact element={<Business />} />
+			<Route path="/searchm" exact element={<SearchM />} />
+			<Route path="/detailM" exact element={<DetailM />} />
 		</Routes>
 	);
 }

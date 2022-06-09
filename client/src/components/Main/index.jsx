@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import Search from "../Search";
+import SearchM from "../SearchM";
 import {Nav,Navbar,Container} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
 import ParseJwt from "../../utilities/ParseJwt";
@@ -12,7 +12,7 @@ import Card from 'react-bootstrap/Card';
 import CardContent from 'react-bootstrap/Card';
 import { Row, Col, NavLink } from 'react-bootstrap'
 import Login from '../Login';
-import { useParams, useNavigate} from "react-router-dom";
+import {  useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
 
 
@@ -59,11 +59,11 @@ function Main(props) {
 				
 			</nav>
 
-			<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
-					View All influencers
+			<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detailm`)}}>
+					View All Businesses
 				</button></h2>
 
-			<Search />
+			<SearchM />
 	
 		</div>
 	);
