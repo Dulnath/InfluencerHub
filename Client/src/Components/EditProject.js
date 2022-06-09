@@ -9,6 +9,7 @@ function EditProject(props) {
     const [projectStartDate, setProjectStartDate] = useState();
     const [projectEndDate, setProjectEndDate] = useState();
 
+    // Edit a project
     const editProject = () => {
         axios.put(`/updateProject/${props.projectID}`, {
             projectName,
@@ -21,6 +22,7 @@ function EditProject(props) {
         });
     }
 
+    // Retrieve a specific project
     useEffect(() => {
         axios.get(`/getProject/${props.projectID}`).then((res) => {
             setProjectName(res.data.project.projectName);

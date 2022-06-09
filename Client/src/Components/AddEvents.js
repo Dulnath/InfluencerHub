@@ -13,6 +13,7 @@ function AddEvents() {
 
     const { projectName, projectID } = useParams();
 
+    // Create an event
     const createEvent = () => {
         Axios.post("/createEvent", {
             projectName,
@@ -26,6 +27,7 @@ function AddEvents() {
         });
     }
 
+    // Retrieve data of project
     useEffect(() => {
         Axios.get(`/getProject/${projectID}`).then((response) => {
             setProjectStartDate(response.data.project.projectStartDate);

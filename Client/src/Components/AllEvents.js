@@ -11,6 +11,7 @@ function AllEvents() {
     const [selected, setSelected] = useState();
     const [openEventCard, setOpenEventCard] = useState();
 
+    //Retrieve all events
     useEffect(() => {
         axios.get("/getEvent").then((response) => {
             setListOfEvents(response.data);
@@ -19,16 +20,19 @@ function AllEvents() {
 
     const { projectName, projectID } = useParams();
 
+    //Open edit event window
     const editWindow = (id) => {
         setSelected(id);
         setOpenEdit(!openEdit);
     }
 
+    //Open event card
     const eventCard = (id) => {
         setSelected(id);
         setOpenEventCard(!openEventCard);
     }
 
+    // Dekete an event
     const handleDelete = (_id) => {
         axios.delete(`/deleteEvent/${_id}`)
             .then((res) => {

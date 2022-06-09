@@ -9,17 +9,20 @@ function AllProjects() {
     const [openEdit, setOpenEdit] = useState();
     const [selected, setSelected] = useState();
 
+    // Retrieve all projects
     useEffect(() => {
         axios.get("/getProjects").then((response) => {
             setListOfProjects(response.data);
         })
     }, [])
 
+    // Open edit project window
     const editWindow = (id) => {
         setSelected(id);
         setOpenEdit(!openEdit);
     }
 
+    // Delete a project
     function handleDelete(_id) {
         axios.delete(`/deleteProject/${_id}`)
             .then((res) => {

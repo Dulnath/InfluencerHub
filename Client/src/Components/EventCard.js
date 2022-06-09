@@ -10,9 +10,7 @@ function EventCard(props) {
     const [eventStartDate, setEventStartDate] = useState("");
     const [eventEndDate, setEventEndDate] = useState("");
 
-    //  const {id} = useParams();
-
-
+    // Retrieve a specific event
     useEffect(() => {
         axios.get(`/getEvent/${props.eventID}`).then((res) => {
             setProjectName(res.data.event.projectName);
@@ -24,7 +22,6 @@ function EventCard(props) {
         // eslint-disable-next-line
     }, []);
 
-    console.log(props.eventID);
     return (
         <div >
             <Card border="dark" className="eventCard">

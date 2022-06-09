@@ -25,11 +25,6 @@ function AddProject() {
 
     const navAllProjects = () => { navigate("/allProjects") }
 
-    // function multipleEvents(){
-    //     navAllProjects
-    //     createProject
-    // }
-
     return (
         <div className='background'>
             <div className="projectCard">

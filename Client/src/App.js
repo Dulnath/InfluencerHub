@@ -6,7 +6,6 @@ import AddProject from './Components/AddProject';
 import AllProjects from './Components/AllProjects';
 import AddEvents from './Components/AddEvents';
 import AllEvents from './Components/AllEvents';
-import { NoMatch } from './Components/NoMatch';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <Route path="/allProjects" element={<AllProjects />} />
         <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
         <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
-        <Route Path='*' element={<NoMatch/>}></Route>
       </Routes>
     </Router>
   );
