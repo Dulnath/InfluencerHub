@@ -86,6 +86,7 @@ function Search() {
                 </Table>
               ) : (
                 data.map((item, index) => (
+                  
                   <div class="card-deck">
                   <div class="card">
    
