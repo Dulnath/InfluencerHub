@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import styles from "./styles.module.css";
 
 function AllPosts() {
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -26,12 +27,17 @@ function AllPosts() {
   let navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className={styles.background}>
       <h1>All posts</h1>
+      <button className="btn btn-success">
+        <a href="/add" style={{ textDecoration: "none", color: "white" }}>
+          Create New Post
+        </a>
+      </button>
       {listOfPosts.map((posts) => {
         return (
-          <div>
-            <Card className="PostdetailsCard" border="dark">
+          <div className={styles.background}>
+            <Card className={styles.background} border="dark">
               <div className="details">
                 <span className="title">Post Topic:</span>
                 <span className="data">{posts.PostTopic}</span>
@@ -80,11 +86,6 @@ function AllPosts() {
           </div>
         );
       })}
-      <button className="btn btn-success">
-        <a href="/add" style={{ textDecoration: "none", color: "white" }}>
-          Create New Post
-        </a>
-      </button>
     </div>
   );
 }
