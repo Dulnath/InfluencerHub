@@ -130,7 +130,7 @@ function AllPosts() {
                       textDecorationLine: "underline",
                     }}
                   >
-                    <a onClick={() => viewComments(posts._id)}>View Comments</a>
+                    <a href="#/" onClick={() => viewComments(posts._id)}>View Comments</a>
                   </p>
                 ) : null}
 

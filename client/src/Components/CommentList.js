@@ -14,10 +14,6 @@ function CommentList(props) {
     const [openEdit, setOpenEdit] = useState(false);
     const [selected, setSelected] = useState();
 
-    // const updateCommentList = () => {
-    //     setCommentList(commentList.concat(newComment));
-    // }
-
     const displayReplyWindow = (id) => {
         setSelected(id);
         setOpenReplyWindow(!openReplyWindow);
@@ -87,7 +83,7 @@ function CommentList(props) {
 
                             {commentList.filter((reply) => reply.responseTo === comments._id && reply.isVisible === true).length > 0 ?
                                 <p style={{ fontWeight: "500", textDecorationLine: "underline" }}>
-                                    <a onClick={() => allReplies(comments._id)}>View replies</a>
+                                    <a href="#/" onClick={() => allReplies(comments._id)}>View replies</a>
                                 </p> : null
                             }
 
