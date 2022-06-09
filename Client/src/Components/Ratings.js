@@ -55,8 +55,8 @@ function Ratings() {
                         />
                     )
                 })}
-            </div>
-            <Button onClick={addRating}>Add rating</Button>
+            </div><br/>
+            <Button variant="success" onClick={addRating}>Add rating</Button>
         </div>
     );
 }

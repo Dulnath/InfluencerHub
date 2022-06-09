@@ -1,4 +1,9 @@
+html{
+  background-color: #C7FFD8;
+}
+
 .page{
+  background-color: #C7FFD8;
   display: flex;
   flex-direction: column;
   align-items: center;
