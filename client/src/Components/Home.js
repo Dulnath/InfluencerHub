@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Card, Button, Container, Col, Row } from "react-bootstrap";
+import { Card, Button, Col, Row } from "react-bootstrap";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import styles from "./styles.module.css";
@@ -57,9 +57,11 @@ function AllPosts() {
         return (
           <div>
             <Card className={styles.record}>
-              <Card.Header>
-                <b>{posts.PostTopic}</b>
-              </Card.Header>
+              <a href={`/post/${posts._id}`}>
+                <Card.Header>
+                  <b>{posts.PostTopic}</b>
+                </Card.Header>
+              </a>
               <Card.Body>
                 <Row>
                   <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
