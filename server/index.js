@@ -35,7 +35,7 @@ app.use(cors())
 const port = process.env.PORT || 5000;
 
 function getUserCount() {
-    var query = User.find();
+    var query = User.find({adminVerified:true});
     var timeNow = FormatDate(Date.now());
     query.count(function(err, count) {
         if (err) {
@@ -94,7 +94,7 @@ app.get("/", function(req, res) {
 
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
-    //setInterval(getUserCount,60000);
+    ///setInterval(getUserCount,60000);
     //setInterval(getNewUserCount,60000);
 });
 
