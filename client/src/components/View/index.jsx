@@ -70,7 +70,7 @@ function View() {
                     <React.Fragment>
                         <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} >
                         <div class="card-deck">
-                  <div class="card">
+                  <div class="card" className={styles.card}>
    
                   <div class="card-body">  
                  
