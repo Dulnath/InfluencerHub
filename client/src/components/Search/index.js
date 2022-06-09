@@ -85,7 +85,7 @@ function Search() {
                   </tr>
                 </Table>
               ) : (
-                data.map((item, index) => (
+                data.filter((item)=>item.category==="influencer").map((item, index) => (
                   
                   <div class="card-deck">
                   <div class="card">
