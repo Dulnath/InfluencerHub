@@ -67,21 +67,16 @@ function AllPosts() {
                   <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
                 </Row>
                 <br />
-                <Row>
-                  <Card.Text>
-                    {
-                      <img
-                        src={`${posts.PostImage}`}
-                        alt=""
-                        width="500"
-                        height="300"
-                        loading="eager"
-                      ></img>
-                    }
-                  </Card.Text>
-                </Row>
-                <br />
 
+                <img
+                  src={`${posts.PostImage}`}
+                  alt=""
+                  width="500"
+                  height="300"
+                  loading="eager"
+                ></img>
+                <br />
+                <br />
                 <Button
                   className="postButton2"
                   variant="warning"
