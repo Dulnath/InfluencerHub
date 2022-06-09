@@ -96,7 +96,7 @@ router.post('/login', async(req, res) => {
 router.put('/firstlogin/:id', async(req, res) => {
     try {
         const password = req.body.passwordNew;
-
+        const email = req.body.email;
         const user = await User.findOne({
             email: req.body.email,
         })
@@ -106,22 +106,19 @@ router.put('/firstlogin/:id', async(req, res) => {
         }
 
         const isPasswordValid = await bcrypt.compare(
-            req.body.passwordNew,
+            password,
             user.password
         );
 
-
+        
         if (isPasswordValid) {
             console.log('duplicate password');
             return res.json({ status: 'duplicate', error: 'duplicate password' });
         } else {
-            console.log(password);
-            const salt = bcrypt.genSaltSync(10);
             const newPassword = await bcrypt.hash(password, salt);
-            console.log(newPassword);
             await User.findByIdAndUpdate(req.params.id, {
                 password: newPassword,
-                isFirstLogin: 'false'
+                isFirstLogin: false
             }, res.json({ status: 'ok' }))
         }
     } catch (err) {

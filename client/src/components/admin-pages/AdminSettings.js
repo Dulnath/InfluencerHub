@@ -2,7 +2,7 @@ import React,{useRef} from 'react'
 import { useState } from 'react'
 import Menu from './Menu'
 import {Accordion,Container,Row,Col,Form,Button} from 'react-bootstrap'
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import emailjs from '@emailjs/browser';
 import { Outlet, Link } from "react-router-dom";
 import styles from '../../styles/styles.module.css';

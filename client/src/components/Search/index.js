@@ -1,10 +1,7 @@
-
-
 import React, { useState, useEffect } from "react";
-import axios, { Axios } from "axios";
-//import "./App.css";
+import axios from "axios";
 import image from "../../images/user.jpg";
-import { button , Table,Row} from "react-bootstrap";
+import { Table,Row} from "react-bootstrap";
 import styles from "./styles.module.css";
 import { useNavigate } from 'react-router-dom';
 

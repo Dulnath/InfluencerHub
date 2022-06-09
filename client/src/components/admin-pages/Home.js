@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import Menu from './Menu';
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import UserCount from './UserCount';
 import NonApproved from './NonApproved';
 import styles from '../../styles/styles.module.css';

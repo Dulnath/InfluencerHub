@@ -1,12 +1,14 @@
 import React,{useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Container, Button, Form} from 'react-bootstrap'
+import AdminLogin from '../Login/index'
 import ParseJwt from '../../utilities/ParseJwt';
 
 function FirstLogin(){
     const navigate = useNavigate();
     const [passwordNew, setPassword] = useState('');
     const [passwordRep, setPasswordRep] = useState('');
+    const loggedInUser = localStorage.getItem("token")
 
     useEffect(()=>{
         setPassword('');
@@ -19,30 +21,27 @@ function FirstLogin(){
 
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
-        const id = user.id;
-        const email = user.email;
-        console.log(id);
+        console.log(user);
         
         if(passwordNew===passwordRep){
-            const response = await fetch('http://localhost:5000/api/useraccounts/firstlogin/'+id, {
+            const response = await fetch(`http://localhost:5000/api/useraccounts/firstlogin/${user._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    passwordNew,
-                    email
+                    passwordNew:passwordNew,
+                    email:user.email
                 }),
             })
             const data = await response.json()
             localStorage.clear();
-
+            console.log(data)
             if (data.status === 'ok') {
                 navigate('/'); 
                 console.log('password updated');
             }else if(data.status === 'duplicate'){
                 console.log('new password cannot be same as old password') 
-                navigate('/');
                 alert('new password cannot be same as old password');
                 
             }else{
@@ -50,38 +49,47 @@ function FirstLogin(){
             }
 
         }else{
+            localStorage.setItem("token",userToken)
             alert('Passwords do not Match!');
         }
     }
 
-    return(
-        <div>
-            <Container className="text-center col-md-3 border border-dark rounded-3" style={{marginTop:"300px"}}>
-                <h4 style={{paddingTop:"40px"}} className='text-danger'>New Password</h4>
-                <Form style={{padding:"40px"}} onSubmit={updatePassoword}>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
-                        value={passwordNew}
-                        onChange={(e)=>setPassword(e.target.value)} 
-                        type="password" 
-                        placeholder="Password" 
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword2">
-                        <Form.Control
-                        value={passwordRep}
-                        onChange={(e)=>setPasswordRep(e.target.value)} 
-                        type="password" 
-                        placeholder="Re-Enter Password" 
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Login
-                    </Button>
-                </Form>
-            </Container>
-        </div>
-    )
+    if(loggedInUser){
+        return(
+            <div>
+                <Container className="text-center col-md-3 border border-dark rounded-3" style={{marginTop:"300px"}}>
+                    <h4 style={{paddingTop:"40px"}} className='text-danger'>New Password</h4>
+                    <Form style={{padding:"40px"}} onSubmit={updatePassoword}>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control
+                            value={passwordNew}
+                            onChange={(e)=>setPassword(e.target.value)} 
+                            type="password" 
+                            placeholder="Password" 
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword2">
+                            <Form.Control
+                            value={passwordRep}
+                            onChange={(e)=>setPasswordRep(e.target.value)} 
+                            type="password" 
+                            placeholder="Re-Enter Password" 
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Update and login
+                        </Button>
+                    </Form>
+                </Container>
+            </div>
+        )
+    }else{
+        return(
+            <div>
+                <AdminLogin></AdminLogin>
+            </div>
+        )
+    }
 }
 
 export default FirstLogin;

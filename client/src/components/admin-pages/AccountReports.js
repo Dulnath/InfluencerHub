@@ -4,7 +4,7 @@ import Menu from './Menu';
 import { Container, Card, Col, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
 import FormatDate from '../../utilities/FormatDate';
 import emailjs from '@emailjs/browser';
@@ -54,7 +54,7 @@ function AccountReports() {
     }
 
     async function deleteReport(id) {
-        axios.delete('http://localhost:5000/api/reports/reportedaccounts/delete/' + id)
+        axios.delete(`http://localhost:5000/api/reports/reportedaccounts/delete/${id}`)
             .then((res) => {
                 console.log(res.status);
                 console.log('Report Deleted');
@@ -76,7 +76,7 @@ function AccountReports() {
         console.log(today);
         console.log(restoreDay);
 
-        const response = await fetch('http://localhost:5000/api/useraccounts/suspendaccount/' + data.accountID, {
+        const response = await fetch(`http://localhost:5000/api/useraccounts/suspendaccount/${data.accountID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

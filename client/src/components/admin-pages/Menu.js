@@ -21,7 +21,7 @@ function Menu(props){
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
         if(userToken){
-            const response = axios.get('http://localhost:5000/api/useraccounts/'+user.id).then(res=>{
+            const response = axios.get(`http://localhost:5000/api/useraccounts/${user._id}`).then(res=>{
                 setUserName(res.data.firstName);
             })
             if(response.staus!=='ok'){

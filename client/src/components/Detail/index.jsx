@@ -1,13 +1,9 @@
 import React from 'react';
 import {useState, useEffect } from 'react';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button} from 'react-bootstrap';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-//import Card from 'react-bootstrap/Card';
 import {Container,Row,Col,Card,CardGroup} from 'react-bootstrap'
 import Login from '../Login';
-import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";

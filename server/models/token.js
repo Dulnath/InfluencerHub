@@ -12,6 +12,19 @@ const tokenSchema = new Schema({
 		type: String,
 		required: false,
 	},
+
+	adminVerified:{
+		type:Boolean,
+		required:false,
+	},
+	isFirstLogin:{
+		type:Boolean,
+		required:false,
+	},
+	email:{
+		type:String,
+		required:false,
+	},
 	token: { type: String, required: true },
 	createdAt: { type: Date, default: Date.now, expires: 3600 },
 });

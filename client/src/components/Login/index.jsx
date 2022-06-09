@@ -22,13 +22,17 @@ const Login = () => {
 			localStorage.setItem("token", res.data);
 			const token = localStorage.getItem('token')
 			const user = ParseJwt(token)
-			console.log(user);
-			if(user.category==='Influencer'){
+
+			if(user.category==='Influencer'&&user.adminVerified===true){
 				navigate('/')
-			}else if(user.category==='business'){
+			}else if(user.category==='business'&&user.adminVerified===true){
 				navigate('/business')
-			}else if(user.category==='admin'){
+			}else if(user.category==='admin'&&user.isFirstLogin===true){
+				navigate('/firstlogin')
+			}else if(user.category==='admin'&&user.isFirstLogin===false){
 				navigate('/dashboard')
+			}else{
+				setError('Your account has yet to be verified')
 			}
 			
 		} catch (error) {

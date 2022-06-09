@@ -4,7 +4,7 @@ import Menu from './Menu';
 import {Container,Card,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
 import FormatDate from '../../utilities/FormatDate';
 import emailjs from '@emailjs/browser';
@@ -98,7 +98,7 @@ function SuspendedUsers(){
         console.log(id+" | "+fname+" | "+email);
         sendEmail(fname,email);
         
-        const response = await fetch('http://localhost:5000/api/useraccounts/restoreaccount/' + id, {
+        const response = await fetch(`http://localhost:5000/api/useraccounts/restoreaccount/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

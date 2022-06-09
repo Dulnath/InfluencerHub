@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -12,7 +12,8 @@ const Signup = () => {
 		password: "",
 		category: "",
 		status: "",
-		img:""
+		img:"",
+		category:'influencer'
 	});
 	const [error, setError] = useState("");
 	const [msg, setMsg] = useState("");
@@ -89,16 +90,6 @@ const Signup = () => {
 							name="password"
 							onChange={handleChange}
 							value={data.password}
-							required
-							className={styles.input}
-						/>
-
-						<input
-							type="text"
-							placeholder="Category"
-							name="category"
-							onChange={handleChange}
-							value={data.category}
 							required
 							className={styles.input}
 						/>

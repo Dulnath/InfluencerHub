@@ -20,12 +20,12 @@ const userSchema = new mongoose.Schema({
 	restoreDate:{type:Date,required:false},
 	verified:{type:Boolean,default:false},
 	isActive:{type:Boolean,default:true},
-	status:{ type: String, required: true },
-	img:{ type: String, required: true },
+	status:{ type: String, required: false },
+	img:{ type: String, required: false },
 });
 
 userSchema.methods.generateAuthToken = function () {
-	const token = jwt.sign({ _id: this._id,category:this.category }, process.env.JWTPRIVATEKEY, {
+	const token = jwt.sign({ _id: this._id,category:this.category,adminVerified:this.adminVerified,isFirstLogin:this.isFirstLogin,email:this.email }, process.env.JWTPRIVATEKEY, {
 		expiresIn: "7d",
 	});
 	return token;

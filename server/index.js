@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { User } = require("./models/user");
 const UserCount = require('./models/UserCount');
+const NVUserCount = require('./models/NonVerifiedUserCount')
 const useraccounts = require('./routes/user');
 const reports = require('./routes/reports');
 const usercount = require('./routes/usercount');
@@ -53,6 +54,26 @@ function getUserCount() {
     });
 }
 
+function getNewUserCount() {
+    var query = User.find({adminVerified:false});
+    var timeNow = FormatDate(Date.now());
+    query.count(function(err, count) {
+        if (err) {
+            console.log(err);
+        } else {
+            try {
+                NVUserCount.create({
+                    userCount: count,
+                    time: timeNow
+                })
+            } catch (err) {
+                console.log(err);
+            }
+            console.log("Count is", count)
+        }
+    });
+}
+
 function FormatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -73,7 +94,8 @@ app.get("/", function(req, res) {
 
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
-    setInterval(getUserCount,3600000);
+    //setInterval(getUserCount,60000);
+    //setInterval(getNewUserCount,60000);
 });
 
 

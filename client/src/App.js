@@ -13,9 +13,11 @@ import AccountReports from './components/admin-pages/AccountReports';
 import SuspendedUsers from './components/admin-pages/SuspendedUsers'
 import AdminSettings from './components/admin-pages/AdminSettings'
 import FirstLogin from './components/admin-pages/FirstLogin'
+import Category from './components/Category/category'
 import EditAccount from './components/admin-pages/EditAccount'
 import Main from "./components/Main";
-import Signup from "./components/Singup";
+import Signup from "./components/Singup/index";
+import SignupBusiness from './components/Singup/indexb'
 import Login from "./components/Login";
 import Business from "./components/Business"
 import EmailVerify from "./components/EmailVerify";
@@ -45,6 +47,8 @@ function App() {
       </Route>
       {user && <Route path="/" exact element={<Main />} />}
 			<Route path="/signup" exact element={<Signup />} />
+      <Route path="/signupb" exact element={<SignupBusiness />} />
+      <Route path="/category" exact element={<Category />} />
 			<Route path="/login" exact element={<Login />} />
 			<Route path="/" element={<Navigate replace to="/login" />} />
 			<Route path="/users/:id/verify/:token" element={<EmailVerify />} />

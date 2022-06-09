@@ -5,7 +5,7 @@ import {Container,Row,Col} from 'react-bootstrap'
 import { useState,useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
 
 function AllUsers(){
@@ -68,7 +68,7 @@ function AllUsers(){
                                                 <React.Fragment key={data._id}>
                                                     <Container fluid="md" className={styles.record} >
                                                         <Row>
-                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName+data.businessName}</Col>
                                                             <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
                                                             <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
                                                         </Row>

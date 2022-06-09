@@ -4,7 +4,7 @@ import Menu from './Menu';
 import {Container,Card,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
 
 function CommentReports(){
@@ -18,7 +18,7 @@ function CommentReports(){
     }
 
     async function deleteReport(rid) {
-        axios.delete('http://localhost:5000/api/comments/reportedcomments/delete/' + rid)
+        axios.delete(`http://localhost:5000/api/comments/reportedcomments/delete/${rid}`)
             .then((res) => {
                 console.log(res.status);
                 console.log('Report Deleted');

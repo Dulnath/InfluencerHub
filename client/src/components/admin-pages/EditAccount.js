@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react'
 import axios from "axios"
 import Menu from './Menu'
 import {Row,Col,Form,Button} from 'react-bootstrap'
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import ParseJwt from '../../utilities/ParseJwt';
 import styles from '../../styles/styles.module.css';
 
@@ -32,7 +32,7 @@ function EditAccount(){
         const user = ParseJwt(userToken)//{id=d12313123jop121o,email='kumuthu@gmail.com', fname="kumuthu"}
         
         if(userToken){
-            axios.get('http://localhost:5000/api/useraccounts/'+user.id).then(res=>{
+            axios.get(`http://localhost:5000/api/useraccounts/${user._id}`).then(res=>{
             setFName(res.data.firstName);
             setLName(res.data.lastName);
             setEmail(res.data.email);
@@ -90,43 +90,43 @@ function EditAccount(){
         }
         if(password===passwordRep&&password!==''){
             console.log(password);
-            const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
+            const response = await fetch(`http://localhost:5000/api/useraccounts/updateaccount/${user._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    fname,
-                    lname,
-                    email,
-                    contactNo,
-                    oldPassword,
-                    password
+                    fname:fname,
+                    lname:lname,
+                    email:email,
+                    contactNo:contactNo,
+                    oldPassword:oldPassword,
+                    password:password
                 }),
             })
             const data = await response.json();
             console.log(data.status);
             if (data.status === 'ok') { 
-                setErrorMsg('Account Information has been updated');
+                setSuccessMsg('Account Information has been updated');
             }else if(!data.user){
+                window.location.reload(); 
                 setErrorMsg('Old Password is incorrect');
             }else{
-                console.log('could not update user account');
+                setErrorMsg('could not update user account');
             }
-        }else if(password!==passwordRep && password!==''){
+        }else if(password!==passwordRep && password!==''){ 
             setErrorMsg('Passwords do not Match!');
-            return;
         }else{
-            const response = await fetch('http://localhost:5000/api/useraccounts/updateaccount/'+user.id, {
+            const response = await fetch(`http://localhost:5000/api/useraccounts/updateaccount/${user._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    fname,
-                    lname,
-                    email,
-                    contactNo
+                    fname:fname,
+                    lname:lname,
+                    email:email,
+                    contactNo:contactNo
                 }),
             })
             const data = await response.json();
@@ -195,13 +195,13 @@ function EditAccount(){
                         <Col xs={6} md={1}>
                         </Col>
                         <Col xs={12} md={8}>
-                        <Button variant="primary" type="submit" onClick={updateUserAccount}>
+                        <Button className='btn btn-success' type="submit" onClick={updateUserAccount}>
                             Update
                         </Button>
                         </Col>
                         <Col xs={6} md={2}>
                         <Link to='/adminsettings' className='text-decoration-none'>
-                            <Button variant="secondary" >
+                            <Button>
                                 Go Back
                             </Button>
                         </Link>

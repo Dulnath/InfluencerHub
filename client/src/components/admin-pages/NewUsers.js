@@ -4,7 +4,7 @@ import Menu from './Menu';
 import {Container,Card,Col,Row} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AdminLogin from './AdminLogin';
+import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
 
 function RenderType(props){
@@ -31,7 +31,7 @@ function NewUsers(){
     const loggedInUser = localStorage.getItem("token");
 
     async function approveUser(uid){
-        const response = await fetch('http://localhost:5000/api/useraccounts/approveuser/' + uid, {
+        const response = await fetch(`http://localhost:5000/api/useraccounts/approveuser/${uid}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ function NewUsers(){
     }
 
     async function deleteNewUsers(uid){
-        axios.delete('http://localhost:5000/api/useraccounts/delete/'+uid)
+        axios.delete(`http://localhost:5000/api/useraccounts/delete/${uid}`)
             .then((res) => {
                 console.log(res.status);
                 console.log('Report Deleted');
@@ -95,9 +95,6 @@ function NewUsers(){
                                                     </Row>
                                                     <Row>
                                                         <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
-                                                    </Row>
-                                                    <Row>
-                                                        <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
                                                     </Row>
                                                     <Row>
                                                         <Col sm={9}></Col>
