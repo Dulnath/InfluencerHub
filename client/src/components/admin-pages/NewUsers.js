@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
-
+import image from "../../images/user.jpg";
 function RenderType(props){
     let type = props.userType
     if (type === 'influencer') {
@@ -87,6 +87,7 @@ function NewUsers(){
                                     return (
                                         <React.Fragment key={data._id}>
                                             <Card className={styles.record} >
+                                                <Row><Col sm={8}><img src={image} className={styles.image1_img} alt="..."/></Col></Row>
                                                 <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                                 <Card.Body>
                                                     <RenderType userType={data.category} />
@@ -95,13 +96,11 @@ function NewUsers(){
                                                     </Row>
                                                     <Row>
                                                         <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
-                                                    </Row>
-                                                    <Row>
-                                                        <Col sm={9}></Col>
+                                                        <Col sm={4}></Col>
                                                         <Col>
                                                             <span className={styles.btnRed} onClick={() => deleteNewUsers(data._id)}>Reject</span>
                                                             <span className={styles.btnGreen} onClick={() => approveUser(data._id)}>Approve</span>
-                                                        </Col>
+                                                        </Col>                                                        
                                                     </Row>
                                                 </Card.Body>
                                             </Card>

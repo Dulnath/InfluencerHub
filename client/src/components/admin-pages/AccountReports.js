@@ -8,6 +8,7 @@ import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
 import FormatDate from '../../utilities/FormatDate';
 import emailjs from '@emailjs/browser';
+import image from "../../images/user.jpg";
 
 function RenderType(props) {
     let type = props.userType
@@ -116,6 +117,7 @@ function AccountReports() {
                         return (
                             <React.Fragment key={data._id}>
                                 <Card className={styles.record}>
+                                <img src={image} className={styles.image1_img} alt="..."/>
                                     <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                     <Card.Body>
                                         <RenderType userType={data.category}></RenderType>
@@ -127,9 +129,7 @@ function AccountReports() {
                                         </Row>
                                         <Row>
                                             <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
-                                        </Row>
-                                        <Row>
-                                            <Col sm={8}></Col>
+                                            <Col sm={5}></Col>
                                             <Col>
                                                 <span className={styles.btnRed} onClick={() => suspendAccount(data)}>Suspend</span>
                                                 <span className={styles.btnGreen} onClick={()=>deleteReport(data._id)}>Dismiss</span>

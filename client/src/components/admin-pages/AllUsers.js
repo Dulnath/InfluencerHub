@@ -7,10 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminLogin from '../Login/index'
 import styles from '../../styles/styles.module.css';
-
+import { useNavigate } from 'react-router-dom';
+import image from "../../images/user.jpg";
 function AllUsers(){
     const [apiData,setApiData] = useState([]);
     const loggedInUser = localStorage.getItem("token");
+    const navigate = useNavigate();
 
     useEffect(()=>{        
         axios.get('http://localhost:5000/api/useraccounts').then(res=>{
@@ -37,11 +39,12 @@ function AllUsers(){
                                         if(data.category==='influencer'){
                                             return (
                                                 <React.Fragment key={data._id}>
-                                                    <Container fluid="md" className={styles.record} >
+                                                    <Container fluid="md" className={styles.record} onClick={() => { navigate(`/viewadmin/${data._id}`) }}>
                                                         <Row>
-                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
-                                                            <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                            <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
+                                                            <Col xs={4} md={3}><b>Email </b> : {data.email}</Col>
+                                                            <Col xs={4} md={3}><img src={image} className={styles.imageList_img} alt="..."/></Col>
                                                         </Row>
                                                     </Container>
                                                 </React.Fragment>
@@ -66,11 +69,12 @@ function AllUsers(){
                                         if(data.category==='business'){
                                             return (
                                                 <React.Fragment key={data._id}>
-                                                    <Container fluid="md" className={styles.record} >
+                                                    <Container fluid="md" className={styles.record} onClick={() => { navigate(`/viewadmin/${data._id}`) }}>
                                                         <Row>
-                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName+data.businessName}</Col>
-                                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
-                                                            <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                        <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
+                                                            <Col xs={4} md={3}><b>Email </b> : {data.email}</Col>
+                                                            <Col xs={4} md={3}><img src={image} className={styles.imageList_img} alt="..."/></Col>
                                                         </Row>
                                                     </Container>
                                                 </React.Fragment>
@@ -95,11 +99,12 @@ function AllUsers(){
                                         if(data.category==='admin'){
                                             return (
                                                 <React.Fragment key={data._id}>
-                                                    <Container fluid="md" className={styles.record} >
+                                                    <Container fluid="md" className={styles.record}>
                                                         <Row>
-                                                            <Col xs={6} md={4}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                                            <Col xs={6} md={4}><b>Type </b> : {data.category}</Col>
-                                                            <Col xs={6} md={4}><b>Email </b> : {data.email}</Col>
+                                                        <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
+                                                            <Col xs={4} md={3}><b>Email </b> : {data.email}</Col>
+                                                            <Col xs={4} md={3}><img src={image} className={styles.imageList_img} alt="..."/></Col>
                                                         </Row>
                                                     </Container>
                                                 </React.Fragment>

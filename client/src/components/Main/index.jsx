@@ -7,7 +7,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
-
+import Login from '../Login/index'
 
 function Main(props) {
     const loggedInUser = localStorage.getItem("token");

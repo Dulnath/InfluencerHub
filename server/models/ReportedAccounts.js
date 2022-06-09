@@ -26,18 +26,6 @@ const ReportedAccountSchema = new Schema({
         type:String,
         required:false
     },
-    district: {
-        type:String,
-        required:false
-    },
-    city: {
-        type:String,
-        required:false
-    },
-    streetNo: {
-        type:String,
-        required:false
-    },
     phoneNo: {
         type:String,
         required:true

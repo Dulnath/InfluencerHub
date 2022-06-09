@@ -23,7 +23,12 @@ const Login = () => {
 			const token = localStorage.getItem('token')
 			const user = ParseJwt(token)
 
-			if(user.category==='Influencer'&&user.adminVerified===true){
+			if(!user.isActive){
+				setError('Your account has been suspended');
+				return;
+			}
+
+			if(user.category==='influencer'&&user.adminVerified===true){
 				navigate('/')
 			}else if(user.category==='business'&&user.adminVerified===true){
 				navigate('/business')

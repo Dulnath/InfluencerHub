@@ -11,9 +11,15 @@ function Search() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    loadAllUsers();
     loadUsersData();
   }, []);
 
+  const loadAllUsers = async () =>{
+    axios.get('http://localhost:5000/api/useraccounts').then(res=>{
+            setData(res.data);
+    })
+  }
   const loadUsersData = async () => {
        let newval= value.toLowerCase();
         return await axios
@@ -29,6 +35,7 @@ function Search() {
   console.log("data", data);
 
   const handleReset = () => {
+    loadAllUsers();
     setValue("");
   };
   const handleSearch = async (e) => {
@@ -83,24 +90,28 @@ function Search() {
                 </Table>
               ) : (
                 data.map((item, index) => (
-                  <div class="card-deck">
-                  <div class="card">
-   
-                  <div class="card-body">  
-                 
-                     <img src={image} className={styles.image_img} alt="..."/>
-                     <h3 class="card-title">{item.firstName+" "+item.lastName}</h3>
-                   <Row> <h5>{item.category}</h5></Row> 
-                    <Row> <h10>{item.email}</h10></Row>  
-                      <button className={styles.button}
-                        onClick={() => {navigate(`/view/${item._id}`)}}
-                        >View
-                        
-                    </button>
-                       
+                  (item.category!=='admin'&&item.adminVerified) ?(
+                    <div class="card-deck">
+                      <div class="card">
+
+                        <div class="card-body">
+
+                          <img src={image} className={styles.image_img} alt="..." />
+                          <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>
+                          <Row> <h5>{item.category}</h5></Row>
+                          <Row> <h10>{item.email}</h10></Row>
+                          <button className={styles.button}
+                            onClick={() => { navigate(`/view/${item._id}`) }}
+                          >View
+
+                          </button>
+
+                        </div>
+                      </div>
                   </div>
-                  </div>
-                  </div>
+                  ):(
+                    <div></div>
+                  )
                 ))
               )}
           

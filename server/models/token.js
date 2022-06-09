@@ -17,6 +17,10 @@ const tokenSchema = new Schema({
 		type:Boolean,
 		required:false,
 	},
+	isActive:{
+		type:Boolean,
+		required:false,
+	},
 	isFirstLogin:{
 		type:Boolean,
 		required:false,
