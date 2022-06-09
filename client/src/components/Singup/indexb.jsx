@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signupb = () => {
-	const [repassword,setRepassword] = useState({});
+	const [repassword,setRepassword] = useState(null);
 	const [data, setData] = useState({
 		businessName: "",
 		businessAddress: "",
@@ -51,7 +51,7 @@ const Signupb = () => {
 				
 				</div>
 				<div className={styles.right}>
-					<form className={styles.form_container} onSubmit={handleSubmit}>
+					<form   className={styles.form_container} style={{"autoComplete":"off"}} onSubmit={handleSubmit}>
 						<h1>Create business account</h1>
 						<input
 							type="text"
@@ -97,6 +97,7 @@ const Signupb = () => {
 							value={repassword}
 							required
 							className={styles.input}
+							style={{"autoComplete":"off"}}
 						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
 						<button type="submit" className={styles.green_btn}>

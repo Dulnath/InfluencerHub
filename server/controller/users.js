@@ -106,7 +106,32 @@ const getById = async (req, res) => {
   }
 };
 
+
+
+const UpdateUser = async (req,res) =>{
+    const {firstName,email} = req.body
+    const id = req.params.id
+    let user;
+    try{
+        user = await User.findByIdAndUpdate(id,{
+           firstName,
+            email,
+           
+        });
+        user = await user.save();
+    }
+    catch(err){
+        console.log(err);
+    }
+    if(!user){
+      return  res.status(404).json({message:"Unable to update"})
+    }
+    return res.status(200).json({user});
+ 
+}
+
 exports.AddUsers = AddUsers;
 exports.getById = getById;
 exports.getUsers = getUsers;
 exports.EmailVerify = EmailVerify;
+exports.UpdateUser=UpdateUser

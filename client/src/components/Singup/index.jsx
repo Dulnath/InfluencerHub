@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./styles.module.css";
 
 const Signup = () => {
-	const [repassword,setRepassword] = useState({});
+	const [repassword,setRepassword] = useState(null);
 	const [data, setData] = useState({
 		firstName: "",
 		lastName: "",
