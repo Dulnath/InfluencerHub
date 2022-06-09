@@ -40,7 +40,7 @@ function EditEvent(props) {
 
     return (
         <div>
-            <div className="eventCard">
+            <div className="projectCard">
                 <Card border="dark" >
                     <Card.Header>
                         <div className="eventCardHeader">

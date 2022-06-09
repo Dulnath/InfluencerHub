@@ -31,7 +31,7 @@ function AddProject() {
     // }
 
     return (
-        <div>
+        <div className='background'>
             <div className="projectCard">
                 <Card border="dark" >
                     <Card.Header>
@@ -40,7 +40,7 @@ function AddProject() {
                             <CloseButton className="closeButton" onClick={navAllProjects} />
                         </div>
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body className='cardBody'>
                         <Form>
                             <Form.Group>
                                 <h5>Project Name</h5>
@@ -76,17 +76,18 @@ function AddProject() {
                             <div>
                                 <input
                                     type="date"
-                                    min = {projectStartDate}
+                                    min={projectStartDate}
                                     value={projectEndDate}
                                     onChange={(event) => { setprojectEndDate(event.target.value) }} />
                             </div><br />
                         </Form>
 
-                        <Card.Footer style={{ paddingLeft: '50%' }}>
-                            <Button variant="primary" size="lg" type="submit" onClick={createProject}>Add Project</Button>
-                        </Card.Footer>
-
                     </Card.Body>
+
+                    <Card.Footer className='cardFooter'>
+                        <Button variant="success" size="lg" type="submit" onClick={createProject}>Add Project</Button>
+                    </Card.Footer>
+
                 </Card>
 
             </div>

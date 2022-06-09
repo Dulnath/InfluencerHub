@@ -35,7 +35,7 @@ function AllProjects() {
     let navigate = useNavigate();
 
     return (
-        <div>
+        <div className='background'>
             <div id="allProjects">
                 <h1>All Projects</h1>
 

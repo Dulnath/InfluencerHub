@@ -1,3 +1,11 @@
+html{
+    background-color:#ADFFC3;
+}
+
+.background{
+    background-color:#ADFFC3;
+}
+
 .projectCard,
 .eventCard {
     padding: 10%;
@@ -66,10 +74,20 @@
 }
 
 .eventCard {
-    background: beige !important;
+    background:  #E8FAEA !important;
+}
+
+.cardBody{
+    background-color:  #E8FAEA;
+}
+
+.background .projectCard .cardFooter{
+    padding-left: 50%;
 }
 
 #table td, #table th {
     border: 1px solid gray;
     padding: 8px;
 }
+
+/* color: #94FFD4 */

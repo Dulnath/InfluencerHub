@@ -37,7 +37,7 @@ function AddEvents() {
     let navigate = useNavigate();
 
     return (
-        <div>
+        <div className='background'>
             <div className="projectCard">
                 <Card border='dark'>
                     <Card.Header>
@@ -46,7 +46,7 @@ function AddEvents() {
                             <CloseButton className="closeButton" onClick={() => { navigate(`/allEvents/${projectName}/${projectID}`) }} />
                         </div>
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body className='cardBody'>
                         <Form>
                             <Form.Group>
                                 <h5>Event Name</h5>
@@ -89,11 +89,12 @@ function AddEvents() {
                             </div><br />
 
                         </Form>
-                        <Card.Footer style={{ paddingLeft: '50%' }}>
-                            <Button variant="success" size="lg" type="submit" onClick={createEvent}>Add Event</Button>
-                        </Card.Footer>
 
                     </Card.Body>
+
+                    <Card.Footer className="cardFooter">
+                        <Button variant="success" size="lg" type="submit" onClick={createEvent}>Add Event</Button>
+                    </Card.Footer>
                 </Card>
             </div>
 
