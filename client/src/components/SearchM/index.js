@@ -86,7 +86,7 @@ function SearchM() {
                 data.filter((item)=>item.category==="business").map((item, index) => (
                   
                   <div class="card-deck">
-                  <div class="card">
+                  <div class="card" className={styles.card}>
    
                   <div class="card-body">  
                  
