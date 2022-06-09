@@ -6,6 +6,7 @@ function ReportDescription(props) {
     const [commentList, setCommentList] = useState([]);
     const [description, setDescription] = useState();
 
+    // Retrieve all comments
     useEffect(() => {
         axios.get("http://localhost:5000/getComments").then((response) => {
             setCommentList(response.data);
@@ -13,6 +14,7 @@ function ReportDescription(props) {
         })
     }, [])
 
+    // Add report description to reported comment
     const reportComment = () => {
         axios.put(`http://localhost:5000/addReport/${props.commentID}`, {
             description
