@@ -3,6 +3,8 @@ import axios from "axios";
 //import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
+
+//influencers signup form
 const Signup = () => {
 	const [repassword,setRepassword] = useState(null);
 	const [data, setData] = useState({
