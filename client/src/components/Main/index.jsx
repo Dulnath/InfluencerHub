@@ -6,6 +6,9 @@ import ParseJwt from "../Utilities/ParseJwt";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 
+
+
+//influencers profile
 const Main = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -13,12 +16,12 @@ const Main = () => {
     window.location.reload();
   };
 
-  const handleEdit =(e)=>{
-	  e.preventDefault()
-	window.location =`/update/${ID}`
-  }
+  const handleEdit = (e) => {
+    e.preventDefault();
+    window.location = `/update/${ID}`;
+  };
   const [fname, setFName] = useState("");
- 
+
   const [ID, setID] = useState("");
 
   useEffect(() => {
@@ -30,9 +33,8 @@ const Main = () => {
       axios
         .get("http://localhost:8080/api/users/getuser/" + user._id)
         .then((res) => {
-			setID(res.data._id);
+          setID(res.data._id);
           setFName(res.data.firstName);
-    
         });
     }
   }, []);
@@ -44,7 +46,6 @@ const Main = () => {
         <button className={styles.white_btn} onClick={handleLogout}>
           Logout
         </button>
-      
       </nav>
 
       <div>
@@ -74,7 +75,7 @@ const Main = () => {
           </Col>
           <Col>
             <div style={{ marginTop: "50px", padding: "20px" }}>
-			<h4>{ID}</h4>
+         
               <h4>{fname}</h4>
             </div>
           </Col>
@@ -82,23 +83,18 @@ const Main = () => {
           <Col></Col>
           <Col>
             {" "}
-	
-		<button onClick={handleEdit}
-		
-		style={{
-		  border: "solid",
-		  marginTop: "20px",
-		  borderRadius: "10px",
-		  padding: "10px",
-		  color: "blue",
-		}}
-	  >
-		Edit profile
-	  </button>
-
-		
-		
-           
+            <button
+              onClick={handleEdit}
+              style={{
+                border: "solid",
+                marginTop: "20px",
+                borderRadius: "10px",
+                padding: "10px",
+                color: "blue",
+              }}
+            >
+              Edit profile
+            </button>
           </Col>
         </Row>
         <Row>

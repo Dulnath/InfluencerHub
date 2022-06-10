@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
     const id = useParams().id;
-    const [inputs, setInputs] = useState();
+    const [inputs, setInputs] = useState(null);
     useEffect(() => {
         const fetchHandler = async () => {
           await axios
@@ -47,21 +47,25 @@ const Update = () => {
   return (
     <div>
     <div className="container">
-     <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword" >
-          <Form.Label>email</Form.Label>
-          <Form.Control type="email" placeholder="email"  onChange={handleChange}  value ={inputs.email} name="email"/>
-        </Form.Group>
+    {inputs!=null?(<>
       
-        <Button variant="primary" type="submit">
-          Update
-        </Button>
-      </Form>
+      <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Name</Form.Label>
+        <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword" >
+        <Form.Label>email</Form.Label>
+        <Form.Control type="email" placeholder="email"  onChange={handleChange}  value ={inputs.email} name="email"/>
+      </Form.Group>
+    
+      <Button variant="primary" type="submit">
+        Update
+      </Button>
+    </Form></>):(<>
+      <h2>asdasd</h2>
+      </>)}
     </div>
      
     </div>
