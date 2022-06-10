@@ -37,29 +37,34 @@ function Main(props) {
         
        
     }, [])
-
-
-
-	return (
-		<div className={styles.main_container}>
-			<nav className={styles.navbar}>
-				<h1>InfluencerHub</h1>
-				<h2> User:{fname}</h2>
-				<img src={image} className={styles.image1_img} alt="..."/>
-				<button className={styles.white_btn} onClick={handleLogout}>
-					Logout
-				</button>
-				
-			</nav>
-
-			<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
-					View All influencers
-				</button></h2>
-
-			<Search />
+	if(loggedInUser){
+		return (
+			<div className={styles.main_container}>
+				<nav className={styles.navbar}>
+					<h1>InfluencerHub</h1>
+					<h2> User:{fname}</h2>
+					<img src={image} className={styles.image1_img} alt="..."/>
+					<button className={styles.white_btn} onClick={handleLogout}>
+						Logout
+					</button>
+					
+				</nav>
 	
-		</div>
-	);
+				<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+						View All influencers
+					</button></h2>
+	
+				<Search />
+		
+			</div>
+		);
+	}else{
+		return(
+			<div>
+				<Login></Login>
+			</div>
+		);
+	}
 };
 
 export default Main;

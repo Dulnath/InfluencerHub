@@ -1,12 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import {Nav,Navbar,Container} from 'react-bootstrap'
+import {Nav,Navbar,Container,NavDropdown} from 'react-bootstrap'
 import { Outlet, Link } from "react-router-dom";
 import ParseJwt from "../../utilities/ParseJwt";
 import { useState,useEffect } from 'react';
 import styles from '../../styles/styles.module.css';
-
+//import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 function Menu(props){
     const navigate = useNavigate();
@@ -41,13 +41,18 @@ function Menu(props){
                             <Nav.Link><Link to='/dashboard'  className={styles.menu_item}>Home</Link></Nav.Link>
                             <Nav.Link><Link to='/allUsers'className={styles.menu_item}> All Users</Link></Nav.Link>
                             <Nav.Link><Link to='/newUsers' className={styles.menu_item}>New Users</Link></Nav.Link>
-                            <div className="btn-group" >
-                                <Nav.Link className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Reports</Nav.Link>
-                                <ul className="dropdown-menu dropdown-menu-end">
-                                    <li className="dropdown-item"><Link to='/accountReports' className="text-decoration-none text-dark">Account Reports</Link></li>
-                                    <li className="dropdown-item"><Link to='/commentReports' className="text-decoration-none text-dark">Comment Reports</Link></li>
-                                </ul>
-                            </div>
+                            <Navbar.Collapse>
+                                <Nav>
+                                    <NavDropdown
+                                        className="text-light"
+                                        title="Reports"
+                                        menuVariant="light"
+                                    >
+                                    <NavDropdown.Item><Link to='/accountReports' className="text-decoration-none text-dark">Account Reports</Link></NavDropdown.Item>
+                                    <NavDropdown.Item><Link to='/commentReports' className="text-decoration-none text-dark">Comment Reports</Link></NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                            </Navbar.Collapse>
                             <Nav.Link><Link to='/suspendedUsers' className={styles.menu_item}>Suspended Users</Link></Nav.Link>
                             <Nav.Link><Link to='/adminSettings' className={styles.menu_item}>Settings</Link></Nav.Link>
                             <Nav.Link onClick={handleLogout}><Link to='/' className={styles.menu_item}>Log out</Link></Nav.Link>
