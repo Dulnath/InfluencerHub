@@ -8,25 +8,23 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import CardContent from 'react-bootstrap/Card';
-import { Row, Col, NavLink } from 'react-bootstrap'
 import Login from '../Login';
 import {  useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
 
 
 function Main(props) {
-    const loggedInUser = localStorage.getItem("token");
+    //const loggedInUser = localStorage.getItem("token");
     const [fname, setUserName] = useState('');
     const navigate = useNavigate();
 
+	//logout function
 		const handleLogout = () => {
 			localStorage.removeItem("token");
 			window.location.reload();
 		};
 
-
+    //By this,we are retrieving the firstName of user
     useEffect(() => {
 		const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);

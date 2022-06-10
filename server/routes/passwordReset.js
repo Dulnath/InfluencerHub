@@ -7,7 +7,7 @@ const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 const bcrypt = require("bcrypt");
 
-// send password link
+// send password reset link
 router.post("/", async (req, res) => {
 	try {
 		const emailSchema = Joi.object({

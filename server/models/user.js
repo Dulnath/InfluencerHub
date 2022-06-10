@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
 	img:{ type: String, required: true },
 });
 
+//create user token
 userSchema.methods.generateAuthToken = function () {
 	const token = jwt.sign({ _id: this._id,category:this.category }, process.env.JWTPRIVATEKEY, {
 		expiresIn: "7d",

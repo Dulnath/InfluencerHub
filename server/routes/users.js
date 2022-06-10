@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
 	}
 });
 
+//email verification link
 router.get("/:id/verify/:token/", async (req, res) => {
 	try {
 		const user = await User.findOne({ _id: req.params.id });
@@ -102,21 +103,7 @@ router.get("/search/:key",async(req,res)=>{
 	
 })
 
-router.get("/search/:key",async(req,res)=>{
-	//console.log(req.params.key)
-
-	let data = await User.find(
-		{
-			"$or":[
-			{firstName :{$regex:req.params.key,$options:'i'}},
-				//{category:{$regex:req.params.key.toLowerCase()}}
-			]
-		}
-	)
-	res.send(data)
-
-	
-})
+/*
 
 router.get("/search1/:key",async(req,res)=>{
 	//console.log(req.params.key)
@@ -133,6 +120,7 @@ router.get("/search1/:key",async(req,res)=>{
 
 	
 })
+*/
 
 router.get('/:id', async(req, res) => {
     try {

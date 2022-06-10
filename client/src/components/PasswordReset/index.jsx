@@ -11,6 +11,7 @@ const PasswordReset = () => {
 	const param = useParams();
 	const url = `http://localhost:8080/api/password-reset/${param.id}/${param.token}`;
 
+	//to check whether url is valid or not
 	useEffect(() => {
 		const verifyUrl = async () => {
 			try {

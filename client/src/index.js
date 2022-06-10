@@ -9,8 +9,7 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css"
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-		<App />
-			
+		<App />	
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById("root")
