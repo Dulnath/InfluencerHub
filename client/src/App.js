@@ -1,8 +1,8 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import Main from "./components/Main";
-import Signup from "./components/Singup";
+
 import Login from "./components/Login";
-import Signupb from "./components/Singup/indexb";
+
 import Category from "./components/Category/category";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
@@ -10,8 +10,10 @@ import Detail from "./components/Detail";
 import View from "./components/View";
 import Payment from "./components/Payment";
 import EmailVerify from "./components/EmailVerify";
-import Business from "./components/business";
+import Business from "./components/Business/business";
 import Update from "./components/Update/Update";
+import Signup from "./components/Signup";
+import Signupb from "./components/Signup/indexb";
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
 	return (
 		<Routes>
 			{user && <Route path="/" exact element={<Main />} />}
-			<Route path="/signup" exact element={<Signup />} />
+			<Route path="/signup" exact element={<Signup/>} />
 			<Route path="/signupb" exact element={<Signupb />} />
 			<Route path="/category" exact element={<Category />} />
 			<Route path="/login" exact element={<Login />} />
