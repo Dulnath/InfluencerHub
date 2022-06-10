@@ -18,10 +18,8 @@ import styles from "./styles.module.css";
 function Detail() {
     const [listOfUsers, setListOfUsers] = useState([]);
     const loggedInUser = localStorage.getItem("token");
-    const [searchTerm,setSearchTerm] = useState('');
-    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
-    const [searchResults, setSearchResults] = useState([]);
+  
 
 
  

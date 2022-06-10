@@ -17,6 +17,7 @@ function Search() {
     loadUsersData();
   }, []);
 
+  //to load data
   const loadUsersData = async () => {
        let newval= value.toLowerCase();
         return await axios
@@ -31,9 +32,12 @@ function Search() {
 
   console.log("data", data);
 
+  //reset button
   const handleReset = () => {
     setValue("");
   };
+
+  //search button
   const handleSearch = async (e) => {
     e.preventDefault();
     let newval= value.toLowerCase();

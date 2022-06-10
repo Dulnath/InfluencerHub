@@ -86,7 +86,7 @@ router.get("/getuser/:id", (req, res) => {
 	});
   });
 
-
+//search user using firstName
 router.get("/search/:key",async(req,res)=>{
 	//console.log(req.params.key)
 
