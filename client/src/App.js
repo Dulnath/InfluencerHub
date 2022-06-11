@@ -16,13 +16,15 @@ import FirstLogin from './components/admin-pages/FirstLogin'
 import Category from './components/Category/category'
 import EditAccount from './components/admin-pages/EditAccount'
 import Main from "./components/Main";
-import Signup from "./components/Singup/index";
-import SignupBusiness from './components/Singup/indexb'
+import Signup from "./components/Signup";
+import SignupBusiness from './components/Signup/indexb';
 import Login from "./components/Login";
 import Business from "./components/Business"
 import EmailVerify from "./components/EmailVerify";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
+import Payment from './components/Payment'
+import Update from './components/Update/Update'
 import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
@@ -61,6 +63,8 @@ function App() {
       <Route path="/viewadmin/:id" exact element={<ViewAdmin />} />
 			<Route path="/filter" exact element={<Filter />} />
       <Route path="/business" exact element={<Business />} />
+      <Route path ="/payment" exact element={<Payment/>}/>
+      <Route path ="/update/:id" element={<Update/>}/>
     </Routes>
   );
 };

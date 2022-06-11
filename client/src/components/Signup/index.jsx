@@ -1,46 +1,49 @@
 import React,{ useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import styles from "./styles.module.css";
 
-const Signupb = () => {
-	const [repassword,setRepassword] = useState({});
+
+//influencers signup form
+const Signup = () => {
+	const [repassword,setRepassword] = useState(null);
 	const [data, setData] = useState({
-		businessName: "",
-		businessAddress: "",
+		firstName: "",
+		lastName: "",
 		email: "",
 		password: "",
-		category:"business",
+		category: "",
+		status: "",
+		img:"",
+		category:'influencer'
 	});
 	const [error, setError] = useState("");
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
 
+	const handleInputState = (name, value) => {
+		setData((prev) => ({ ...prev, [name]: value }));
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if(data.password===repassword)
-		{
-			try {
-				const url = "http://localhost:5000/api/users";
-				const { data: res } = await axios.post(url, data);
-				navigate("/login");
-				console.log(res.message);
-			} catch (error) {
-				if (
-					error.response &&
-					error.response.status >= 400 &&
-					error.response.status <= 500
-				) {
-					setError(error.response.data.message);
-				}
+		try {
+			const url = "http://localhost:5000/api/users";
+			const { data: res } = await axios.post(url, data);
+		//	navigate("/login");
+			console.log(res.message);
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
 			}
-		}else{
-			alert("password mismatch");
 		}
-	
 	};
 
 	return (
@@ -48,26 +51,30 @@ const Signupb = () => {
 			<div className={styles.signup_form_container}>
 				<div className={styles.left}>
 					<h1>Welcome Back</h1>
-				
+					<Link to="/login">
+						<button type="button" className={styles.white_btn}>
+							Sign in
+						</button>
+					</Link>
 				</div>
 				<div className={styles.right}>
 					<form className={styles.form_container} onSubmit={handleSubmit}>
-						<h1>Create business account</h1>
+						<h1>Create Account</h1>
 						<input
 							type="text"
-							placeholder="business Name"
-							name="businessName"
+							placeholder="First Name"
+							name="firstName"
 							onChange={handleChange}
-							value={data.businessName}
+							value={data.firstName}
 							required
 							className={styles.input}
 						/>
 						<input
 							type="text"
-							placeholder="Business Address"
-							name="businessAddress"
+							placeholder="Last Name"
+							name="lastName"
 							onChange={handleChange}
-							value={data.businessAddress}
+							value={data.lastName}
 							required
 							className={styles.input}
 						/>
@@ -89,16 +96,20 @@ const Signupb = () => {
 							required
 							className={styles.input}
 						/>
-							<input
-							type="password"
-							placeholder="ConfirmPassword"
-							name="repassword"
-							onChange={(e)=>setRepassword(e.target.value)}
-							value={repassword}
+
+						<input
+							type="text"
+							placeholder="Status"
+							name="status"
+							onChange={handleChange}
+							value={data.status}
 							required
 							className={styles.input}
 						/>
+
+
 						{error && <div className={styles.error_msg}>{error}</div>}
+						{error && <div className={styles.success_msg}>{error}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>
@@ -109,4 +120,4 @@ const Signupb = () => {
 	);
 };
 
-export default Signupb;
+export default Signup;

@@ -5,6 +5,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-image: url("https://images.unsplash.com/photo-1579444741963-5ae219cfe27c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+	background-repeat: no-repeat;
+	background-size: cover;
+
 }
 
 .signup_form_container {
@@ -12,8 +16,8 @@
 	height: 500px;
 	display: flex;
 	border-radius: 10px;
-	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
-		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 70%),
+		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 80%);
 }
 
 .left {
@@ -25,6 +29,7 @@
 	background-color: #3bb19b;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
+
 }
 
 .left h1 {
@@ -43,6 +48,7 @@
 	background-color: white;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
+	opacity: 80%;
 }
 
 .form_container {

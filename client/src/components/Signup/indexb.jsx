@@ -1,46 +1,49 @@
 import React,{ useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 
-const Signup = () => {
+//business signup form
+const Signupb = () => {
+	const [repassword,setRepassword] = useState(null);
 	const [data, setData] = useState({
-		firstName: "",
-		lastName: "",
+		businessName: "",
+		businessAddress: "",
 		email: "",
 		password: "",
-		category: "",
-		status: "",
-		img:"",
-		category:'influencer'
+		category:"business",
 	});
 	const [error, setError] = useState("");
-	const [msg, setMsg] = useState("");
+	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
 
-	const handleInputState = (name, value) => {
-		setData((prev) => ({ ...prev, [name]: value }));
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const url = "http://localhost:5000/api/users";
-			const { data: res } = await axios.post(url, data);
-			setMsg(res.message);
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
+		
+		if(data.password===repassword)
+		{
+			try {
+				const url = "http://localhost:5000/api/users";
+				const { data: res } = await axios.post(url, data);
+				navigate("/login");
+				console.log(res.message);
+			} catch (error) {
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status <= 500
+				) {
+					setError(error.response.data.message);
+				}
 			}
+		}else{
+			alert("password mismatch");
 		}
+	
 	};
 
 	return (
@@ -48,30 +51,26 @@ const Signup = () => {
 			<div className={styles.signup_form_container}>
 				<div className={styles.left}>
 					<h1>Welcome Back</h1>
-					<Link to="/login">
-						<button type="button" className={styles.white_btn}>
-							Sign in
-						</button>
-					</Link>
+				
 				</div>
 				<div className={styles.right}>
-					<form className={styles.form_container} onSubmit={handleSubmit}>
-						<h1>Create Account</h1>
+					<form   className={styles.form_container} style={{"autoComplete":"off"}} onSubmit={handleSubmit}>
+						<h1>Create business account</h1>
 						<input
 							type="text"
-							placeholder="First Name"
-							name="firstName"
+							placeholder="business Name"
+							name="businessName"
 							onChange={handleChange}
-							value={data.firstName}
+							value={data.businessName}
 							required
 							className={styles.input}
 						/>
 						<input
 							type="text"
-							placeholder="Last Name"
-							name="lastName"
+							placeholder="Business Address"
+							name="businessAddress"
 							onChange={handleChange}
-							value={data.lastName}
+							value={data.businessAddress}
 							required
 							className={styles.input}
 						/>
@@ -93,20 +92,17 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
-
-						<input
-							type="text"
-							placeholder="Status"
-							name="status"
-							onChange={handleChange}
-							value={data.status}
+							<input
+							type="password"
+							placeholder="ConfirmPassword"
+							name="repassword"
+							onChange={(e)=>setRepassword(e.target.value)}
+							value={repassword}
 							required
 							className={styles.input}
+							style={{"autoComplete":"off"}}
 						/>
-
-
 						{error && <div className={styles.error_msg}>{error}</div>}
-						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>
@@ -117,4 +113,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default Signupb;

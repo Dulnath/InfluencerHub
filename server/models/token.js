@@ -7,6 +7,12 @@ const tokenSchema = new Schema({
 		required: true,
 		ref: "user",
 		unique: true,
+		
+	},
+	category:{
+		type:String,
+		required:false,
+	
 	},
 	category:{
 		type: String,
