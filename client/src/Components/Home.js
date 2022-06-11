@@ -77,39 +77,47 @@ function AllPosts() {
                 ></img>
                 <br />
                 <br />
-                <Button
-                  className="postButton2"
-                  variant="warning"
-                  size="sm"
-                  type="submit"
-                  onClick={() => {
-                    navigate(`/edit/${posts._id}`);
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-around",
                   }}
                 >
-                  Edit Post
-                </Button>
-                <br />
-                <br />
-                <Button
-                  className="postButton2"
-                  variant="danger"
-                  size="sm"
-                  type="submit"
-                  onClick={() => onDelete(posts._id)}
-                >
-                  Delete Post
-                </Button>
-                <br />
-                <br />
-                <Button
-                  size="sm"
-                  type="submit"
-                  onClick={() => {
-                    commentForm(posts._id);
-                  }}
-                >
-                  Add Comment
-                </Button>
+                  <Button
+                    className="postButton2"
+                    variant="warning"
+                    size="sm"
+                    type="submit"
+                    onClick={() => {
+                      navigate(`/edit/${posts._id}`);
+                    }}
+                  >
+                    Edit Post
+                  </Button>
+                  <br />
+                  <br />
+                  <Button
+                    className="postButton2"
+                    variant="danger"
+                    size="sm"
+                    type="submit"
+                    onClick={() => onDelete(posts._id)}
+                  >
+                    Delete Post
+                  </Button>
+                  <br />
+                  <br />
+                  <Button
+                    size="sm"
+                    type="submit"
+                    onClick={() => {
+                      commentForm(posts._id);
+                    }}
+                  >
+                    Add Comment
+                  </Button>
+                </div>
               </Card.Body>
               <Card.Footer>
                 {selected === posts._id
