@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 	phoneNo:{type:String, required:true},
 	password: { type: String, required: true },
 	category:{ type: String, required: true },
-	isFirstLogin:{type:Boolean,required:false},
+	isFirstLogin:{type:Boolean,default:true},
 	adminVerified:{type:Boolean,default:false},
 	suspendedDate:{type:Date,required:false},
 	restoreDate:{type:Date,required:false},
