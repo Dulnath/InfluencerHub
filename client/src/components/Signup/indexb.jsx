@@ -23,6 +23,7 @@ const Signupb = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		
 		if(data.password===repassword)
 		{
 			try {
