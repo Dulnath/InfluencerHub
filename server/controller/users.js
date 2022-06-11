@@ -57,7 +57,7 @@ const AddUsers = async (req, res) => {
       .send({ message: "An Email sent to your account please verify" });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: "Internal Serversdfsadf Error", error });
+    res.status(500).send({ message: "Internal Server Error", error });
   }
 };
 
@@ -116,6 +116,7 @@ const UpdateUser = async (req,res) =>{
         user = await User.findByIdAndUpdate(id,{
            firstName,
             email,
+            isActive:false,
            
         });
         user = await user.save();
