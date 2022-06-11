@@ -30,9 +30,6 @@ function Search() {
           .then((response) =>  setData(response.data))
           .catch((err) => console.log(err));
   };
-      
-
-  console.log("data", data);
 
   const handleReset = () => {
     loadAllUsers();

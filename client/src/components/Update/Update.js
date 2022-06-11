@@ -1,17 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
+    const navigate = useNavigate();
     const id = useParams().id;
     const [inputs, setInputs] = useState(null);
+    console.log(id);
     useEffect(() => {
         const fetchHandler = async () => {
           await axios
-            .get(`http://localhost:8080/api/users/getuser/${id}`)
+            .get(`http://localhost:5000/api/users/getuser/${id}`)
             .then((res) => res.data)
-            .then((data) => setInputs(data));
+            .then((data) => setInputs(data))
+            .then(console.log(inputs));
         };
     
         fetchHandler();
@@ -24,7 +27,7 @@ const Update = () => {
 
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:8080/api/users/getuser/${id}`, {
+      .put(`http://localhost:5000/api/users/getuser/${id}`, {
         firstName: String(inputs.firstName),
         email: String(inputs.email),
       })
@@ -32,7 +35,12 @@ const Update = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendRequest().then(() => history("/"));
+    sendRequest()
+    if(inputs.category==='business'){
+      navigate('/business');
+    }else{
+      navigate('/')
+    }
   };
   const handleChange = (e) => {
     setInputs((prevState) => ({

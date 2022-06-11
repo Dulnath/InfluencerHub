@@ -25,10 +25,9 @@ const Business = () => {
     const userToken = localStorage.getItem("token"); //dpasfjfwa.adaisoixfn.sdfawsfcopi
 
     const user = ParseJwt(userToken); //{id=d12313123jop121o,email='kumuthu@gmail.com', fname="kumuthu"}
-    console.log(user._id);
     if (userToken) {
       axios
-        .get("http://localhost:8080/api/users/getuser/" + user._id)
+        .get("http://localhost:5000/api/users/getuser/" + user._id)
         .then((res) => {
 			setID(res.data._id);
           setFName(res.data.firstName);

@@ -14,6 +14,7 @@ import image from "../../images/user.jpg";
 
 function Business(props) {
     const loggedInUser = localStorage.getItem("token");
+	const [id,setUsrId] = useState('')
     const [fname, setUserName] = useState('');
    
     const navigate = useNavigate();
@@ -23,12 +24,11 @@ function Business(props) {
         const user = ParseJwt(userToken);
         if(userToken){
 		
-			const response = axios.get(`http://localhost:8080/api/users/getuser/${user._id}`).then((response) => {
+			const response = axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((response) => {
 			
-            setUserName(response.data.user.businessName);
-            
-            console.log(response.data);
-			
+            setUserName(response.data.firstName);
+			setUsrId(response.data._id);
+			console.log(response.data._id);
 		})
 		if(response.staus!=='ok'){
 			setUserName('default');
@@ -45,8 +45,7 @@ function Business(props) {
 			<nav className={styles.navbar}>
 				<h1>InfluencerHub</h1>
 				<h2> User:{fname}</h2>
-                <img src={image} className={styles.image1_img} alt="..."/>
-
+                <Link to={`/update/${id}`}><img src={image} className={styles.image1_img} alt="..."/></Link>
 				<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
 					Logout
 				</button>

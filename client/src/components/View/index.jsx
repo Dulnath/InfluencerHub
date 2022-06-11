@@ -19,10 +19,10 @@ function View() {
     useEffect(() => {
         axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
 
-            setFirstName(response.data.user.firstName);
-            setLastName(response.data.user.lastName);
-            setUserEmail(response.data.user.email);
-            setUserCategory(response.data.user.category);
+            setFirstName(response.data.firstName);
+            setLastName(response.data.lastName);
+            setUserEmail(response.data.email);
+            setUserCategory(response.data.category);
             console.log(response.data);
         })
 
