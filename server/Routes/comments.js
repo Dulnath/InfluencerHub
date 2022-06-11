@@ -19,7 +19,7 @@ router.post('/addComment', async (req, res) => {
 })
 
 // Retrieve comments
-router.get('/getComments', (req, res) => {
+router.get('/getComments', async (req, res) => {
     CommentsModel.find({}, (err, result) => {
         if (err) {
             res.json(err);
