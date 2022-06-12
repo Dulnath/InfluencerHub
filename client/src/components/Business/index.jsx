@@ -48,14 +48,14 @@ function Business(props) {
 				<h1>InfluencerHub</h1>
 				<Dropdown>
   <Dropdown.Toggle variant="success" id="dropdown-basic">
-  <h7>{fname}</h7> &ensp;
+  {fname} &ensp;
   <img src={image} className={styles.image1_img} alt="..."/>
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+    <Dropdown.Item href="/view">Profile</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
+    
   </Dropdown.Menu>
 </Dropdown>
   
