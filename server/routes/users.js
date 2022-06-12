@@ -94,7 +94,7 @@ router.get("/search/:key",async(req,res)=>{
 		{
 			"$or":[
 			{firstName :{$regex:req.params.key,$options:'i'}},
-				//{category:{$regex:req.params.key.toLowerCase()}}
+			{lastName :{$regex:req.params.key,$options:'i'}},
 			]
 		}
 	)

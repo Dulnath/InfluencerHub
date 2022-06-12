@@ -90,9 +90,11 @@ function View() {
                         Regardless of the kind of information they contain, all paragraphs share certain characteristics. One of the most 
                         important of these is a topic sentence.</p></Row> 
                    <button className={styles.button}>
-                       Follow
-                        
+                       Follow 
                     </button> 
+                    <button className={styles.button1}>
+                       Report
+                     </button> 
                   </div>
                   </div>
                   </div>

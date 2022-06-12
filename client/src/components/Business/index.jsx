@@ -10,6 +10,8 @@ import Login from '../Login';
 import { useParams, useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
 //import user from "../../../../server/models/user";
+import Dropdown from 'react-bootstrap/Dropdown';
+import { DropdownButton } from "react-bootstrap";
 
 
 function Business(props) {
@@ -44,8 +46,20 @@ function Business(props) {
 		<div className={styles.main_container}>
 			<nav className={styles.navbar}>
 				<h1>InfluencerHub</h1>
-				<h2> User:{fname}</h2>
-                <img src={image} className={styles.image1_img} alt="..."/>
+				<Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+  <h7>{fname}</h7> &ensp;
+  <img src={image} className={styles.image1_img} alt="..."/>
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+  
+               
 
 				<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
 					Logout
