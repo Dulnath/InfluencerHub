@@ -1,26 +1,30 @@
 import React from 'react';
 import {useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button} from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+//import Card from 'react-bootstrap/Card';
 import {Container,Row,Col,Card,CardGroup} from 'react-bootstrap'
 import Login from '../Login';
+import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 
 
 
-function Detail() {
+function DetailM() {
     const [listOfUsers, setListOfUsers] = useState([]);
     const loggedInUser = localStorage.getItem("token");
     const navigate = useNavigate();
-  
+    
 
 
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
-        axios.get("http://localhost:5000/api/users/getUsers").then((response) => {
+        axios.get("http://localhost:8080/api/users/getUsers").then((response) => {
              setListOfUsers(response.data);
         })
     }, [])
@@ -47,7 +51,7 @@ if(loggedInUser){
     
 
             {listOfUsers.map((user,id) => {
-               if(user.category==="influencer"){
+               if(user.category==="business"){
                 return (
                     
                     <React.Fragment>
@@ -104,4 +108,4 @@ if(loggedInUser){
     
 };
 
-export default Detail;
+export default DetailM;

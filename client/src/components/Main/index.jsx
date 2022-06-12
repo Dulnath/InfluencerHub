@@ -1,28 +1,29 @@
 import styles from "./styles.module.css";
-import Search from "../Search";
+import SearchM from "../SearchM";
 import ParseJwt from "../../utilities/ParseJwt";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from "react-router-dom";
+import {  useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
 import Login from '../Login/index'
 import { Outlet, Link } from "react-router-dom";
 
 function Main(props) {
-	const loggedInUser = localStorage.getItem("token");
-	const cUser = ParseJwt(loggedInUser);
-	const [fname, setUserName] = useState('');
-	const navigate = useNavigate();
+    //const loggedInUser = localStorage.getItem("token");
+    const [fname, setUserName] = useState('');
+    const navigate = useNavigate();
+	const loggedInUser = localStorage.getItem('token')
 
-	const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
+	//logout function
+		const handleLogout = () => {
+			localStorage.removeItem("token");
+			window.location.reload();
+		};
 
-
-	useEffect(() => {
+    //By this,we are retrieving the firstName of user
+    useEffect(() => {
 		const userToken = localStorage.getItem("token");
 		const user = ParseJwt(userToken);
 		if (userToken) {
@@ -50,21 +51,21 @@ function Main(props) {
 
 				</nav>
 
-				<h2><button className={styles.white_btn1} onClick={() => { navigate(`/detail`) }}>
-					View All influencers
+			<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detailm`)}}>
+					View All Businesses
 				</button></h2>
 
-				<Search />
-
-			</div>
-		);
-	} else {
-		return (
-			<div>
-				<Login></Login>
-			</div>
-		);
-	}
+			<SearchM />
+	
+		</div>
+	);
+		}else{
+			return(
+				<div>
+					<Login></Login>
+				</div>
+			)
+		}
 };
 
 export default Main;

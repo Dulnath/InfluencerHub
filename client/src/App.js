@@ -28,8 +28,10 @@ import Update from './components/Update/Update'
 import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
+import SearchM from "./components/SearchM";
 import Filter from "./components/Filter";
 import ViewAdmin from './components/ViewAdmin'
+import DetailM from "./components/DetailM";
 
 function App() {
   const user = localStorage.getItem('token');
@@ -65,6 +67,8 @@ function App() {
       <Route path="/business" exact element={<Business />} />
       <Route path ="/payment" exact element={<Payment/>}/>
       <Route path ="/update/:id" element={<Update/>}/>
+      <Route path="/searchm" exact element={<SearchM />} />
+			<Route path="/detailM" exact element={<DetailM />} />
     </Routes>
   );
 };
