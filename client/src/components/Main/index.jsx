@@ -49,13 +49,12 @@ function Main(props) {
 	return (
 		<div className={styles.main_container}>
 		<nav className={styles.navbar}>
-			<h1>InfluencerHub</h1>
-			<Dropdown>
-<Dropdown.Toggle variant="success" id="dropdown-basic">
-{fname} &ensp;
-<img src={image} className={styles.image1_img} alt="..."/>
-</Dropdown.Toggle>
-
+		<h1>InfluencerHub</h1>
+				<Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+  {fname} &ensp;
+  <img src={image} className={styles.image1_img} alt="..."/>
+  </Dropdown.Toggle>
 <Dropdown.Menu>
 <Dropdown.Item href="/view">Profile</Dropdown.Item>
 <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>

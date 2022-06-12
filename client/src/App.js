@@ -13,7 +13,7 @@ import Search from "./components/Search";
 import SearchM from "./components/SearchM";
 import Filter from "./components/Filter";
 import DetailM from "./components/DetailM";
-
+import Report from "./components/Report"
 function App() {
 	const user = localStorage.getItem("token");
 	//const { user } = useContext(AuthContext);
@@ -33,6 +33,7 @@ function App() {
             <Route path="/business" exact element={<Business />} />
 			<Route path="/searchm" exact element={<SearchM />} />
 			<Route path="/detailM" exact element={<DetailM />} />
+			<Route path="/report" exact element={<Report />} />
 		</Routes>
 	);
 }

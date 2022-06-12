@@ -54,8 +54,7 @@ function Business(props) {
 
   <Dropdown.Menu>
     <Dropdown.Item href="/view">Profile</Dropdown.Item>
-    <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-    
+    <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>  
   </Dropdown.Menu>
 </Dropdown>
   
