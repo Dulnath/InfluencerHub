@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import  "./styles.module.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import ParseJwt from "../Utilities/ParseJwt";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 
-const Business = () => {
+const ProfileView = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -110,4 +110,4 @@ const Business = () => {
   );
 };
 
-export default Business;
+export default ProfileView;

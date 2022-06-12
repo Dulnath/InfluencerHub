@@ -24,7 +24,7 @@ function DetailM() {
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
-        axios.get("http://localhost:8080/api/users/getUsers").then((response) => {
+        axios.get("http://localhost:5000/api/users/getUsers").then((response) => {
              setListOfUsers(response.data);
         })
     }, [])

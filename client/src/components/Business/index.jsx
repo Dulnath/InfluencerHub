@@ -10,6 +10,8 @@ import Login from '../Login';
 import { useParams, useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
 //import user from "../../../../server/models/user";
+import Dropdown from 'react-bootstrap/Dropdown';
+import { DropdownButton } from "react-bootstrap";
 
 
 function Business(props) {
@@ -18,7 +20,12 @@ function Business(props) {
     const [fname, setUserName] = useState('');
    
     const navigate = useNavigate();
-		
+	
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
+
     useEffect(() => {
 		const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
@@ -40,25 +47,46 @@ function Business(props) {
 
 
 
-	return (
-		<div className={styles.main_container}>
-			<nav className={styles.navbar}>
-				<h1>InfluencerHub</h1>
-				<h2> User:{fname}</h2>
-                <Link to={`/update/${id}`}><img src={image} className={styles.image1_img} alt="..."/></Link>
-				<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
-					Logout
-				</button>
-				
-			</nav>
+	if(loggedInUser){
+			return (
+				<div className={styles.main_container}>
+					<nav className={styles.navbar}>
+						<h1>InfluencerHub</h1>
+						<Dropdown>
+							<Dropdown.Toggle variant="success" id="dropdown-basic">
+								{fname} &ensp;
+								<img src={image} className={styles.image1_img} alt="..." />
+							</Dropdown.Toggle>
 		
-            <h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
-					View All influencers
-				</button></h2>
-			<Search />
-	
-		</div>
-	);
+							<Dropdown.Menu>
+								<Dropdown.Item><Link to={'/profileview'}>Profile</Link></Dropdown.Item>
+								<Dropdown.Item><Link to={`/update/${id}`}>Settings</Link></Dropdown.Item>
+		
+							</Dropdown.Menu>
+						</Dropdown>
+		  
+					   
+		
+						<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
+							Logout
+						</button>
+						
+					</nav>
+				
+					<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+							View All influencers
+						</button></h2>
+					<Search />
+			
+				</div>
+			);
+	}else{
+		return(
+			<div>
+				<Login></Login>
+			</div>
+		)
+	}
 };
 
 export default Business;

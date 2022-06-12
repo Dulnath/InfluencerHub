@@ -32,7 +32,7 @@ import SearchM from "./components/SearchM";
 import Filter from "./components/Filter";
 import ViewAdmin from './components/ViewAdmin'
 import DetailM from "./components/DetailM";
-
+import ProfileView from "./components/ProfileView";
 function App() {
   const user = localStorage.getItem('token');
   return (
@@ -69,6 +69,7 @@ function App() {
       <Route path ="/update/:id" element={<Update/>}/>
       <Route path="/searchm" exact element={<SearchM />} />
 			<Route path="/detailM" exact element={<DetailM />} />
+      <Route path="/profileview" exact element={<ProfileView />} />
     </Routes>
   );
 };
