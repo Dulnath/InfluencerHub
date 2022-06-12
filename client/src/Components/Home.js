@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -46,7 +46,7 @@ function AllPosts() {
   let navigate = useNavigate();
 
   return (
-    <div className={styles.background}>
+    <div className='background'>
       <h1>All posts</h1>
       <button className={styles.btnGreen}>
         <a href="/add" style={{ textDecoration: "none", color: "white" }}>
@@ -56,101 +56,113 @@ function AllPosts() {
       {listOfPosts.map((posts) => {
         return (
           <div>
-            <Card className={styles.record}>
-              <a href={`/post/${posts._id}`}>
-                <Card.Header>
-                  <b>{posts.PostTopic}</b>
-                </Card.Header>
-              </a>
-              <Card.Body>
-                <Row>
-                  <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
-                </Row>
-                <br />
+            <div className="postDescription">
 
-                <img
-                  src={`${posts.PostImage}`}
-                  alt=""
-                  width="500"
-                  height="300"
-                  loading="eager"
-                ></img>
-                <br />
-                <br />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Button
-                    className="postButton2"
-                    variant="warning"
-                    size="sm"
-                    type="submit"
-                    onClick={() => {
-                      navigate(`/edit/${posts._id}`);
-                    }}
-                  >
-                    Edit Post
-                  </Button>
-                  <br />
-                  <br />
-                  <Button
-                    className="postButton2"
-                    variant="danger"
-                    size="sm"
-                    type="submit"
-                    onClick={() => onDelete(posts._id)}
-                  >
-                    Delete Post
-                  </Button>
-                  <br />
-                  <br />
-                  <Button
-                    size="sm"
-                    type="submit"
-                    onClick={() => {
-                      commentForm(posts._id);
-                    }}
-                  >
-                    Add Comment
-                  </Button>
-                </div>
-              </Card.Body>
-              <Card.Footer>
-                {selected === posts._id
-                  ? openCommentForm && (
-                      <div>
-                        <CommentForm postID={posts._id} />
-                      </div>
-                    )
-                  : null}
+              <Card className={styles.record}>
+                
+                <a href={`/post/${posts._id}`}>
+                  <Card.Header>
+                    <b>{posts.PostTopic}</b>
+                  </Card.Header>
+                </a>
 
-                {listOfComments.filter(
-                  (comment) =>
-                    comment.postId === posts._id && comment.isVisible === true
-                ).length > 0 ? (
-                  <p
+                <Card.Body>
+                  <Link to={`/post/${posts._id}`} style={{ textDecoration: 'none' }}>
+                    <Row>
+                      <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
+                    </Row>
+                    <br />
+                    <div className="image">
+                      <img
+                        src={`${posts.PostImage}`}
+                        alt=""
+                        width="500"
+                        height="300"
+                        loading="eager"
+                      ></img>
+                    </div><br /><br />
+                  </Link>
+                  <div
                     style={{
-                      fontWeight: "500",
-                      textDecorationLine: "underline",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
                     }}
                   >
-                    <a href="#/" onClick={() => viewComments(posts._id)}>View Comments</a>
-                  </p>
-                ) : null}
+                    <Button
+                      size="sm"
+                      variant="outline-secondary"
+                      type="submit"
+                      onClick={() => {
+                        commentForm(posts._id);
+                      }}
+                    >
+                      Add Comment
+                    </Button>
+                    <br />
+                    <br />
+                    <Button
+                      className="postButton2"
+                      variant="outline-success"
+                      size="sm"
+                      type="submit"
+                      onClick={() => {
+                        navigate(`/edit/${posts._id}`);
+                      }}
+                    >
+                      Edit Post
+                    </Button>
+                    <br />
+                    <br />
+                    <Button
+                      className="postButton2"
+                      variant="outline-danger"
+                      size="sm"
+                      type="submit"
+                      onClick={() => onDelete(posts._id)}
+                    >
+                      Delete Post
+                    </Button>
+                  </div>
+                </Card.Body>
+                <Card.Footer style={{ backgroundColor: '#E8FAEA' }}>
+                  <div >
+                    {selected === posts._id
+                      ? openCommentForm && (
+                        <div>
+                          <CommentForm postID={posts._id} />
+                        </div>
+                      )
+                      : null}
 
-                {selected === posts._id
-                  ? openComments && (
-                      <div>
-                        <CommentList postID={posts._id} />
-                      </div>
-                    )
-                  : null}
-              </Card.Footer>
-            </Card>
+                    {listOfComments.filter(
+                      (comment) =>
+                        comment.postId === posts._id && comment.isVisible === true
+                    ).length > 0 ? (
+                      <p
+                        style={{
+                          fontWeight: "500",
+                          textDecorationLine: "underline"
+                        }}
+                      >
+                        <a href="#/" onClick={() => viewComments(posts._id)}>View Comments</a>
+                      </p>
+                    ) : null}
+
+                    {selected === posts._id
+                      ? openComments && (
+                        <div>
+                          <CommentList postID={posts._id} />
+                        </div>
+                      )
+                      : null}
+                  </div>
+
+                </Card.Footer>
+              </Card>
+
+
+            </div>
           </div>
         );
       })}

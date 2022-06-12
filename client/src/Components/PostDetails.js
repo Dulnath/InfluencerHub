@@ -37,56 +37,74 @@ export default function PostDetails() {
 
   return (
     <div>
-      <Card border="dark">
-        <Card.Header>
-          <h2>Topic: {PostTopic}</h2>
-          <h2>Description: {Postdescription}</h2>
-        </Card.Header>
-        <Card.Body>
-          <img
-            src={`${PostImage}`}
-            alt=""
-            width="500"
-            height="300"
-            loading="eager"
-          ></img>
-        </Card.Body>
-        <Card.Footer style={{ paddingLeft: "50%" }}>
-          <Button
-            size="lg"
-            type="submit"
-            onClick={() => {
-              commentForm();
-            }}
-          >
-            Add Comment
-          </Button>
-        </Card.Footer>
-        {
-          openCommentForm && (
-            <div>
-              <CommentForm postID={id} />
+      <div className="postDescription">
+        <Card border="dark">
+          <Card.Header>
+            <p style={{ fontWeight: 'bold' }}>{PostTopic}</p>
+          </Card.Header>
+          <Card.Body>
+            <p>{Postdescription}</p>
+            <div className="image">
+              <img
+                src={`${PostImage}`}
+                alt=""
+                width="500"
+                height="300"
+                loading="eager"
+              ></img>
+            </div><br/>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}>
+              <Button
+                variant="outline-success"
+                size="lg"
+                type="submit"
+                onClick={() => {
+                  commentForm();
+                }}
+              >
+                Add Comment
+              </Button>
             </div>
-          )
-        }
+          </Card.Body>
+          <Card.Footer style={{ backgroundColor: '#E8FAEA' }}>
+          <div >
+            {
+              openCommentForm && (
+                <div>
+                  <CommentForm postID={id} />
+                </div>
+              )
+            }
 
-        {commentList.filter((comment) => comment.postId === id && comment.isVisible === true).length > 0 ? (
-          <p
-            style={{
-              fontWeight: "500",
-              textDecorationLine: "underline",
-            }}
-          >
-            <a href="#/" onClick={() => viewComments()}>View Comments</a>
-          </p>
-        ) : null}
+            {commentList.filter((comment) => comment.postId === id && comment.isVisible === true).length > 0 ? (
+              <p
+                style={{
+                  fontWeight: "500",
+                  textDecorationLine: "underline",
+                  marginLeft: '2%'
+                }}
+              >
+                <a href="#/" onClick={() => viewComments()}>View Comments</a>
+              </p>
+            ) : null}
 
-        {openComments && (
-          <div>
-            <CommentList postID={id} />
+            {openComments && (
+              <div style={{ marginLeft: '2%' }}>
+                <CommentList postID={id} />
+              </div>
+            )}
           </div>
-        )}
-      </Card>
+          </Card.Footer>
+          
+
+        </Card>
+      </div>
+
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, CloseButton, Form, Card } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 
 function EditPost() {

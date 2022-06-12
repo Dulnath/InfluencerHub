@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Card, Image, } from 'react-bootstrap';
+import { Button, Card, Image, Dropdown, DropdownButton } from 'react-bootstrap';
 import Reply from './Reply';
 import ReportDescription from './ReportDescription';
 import EditComment from './EditComment';
@@ -13,6 +13,7 @@ function CommentList(props) {
     const [openReport, setOpenReport] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
     const [selected, setSelected] = useState();
+    const [newestFirst, setNewestFirst] = useState(true);
 
     const displayReplyWindow = (id) => {
         setSelected(id);
@@ -52,10 +53,25 @@ function CommentList(props) {
         })
     }, [])
 
+    const filteredList = commentList.filter((comments) => comments.responseTo === null && comments.isVisible === true && comments.postId === props.postID)
+
+    let sortedList;
+    if (newestFirst === true) {
+        sortedList = filteredList.sort((a, b) => new Date(b.time) - new Date(a.time));
+    } else {
+        sortedList = filteredList.sort((a, b) => new Date(a.time) - new Date(b.time))
+    }
+
     return (
         <div>
+            <div>
+                <DropdownButton variant="success" title="Sort By">
+                    <Dropdown.Item onClick={() => setNewestFirst(true)}>Newest First</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setNewestFirst(false)}>Oldest first</Dropdown.Item>
+                </DropdownButton>
+            </div>
             <div className="commentList">
-                {commentList.filter((comments) => comments.responseTo === null && comments.isVisible === true && comments.postId === props.postID).map((comments, index) => {
+                {sortedList.map((comments, index) => {
                     return (
                         <div>
                             <Card className="comment">

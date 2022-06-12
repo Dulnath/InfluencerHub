@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import { Button, Card, Form } from 'react-bootstrap';
 import axios from 'axios';
-import CommentList from "./CommentList";
 
 function CommentForm(props) {
     const [comment, setComment] = useState();
