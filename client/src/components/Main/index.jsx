@@ -14,6 +14,7 @@ import Login from '../Login/index'
 function Main(props) {
 	//const loggedInUser = localStorage.getItem("token");
 	const [fname, setUserName] = useState('');
+	const [category,setCategory] = useState('');
 	const [id, setId] = useState('');
 	const navigate = useNavigate();
 	const loggedInUser = localStorage.getItem('token')
@@ -33,6 +34,7 @@ function Main(props) {
 
 				setUserName(response.data.firstName);
 				setId(response.data._id);
+				setCategory(response.data.category)
 			})
 			if (response.staus !== 'ok') {
 				setUserName('default');
@@ -80,7 +82,7 @@ function Main(props) {
 							View All Businesses
 						</button></h2>
 
-						<SearchM />
+						<SearchM category={category}/>
 					</div>
 				</nav>
 			</div>

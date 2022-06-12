@@ -18,6 +18,7 @@ function Business(props) {
     const loggedInUser = localStorage.getItem("token");
 	const [id,setUsrId] = useState('')
     const [fname, setUserName] = useState('');
+	const [category,setCategory] = useState('');
    
     const navigate = useNavigate();
 	
@@ -35,6 +36,7 @@ function Business(props) {
 			
             setUserName(response.data.firstName);
 			setUsrId(response.data._id);
+			setCategory(response.data.category)
 			console.log(response.data._id);
 		})
 		if(response.staus!=='ok'){
@@ -76,7 +78,7 @@ function Business(props) {
 					<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
 							View All influencers
 						</button></h2>
-					<Search />
+					<Search category={category}/>
 			
 				</div>
 			);

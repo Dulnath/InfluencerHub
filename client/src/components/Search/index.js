@@ -4,8 +4,9 @@ import image from "../../images/user.jpg";
 import { Table,Row} from "react-bootstrap";
 import styles from "./styles.module.css";
 import { useNavigate } from 'react-router-dom';
+import { propTypes } from "react-bootstrap/esm/Image";
 
-function Search() {
+function Search(props) {
   const [data, setData] = useState([]);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function Search() {
     })
     .catch((err)=>console.log(err));
   };
-
+  console.log('test')
 
  
   return (
@@ -90,7 +91,7 @@ function Search() {
                 </Table>
               ) : (
                 data.map((item, index) => (
-                  (item.category!=='admin'&&item.adminVerified) ?(
+                  (item.category!=='admin'&&item.adminVerified&&item.category!==props.category) ?(
                     <div class="card-deck">
                       <div class="card">
 

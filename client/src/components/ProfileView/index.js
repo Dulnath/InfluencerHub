@@ -10,7 +10,7 @@ const ProfileView = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    navigate('/login');
   };
 
   const handleEdit =(e)=>{

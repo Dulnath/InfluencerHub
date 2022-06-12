@@ -57,7 +57,7 @@ function Menu(props){
                             <Nav.Link><Link to='/adminSettings' className={styles.menu_item}>Settings</Link></Nav.Link>
                             <Nav.Link onClick={handleLogout}><Link to='/' className={styles.menu_item}>Log out</Link></Nav.Link>
                         </Nav>
-                        <Navbar.Brand Style={"padding:0px 0px 0px 450px; color:#f0f0f0"}>{fname}</Navbar.Brand>
+                        <Navbar.Brand Style={"padding:0px 0px 0px 450px; color:#f0f0f0"}><Link to={'/editaccount'} className="text-decoration-none text-light">{fname}</Link></Navbar.Brand>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
