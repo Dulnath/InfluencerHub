@@ -7,7 +7,7 @@ function Reply(props) {
 
     console.log(props.postID);
     console.log(props.value);
-    const parentID = props.postID;
+    const parentID = props.parentID;
 
     const addComment = (event) => {
         event.preventDefault();

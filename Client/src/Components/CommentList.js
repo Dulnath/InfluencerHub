@@ -33,7 +33,6 @@ function CommentList() {
     const deleteComment = (id) => {
         axios.delete(`http://localhost:5000/deleteComment/${id}`)
             .then((res) => {
-                //console.log(res);
                 console.log(res.data);
             })
 
@@ -107,7 +106,7 @@ function CommentList() {
                             {(selected === comments._id) ?
                                 openReplyWindow &&
                                 < div >
-                                    <Reply value={index} postID={comments._id} />
+                                    <Reply value={index} parentID={comments._id} />
                                 </div> : null
                             }
 
