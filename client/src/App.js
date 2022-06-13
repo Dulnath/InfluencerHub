@@ -51,12 +51,12 @@ function App() {
         <Route path="firstlogin" element={<FirstLogin />} />
         <Route path="editaccount" element={<EditAccount />} />
       </Route>
-      {user && <Route path="/" exact element={<Main />} />}
+      {user && <Route path="/login" exact element={<Login />} />}
 			<Route path="/signup" exact element={<Signup />} />
       <Route path="/signupb" exact element={<SignupBusiness />} />
       <Route path="/category" exact element={<Category />} />
 			<Route path="/login" exact element={<Login />} />
-			<Route path="/" element={<Navigate replace to="/login" />} />
+			<Route path="/" element={<Main/>} />
 			<Route path="/users/:id/verify/:token" element={<EmailVerify />} />
 			<Route path="/forgot-password" element={<ForgotPassword />} />
 			<Route path="/password-reset/:id/:token" element={<PasswordReset />} />

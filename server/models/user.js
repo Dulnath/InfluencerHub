@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 	restoreDate:{type:Date,required:false},
 	verified:{type:Boolean,default:false},
 	isActive:{type:Boolean,default:true},
-	status:{ type: String, required: false },
+	
 	img:{ type: String, required: false },
 });
 

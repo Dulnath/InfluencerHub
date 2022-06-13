@@ -13,8 +13,8 @@ const Signup = () => {
 		email: "",
 		password: "",
 		category: "",
-		status: "",
-		img:"",
+		
+
 		category:'influencer'
 	});
 	const [error, setError] = useState("");
@@ -97,15 +97,6 @@ const Signup = () => {
 							className={styles.input}
 						/>
 
-						<input
-							type="text"
-							placeholder="Status"
-							name="status"
-							onChange={handleChange}
-							value={data.status}
-							required
-							className={styles.input}
-						/>
 
 
 						{error && <div className={styles.error_msg}>{error}</div>}

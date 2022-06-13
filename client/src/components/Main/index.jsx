@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import SearchM from "../SearchM";
+import Search from "../Search";
 import ParseJwt from "../../utilities/ParseJwt";
 import React from 'react';
 import { useState, useEffect } from 'react';
@@ -22,7 +22,7 @@ function Main(props) {
 	//logout function
 	const handleLogout = () => {
 		localStorage.removeItem("token");
-		window.location.reload();
+		navigate('/login')
 	};
 
 	//By this,we are retrieving the firstName of user
@@ -42,58 +42,46 @@ function Main(props) {
 		}
 	}, [])
 
-	if (loggedInUser) {
-
+	if(loggedInUser){
 		return (
 			<div className={styles.main_container}>
 				<nav className={styles.navbar}>
 					<h1>InfluencerHub</h1>
-					<h2> User:{fname}</h2>
-					<img src={image} className={styles.image1_img} alt="..." />
-
-					<button className={styles.white_btn} onClick={handleLogout}>
+					<Dropdown>
+						<Dropdown.Toggle variant="success" id="dropdown-basic">
+							{fname} &ensp;
+							<img src={image} className={styles.image1_img} alt="..." />
+						</Dropdown.Toggle>
+	
+						<Dropdown.Menu>
+							<Dropdown.Item><Link to={'/profileview'}>Profile</Link></Dropdown.Item>
+							<Dropdown.Item><Link to={`/update/${id}`}>Settings</Link></Dropdown.Item>
+	
+						</Dropdown.Menu>
+					</Dropdown>
+	  
+				   
+	
+					<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
 						Logout
 					</button>
-
-					<div className={styles.main_container}>
-						<nav className={styles.navbar}>
-							<h1>InfluencerHub</h1>
-							<Dropdown>
-								<Dropdown.Toggle variant="success" id="dropdown-basic">
-									{fname} &ensp;
-									<img src={image} className={styles.image1_img} alt="..." />
-								</Dropdown.Toggle>
-
-								<Dropdown.Menu>
-									<Dropdown.Item><Link to = {'/profileview'}>Profile</Link></Dropdown.Item>
-									<Dropdown.Item><Link to={`/update/${id}`}>Settings</Link></Dropdown.Item>
-
-								</Dropdown.Menu>
-							</Dropdown>
-
-							<button className={styles.white_btn} onClick={handleLogout}>
-								Logout
-							</button>
-
-						</nav>
-						
-
-						<h2><button className={styles.white_btn1} onClick={() => { navigate(`/detailm`) }}>
-							View All Businesses
-						</button></h2>
-
-						<SearchM category={category}/>
-					</div>
+					
 				</nav>
+			
+				<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+						View All Businesses
+					</button></h2>
+				<Search category={category}/>
+		
 			</div>
-					);
-		}else{
-			return(
-				<div>
-					<Login></Login>
-				</div>
-			)
-		}
+		);
+}else{
+	return(
+		<div>
+			<Login></Login>
+		</div>
+	)
+}
 };
 
 export default Main;
