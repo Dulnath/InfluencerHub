@@ -31,11 +31,15 @@ import Search from "./components/Search";
 import Filter from "./components/Filter";
 import ViewAdmin from './components/ViewAdmin'
 import ProfileView from "./components/ProfileView";
+import CreatePost from "./components/posts-and-comments/CreatePost";
+import EditPost from "./components/posts-and-comments/EditPost";
+import AllPosts from "./components/posts-and-comments/AllPosts";
+import PostDetails from "./components/posts-and-comments/PostDetails";
 
 function App() {
   const user = localStorage.getItem('token');
   return (
-    
+
     <Routes>
       <Route path="adminlogin" element={<AdminLogin />}></Route>
       <Route>
@@ -50,26 +54,29 @@ function App() {
         <Route path="editaccount" element={<EditAccount />} />
       </Route>
       {user && <Route path="/login" exact element={<Login />} />}
-			<Route path="/signup" exact element={<Signup />} />
+      <Route path="/signup" exact element={<Signup />} />
       <Route path="/signupb" exact element={<SignupBusiness />} />
       <Route path="/category" exact element={<Category />} />
-			<Route path="/login" exact element={<Login />} />
-			<Route path="/home" element={<Main/>} />
-			<Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-			<Route path="/forgot-password" element={<ForgotPassword />} />
-			<Route path="/password-reset/:id/:token" element={<PasswordReset />} />
-			<Route path="/detail" exact element={<Detail />} />
-			<Route path="/search" exact element={<Search />} />
-			<Route path="/view/:id" exact element={<View />} />
+      <Route path="/login" exact element={<Login />} />
+      <Route path="/home" element={<Main />} />
+      <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
+      <Route path="/detail" exact element={<Detail />} />
+      <Route path="/search" exact element={<Search />} />
+      <Route path="/view/:id" exact element={<View />} />
       <Route path="/viewadmin/:id" exact element={<ViewAdmin />} />
-			<Route path="/filter" exact element={<Filter />} />
+      <Route path="/filter" exact element={<Filter />} />
       <Route path="/business" exact element={<Business />} />
-      <Route path ="/payment" exact element={<Payment/>}/>
-      <Route path ="/update/:id" element={<Update/>}/>
+      <Route path="/payment" exact element={<Payment />} />
+      <Route path="/update/:id" element={<Update />} />
       <Route path="/profileview" exact element={<ProfileView />} />
+      <Route path="/allposts" element={<AllPosts />}></Route>
+      <Route path="/addpost" element={<CreatePost />}></Route>
+      <Route path="/editpost/:id" element={<EditPost />}></Route>
+      <Route path="/post/:id" element={<PostDetails />}></Route>
     </Routes>
   );
 };
 
 export default App;
-

@@ -5,6 +5,7 @@ import React,{ useEffect, useState } from "react";
 import ParseJwt from "../Utilities/ParseJwt";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
+import AllPosts from "../posts-and-comments/AllPosts";
 
 const ProfileView = () => {
   const navigate = useNavigate();
@@ -105,6 +106,9 @@ const ProfileView = () => {
           <Col> </Col>
           <Col></Col>
         </Row>
+      </Container>
+      <Container>
+        <AllPosts></AllPosts>
       </Container>
     </div>
   );

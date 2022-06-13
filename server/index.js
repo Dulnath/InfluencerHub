@@ -14,6 +14,8 @@ const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const passwordResetRoutes = require("./routes/passwordReset");
+const postRoutes = require("./routes/posts");
+const commentsRoute = require('./routes/comments');
 
 const app = express();
 app.use(bodyParser.json());
@@ -22,6 +24,14 @@ app.use(cors());
 connection();
 
 //use api
+app.use(express.json({ limit: "50mb" }));
+app.use(
+  express.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 app.use('/api/useraccounts', useraccounts);
 app.use('/api/reports', reports);
 app.use('/api/comments',comments);
@@ -29,6 +39,8 @@ app.use('/api/usercount', usercount);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/password-reset",passwordResetRoutes);
+app.use(postRoutes);
+app.use(commentsRoute);
 app.use(express.json());
 app.use(cors())
 
@@ -97,6 +109,3 @@ app.listen(port, () => {
     //setInterval(getUserCount,60000);
     //setInterval(getNewUserCount,60000);
 });
-
-
-
