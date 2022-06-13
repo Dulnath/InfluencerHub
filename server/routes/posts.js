@@ -19,8 +19,8 @@ router.post("/post/save", (req, res) => {
 });
 
 //retrieve all posts
-router.get("/posts", (req, res) => {
-  Posts.find({}, (err, result) => {
+router.get("/posts/:id", (req, res) => {
+  Posts.find({PostAuthorID:req.params.id}, (err, result) => {
     if (err) {
       res.json(err);
     } else {

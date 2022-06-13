@@ -54,7 +54,7 @@ function Main(props) {
 						</Dropdown.Toggle>
 	
 						<Dropdown.Menu>
-							<Dropdown.Item><Link to={'/profileview'}>Profile</Link></Dropdown.Item>
+							<Dropdown.Item><Link to={`/profileview/${id}`}>Profile</Link></Dropdown.Item>
 							<Dropdown.Item><Link to={`/update/${id}`}>Settings</Link></Dropdown.Item>
 	
 						</Dropdown.Menu>

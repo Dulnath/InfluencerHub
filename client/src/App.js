@@ -70,7 +70,7 @@ function App() {
       <Route path="/business" exact element={<Business />} />
       <Route path="/payment" exact element={<Payment />} />
       <Route path="/update/:id" element={<Update />} />
-      <Route path="/profileview" exact element={<ProfileView />} />
+      <Route path="/profileview/:id" exact element={<ProfileView />} />
       <Route path="/allposts" element={<AllPosts />}></Route>
       <Route path="/addpost" element={<CreatePost />}></Route>
       <Route path="/editpost/:id" element={<EditPost />}></Route>

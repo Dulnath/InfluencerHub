@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const postSchema = new mongoose.Schema({
   PostAuthor: {
     type: String,
     required: false,
+  },
+  PostAuthorID:{
+    type:Schema.Types.ObjectId,
+    required:false,
   },
   PostTopic: {
     type: String,

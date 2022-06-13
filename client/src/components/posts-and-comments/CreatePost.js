@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import { Form, Button, Card } from "react-bootstrap";
+import ParseJwt from "../Utilities/ParseJwt";
 
 function CreatePost() {
   const [PostTopic, setTopic] = useState();
   const [Postdescription, setDescription] = useState();
   const [PostImage, setPostImage] = useState();
-
+  const [PostAuthorID,setPostAuthorID] = useState();
+  const loggedInUser = localStorage.getItem("token")
+  const user = ParseJwt(loggedInUser)
+  
   const CreatePost = async () => {
+    setPostAuthorID(user._id)
     Axios.post("http://localhost:5000/post/save", {
       PostTopic,
       Postdescription,
       PostImage,
+      PostAuthorID
     }).then((res) => {
       alert("Post created successfully");
       console.log("Post created");

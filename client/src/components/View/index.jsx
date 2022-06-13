@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 import Login from '../Login/index'
-import AllPosts from '../posts-and-comments/AllPosts';
+import AllPostsExternal from '../posts-and-comments/AllPostsExternal';
 
 function View() {
     const loggedInUser = localStorage.getItem("token");
@@ -83,7 +83,7 @@ function View() {
                     </React.Fragment>
                 </div >
                 <Container>
-                    <AllPosts></AllPosts>
+                    <AllPostsExternal id={id}></AllPostsExternal>
                 </Container>
             </div >
 

@@ -6,25 +6,24 @@ import styles from "./styles.module.css";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 
-function AllPosts(props) {
+function AllPostsExternal(props) {
   const [listOfPosts, setListOfPosts] = useState([]);
   const [listOfComments, setListOfComments] = useState([]);
   const [openCommentForm, setOpenCommentForm] = useState();
   const [openComments, setOpenComments] = useState();
   const [selected, setSelected] = useState();
-  const navigate = useNavigate()
 
   function getPosts(uid){
     axios.get(`http://localhost:5000/posts/${uid}`).then((response) => {
       setListOfPosts(response.data);
-    })
+    });
 
   }
 
   function getComments(){
     axios.get(`http://localhost:5000/getComments`).then((response) => {
       setListOfComments(response.data);
-    })
+    });
   }
 
   useEffect(() => {
@@ -53,14 +52,13 @@ function AllPosts(props) {
     setOpenComments(!openComments);
   };
 
+  let navigate = useNavigate();
   console.log(props.id);
   if(listOfPosts.length!==0){
     return (
       <div className='background'>
         <h1>Posts</h1>
-        <button className={styles.btnGreen} onClick={()=>{navigate("/addpost")}}>
-            Create New Post
-        </button>
+        <hr/>
         {listOfPosts.map((posts,id) => {
           return (
             <div key={posts._id}>
@@ -157,14 +155,11 @@ function AllPosts(props) {
     return(
       <div className='background'>
         <h1>Posts</h1>
-        <button className={styles.btnGreen} onClick={()=>{navigate("/addpost")}}>
-            Create New Post
-        </button>
-        <p>You have no posts</p>
+        <p>This user has no posts</p>
       </div>
     )
   }
   
 }
 
-export default AllPosts;
+export default AllPostsExternal;
