@@ -4,7 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container,Row,Col,Card,CardGroup} from 'react-bootstrap'
 import Login from '../Login';
-import { useNavigate } from 'react-router-dom';
+import { createPath, useNavigate } from 'react-router-dom';
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 
@@ -20,8 +20,9 @@ function Detail() {
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
-        axios.get("http://localhost:5000/api/users/getUsers").then((response) => {
+        axios.get("http://localhost:5000/api/useraccounts").then((response) => {
              setListOfUsers(response.data);
+             console.log(response.data);
         })
     }, [])
 
@@ -44,52 +45,46 @@ if(loggedInUser){
                         }}
                         ></div>
             <h1>All Users</h1>
-    
-
             {listOfUsers.map((user,id) => {
-               if(user.category==="influencer"){
+               if(user.category==="business"){
                 return (
-                    
+
                     <React.Fragment>
                         <CardGroup>
                             <Card>
-                        <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{border:'2px solid #000000', paddingTop:"5px", paddingBottom:"5px" ,paddingLeft:"5px"}} key={user._id}>
-                                    
+                                <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} key={user._id}>
+
                                     <div class="card-deck">
-                  <div class="card" className={styles.card}>
-   
-                  <div class="card-body">  
-                 
-                     <img src={image} className={styles.image_img} alt="..."/>
-                     <h3 class="card-title">{user.firstName+" "+user.lastName}</h3>
-                   <Row> <h5>{user.category}</h5></Row> 
-                    <Row> <h10>{user.email}</h10></Row>  
-                   <Row>
-                    <Col xs={3} md={2}><b> <button className="btn btn-success"
-                        onClick={() => {navigate(`/view/${user._id}`)}}
-                        >View 
-                    </button> </b></Col>
-                    </Row>
-                  </div>
-                  </div>
-                  </div>
-                                   
-                                       
-                                   
-                                    
+                                        <div class="card" className={styles.card}>
+
+                                            <div class="card-body">
+
+                                                <img src={image} className={styles.image_img} alt="..." />
+                                                <h3 class="card-title">{user.firstName + " " + user.lastName}</h3>
+                                                <Row> <h5>{user.category}</h5></Row>
+                                                <Row> <h10>{user.email}</h10></Row>
+                                                <Row>
+                                                    <Col xs={3} md={2}><b> <button className="btn btn-success"
+                                                        onClick={() => { navigate(`/view/${user._id}`) }}
+                                                    >View
+                                                    </button> </b></Col>
+                                                </Row>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </Container>
-                                </Card>
+                            </Card>
                         </CardGroup>
-                        </React.Fragment>
-      
-
-
-
-
-
+                    </React.Fragment>
+    
                 );
+               }else{
+                return(
+                    <div></div>
+                )
                }
             })}
+                    
         </div >
 </div >
     );

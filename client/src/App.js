@@ -21,7 +21,7 @@ import SignupBusiness from './components/Signup/indexb';
 import Login from "./components/Login";
 import Business from "./components/Business"
 import EmailVerify from "./components/EmailVerify";
-import ForgotPassword from "./components/ForgotPassword";
+import ForgotPassword from "./components/ForgotPassword/index";
 import PasswordReset from "./components/PasswordReset";
 import Payment from './components/Payment'
 import Update from './components/Update/Update'

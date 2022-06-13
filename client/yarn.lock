@@ -16976,7 +16976,7 @@
   "resolved" "https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.2.3.tgz"
   "version" "3.2.3"
 
-"webpack@^2.0.0 || ^3.0.0 || ^4.0.0", "webpack@^3.0.0 || ^4.0.0", "webpack@^4.0.0", "webpack@^4.4.0", "webpack@>=2", "webpack@>=2.0.0 <5.0.0", "webpack@>=4.43.0 <6.0.0", "webpack@2 || 3 || 4", "webpack@4.28.3":
+"webpack@^2.0.0 || ^3.0.0 || ^4.0.0", "webpack@^3.0.0 || ^4.0.0", "webpack@^4.0.0", "webpack@^4.28.3", "webpack@^4.4.0", "webpack@>=2", "webpack@>=2.0.0 <5.0.0", "webpack@>=4.43.0 <6.0.0", "webpack@2 || 3 || 4", "webpack@4.28.3":
   "integrity" "sha512-vLZN9k5I7Nr/XB1IDG9GbZB4yQd1sPuvufMFgJkx0b31fi2LD97KQIjwjxE7xytdruAYfu5S0FLBLjdxmwGJCg=="
   "resolved" "https://registry.npmjs.org/webpack/-/webpack-4.28.3.tgz"
   "version" "4.28.3"
