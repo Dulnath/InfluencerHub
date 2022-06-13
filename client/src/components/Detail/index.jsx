@@ -7,12 +7,14 @@ import Login from '../Login';
 import { createPath, useNavigate } from 'react-router-dom';
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
+import ParseJwt from '../../utilities/ParseJwt';
 
 
 
 function Detail() {
     const [listOfUsers, setListOfUsers] = useState([]);
     const loggedInUser = localStorage.getItem("token");
+    const userMain = ParseJwt(loggedInUser)
     const navigate = useNavigate();
   
 
@@ -46,7 +48,7 @@ if(loggedInUser){
                         ></div>
             <h1>All Users</h1>
             {listOfUsers.map((user,id) => {
-               if(user.category==="business"){
+               if(user.category!=='admin'&&user.category!==userMain.category){
                 return (
 
                     <React.Fragment>

@@ -2,7 +2,7 @@ import React,{ useState } from "react";
 import axios from "axios";
 import { Link} from "react-router-dom";
 import styles from "./styles.module.css";
-
+import { useNavigate } from 'react-router-dom';
 
 //influencers signup form
 const Signup = () => {
@@ -18,7 +18,7 @@ const Signup = () => {
 		category:'influencer'
 	});
 	const [error, setError] = useState("");
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -33,7 +33,7 @@ const Signup = () => {
 		try {
 			const url = "http://localhost:5000/api/users";
 			const { data: res } = await axios.post(url, data);
-		//	navigate("/login");
+			navigate("/login");
 			console.log(res.message);
 		} catch (error) {
 			if (
@@ -100,7 +100,6 @@ const Signup = () => {
 
 
 						{error && <div className={styles.error_msg}>{error}</div>}
-						{error && <div className={styles.success_msg}>{error}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>

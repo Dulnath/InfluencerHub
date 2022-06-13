@@ -28,10 +28,8 @@ import Update from './components/Update/Update'
 import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
-import SearchM from "./components/SearchM";
 import Filter from "./components/Filter";
 import ViewAdmin from './components/ViewAdmin'
-import DetailM from "./components/DetailM";
 import ProfileView from "./components/ProfileView";
 
 function App() {
@@ -56,7 +54,7 @@ function App() {
       <Route path="/signupb" exact element={<SignupBusiness />} />
       <Route path="/category" exact element={<Category />} />
 			<Route path="/login" exact element={<Login />} />
-			<Route path="/" element={<Main/>} />
+			<Route path="/home" element={<Main/>} />
 			<Route path="/users/:id/verify/:token" element={<EmailVerify />} />
 			<Route path="/forgot-password" element={<ForgotPassword />} />
 			<Route path="/password-reset/:id/:token" element={<PasswordReset />} />
@@ -68,8 +66,6 @@ function App() {
       <Route path="/business" exact element={<Business />} />
       <Route path ="/payment" exact element={<Payment/>}/>
       <Route path ="/update/:id" element={<Update/>}/>
-      <Route path="/searchm" exact element={<SearchM />} />
-			<Route path="/detailM" exact element={<DetailM />} />
       <Route path="/profileview" exact element={<ProfileView />} />
     </Routes>
   );
