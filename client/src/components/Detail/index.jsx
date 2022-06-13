@@ -9,16 +9,11 @@ import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 import ParseJwt from '../../utilities/ParseJwt';
 
-
-
 function Detail() {
     const [listOfUsers, setListOfUsers] = useState([]);
     const loggedInUser = localStorage.getItem("token");
     const userMain = ParseJwt(loggedInUser)
     const navigate = useNavigate();
-  
-
-
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
@@ -30,10 +25,8 @@ function Detail() {
 
 //   {listOfUsers.filter((user)=>user.category.includes("Business")).map((user,id) =>
     console.log(listOfUsers)
-if(loggedInUser){
-      
-    return (
-      
+if(loggedInUser){      
+    return (     
     
         <div id="allUsers">
             <div className="container" style={{marginTop:"30px"}}>
@@ -69,7 +62,9 @@ if(loggedInUser){
                                                     <Col xs={3} md={2}><b> <button className="btn btn-success"
                                                         onClick={() => { navigate(`/view/${user._id}`) }}
                                                     >View
-                                                    </button> </b></Col>
+                                                    </button>
+                                                    
+                                                     </b></Col>
                                                 </Row>
                                             </div>
                                         </div>
