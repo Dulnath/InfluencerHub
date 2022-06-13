@@ -138,6 +138,28 @@ router.get('/:id', async(req, res) => {
 })
 
 
+// Report a user
+router.put('/addReport/:id', (req, res) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        {
+            description: req.body.description,
+            isVisible: false
+        },
+        (err, updatedUser) => {
+            if (err) {
+                console.log(err);
+                return res.status(400).json({ error: err });
+            }
+
+            return res.status(200).json({
+                success: "Updated succesfully"
+            });
+        }
+    );
+});
+
+
 
 //User.find( { $or: [ { category: "Influencer" || "influencer"} ] } )
 module.exports = router;
