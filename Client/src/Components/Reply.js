@@ -9,6 +9,7 @@ function Reply(props) {
     console.log(props.value);
     const parentID = props.parentID;
 
+    // Add a reply to a parent comment
     const addComment = (event) => {
         event.preventDefault();
 

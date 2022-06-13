@@ -13,6 +13,7 @@ function ReplyList(props) {
     const [openReplies, setOpenReplies] = useState(false);
     const [selected, setSelected] = useState();
 
+    // Open report window 
     const reportWindow = (id) => {
         setSelected(id);
         setOpenReport(!openReport);
@@ -43,6 +44,7 @@ function ReplyList(props) {
         setReplyList(newList);
     }
 
+    // Retrieve all comments
     useEffect(() => {
         axios.get("http://localhost:5000/getComments").then((response) => {
             setReplyList(response.data);
@@ -50,7 +52,9 @@ function ReplyList(props) {
         })
     }, [])
 
+    //Filter replies which belong to the parent comment
     const filteredList = replyList.filter((reply) => reply.responseTo === props.parentID && reply.isVisible === true)
+    
     return (
         <div>
             <div className='replyList'>
