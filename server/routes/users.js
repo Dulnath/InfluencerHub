@@ -5,6 +5,8 @@ const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 const bcrypt = require("bcrypt");
 const userModel= require("../models/user");
+const ReportedAccounts = require('../models/ReportedAccounts');
+
 
 
 //signup
@@ -139,26 +141,20 @@ router.get('/:id', async(req, res) => {
 
 
 // Report a user
-router.put('/addReport/:id', (req, res) => {
-    User.findByIdAndUpdate(
-        req.params.id,
-        {
+router.post('/report', async (req, res) => {
+    try {
+        await ReportedAccounts.create({
+            accountID: req.body.accountID,
+            firstName: req.body.firstName,
             description: req.body.description,
-            isVisible: false
-        },
-        (err, updatedUser) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).json({ error: err });
-            }
-
-            return res.status(200).json({
-                success: "Updated succesfully"
-            });
-        }
-    );
-});
-
+            date: req.body.date
+        })
+        res.json({ status: 'ok' })
+    } catch (err) {
+        res.json({ status: 'error' });
+        console.log(err);
+    }
+})
 
 
 //User.find( { $or: [ { category: "Influencer" || "influencer"} ] } )

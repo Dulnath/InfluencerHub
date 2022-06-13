@@ -1,50 +1,48 @@
-import axios from "axios";
-import { React, useState, useEffect } from "react";
-import { Card, Form, Button } from "react-bootstrap";
+import { React, useState } from "react";
+import { Button, Card, Form } from 'react-bootstrap';
+import axios from 'axios';
+import styles from "./styles.module.css";
+import { useNavigate } from 'react-router-dom';
 
-function Report(props) {
-    const [userList, setUserList] = useState([]);
+
+function CommentForm(props) {
     const [description, setDescription] = useState();
+    const navigate = useNavigate();
 
-    // Retrieve all comments
-    useEffect(() => {
-        axios.get("http://localhost:8080/api/users/getUsers").then((response) => {
-            setUserList(response.data);
-            console.log(response.data);
-        })
-    }, [])
+    const addReport = (event) => {
+        event.preventDefault();
 
-    // Add report description to reported user
-    const reportUser = () => {
-        axios.put(`http://localhost:8080/api/users/addReport/${props._id}`, {
-            description
+        let time = new Date().toLocaleString();
+        let accountID = props.accountID;
+        let firstName = props.firstName;
+        axios.post('http://localhost:8080/api/users/report', {
+            accountID,
+            description,
+            firstName,
+            time
         }).then((res) => {
-            console.log("User has been reported");
-        }).catch((error) => {
-            console.log(error.response);
+            setDescription("");
+            console.log("Reported successfully");
+            navigate(-1);
         });
-
-        const newList = userList.filter((user) => user._id !== props._id);
-        setUserList(newList);
     }
 
     return (
-        <div>
-            <Card>
+        <div className="ReportForm">
+            <Card border="dark" className={styles.card}>
                 <Form>
                     <Form.Group>
                         <Form.Control as="textarea"
-                            rows={6}
-                            placeholder="Enter reason for reporting user"
-                            value = {description}
-                            onChange = {(event) => {setDescription(event.target.value)}}>
+                            value={description}
+                            placeholder="Add a report description"
+                            onChange={(event) => { setDescription(event.target.value) }}>
                         </Form.Control>
-                        <Button variant="danger" onClick={() => {reportUser()}}>Report user</Button>
+                        <Button className="float-end" variant="dark" onClick={addReport}>Report</Button>
                     </Form.Group>
                 </Form>
-            </Card>
+            </Card>           
         </div >
     );
 }
 
-export default Report;
+export default CommentForm;
