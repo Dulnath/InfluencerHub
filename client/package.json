@@ -18,6 +18,7 @@
     "app-b-dashboard": "file:./packages/app-b-dashboard",
     "axios": "^0.24.0",
     "babel-plugin-macros": "^3.1.0",
+    "webpack": "4.28.3",
     "bootstrap": "^5.2.0-beta1",
     "es6-promise": "^4.2.8",
     "isomorphic-fetch": "^3.0.0",

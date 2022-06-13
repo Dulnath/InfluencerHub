@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
 	businessAddress: { type: String, required: false },
 	lastName: { type: String, default:'' },
 	email: { type: String, required: true },
-	phoneNo:{type:String, required:true},
+	phoneNo:{type:String, required:false},
 	password: { type: String, required: true },
 	category:{ type: String, required: true },
 	isFirstLogin:{type:Boolean,default:true},
