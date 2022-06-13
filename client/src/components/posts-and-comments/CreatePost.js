@@ -8,16 +8,16 @@ function CreatePost() {
   const [Postdescription, setDescription] = useState();
   const [PostImage, setPostImage] = useState();
   const [PostAuthorID,setPostAuthorID] = useState();
-  const loggedInUser = localStorage.getItem("token")
-  const user = ParseJwt(loggedInUser)
+  
   
   const CreatePost = async () => {
-    setPostAuthorID(user._id)
+    const loggedInUser = localStorage.getItem("token")
+    const user = ParseJwt(loggedInUser)
     Axios.post("http://localhost:5000/post/save", {
-      PostTopic,
-      Postdescription,
-      PostImage,
-      PostAuthorID
+      PostTopic: PostTopic,
+      Postdescription: Postdescription,
+      PostImage: PostImage,
+      PostAuthorID: user._id
     }).then((res) => {
       alert("Post created successfully");
       console.log("Post created");

@@ -3,19 +3,19 @@ const Posts = require("../models/posts");
 const router = express.Router();
 
 //save posts
-router.post("/post/save", (req, res) => {
-  let newPost = new Posts(req.body);
-  newPost.save((err, post) => {
-    //console.log(post._id);
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
+router.post("/post/save", async(req, res) => {
+  try {
+        await Posts.create({
+          PostTopic: req.body.PostTopic,
+          Postdescription: req.body.Postdescription,
+          PostImage: req.body.PostImage,
+          PostAuthorID: req.body.PostAuthorID
+        })
+        res.json({ status: 'ok' })
+    } catch (err) {
+        res.json({ status: 'error' });
+        console.log(err);
     }
-    return res.status(200).json({
-      success: "Posts saved successfully",
-    });
-  });
 });
 
 //retrieve all posts

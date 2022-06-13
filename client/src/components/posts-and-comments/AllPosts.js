@@ -67,16 +67,13 @@ function AllPosts(props) {
               <div className="postDescription">
   
                 <Card className={styles.record}>
-                  
-                  <a href={`/post/${posts._id}`}>
+                  <Card.Body>
+                    <Link to={`/post/${posts._id}`} className="text-decoration-none">
                     <Card.Header>
                       <b>{posts.PostTopic}</b>
                     </Card.Header>
-                  </a>
-  
-                  <Card.Body>
-                    <Link to={`/post/${posts._id}`} style={{ textDecoration: 'none' }}>
-                      <Row>
+                    </Link>
+                    <Row>
                         <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
                       </Row>
                       <br />
@@ -89,7 +86,6 @@ function AllPosts(props) {
                           loading="eager"
                         ></img>
                       </div><br /><br />
-                    </Link>
                     <div
                       style={{
                         display: "flex",
@@ -97,6 +93,28 @@ function AllPosts(props) {
                         justifyContent: "space-around",
                       }}
                     >
+                      <Button
+                        className="postButton2"
+                        variant="outline-success"
+                        size="sm"
+                        type="submit"
+                        onClick={() => {
+                          navigate(`/editpost/${posts._id}`);
+                        }}
+                      >
+                        Edit Post
+                      </Button>
+                      <br />
+                      <br />
+                      <Button
+                        className="postButton2"
+                        variant="outline-danger"
+                        size="sm"
+                        type="submit"
+                        onClick={() => onDelete(posts._id)}
+                      >
+                        Delete Post
+                      </Button>
                       <Button
                         size="sm"
                         variant="outline-secondary"
