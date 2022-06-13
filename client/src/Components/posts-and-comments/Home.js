@@ -2,9 +2,9 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Card, Button, Col, Row } from "react-bootstrap";
+import styles from "./styles.module.css";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-import styles from "./styles.module.css";
 
 function AllPosts() {
   const [listOfPosts, setListOfPosts] = useState([]);

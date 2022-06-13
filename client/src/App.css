@@ -36,6 +36,11 @@ a {
   padding-top: 1.5%;
 }
 
+.replyList{
+  padding-left: 5%; 
+  padding-top: 1%;
+}
+
 .commentList {
   padding-left: 5%;
   padding-right: 5%;
