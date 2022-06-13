@@ -49,8 +49,8 @@ mongoose
   .catch((err) => console.log("DB connection error", err));
 
 //import routes
-const postRoutes = require("./Routes/posts");
-const commentsRoute = require('./Routes/comments');
+const postRoutes = require("./routes/posts");
+const commentsRoute = require('./routes/comments');
 
 app.use(postRoutes);
 app.use(commentsRoute);
