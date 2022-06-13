@@ -1,11 +1,11 @@
-import { React, useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Card, Image, Dropdown, DropdownButton } from 'react-bootstrap';
 import Reply from './Reply';
 import ReportDescription from './ReportDescription';
 import EditComment from './EditComment';
 import ReplyList from './ReplyList';
-
+import styles from '../../styles/styles.module.css';
 function CommentList(props) {
     const [commentList, setCommentList] = useState([]);
     const [openReplyWindow, setOpenReplyWindow] = useState(false);
@@ -14,6 +14,7 @@ function CommentList(props) {
     const [openEdit, setOpenEdit] = useState(false);
     const [selected, setSelected] = useState();
     const [newestFirst, setNewestFirst] = useState(true);
+    
 
     const displayReplyWindow = (id) => {
         setSelected(id);
@@ -76,7 +77,7 @@ function CommentList(props) {
                             <Card className="comment">
                                 <div>
                                     <div className="avatar">
-                                        <Image src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" fluid="true" roundedCircle="true"></Image>
+                                        <Image src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" fluid="true" roundedCircle="true" className={styles.imageList_img}></Image>
                                     </div>
                                     <p className="userName" style={{ fontWeight: "bold" }}>{comments._id}</p>
                                     <p id="dateTime">{comments.time}</p>

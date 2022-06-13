@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { Card, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
 import ReportDescription from './ReportDescription';
