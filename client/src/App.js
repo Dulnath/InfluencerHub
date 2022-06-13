@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CreatePost from "./Components/CreatePost";
-import EditPost from "./Components/EditPost";
-import Home from "./Components/Home";
-import PostDetails from "./Components/PostDetails";
+import CreatePost from "./Components/posts-and-comments/CreatePost";
+import EditPost from "./Components/posts-and-comments/EditPost";
+import Home from "./Components/posts-and-comments/Home";
+import PostDetails from "./Components/posts-and-comments/PostDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
