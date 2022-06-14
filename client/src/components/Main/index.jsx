@@ -9,6 +9,8 @@ import {  useNavigate} from "react-router-dom";
 import image from "../../images/user.jpg";
 import Dropdown from 'react-bootstrap/Dropdown';
 import {Link,Outlet} from 'react-router-dom'
+import { Button } from "react-bootstrap";
+import { BsBellFill } from "react-icons/bs";
 
 import Login from '../Login/index'
 function Main(props) {
@@ -24,6 +26,10 @@ function Main(props) {
 		localStorage.removeItem("token");
 		navigate('/login')
 	};
+
+	const DisplayNotifications = () => {
+		navigate(`/viewnotifications`)
+	}	
 
 	//By this,we are retrieving the firstName of user
 	useEffect(() => {
@@ -47,6 +53,9 @@ function Main(props) {
 			<div className={styles.main_container}>
 				<nav className={styles.navbar}>
 					<h1>InfluencerHub</h1>
+					<Button onClick={DisplayNotifications}>
+					<BsBellFill/>
+					</Button>
 					<Dropdown>
 						<Dropdown.Toggle variant="success" id="dropdown-basic">
 							{fname} &ensp;

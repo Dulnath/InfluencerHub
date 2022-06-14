@@ -16,6 +16,7 @@ const authRoutes = require("./routes/auth");
 const passwordResetRoutes = require("./routes/passwordReset");
 const postRoutes = require("./routes/posts");
 const commentsRoute = require("./routes/comments");
+const notificationRoutes = require("./routes/notificationsroutes");
 
 const app = express();
 app.use(bodyParser.json());

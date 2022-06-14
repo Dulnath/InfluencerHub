@@ -12,6 +12,8 @@ import image from "../../images/user.jpg";
 //import user from "../../../../server/models/user";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DropdownButton } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { BsBellFill } from "react-icons/bs";
 
 
 function Business(props) {
@@ -26,6 +28,10 @@ function Business(props) {
 		localStorage.removeItem("token");
 		window.location.reload();
 	};
+
+	const DisplayNotifications = () => {
+		navigate(`/viewnotifications`)
+	}
 
     useEffect(() => {
 		const userToken = localStorage.getItem("token");
@@ -54,6 +60,9 @@ function Business(props) {
 				<div className={styles.main_container}>
 					<nav className={styles.navbar}>
 						<h1>InfluencerHub</h1>
+						<Button onClick={DisplayNotifications}>
+					<BsBellFill/>
+					</Button>
 						<Dropdown>
 							<Dropdown.Toggle variant="success" id="dropdown-basic">
 								{fname} &ensp;
