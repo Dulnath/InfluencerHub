@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { Form, Button, Card } from "react-bootstrap";
 import ParseJwt from "../Utilities/ParseJwt";
+import MainMenu from "../Main/MainMenu";
 
 function CreatePost() {
   const [PostTopic, setTopic] = useState();
@@ -26,6 +27,7 @@ function CreatePost() {
 
   return (
     <div>
+      <MainMenu></MainMenu>
       <div className="addPostCard">
         <Card border='dark'>
           <Card.Header>

@@ -12,7 +12,7 @@ import image from "../../images/user.jpg";
 //import user from "../../../../server/models/user";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DropdownButton } from "react-bootstrap";
-
+import MainMenu from "../Main/MainMenu";
 
 function Business(props) {
     const loggedInUser = localStorage.getItem("token");
@@ -52,28 +52,7 @@ function Business(props) {
 	if(loggedInUser){
 			return (
 				<div className={styles.main_container}>
-					<nav className={styles.navbar}>
-						<h1>InfluencerHub</h1>
-						<Dropdown>
-							<Dropdown.Toggle variant="success" id="dropdown-basic">
-								{fname} &ensp;
-								<img src={image} className={styles.image1_img} alt="..." />
-							</Dropdown.Toggle>
-		
-							<Dropdown.Menu>
-								<Dropdown.Item><Link to={'/profileview'}>Profile</Link></Dropdown.Item>
-								<Dropdown.Item><Link to={`/update/${id}`}>Settings</Link></Dropdown.Item>
-		
-							</Dropdown.Menu>
-						</Dropdown>
-		  
-					   
-		
-						<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
-							Logout
-						</button>
-						
-					</nav>
+					<MainMenu></MainMenu>
 				
 					<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
 							View All influencers

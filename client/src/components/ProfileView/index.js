@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 import AllPosts from "../posts-and-comments/AllPosts";
+import MainMenu from "../Main/MainMenu";
 
 const ProfileView = () => {
   const navigate = useNavigate();
@@ -38,18 +39,7 @@ const ProfileView = () => {
 
   return (
     <div className="main_container">
-      <nav className="navbar">
-        <h1>InfluencerHub</h1>
-        <button className="white_btn" onClick={handleLogout}>
-          Logout
-        </button>
-      
-      </nav>
-
-      <div>
-        <div></div>
-      </div>
-
+      <MainMenu></MainMenu>
       <Container>
         <Row>
           <Col>

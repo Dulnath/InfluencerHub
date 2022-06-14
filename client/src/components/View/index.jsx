@@ -8,6 +8,7 @@ import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 import Login from '../Login/index'
 import AllPostsExternal from '../posts-and-comments/AllPostsExternal';
+import MainMenu from '../Main/MainMenu';
 
 function View() {
     const loggedInUser = localStorage.getItem("token");
@@ -34,6 +35,7 @@ function View() {
         return (
 
             <div id="allUsers">
+                <MainMenu></MainMenu>
                 <div className="container" style={{ marginTop: "30px" }}>
                     <div
                         className="container"

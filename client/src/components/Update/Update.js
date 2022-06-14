@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import MainMenu from "../Main/MainMenu";
 
 const Update = () => {
     const navigate = useNavigate();
@@ -54,6 +55,7 @@ const Update = () => {
   }
   return (
     <div>
+    <MainMenu></MainMenu>
     <div className="container">
     {inputs!=null?(<>
       
