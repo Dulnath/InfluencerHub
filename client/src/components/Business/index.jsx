@@ -15,7 +15,6 @@ import { DropdownButton } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { BsBellFill } from "react-icons/bs";
 
-
 function Business(props) {
     const loggedInUser = localStorage.getItem("token");
 	const [id,setUsrId] = useState('')
@@ -48,21 +47,16 @@ function Business(props) {
 		if(response.staus!=='ok'){
 			setUserName('default');
 		}
-	}
-        
+	}       
        
     }, [])
-
-
 
 	if(loggedInUser){
 			return (
 				<div className={styles.main_container}>
 					<nav className={styles.navbar}>
 						<h1>InfluencerHub</h1>
-						<Button onClick={DisplayNotifications}>
-					<BsBellFill/>
-					</Button>
+						
 						<Dropdown>
 							<Dropdown.Toggle variant="success" id="dropdown-basic">
 								{fname} &ensp;
@@ -75,8 +69,9 @@ function Business(props) {
 		
 							</Dropdown.Menu>
 						</Dropdown>
-		  
-					   
+						<Button onClick={DisplayNotifications}>
+					<BsBellFill/>
+					</Button>					   
 		
 						<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
 							Logout

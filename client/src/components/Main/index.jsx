@@ -53,9 +53,7 @@ function Main(props) {
 			<div className={styles.main_container}>
 				<nav className={styles.navbar}>
 					<h1>InfluencerHub</h1>
-					<Button onClick={DisplayNotifications}>
-					<BsBellFill/>
-					</Button>
+					
 					<Dropdown>
 						<Dropdown.Toggle variant="success" id="dropdown-basic">
 							{fname} &ensp;
@@ -68,8 +66,9 @@ function Main(props) {
 	
 						</Dropdown.Menu>
 					</Dropdown>
-	  
-				   
+					<Button onClick={DisplayNotifications}>
+					<BsBellFill/>
+					</Button>			   
 	
 					<button className={styles.white_btn} onClick={() => {navigate(`/login`)}}>
 						Logout
