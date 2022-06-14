@@ -132,8 +132,8 @@ function AccountReports() {
                                                             return (
                                                             <Container fluid="md" className={styles.record}>
                                                                     <Row>
-                                                                        <Col xs={2} md={2}><b>Id </b> : {index}</Col>
-                                                                        <Col xs={2} md={2}><b>Desc </b> : {desc}</Col>
+                                                                        <Col xs={4} md={4}><b>Id </b> : {index}</Col>
+                                                                        <Col xs={4} md={4}><b>Desc </b> : {desc}</Col>
                                                                     </Row>
                                                              </Container>
                                                             )
