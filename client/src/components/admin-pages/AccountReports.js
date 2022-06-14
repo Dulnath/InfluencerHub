@@ -125,9 +125,6 @@ function AccountReports() {
                                             <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                         </Row>
                                         <Row>
-                                            <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
-                                        </Row>
-                                        <Row>
                                             <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
                                             <Col sm={5}></Col>
                                             <Col>

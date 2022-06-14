@@ -1,29 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, Form } from 'react-bootstrap';
 import axios from 'axios';
 import styles from "./styles.module.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import CommentReports from "../admin-pages/CommentReports";
 
 
 function CommentForm(props) {
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [email, setUserEmail] = useState('');
+    const [category, setUserCategory] = useState();
+    const { id } = useParams();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        
+        axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
+            console.log(response.data);
+            setFirstName(response.data.firstName);
+            setUserEmail(response.data.email);
+            setUserCategory(response.data.category);
+        })
+
+        if(!firstName){
+            setFirstName('N/A')
+        }
+
+    }, [])
+
+    console.log(email)
+    
     const addReport = (event) => {
         event.preventDefault();
+        
+        
 
         let time = new Date().toLocaleString();
-        let accountID = props.accountID;
-        let firstName = props.firstName;
         axios.post('http://localhost:5000/api/users/report', {
-            accountID,
+            accountID:id,
             firstName,
             description,
+            email,
+            category,
             time,
 
         }).then((res) => {
             setDescription("");
-            console.log("Reported successfully");
-            navigate(-1);
+            console.log(res);
+            if(res.statusText === "OK"){
+                console.log("Reported successfully");
+                navigate(-1);
+            }else{
+                console.log("Something went wrong")
+            }
+            
         });
     }
 

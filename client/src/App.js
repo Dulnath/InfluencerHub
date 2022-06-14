@@ -74,7 +74,7 @@ function App() {
       <Route path="/addpost" element={<CreatePost />}></Route>
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
-      <Route path="/report" exact element={<Report />} />
+      <Route path="/report/:id" exact element={<Report />} />
     </Routes>
   );
 };

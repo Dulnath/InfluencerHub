@@ -20,7 +20,7 @@ const ReportedAccountSchema = new Schema({
     },
     firstName:{
         type:String,
-        required:true
+        default:'N/A'
     },
     lastName:{
         type:String,
@@ -28,9 +28,13 @@ const ReportedAccountSchema = new Schema({
     },
     phoneNo: {
         type:String,
-        required:true
+        required:false
     },
     email: {
+        type:String,
+        required:true
+    },
+    category:{
         type:String,
         required:true
     },

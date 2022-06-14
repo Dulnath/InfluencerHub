@@ -60,7 +60,7 @@ function View() {
                         <button className={styles.button}>
                             Follow
                         </button>
-                        <button className={styles.button1} onClick = {()=>{navigate('/report')}}>
+                        <button className={styles.button1} onClick = {()=>{navigate(`/report/${id}`)}}>
                             Report
                         </button>
                     </div>

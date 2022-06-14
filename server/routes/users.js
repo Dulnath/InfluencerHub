@@ -64,18 +64,39 @@ router.get('/:id', async(req, res) => {
 
 // Report a user
 router.post('/report', async (req, res) => {
-    try {
-        await ReportedAccounts.create({
-            accountID: req.body.accountID,
-            firstName: req.body.firstName,
-            description: req.body.description,
-            date: req.body.date
-        })
-        res.json({ status: 'ok' })
-    } catch (err) {
-        res.json({ status: 'error' });
-        console.log(err);
+    const report = await ReportedAccounts.findOne({accountID:req.body.accountID});
+
+    if(report){
+        console.log(report._id)
+        try{
+            await ReportedAccounts.findByIdAndUpdate(report._id,{
+                description:req.body.description,
+                date:req.body.date
+            })
+            res.json({ status: 'ok' })
+        }catch (err) {
+            res.json({ status: 'error' });
+            console.log(err);
+        }
+    }else{
+        console.log('new report')
+        try {
+            await ReportedAccounts.create({
+                accountID: req.body.accountID,
+                firstName: req.body.firstName,
+                email: req.body.email,
+                description: req.body.description,
+                category:req.body.category,
+                date: req.body.date
+            })
+            res.json({ status: 'ok' })
+        } catch (err) {
+            res.json({ status: 'error' });
+            console.log(err);
+        }
     }
+
+    
 })
 
 
