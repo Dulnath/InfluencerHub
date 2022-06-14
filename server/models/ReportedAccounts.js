@@ -38,10 +38,10 @@ const ReportedAccountSchema = new Schema({
         type:String,
         required:true
     },
-    description:{
+    description:[{
         type:String,
         required:true
-    },
+    }],
     date: {
         type:String,
         default:FormatDate(Date.now())
