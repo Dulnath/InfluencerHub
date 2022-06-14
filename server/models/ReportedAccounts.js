@@ -15,12 +15,12 @@ function FormatDate(date) {
 
 const ReportedAccountSchema = new Schema({
     accountID:{
-        type:String,
-        required:true
+        type:Schema.Types.ObjectId,
+        required:false
     },
     firstName:{
-        type:String,
-        required:true
+        type:Schema.Types.ObjectId,
+        required:false
     },
     lastName:{
         type:String,
@@ -28,11 +28,11 @@ const ReportedAccountSchema = new Schema({
     },
     phoneNo: {
         type:String,
-        required:true
+        required:false
     },
     email: {
         type:String,
-        required:true
+        required:false
     },
     description:{
         type:String,

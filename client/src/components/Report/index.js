@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 function CommentForm(props) {
     const [description, setDescription] = useState();
     const navigate = useNavigate();
-
     const addReport = (event) => {
         event.preventDefault();
 
@@ -17,9 +16,10 @@ function CommentForm(props) {
         let firstName = props.firstName;
         axios.post('http://localhost:8080/api/users/report', {
             accountID,
-            description,
             firstName,
-            time
+            description,
+            time,
+
         }).then((res) => {
             setDescription("");
             console.log("Reported successfully");
