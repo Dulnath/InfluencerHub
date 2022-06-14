@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row } from 'react-bootstrap'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 import Login from '../Login/index'
@@ -18,6 +18,7 @@ function View() {
     const [email, setUserEmail] = useState();
     const [category, setUserCategory] = useState();
     const { id } = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
 
@@ -59,7 +60,7 @@ function View() {
                         <button className={styles.button}>
                             Follow
                         </button>
-                        <button className={styles.button1}>
+                        <button className={styles.button1} onClick = {()=>{navigate('/report')}}>
                             Report
                         </button>
                     </div>

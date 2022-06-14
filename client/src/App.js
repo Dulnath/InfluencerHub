@@ -35,11 +35,10 @@ import CreatePost from "./components/posts-and-comments/CreatePost";
 import EditPost from "./components/posts-and-comments/EditPost";
 import AllPosts from "./components/posts-and-comments/AllPosts";
 import PostDetails from "./components/posts-and-comments/PostDetails";
-
+import Report from "./components/Report"
 function App() {
   const user = localStorage.getItem('token');
-  return (
-
+  return( 
     <Routes>
       <Route path="adminlogin" element={<AdminLogin />}></Route>
       <Route>
@@ -75,6 +74,7 @@ function App() {
       <Route path="/addpost" element={<CreatePost />}></Route>
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
+      <Route path="/report" exact element={<Report />} />
     </Routes>
   );
 };
