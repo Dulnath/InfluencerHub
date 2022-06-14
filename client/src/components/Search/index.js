@@ -54,7 +54,7 @@ function Search(props) {
 
  
   return (
-    <div class ="container">
+    <div class="container">
       <form
         style={{
           margin: "auto",
@@ -72,49 +72,49 @@ function Search(props) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-<button type="submit" class="btn btn-success">Search</button>
-        
+        <button type="submit" class="btn btn-success">Search</button>
+
         <button type="submit" class="btn btn-primary" onClick={() => handleReset()}>
           Reset
         </button>
       </form>
       <div style={{ marginTop: "100px" }}>
-     
- 
-              {data.length === 0 ? (
-                <Table className="align-center mb-0">
-                  <tr>
-                    <td colSpan={8} className="text-center mb-0">
-                      No Data Found
-                    </td>
-                  </tr>
-                </Table>
-              ) : (
-                data.map((item, index) => (
-                  (item.category!=='admin'&&item.adminVerified&&item.category!==props.category) ?(
-                    <div class="card-deck">
-                      <div class="card">
 
-                        <div class="card-body">
 
-                          <img src={image} className={styles.image_img} alt="..." />
-                          <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>
-                          <Row> <h5>{item.category}</h5></Row>
-                          <Row> <h10>{item.email}</h10></Row>
-                          <button className={styles.button}
-                            onClick={() => { navigate(`/view/${item._id}`) }}
-                          >View
+        {data.length === 0 ? (
+          <Table className="align-center mb-0">
+            <tr>
+              <td colSpan={8} className="text-center mb-0">
+                No Data Found
+              </td>
+            </tr>
+          </Table>
+        ) : (
+          data.map((item, index) => (
+            (item.category !== 'admin' && item.adminVerified && item.category !== props.category) ? (              
+              <div>
+                <div class="card">
 
-                          </button>
+                  <div class="card-body">
 
-                        </div>
-                      </div>
+                    <img src={image} className={styles.image_img} alt="..." />
+                    <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>
+                    <Row> <h5>{item.category}</h5></Row>
+                    <Row> <h10>{item.email}</h10></Row>
+                    <button className={styles.button}
+                      onClick={() => { navigate(`/view/${item._id}`) }}
+                    >View
+
+                    </button>
+
                   </div>
-                  ):(
-                    <div></div>
-                  )
-                ))
-              )}
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )
+          ))
+        )}
           
  
 
