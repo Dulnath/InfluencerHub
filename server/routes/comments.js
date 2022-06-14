@@ -47,6 +47,7 @@ router.delete('/reportedcomments/delete/:id',(req,res)=>{
 router.post('/addComment', async (req, res) => {
     try {
         await Comments.create({
+            commentAuthor: req.body.commentAuthor,
             postId: req.body.postID,
             responseTo: req.body.responseTo,
             comment: req.body.comment,

@@ -15,7 +15,6 @@ function CommentList(props) {
     const [selected, setSelected] = useState();
     const [newestFirst, setNewestFirst] = useState(true);
     
-
     const displayReplyWindow = (id) => {
         setSelected(id);
         setOpenReplyWindow(!openReplyWindow);
@@ -79,7 +78,7 @@ function CommentList(props) {
                                     <div className="avatar">
                                         <Image src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" fluid="true" roundedCircle="true" className={styles.imageList_img}></Image>
                                     </div>
-                                    <p className="userName" style={{ fontWeight: "bold" }}>{comments._id}</p>
+                                    <p className="userName" style={{ fontWeight: "bold" }}>{comments.commentAuthor}</p>
                                     <p id="dateTime">{comments.time}</p>
                                     {(comments.isEdited === true) ?
                                         <p id="edited">(Edited)</p> : null}

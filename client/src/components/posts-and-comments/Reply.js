@@ -1,21 +1,24 @@
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 import { Button, Card, Form } from 'react-bootstrap';
 import axios from 'axios';
+import ParseJwt from "../Utilities/ParseJwt";
 
 function Reply(props) {
     const [comment, setComment] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
 
-    console.log(props.postID);
-    console.log(props.value);
     const parentID = props.parentID;
 
     const addComment = (event) => {
         event.preventDefault();
 
         let commentTime = new Date().toLocaleString();
-        let responseTo = parentID
+        let responseTo = parentID;
+        let commentAuthor = firstName + " " + lastName;
 
         axios.post('http://localhost:5000/addComment', {
+            commentAuthor,
             comment,
             responseTo,
             commentTime
@@ -25,11 +28,19 @@ function Reply(props) {
         });
     }
 
+    useEffect(() => {
+        const userToken = localStorage.getItem("token");
+        const user = ParseJwt(userToken);
+        axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((res)=>{
+            setFirstName(res.data.firstName);
+            setLastName(res.data.lastName);
+        });
+    },[]);
+
     return (
         <div className="reply">
             <Card>
                 <Form>
-                    <p id="replyTo">Replying to {parentID}</p>
                     <Form.Group>
                         <Form.Control as="textarea"
                             value={comment}
