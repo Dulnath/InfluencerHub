@@ -15,7 +15,7 @@ function AllEvents() {
 
     //Retrieve all events
     useEffect(() => {
-        axios.get("/getEvent").then((response) => {
+        axios.get("http://localhost:5000/getEvent").then((response) => {
             setListOfEvents(response.data);
         })
     }, []);
@@ -36,7 +36,7 @@ function AllEvents() {
 
     // Dekete an event
     const handleDelete = (_id) => {
-        axios.delete(`/deleteEvent/${_id}`)
+        axios.delete(`http://localhost:5000/deleteEvent/${_id}`)
             .then((res) => {
                 console.log(res);
                 console.log(res.data);

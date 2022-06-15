@@ -12,7 +12,7 @@ function EditProject(props) {
 
     // Edit a project
     const editProject = () => {
-        axios.put(`/updateProject/${props.projectID}`, {
+        axios.put(`http://localhost:5000/updateProject/${props.projectID}`, {
             projectName,
             projectDescription,
             projectStartDate,
@@ -25,7 +25,7 @@ function EditProject(props) {
 
     // Retrieve a specific project
     useEffect(() => {
-        axios.get(`/getProject/${props.projectID}`).then((res) => {
+        axios.get(`http://localhost:5000/getProject/${props.projectID}`).then((res) => {
             setProjectName(res.data.project.projectName);
             setProjectDescription(res.data.project.projectDescription);
             setProjectStartDate(res.data.project.projectStartDate);

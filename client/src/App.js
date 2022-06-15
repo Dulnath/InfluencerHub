@@ -41,6 +41,7 @@ import AddProject from './components/projects-and-events/AddProject';
 import AllProjects from './components/projects-and-events/AllProjects';
 import AddEvents from './components/projects-and-events/AddEvents';
 import AllEvents from './components/projects-and-events/AllEvents';
+import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
 
 function App() {
   const user = localStorage.getItem('token');
@@ -81,7 +82,8 @@ function App() {
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
       <Route path="/report/:id" exact element={<Report />} />
-      <Route path="/manageprojects" element={<AddProject />} />    
+      <Route path="/manageprojects" element={<ChooseInfluencer />} />    
+      <Route path="/addProject/:influencerID" element={<AddProject/>}/>
       <Route path="/allprojects" element={<AllProjects />} />
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
       <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />

@@ -13,7 +13,7 @@ function EventCard(props) {
 
     // Retrieve a specific event
     useEffect(() => {
-        axios.get(`/getEvent/${props.eventID}`).then((res) => {
+        axios.get(`http://localhost:5000/getEvent/${props.eventID}`).then((res) => {
             setProjectName(res.data.event.projectName);
             setEventName(res.data.event.eventName);
             setEventDescription(res.data.event.eventDescription);

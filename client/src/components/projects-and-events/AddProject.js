@@ -1,17 +1,27 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { Button, CloseButton, Form, Card } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import MainMenu from '../Main/MainMenu';
+import ParseJwt from '../Utilities/ParseJwt';
 
 function AddProject() {
     const [projectName, setProjectName] = useState("");
     const [projectDescription, setprojectDescription] = useState("");
     const [projectStartDate, setprojectStartDate] = useState("");
     const [projectEndDate, setprojectEndDate] = useState("");
+    const [businessName, setBusinessName] = useState("");
+    const [influencerFirstName, setInfluencerFirstName] = useState("");
+    const [influencerLastName, setInfluencerLastName] = useState("");
+
+    const {influencerID} = useParams();
+    const influencerName = influencerFirstName + " " + influencerLastName;
+    console.log(influencerID);
 
     const createProject = () => {
-        Axios.post("/createProject", {
+        Axios.post("http://localhost:5000/createProject", {
+            influencerName,
+            businessName,
             projectName,
             projectDescription,
             projectStartDate,
@@ -21,6 +31,18 @@ function AddProject() {
             console.log("Project created");
         });
     }
+
+    useEffect(() => {
+        const userToken = localStorage.getItem("token");
+        const user = ParseJwt(userToken);
+        Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((res)=>{
+            setBusinessName(res.data.firstName);
+        });
+        Axios.get(`http://localhost:5000/api/users/getuser/${influencerID}`).then((res) => {
+            setInfluencerFirstName(res.data.firstName);
+            setInfluencerLastName(res.data.lastName);
+        })
+    },[]);
 
     let navigate = useNavigate();
 

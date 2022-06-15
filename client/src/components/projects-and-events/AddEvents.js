@@ -16,7 +16,7 @@ function AddEvents() {
 
     // Create an event
     const createEvent = () => {
-        Axios.post("/createEvent", {
+        Axios.post("http://localhost:5000/createEvent", {
             projectName,
             eventName,
             eventDescription,
@@ -30,7 +30,7 @@ function AddEvents() {
 
     // Retrieve data of project
     useEffect(() => {
-        Axios.get(`/getProject/${projectID}`).then((response) => {
+        Axios.get(`http://localhost:5000/getProject/${projectID}`).then((response) => {
             setProjectStartDate(response.data.project.projectStartDate);
             setProjectEndDate(response.data.project.projectEndDate);
         })

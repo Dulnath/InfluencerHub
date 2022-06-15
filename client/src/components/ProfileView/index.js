@@ -22,6 +22,7 @@ const ProfileView = () => {
     window.location = `/update/${id}`
   }
   const [fname, setFName] = useState("");
+  const [userType, setUserType] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const ProfileView = () => {
         .get("http://localhost:5000/api/users/getuser/" + user._id)
         .then((res) => {
           setFName(res.data.firstName);
-
+          setUserType(res.data.category);
         });
     }
   }, []);
@@ -83,6 +84,8 @@ const ProfileView = () => {
             </button>
           </Col>
           <Col>
+          {
+            (userType === 'business') ? 
             <button
             style={{
               border: "solid",
@@ -93,7 +96,9 @@ const ProfileView = () => {
             }} 
              onClick={() => { navigate(`/manageprojects`) }}>
               Manage Projects
-            </button>
+            </button>: null
+          }
+            
           </Col>
           <Col>
             {" "}

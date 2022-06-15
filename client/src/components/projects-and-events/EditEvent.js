@@ -15,7 +15,7 @@ function EditEvent(props) {
 
     // Edit an event
     const editEvent = () => {
-        axios.put(`/updateEvent/${props.eventID}`, {
+        axios.put(`http://localhost:5000/updateEvent/${props.eventID}`, {
             eventName,
             eventDescription,
             eventStartDate,
@@ -28,7 +28,7 @@ function EditEvent(props) {
 
     useEffect(() => {
         // Retrieve a specific event
-        axios.get(`/getEvent/${props.eventID}`).then((res) => {
+        axios.get(`http://localhost:5000/getEvent/${props.eventID}`).then((res) => {
             setEventName(res.data.event.eventName);
             setEventDescription(res.data.event.eventDescription);
             setEventStartDate(res.data.event.eventStartDate);
@@ -36,7 +36,7 @@ function EditEvent(props) {
             console.log(res.data.event);
         });
         // Retrieve a specific project
-        axios.get(`/getProject/${props.projectID}`).then((response) => {
+        axios.get(`http://localhost:5000/getProject/${props.projectID}`).then((response) => {
             setProjectStartDate(response.data.project.projectStartDate);
             setProjectEndDate(response.data.project.projectEndDate);
         })
