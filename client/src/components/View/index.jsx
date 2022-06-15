@@ -10,6 +10,7 @@ import Login from '../Login/index'
 import AllPostsExternal from '../posts-and-comments/AllPostsExternal';
 import MainMenu from '../Main/MainMenu';
 
+//test comment
 function View() {
     const loggedInUser = localStorage.getItem("token");
     const [listOfUsers, setListOfUsers] = useState([]);
