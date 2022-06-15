@@ -102,3 +102,91 @@ a {
   padding-left: 1%;
   font-weight: 500;
 }
+html{
+    background-color:#ADFFC3;
+}
+.projectCard,
+.eventCard {
+    padding: 10%;
+    padding-top: 1.5%;
+    padding-bottom: 3%;
+}
+
+.projectCardHeader,
+.eventCardHeader {
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.closeButton {
+    float: right;
+    font-size: 60%;
+}
+
+#allProjects {
+    padding: 2%;
+}
+
+.details span {
+    display: inline-block;
+}
+
+.details .title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.detailsCard {
+    padding: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+#allEvents {
+    padding: 2%;
+}
+
+.projectButton1 {
+    float: left;
+    margin-right: 1%;
+}
+
+.projectButton2 {
+    float: right;
+    margin-left: 1%;
+}
+
+.eventButton {
+    float: right;
+    margin-left: 1%;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dates {
+    display: inline-block;
+}
+
+.eventCard {
+    background:  #E8FAEA !important;
+}
+
+.cardBody{
+    background-color:  #E8FAEA;
+}
+
+.background .projectCard .cardFooter{
+    padding-left: 50%;
+}
+
+#table td, #table th {
+    border: 1px solid gray;
+    padding: 8px;
+}
+
+/* color: #94FFD4 */

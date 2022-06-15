@@ -10,6 +10,7 @@ import Login from '../Login/index'
 import AllPostsExternal from '../posts-and-comments/AllPostsExternal';
 import MainMenu from '../Main/MainMenu';
 
+//test comment
 function View() {
     const loggedInUser = localStorage.getItem("token");
     const [listOfUsers, setListOfUsers] = useState([]);
@@ -57,12 +58,6 @@ function View() {
                             Almost every piece of writing you do that is longer than a few sentences should be organized into paragraphs.
                             This is because paragraphs show a reader where the subdivisions of an essay begin and end, and thus help the reader
                             see the organization of the essay and grasp its main points.</p></Row>
-                        <button className={styles.button}>
-                            Follow
-                        </button>
-                        <button className={styles.button1} onClick = {()=>{navigate(`/report/${id}`)}}>
-                            Report
-                        </button>
                     </div>
                 </div >
                 <Container>

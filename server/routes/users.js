@@ -70,11 +70,11 @@ router.post('/report', async (req, res) => {
         console.log(report._id)
         try{
             await ReportedAccounts.findByIdAndUpdate(report._id,{
-                description:req.body.description,
+                $push:{description:[req.body.description]},
                 date:req.body.date
             })
             res.json({ status: 'ok' })
-        }catch (err) {
+        }catch(err){
             res.json({ status: 'error' });
             console.log(err);
         }
@@ -85,7 +85,7 @@ router.post('/report', async (req, res) => {
                 accountID: req.body.accountID,
                 firstName: req.body.firstName,
                 email: req.body.email,
-                description: req.body.description,
+                $push:{description:[req.body.description]},
                 category:req.body.category,
                 date: req.body.date
             })

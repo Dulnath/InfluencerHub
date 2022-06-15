@@ -125,8 +125,26 @@ function AccountReports() {
                                             <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                         </Row>
                                         <Row>
-                                            <Card.Text as={Col}><b>Description </b> : {data.description}</Card.Text>
-                                            <Col sm={5}></Col>
+                                            <Card.Text><b>Complaints : </b></Card.Text>
+                                            <Col ><ul>
+                                                    <div className={styles.scrollbox_nano}>
+                                                        {data.description.map((desc, index) => {
+                                                            return (
+                                                            <Container fluid="md" className={styles.record}>
+                                                                    <Row>
+                                                                        <Col xs={4} md={4}><b>Id </b> : {index}</Col>
+                                                                        <Col xs={4} md={4}><b>Desc </b> : {desc}</Col>
+                                                                    </Row>
+                                                             </Container>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                    
+                                                </ul></Col>
+                                                
+                                        </Row>
+                                        <Row>
+                                        <Col sm={8}></Col>
                                             <Col>
                                                 <span className={styles.btnRed} onClick={() => suspendAccount(data)}>Suspend</span>
                                                 <span className={styles.btnGreen} onClick={()=>deleteReport(data._id)}>Dismiss</span>
