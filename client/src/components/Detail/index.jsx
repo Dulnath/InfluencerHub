@@ -8,6 +8,7 @@ import { createPath, useNavigate } from 'react-router-dom';
 import image from "../../images/user.jpg";
 import styles from "./styles.module.css";
 import ParseJwt from '../../utilities/ParseJwt';
+import MainMenu from '../Main/MainMenu';
 
 function Detail() {
     const [listOfUsers, setListOfUsers] = useState([]);
@@ -29,6 +30,7 @@ if(loggedInUser){
     return (     
     
         <div id="allUsers">
+            <MainMenu></MainMenu>
             <div className="container" style={{marginTop:"30px"}}>
                         <div
                         className="container"

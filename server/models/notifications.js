@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const NotificationSchema = new mongoose.Schema(
   {
-    InvolvedInfluencerId: {
+    SenderId: {
       type: String,
       required: true,
     },
-    InvolvedBusinessId: {
+    ReceiverId: {
       type: String,
       required: true,
     },

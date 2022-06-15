@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 import Login from '../Login/index'
 import AllPosts from '../posts-and-comments/AllPosts';
 import ParseJwt from '../../utilities/ParseJwt';
+import MainMenu from '../Main/MainMenu';
 
 function View() {
     const loggedInUser = localStorage.getItem("token");
@@ -43,21 +44,20 @@ function View() {
     
       const NotifyAddProject = async () => {      
         axios.post("http://localhost:5000/createProject", {
-        InvolvedInfluencerId: receiversid,
-          InvolvedBusinessId: sendersid,
+          ReceiverId: receiversid,
+          SenderId: sendersid,
           Eventhappened: "Invitation for project collaboration",
           Notificationmessage: firstNamelog + " " + lastNamelog + " " + "is inviting you to collaborate on a project" ,
         }).then((res) => {
           alert("Notification created successfully");
           console.log("Notification created");
-        });
-    
+        });    
 }
 
 const NotifyAddEvent = async () => {         
-    axios.post("http://localhost:5000/createProject", {
-    InvolvedInfluencerId: receiversid,
-      InvolvedBusinessId: sendersid,
+    axios.post("http://localhost:5000/createEvent", {
+    ReceiverId: receiversid,
+      SenderId: sendersid,
       Eventhappened: "Event addition",
       Notificationmessage: firstNamelog + " " + lastNamelog + " " + "added an event",
     }).then((res) => {
@@ -69,8 +69,8 @@ const NotifyAddEvent = async () => {
 
 const NotifyChangeDatesProject = async () => {          
     axios.post("http://localhost:5000/updateProject", {
-    InvolvedInfluencerId: receiversid,
-      InvolvedBusinessId: sendersid,
+    ReceiverId: receiversid,
+      SenderId: sendersid,
       Eventhappened: "Schedule change of a project",
       Notificationmessage: firstNamelog + " " + lastNamelog + " " + "changed schedules of a project" ,
     }).then((res) => {
@@ -81,8 +81,8 @@ const NotifyChangeDatesProject = async () => {
 
 const NotifyChangeDatesEvent = async () => {          
      axios.post("http://localhost:5000/updateEvent", {
-    InvolvedInfluencerId: receiversid,
-      InvolvedBusinessId: sendersid,
+    ReceiverId: receiversid,
+      SenderId: sendersid,
       Eventhappened: "Schedule change of an event",
       Notificationmessage: firstNamelog + " " + lastNamelog + " " + "changed schedules of an event" ,
     }).then((res) => {
@@ -93,8 +93,8 @@ const NotifyChangeDatesEvent = async () => {
 
 const NotifyMakePayment = async () => {          
     axios.post("http://localhost:5000/makepayment", {
-    InvolvedInfluencerId: receiversid,
-      InvolvedBusinessId: sendersid,
+    ReceiverId: receiversid,
+      SenderId: sendersid,
       Eventhappened: "Business paid an influencer",
       Notificationmessage: firstNamelog + " " + lastNamelog + " " + "paid you." ,
     }).then((res) => {
@@ -105,8 +105,8 @@ const NotifyMakePayment = async () => {
 
 const NotifyRequestPaymentRefund = async () => {          
     axios.post("http://localhost:5000/requestrefund", {
-    InvolvedInfluencerId: receiversid,
-      InvolvedBusinessId: sendersid,
+    ReceiverId: receiversid,
+      SenderId: sendersid,
       Eventhappened: "Business requested a payment refund",
       Notificationmessage: firstNamelog + " " + lastNamelog + " " + "requests a payment refund from you." ,
     }).then((res) => {
@@ -119,6 +119,7 @@ const NotifyRequestPaymentRefund = async () => {
         return (
 
             <div id="allUsers">
+              <MainMenu></MainMenu>
                 <div className="container" style={{ marginTop: "30px" }}>
                     <div
                         className="container"
@@ -129,9 +130,6 @@ const NotifyRequestPaymentRefund = async () => {
                             paddingBottom: "10px"
                         }}
                     ></div>
-
-
-
                     <React.Fragment>
                         <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} >
                         <div class="card-deck">
@@ -189,14 +187,13 @@ const NotifyRequestPaymentRefund = async () => {
                     <AllPosts></AllPosts>
                 </Container>
             </div >
-
-
         );
     }
     else if(loggedInUser && userMain.category==="influencer"){
         return (
 
             <div id="allUsers">
+                <MainMenu></MainMenu>
                 <div className="container" style={{ marginTop: "30px" }}>
                     <div
                         className="container"
@@ -207,9 +204,6 @@ const NotifyRequestPaymentRefund = async () => {
                             paddingBottom: "10px"
                         }}
                     ></div>
-
-
-
                     <React.Fragment>
                         <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} >
                         <div class="card-deck">
@@ -260,7 +254,6 @@ const NotifyRequestPaymentRefund = async () => {
                   </div>
                   </div>
                   </div>
-
                         </Container>
                     </React.Fragment>
                 </div >
@@ -268,8 +261,6 @@ const NotifyRequestPaymentRefund = async () => {
                     <AllPosts></AllPosts>
                 </Container>
             </div >
-
-
         );
     }
     
