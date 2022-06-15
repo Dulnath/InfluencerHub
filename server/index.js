@@ -16,6 +16,8 @@ const authRoutes = require("./routes/auth");
 const passwordResetRoutes = require("./routes/passwordReset");
 const postRoutes = require("./routes/posts");
 const commentsRoute = require('./routes/comments');
+const projectRoutes = require('./routes/projects');
+const eventRoutes = require('./routes/events');
 
 const app = express();
 app.use(bodyParser.json());
@@ -33,6 +35,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/password-reset",passwordResetRoutes);
 app.use(postRoutes);
 app.use(commentsRoute);
+app.use(projectRoutes);
+app.use(eventRoutes);
+
 app.use(express.json());
 app.use(cors())
 
@@ -101,3 +106,5 @@ app.listen(port, () => {
     //setInterval(getUserCount,60000);
     //setInterval(getNewUserCount,60000);
 });
+
+
