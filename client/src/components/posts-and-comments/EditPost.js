@@ -1,7 +1,8 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Form, Card } from "react-bootstrap";
 import axios from "axios";
+import MainMenu from "../Main/MainMenu";
 
 function EditPost() {
   const [PostTopic, setTopic] = useState();
@@ -28,12 +29,11 @@ function EditPost() {
 
   return (
     <div>
+      <MainMenu></MainMenu>
       <div className="editPostCard">
-        <Card border="dark" >
+        <Card border="dark">
           <Card.Header>
-            <div className="editPostHeader">
-              Edit post
-            </div>
+            <div className="editPostHeader">Edit post</div>
           </Card.Header>
           <Card.Body>
             <Form>
@@ -47,7 +47,8 @@ function EditPost() {
                   onChange={(event) => {
                     setTopic(event.target.value);
                   }}
-                ></Form.Control><br />
+                ></Form.Control>
+                <br />
               </Form.Group>
 
               <Form.Group>
@@ -60,29 +61,26 @@ function EditPost() {
                   onChange={(event) => {
                     setDescription(event.target.value);
                   }}
-                ></Form.Control><br />
+                ></Form.Control>
+                <br />
               </Form.Group>
-
-
             </Form>
 
-            <Card.Footer style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around"
-            }}>
+            <Card.Footer
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}
+            >
               <Button variant="warning" type="submit" onClick={EditPost}>
                 Edit Selected Post
               </Button>
             </Card.Footer>
-
           </Card.Body>
         </Card>
-
       </div>
     </div>
-
-
   );
 }
 
