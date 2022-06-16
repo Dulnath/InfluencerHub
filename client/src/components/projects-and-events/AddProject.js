@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
 import MainMenu from "../Main/MainMenu";
 import ParseJwt from "../Utilities/ParseJwt";
+import axios from "axios";
 
 function AddProject() {
   const [projectName, setProjectName] = useState("");
@@ -33,6 +34,19 @@ function AddProject() {
       alert("Project created successfully");
       console.log("Project created");
     });
+
+    axios
+      .post("http://localhost:5000/createProjectNotification", {
+        ReceiverId: receiversid,
+        SenderId: sendersid,
+        Eventhappened: "Invitation for project collaboration",
+        Notificationmessage:
+          businessName + " " + "is inviting you to collaborate on a project",
+      })
+      .then((res) => {
+        alert("Notification created successfully");
+        console.log("Notification created");
+      });
   };
 
   useEffect(() => {
