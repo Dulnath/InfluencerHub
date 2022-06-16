@@ -22,6 +22,7 @@ function AddProject() {
   const createProject = () => {
     Axios.post("http://localhost:5000/createProject", {
       influencerName,
+      influencerID,
       businessName,
       projectName,
       projectDescription,

@@ -12,6 +12,7 @@ function AddEvents() {
   const [projectStartDate, setProjectStartDate] = useState("");
   const [projectEndDate, setProjectEndDate] = useState("");
   const [influencerName, setInfluencerName] = useState("");
+  const [influencerID, setInfluencerID] = useState("");
   const [businessName, setBusinessName] = useState("");
   const { projectName, projectID } = useParams();
 
@@ -19,6 +20,7 @@ function AddEvents() {
   const createEvent = () => {
     Axios.post("http://localhost:5000/createEvent", {
       influencerName,
+      influencerID,
       businessName,
       projectName,
       eventName,
@@ -39,6 +41,7 @@ function AddEvents() {
         setProjectEndDate(response.data.project.projectEndDate);
         setInfluencerName(response.data.project.influencerName);
         setBusinessName(response.data.project.businessName);
+        setInfluencerID(response.data.project.influencerID);
       }
     );
     // eslint-disable-next-line
