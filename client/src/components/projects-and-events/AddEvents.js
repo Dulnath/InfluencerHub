@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CloseButton, Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
-import axios from "axios";
 import MainMenu from "../Main/MainMenu";
-import ParseJwt from "../Utilities/ParseJwt";
 
 function AddEvents() {
   const [eventName, setEventName] = useState("");
@@ -13,14 +11,15 @@ function AddEvents() {
   const [eventEndDate, setEventEndDate] = useState("");
   const [projectStartDate, setProjectStartDate] = useState("");
   const [projectEndDate, setProjectEndDate] = useState("");
-  const { projectName, projectID } = useParams();
-  const loggedInUser = localStorage.getItem("token");
+  const [influencerName, setInfluencerName] = useState("");
   const [businessName, setBusinessName] = useState("");
-  const user = ParseJwt(loggedInUser);
+  const { projectName, projectID } = useParams();
 
   // Create an event
   const createEvent = () => {
     Axios.post("http://localhost:5000/createEvent", {
+      influencerName,
+      businessName,
       projectName,
       eventName,
       eventDescription,
@@ -30,30 +29,7 @@ function AddEvents() {
       alert("Event created successfully");
       console.log("Event created");
     });
-
-    axios
-      .post("http://localhost:5000/createEventNotification", {
-        //ReceiverId: influencerID,
-        SenderId: user._id,
-        Eventhappened: "Event addition",
-        Notificationmessage:
-          businessName +
-          " " +
-          "added an event to a project that you have collaborated",
-      })
-      .then((res) => {
-        alert("Notification created successfully");
-        console.log("Notification created");
-      });
   };
-
-  useEffect(() => {
-    Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then(
-      (res) => {
-        setBusinessName(res.data.firstName);
-      }
-    );
-  }, []);
 
   // Retrieve data of project
   useEffect(() => {
@@ -61,6 +37,9 @@ function AddEvents() {
       (response) => {
         setProjectStartDate(response.data.project.projectStartDate);
         setProjectEndDate(response.data.project.projectEndDate);
+        setInfluencerName(response.data.project.influencerName);
+        setBusinessName(response.data.project.businessName);
+        console.log(influencerName);
       }
     );
     // eslint-disable-next-line
