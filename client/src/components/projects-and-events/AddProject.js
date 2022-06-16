@@ -18,6 +18,9 @@ function AddProject() {
   const loggedInUser = localStorage.getItem("token");
   const user = ParseJwt(loggedInUser);
 
+  const sendersid = user._id;
+  const receiversid = influencerID;
+
   const createProject = () => {
     Axios.post("http://localhost:5000/createProject", {
       influencerName,
