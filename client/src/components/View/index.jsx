@@ -146,24 +146,6 @@ const NotifyRequestPaymentRefund = async () => {
                      <button className={styles.button1} onClick={()=>{navigate(`/report/${id}`)}}>
                        Report
                      </button> 
-                     <button className={styles.button} onClick={NotifyAddProject}>
-                       Add Project
-                     </button>
-                     <button className={styles.button} onClick={NotifyAddEvent}>
-                       Add Event
-                     </button> 
-                     <button className={styles.button} onClick={NotifyChangeDatesProject}>
-                       Change schedules of the project
-                     </button>
-                     <button className={styles.button} onClick={NotifyChangeDatesEvent}>
-                       Change schedules of the event
-                     </button>
-                     <button className={styles.button} onClick={NotifyMakePayment}>
-                       Pay Influencer
-                     </button>
-                     <button className={styles.button} onClick={NotifyRequestPaymentRefund}>
-                       Request a Payment Refund
-                     </button>
                     </div>
                     
                 </div >
