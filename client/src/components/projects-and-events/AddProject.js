@@ -13,10 +13,10 @@ function AddProject() {
   const [businessName, setBusinessName] = useState("");
   const [influencerFirstName, setInfluencerFirstName] = useState("");
   const [influencerLastName, setInfluencerLastName] = useState("");
-
   const { influencerID } = useParams();
   const influencerName = influencerFirstName + " " + influencerLastName;
-  console.log(influencerID);
+  const loggedInUser = localStorage.getItem("token");
+  const user = ParseJwt(loggedInUser);
 
   const createProject = () => {
     Axios.post("http://localhost:5000/createProject", {
@@ -33,8 +33,6 @@ function AddProject() {
   };
 
   useEffect(() => {
-    const userToken = localStorage.getItem("token");
-    const user = ParseJwt(userToken);
     Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then(
       (res) => {
         setBusinessName(res.data.firstName);
