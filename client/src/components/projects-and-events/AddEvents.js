@@ -1,109 +1,165 @@
-import React,{ useEffect, useState } from 'react';
-import { Card, CloseButton, Form, Button } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
-import Axios from 'axios';
-import MainMenu from '../Main/MainMenu';
+import React, { useEffect, useState } from "react";
+import { Card, CloseButton, Form, Button } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import Axios from "axios";
+import axios from "axios";
+import MainMenu from "../Main/MainMenu";
+import ParseJwt from "../Utilities/ParseJwt";
 
 function AddEvents() {
-    const [eventName, setEventName] = useState("");
-    const [eventDescription, setEventDescription] = useState("");
-    const [eventStartDate, setEventStartDate] = useState("");
-    const [eventEndDate, setEventEndDate] = useState("");
-    const [projectStartDate, setProjectStartDate] = useState("");
-    const [projectEndDate, setProjectEndDate] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [eventStartDate, setEventStartDate] = useState("");
+  const [eventEndDate, setEventEndDate] = useState("");
+  const [projectStartDate, setProjectStartDate] = useState("");
+  const [projectEndDate, setProjectEndDate] = useState("");
+  const { projectName, projectID } = useParams();
+  const loggedInUser = localStorage.getItem("token");
+  const [businessName, setBusinessName] = useState("");
+  const user = ParseJwt(loggedInUser);
 
-    const { projectName, projectID } = useParams();
+  // Create an event
+  const createEvent = () => {
+    Axios.post("http://localhost:5000/createEvent", {
+      projectName,
+      eventName,
+      eventDescription,
+      eventStartDate,
+      eventEndDate,
+    }).then((res) => {
+      alert("Event created successfully");
+      console.log("Event created");
+    });
 
-    // Create an event
-    const createEvent = () => {
-        Axios.post("http://localhost:5000/createEvent", {
-            projectName,
-            eventName,
-            eventDescription,
-            eventStartDate,
-            eventEndDate
-        }).then((res) => {
-            alert("Event created successfully");
-            console.log("Event created");
-        });
-    }
+    axios
+      .post("http://localhost:5000/createEventNotification", {
+        //ReceiverId: influencerID,
+        SenderId: user._id,
+        Eventhappened: "Event addition",
+        Notificationmessage:
+          businessName +
+          " " +
+          "added an event to a project that you have collaborated",
+      })
+      .then((res) => {
+        alert("Notification created successfully");
+        console.log("Notification created");
+      });
+  };
 
-    // Retrieve data of project
-    useEffect(() => {
-        Axios.get(`http://localhost:5000/getProject/${projectID}`).then((response) => {
-            setProjectStartDate(response.data.project.projectStartDate);
-            setProjectEndDate(response.data.project.projectEndDate);
-        })
-        // eslint-disable-next-line
-    }, []);
-
-    let navigate = useNavigate();
-
-    return (
-        <div className='background'>
-            <MainMenu></MainMenu>
-            <div className="projectCard">
-                <Card border='dark'>
-                    <Card.Header>
-                        <div className="projectCardHeader">
-                            Add Event
-                            <CloseButton className="closeButton" onClick={() => { navigate(`/allEvents/${projectName}/${projectID}`) }} />
-                        </div>
-                    </Card.Header>
-                    <Card.Body className='cardBody'>
-                        <Form>
-                            <Form.Group>
-                                <h5>Event Name</h5>
-                                <Form.Control as="textarea"
-                                    rows={1}
-                                    placeholder='Add Event Name'
-                                    onChange={(event) => { setEventName(event.target.value) }}>
-                                </Form.Control><br />
-                            </Form.Group>
-
-                            <Form.Group>
-                                <h5>Event Description</h5>
-                                <Form.Control as="textarea"
-                                    rows={3}
-                                    placeholder='Add Event Description'
-                                    onChange={(event) => { setEventDescription(event.target.value) }}>
-                                </Form.Control><br />
-                            </Form.Group>
-
-                            <h5>Event Duration</h5>
-
-                            <Form.Label>Start Date</Form.Label><br />
-                            <div>
-                                <input
-                                    type="date"
-                                    min={projectStartDate}
-                                    max={eventEndDate}
-                                    value={eventStartDate}
-                                    onChange={(event) => { setEventStartDate(event.target.value) }} />
-                            </div><br />
-
-                            <Form.Label>End Date</Form.Label><br />
-                            <div>
-                                <input
-                                    type="date"
-                                    min={eventStartDate}
-                                    max={projectEndDate}
-                                    value={eventEndDate}
-                                    onChange={(event) => { setEventEndDate(event.target.value) }} />
-                            </div><br />
-
-                        </Form>
-
-                    </Card.Body>
-
-                    <Card.Footer className="cardFooter">
-                        <Button variant="success" size="lg" type="submit" onClick={createEvent}>Add Event</Button>
-                    </Card.Footer>
-                </Card>
-            </div>
-
-        </div>
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then(
+      (res) => {
+        setBusinessName(res.data.firstName);
+      }
     );
+  }, []);
+
+  // Retrieve data of project
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/getProject/${projectID}`).then(
+      (response) => {
+        setProjectStartDate(response.data.project.projectStartDate);
+        setProjectEndDate(response.data.project.projectEndDate);
+      }
+    );
+    // eslint-disable-next-line
+  }, []);
+
+  let navigate = useNavigate();
+
+  return (
+    <div className="background">
+      <MainMenu></MainMenu>
+      <div className="projectCard">
+        <Card border="dark">
+          <Card.Header>
+            <div className="projectCardHeader">
+              Add Event
+              <CloseButton
+                className="closeButton"
+                onClick={() => {
+                  navigate(`/allEvents/${projectName}/${projectID}`);
+                }}
+              />
+            </div>
+          </Card.Header>
+          <Card.Body className="cardBody">
+            <Form>
+              <Form.Group>
+                <h5>Event Name</h5>
+                <Form.Control
+                  as="textarea"
+                  rows={1}
+                  placeholder="Add Event Name"
+                  onChange={(event) => {
+                    setEventName(event.target.value);
+                  }}
+                ></Form.Control>
+                <br />
+              </Form.Group>
+
+              <Form.Group>
+                <h5>Event Description</h5>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  placeholder="Add Event Description"
+                  onChange={(event) => {
+                    setEventDescription(event.target.value);
+                  }}
+                ></Form.Control>
+                <br />
+              </Form.Group>
+
+              <h5>Event Duration</h5>
+
+              <Form.Label>Start Date</Form.Label>
+              <br />
+              <div>
+                <input
+                  type="date"
+                  min={projectStartDate}
+                  max={eventEndDate}
+                  value={eventStartDate}
+                  onChange={(event) => {
+                    setEventStartDate(event.target.value);
+                  }}
+                />
+              </div>
+              <br />
+
+              <Form.Label>End Date</Form.Label>
+              <br />
+              <div>
+                <input
+                  type="date"
+                  min={eventStartDate}
+                  max={projectEndDate}
+                  value={eventEndDate}
+                  onChange={(event) => {
+                    setEventEndDate(event.target.value);
+                  }}
+                />
+              </div>
+              <br />
+            </Form>
+          </Card.Body>
+
+          <Card.Footer className="cardFooter">
+            <Button
+              variant="success"
+              size="lg"
+              type="submit"
+              onClick={createEvent}
+            >
+              Add Event
+            </Button>
+          </Card.Footer>
+        </Card>
+      </div>
+    </div>
+  );
 }
 
 export default AddEvents;

@@ -19,7 +19,7 @@ router.post("/createProjectNotification", (req, res) => {
 });
 
 //save event notifications
-router.post("/createEvent", (req, res) => {
+router.post("/createEventNotification", (req, res) => {
   let newNotification = new notification(req.body);
   newNotification.save((err) => {
     if (err) {
