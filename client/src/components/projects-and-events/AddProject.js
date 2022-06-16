@@ -39,7 +39,19 @@ function AddProject() {
         SenderId: user._id,
         Eventhappened: "Invitation for project collaboration",
         Notificationmessage:
-          businessName + " " + "is inviting you to collaborate on a project",
+          businessName +
+          " " +
+          "is inviting you to collaborate on a project named" +
+          " " +
+          projectName +
+          " " +
+          "from" +
+          " " +
+          projectStartDate +
+          " " +
+          "to" +
+          " " +
+          projectEndDate,
       })
       .then((res) => {
         alert("Notification created successfully");

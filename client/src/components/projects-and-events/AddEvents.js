@@ -3,6 +3,8 @@ import { Card, CloseButton, Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
 import MainMenu from "../Main/MainMenu";
+import axios from "axios";
+import ParseJwt from "../Utilities/ParseJwt";
 
 function AddEvents() {
   const [eventName, setEventName] = useState("");
@@ -15,6 +17,8 @@ function AddEvents() {
   const [influencerID, setInfluencerID] = useState("");
   const [businessName, setBusinessName] = useState("");
   const { projectName, projectID } = useParams();
+  const loggedInUser = localStorage.getItem("token");
+  const user = ParseJwt(loggedInUser);
 
   // Create an event
   const createEvent = () => {
@@ -31,6 +35,31 @@ function AddEvents() {
       alert("Event created successfully");
       console.log("Event created");
     });
+
+    axios
+      .post("http://localhost:5000/createEventNotification", {
+        ReceiverId: influencerID,
+        SenderId: user._id,
+        Eventhappened: "Event addition",
+        Notificationmessage:
+          businessName +
+          " " +
+          "added an event to" +
+          " " +
+          projectName +
+          " " +
+          "from" +
+          " " +
+          eventStartDate +
+          " " +
+          "to" +
+          " " +
+          eventEndDate,
+      })
+      .then((res) => {
+        alert("Notification created successfully");
+        console.log("Notification created");
+      });
   };
 
   // Retrieve data of project
