@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Card, Button, Col, Row } from "react-bootstrap";
@@ -12,19 +12,18 @@ function AllPosts(props) {
   const [openCommentForm, setOpenCommentForm] = useState();
   const [openComments, setOpenComments] = useState();
   const [selected, setSelected] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function getPosts(uid){
+  function getPosts(uid) {
     axios.get(`http://localhost:5000/posts/${uid}`).then((response) => {
       setListOfPosts(response.data);
-    })
-
+    });
   }
 
-  function getComments(){
+  function getComments() {
     axios.get(`http://localhost:5000/getComments`).then((response) => {
       setListOfComments(response.data);
-    })
+    });
   }
 
   useEffect(() => {
@@ -53,39 +52,47 @@ function AllPosts(props) {
     setOpenComments(!openComments);
   };
 
-  console.log(props.id);
-  if(listOfPosts.length!==0){
+  if (listOfPosts.length !== 0) {
     return (
-      <div className='background'>
+      <div className="background">
         <h1>Posts</h1>
-        <button className={styles.btnGreen} onClick={()=>{navigate("/addpost")}}>
-            Create New Post
+        <button
+          className={styles.btnGreen}
+          onClick={() => {
+            navigate("/addpost");
+          }}
+        >
+          Create New Post
         </button>
-        {listOfPosts.map((posts,id) => {
+        {listOfPosts.map((posts, id) => {
           return (
             <div key={posts._id}>
               <div className="postDescription">
-  
                 <Card className={styles.record}>
                   <Card.Body>
-                    <Link to={`/post/${posts._id}`} className="text-decoration-none">
-                    <Card.Header>
-                      <b>{posts.PostTopic}</b>
-                    </Card.Header>
+                    <Link
+                      to={`/post/${posts._id}`}
+                      className="text-decoration-none"
+                    >
+                      <Card.Header>
+                        <b>{posts.PostTopic}</b>
+                      </Card.Header>
                     </Link>
                     <Row>
-                        <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
-                      </Row>
-                      <br />
-                      <div className="image">
-                        <img
-                          src={`${posts.PostImage}`}
-                          alt=""
-                          width="500"
-                          height="300"
-                          loading="eager"
-                        ></img>
-                      </div><br /><br />
+                      <Card.Text as={Col}>{posts.Postdescription}</Card.Text>
+                    </Row>
+                    <br />
+                    <div className="image">
+                      <img
+                        src={`${posts.PostImage}`}
+                        alt=""
+                        width="500"
+                        height="300"
+                        loading="eager"
+                      ></img>
+                    </div>
+                    <br />
+                    <br />
                     <div
                       style={{
                         display: "flex",
@@ -131,58 +138,65 @@ function AllPosts(props) {
                       <br />
                     </div>
                   </Card.Body>
-                  <Card.Footer style={{ backgroundColor: '#E8FAEA' }}>
-                    <div >
+                  <Card.Footer style={{ backgroundColor: "#E8FAEA" }}>
+                    <div>
                       {selected === posts._id
                         ? openCommentForm && (
-                          <div>
-                            <CommentForm postID={posts._id} />
-                          </div>
-                        )
+                            <div>
+                              <CommentForm postID={posts._id} />
+                            </div>
+                          )
                         : null}
-  
+
                       {listOfComments.filter(
                         (comment) =>
-                          comment.postId === posts._id && comment.isVisible === true
+                          comment.postId === posts._id &&
+                          comment.isVisible === true
                       ).length > 0 ? (
                         <p
                           style={{
                             fontWeight: "500",
-                            textDecorationLine: "underline"
+                            textDecorationLine: "underline",
                           }}
                         >
-                          <a href="#/" onClick={() => viewComments(posts._id)}>View Comments</a>
+                          <a href="#/" onClick={() => viewComments(posts._id)}>
+                            View Comments
+                          </a>
                         </p>
                       ) : null}
-  
+
                       {selected === posts._id
                         ? openComments && (
-                          <div>
-                            <CommentList postID={posts._id} />
-                          </div>
-                        )
+                            <div>
+                              <CommentList postID={posts._id} />
+                            </div>
+                          )
                         : null}
-                    </div>  
+                    </div>
                   </Card.Footer>
                 </Card>
               </div>
             </div>
-          );  
+          );
         })}
       </div>
     );
-  }else{
-    return(
-      <div className='background'>
+  } else {
+    return (
+      <div className="background">
         <h1>Posts</h1>
-        <button className={styles.btnGreen} onClick={()=>{navigate("/addpost")}}>
-            Create New Post
+        <button
+          className={styles.btnGreen}
+          onClick={() => {
+            navigate("/addpost");
+          }}
+        >
+          Create New Post
         </button>
         <p>You have no posts</p>
       </div>
-    )
+    );
   }
-  
 }
 
 export default AllPosts;
