@@ -19,9 +19,6 @@ function AddProject() {
   const loggedInUser = localStorage.getItem("token");
   const user = ParseJwt(loggedInUser);
 
-  const sendersid = user._id;
-  const receiversid = influencerID;
-
   const createProject = () => {
     Axios.post("http://localhost:5000/createProject", {
       influencerName,
@@ -37,8 +34,8 @@ function AddProject() {
 
     axios
       .post("http://localhost:5000/createProjectNotification", {
-        ReceiverId: receiversid,
-        SenderId: sendersid,
+        ReceiverId: influencerID,
+        SenderId: user._id,
         Eventhappened: "Invitation for project collaboration",
         Notificationmessage:
           businessName + " " + "is inviting you to collaborate on a project",
