@@ -39,7 +39,6 @@ function AddEvents() {
         setProjectEndDate(response.data.project.projectEndDate);
         setInfluencerName(response.data.project.influencerName);
         setBusinessName(response.data.project.businessName);
-        console.log(influencerName);
       }
     );
     // eslint-disable-next-line
