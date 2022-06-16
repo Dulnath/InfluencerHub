@@ -51,8 +51,6 @@ function AllPostsExternal(props) {
     setOpenComments(!openComments);
   };
 
-  let navigate = useNavigate();
-
   if (listOfPosts.length !== 0) {
     return (
       <div className="background">

@@ -1,11 +1,9 @@
-import styles from "./styles.module.css";
-import {  useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import ParseJwt from '../../utilities/ParseJwt';
 import React, { Component }  from 'react';
 import MainMenu from '../Main/MainMenu';
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 function ViewNotifications() {
 
     const [notificationList, setNotificationList] = useState([]);	

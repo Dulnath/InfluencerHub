@@ -13,7 +13,6 @@ import MainMenu from '../Main/MainMenu';
 //test comment
 function View() {
   const loggedInUser = localStorage.getItem("token");  
-  const [listOfUsers, setListOfUsers] = useState([]);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setUserEmail] = useState();
