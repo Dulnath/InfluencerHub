@@ -30,7 +30,7 @@ import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
 import Filter from "./components/Filter";
-import ViewAdmin from './components/ViewAdmin'
+import ViewAdmin from "./components/ViewAdmin";
 import ProfileView from "./components/ProfileView";
 import CreatePost from "./components/posts-and-comments/CreatePost";
 import EditPost from "./components/posts-and-comments/EditPost";
@@ -42,6 +42,7 @@ import AllProjects from './components/projects-and-events/AllProjects';
 import AddEvents from './components/projects-and-events/AddEvents';
 import AllEvents from './components/projects-and-events/AllEvents';
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
+import ViewNotifications from "./components/Notifications/index"
 
 function App() {
   const user = localStorage.getItem('token');
@@ -85,6 +86,7 @@ function App() {
       <Route path="/manageprojects" element={<ChooseInfluencer />} />    
       <Route path="/addProject/:influencerID" element={<AddProject/>}/>
       <Route path="/allprojects" element={<AllProjects />} />
+      <Route path="/viewnotifications" element={<ViewNotifications />}></Route>
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
       <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
     </Routes>

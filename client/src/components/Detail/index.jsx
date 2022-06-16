@@ -10,15 +10,11 @@ import styles from "./styles.module.css";
 import ParseJwt from '../../utilities/ParseJwt';
 import MainMenu from '../Main/MainMenu';
 
-
 function Detail() {
     const [listOfUsers, setListOfUsers] = useState([]);
     const loggedInUser = localStorage.getItem("token");
     const userMain = ParseJwt(loggedInUser)
     const navigate = useNavigate();
-  
-
-
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
