@@ -8,17 +8,15 @@ function CreatePost() {
   const [PostTopic, setTopic] = useState();
   const [Postdescription, setDescription] = useState();
   const [PostImage, setPostImage] = useState();
-  const [PostAuthorID,setPostAuthorID] = useState();
-  
-  
+
   const CreatePost = async () => {
-    const loggedInUser = localStorage.getItem("token")
-    const user = ParseJwt(loggedInUser)
+    const loggedInUser = localStorage.getItem("token");
+    const user = ParseJwt(loggedInUser);
     Axios.post("http://localhost:5000/post/save", {
       PostTopic: PostTopic,
       Postdescription: Postdescription,
       PostImage: PostImage,
-      PostAuthorID: user._id
+      PostAuthorID: user._id,
     }).then((res) => {
       alert("Post created successfully");
       console.log("Post created");
@@ -29,11 +27,9 @@ function CreatePost() {
     <div>
       <MainMenu></MainMenu>
       <div className="addPostCard">
-        <Card border='dark'>
+        <Card border="dark">
           <Card.Header>
-            <div className="addPostHeader">
-              Add new post
-            </div>
+            <div className="addPostHeader">Add new post</div>
           </Card.Header>
           <Card.Body>
             <Form>
@@ -46,7 +42,8 @@ function CreatePost() {
                   onChange={(event) => {
                     setTopic(event.target.value);
                   }}
-                ></Form.Control><br />
+                ></Form.Control>
+                <br />
               </Form.Group>
 
               <Form.Group>
@@ -58,7 +55,8 @@ function CreatePost() {
                   onChange={(event) => {
                     setDescription(event.target.value);
                   }}
-                ></Form.Control><br />
+                ></Form.Control>
+                <br />
               </Form.Group>
 
               <h5>Attach image</h5>
@@ -75,23 +73,24 @@ function CreatePost() {
                     };
                   }
                 }}
-              /><br /><br />
-
+              />
+              <br />
+              <br />
             </Form>
-            <Card.Footer style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around"
-            }}>
+            <Card.Footer
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}
+            >
               <Button variant="primary" type="submit" onClick={CreatePost}>
                 Add New Post
               </Button>
             </Card.Footer>
-
           </Card.Body>
         </Card>
       </div>
-
     </div>
   );
 }

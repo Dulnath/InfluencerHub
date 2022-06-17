@@ -3,7 +3,7 @@ const notification = require("../models/notifications");
 const router = express.Router();
 
 //save project notifications
-router.post("/createProject", (req, res) => {
+router.post("/createProjectNotification", (req, res) => {
   let newNotification = new notification(req.body);
   newNotification.save((err) => {
     if (err) {
@@ -19,7 +19,22 @@ router.post("/createProject", (req, res) => {
 });
 
 //save event notifications
-router.post("/createEvent", (req, res) => {
+router.post("/createEventNotification", (req, res) => {
+  let newNotification = new notification(req.body);
+  newNotification.save((err) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: err,
+      });
+    }
+    return res.status(200).json({
+      success: "Notification saved successfully",
+    });
+  });
+});
+
+router.post("/notificationDeleteProject", (req, res) => {
   let newNotification = new notification(req.body);
   newNotification.save((err) => {
     if (err) {

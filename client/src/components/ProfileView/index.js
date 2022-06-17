@@ -8,19 +8,14 @@ import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 import AllPosts from "../posts-and-comments/AllPosts";
 import MainMenu from "../Main/MainMenu";
-import styles from "./styles.module.css";
 
 const ProfileView = () => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate('/login');
-  };
 
   const handleEdit = (e) => {
-    e.preventDefault()
-    window.location = `/update/${id}`
-  }
+    e.preventDefault();
+    window.location = `/update/${id}`;
+  };
   const [fname, setFName] = useState("");
   const [userType, setUserType] = useState("");
   const { id } = useParams();
@@ -70,41 +65,44 @@ const ProfileView = () => {
             </div>
           </Col>
 
-
           <Col>
-            <button 
-            style={{
-              border: "solid",
-              marginTop: "20px",
-              borderRadius: "10px",
-              padding: "10px",
-              color: "green",
-            }} onClick={() => { navigate(`/allProjects`) }}>
+            <button
+              style={{
+                border: "solid",
+                marginTop: "20px",
+                borderRadius: "10px",
+                padding: "10px",
+                color: "green",
+              }}
+              onClick={() => {
+                navigate(`/allProjects`);
+              }}
+            >
               View Projects
             </button>
           </Col>
           <Col>
-          {
-            (userType === 'business') ? 
-            <button
-            style={{
-              border: "solid",
-              marginTop: "20px",
-              borderRadius: "10px",
-              padding: "10px",
-              color: "green",
-            }} 
-             onClick={() => { navigate(`/manageprojects`) }}>
-              Manage Projects
-            </button>: null
-          }
-            
+            {userType === "business" ? (
+              <button
+                style={{
+                  border: "solid",
+                  marginTop: "20px",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  color: "green",
+                }}
+                onClick={() => {
+                  navigate(`/manageprojects`);
+                }}
+              >
+                Manage Projects
+              </button>
+            ) : null}
           </Col>
           <Col>
             {" "}
-
-            <button onClick={handleEdit}
-
+            <button
+              onClick={handleEdit}
               style={{
                 border: "solid",
                 marginTop: "20px",
@@ -115,10 +113,6 @@ const ProfileView = () => {
             >
               Edit profile
             </button>
-
-
-
-
           </Col>
         </Row>
         <Row>

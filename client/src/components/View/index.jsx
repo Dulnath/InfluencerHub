@@ -9,23 +9,17 @@ import styles from "./styles.module.css";
 import Login from '../Login/index'
 import AllPostsExternal from '../posts-and-comments/AllPostsExternal';
 import MainMenu from '../Main/MainMenu';
-import ParseJwt from '../Utilities/ParseJwt';
+
 //test comment
 function View() {
-  const loggedInUser = localStorage.getItem("token");
-  const userMain = ParseJwt(loggedInUser)
-  const [listOfUsers, setListOfUsers] = useState([]);
+  const loggedInUser = localStorage.getItem("token");  
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setUserEmail] = useState();
   const [category, setUserCategory] = useState();
-  const { id } = useParams();
-  const [firstNamelog, setfirstName] = useState();
-  const [lastNamelog, setlastName] = useState();
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
-  const sendersid = userMain._id;
-  const receiversid = id;
   useEffect(() => {
       axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
 
@@ -33,89 +27,9 @@ function View() {
           setLastName(response.data.lastName);
           setUserEmail(response.data.email);
           setUserCategory(response.data.category);            
-      })
-
-      axios.get(`http://localhost:5000/api/users/getuser/${sendersid}`).then((response) => {
-          
-          setfirstName(response.data.firstName);
-          setlastName(response.data.lastName);
-      }) 
+      })       
 
   }, [])
-  
-    const NotifyAddProject = async () => {      
-      axios.post("http://localhost:5000/createProject", {
-        ReceiverId: receiversid,
-        SenderId: sendersid,
-        Eventhappened: "Invitation for project collaboration",
-        Notificationmessage: firstNamelog + " " + lastNamelog + " " + "is inviting you to collaborate on a project" ,
-      }).then((res) => {
-        alert("Notification created successfully");
-        console.log("Notification created");
-      });    
-}
-
-const NotifyAddEvent = async () => {         
-  axios.post("http://localhost:5000/createEvent", {
-  ReceiverId: receiversid,
-    SenderId: sendersid,
-    Eventhappened: "Event addition",
-    Notificationmessage: firstNamelog + " " + lastNamelog + " " + "added an event",
-  }).then((res) => {
-    alert("Notification created successfully");
-    console.log("Notification created");
-  });
-
-}
-
-const NotifyChangeDatesProject = async () => {          
-  axios.post("http://localhost:5000/updateProject", {
-  ReceiverId: receiversid,
-    SenderId: sendersid,
-    Eventhappened: "Schedule change of a project",
-    Notificationmessage: firstNamelog + " " + lastNamelog + " " + "changed schedules of a project" ,
-  }).then((res) => {
-    alert("Notification created successfully");
-    console.log("Notification created");
-  });
-}
-
-const NotifyChangeDatesEvent = async () => {          
-   axios.post("http://localhost:5000/updateEvent", {
-  ReceiverId: receiversid,
-    SenderId: sendersid,
-    Eventhappened: "Schedule change of an event",
-    Notificationmessage: firstNamelog + " " + lastNamelog + " " + "changed schedules of an event" ,
-  }).then((res) => {
-    alert("Notification created successfully");
-    console.log("Notification created");
-  });
-}
-
-const NotifyMakePayment = async () => {          
-  axios.post("http://localhost:5000/makepayment", {
-  ReceiverId: receiversid,
-    SenderId: sendersid,
-    Eventhappened: "Business paid an influencer",
-    Notificationmessage: firstNamelog + " " + lastNamelog + " " + "paid you." ,
-  }).then((res) => {
-    alert("Notification created successfully");
-    console.log("Notification created");
-  });
-}
-
-const NotifyRequestPaymentRefund = async () => {          
-  axios.post("http://localhost:5000/requestrefund", {
-  ReceiverId: receiversid,
-    SenderId: sendersid,
-    Eventhappened: "Business requested a payment refund",
-    Notificationmessage: firstNamelog + " " + lastNamelog + " " + "requests a payment refund from you." ,
-  }).then((res) => {
-    alert("Notification created successfully");
-    console.log("Notification created");
-  });
-}
-
 
     if (loggedInUser) {
         return (
@@ -146,24 +60,6 @@ const NotifyRequestPaymentRefund = async () => {
                      <button className={styles.button1} onClick={()=>{navigate(`/report/${id}`)}}>
                        Report
                      </button> 
-                     <button className={styles.button} onClick={NotifyAddProject}>
-                       Add Project
-                     </button>
-                     <button className={styles.button} onClick={NotifyAddEvent}>
-                       Add Event
-                     </button> 
-                     <button className={styles.button} onClick={NotifyChangeDatesProject}>
-                       Change schedules of the project
-                     </button>
-                     <button className={styles.button} onClick={NotifyChangeDatesEvent}>
-                       Change schedules of the event
-                     </button>
-                     <button className={styles.button} onClick={NotifyMakePayment}>
-                       Pay Influencer
-                     </button>
-                     <button className={styles.button} onClick={NotifyRequestPaymentRefund}>
-                       Request a Payment Refund
-                     </button>
                     </div>
                     
                 </div >

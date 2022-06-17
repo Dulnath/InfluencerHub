@@ -1,31 +1,29 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import React from 'react'
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
-import Home from './components/admin-pages/Home'
-import AllUsers from './components/admin-pages/AllUsers'
-import NewUsers from './components/admin-pages/NewUsers'
-import AdminLogin from './components/admin-pages/AdminLogin';
-import CommentReports from './components/admin-pages/CommentReports'
-import AccountReports from './components/admin-pages/AccountReports';
-import SuspendedUsers from './components/admin-pages/SuspendedUsers'
-import AdminSettings from './components/admin-pages/AdminSettings'
-import FirstLogin from './components/admin-pages/FirstLogin'
-import Category from './components/Category/category'
-import EditAccount from './components/admin-pages/EditAccount'
+import { Route, Routes } from "react-router-dom";
+import React from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import Home from "./components/admin-pages/Home";
+import AllUsers from "./components/admin-pages/AllUsers";
+import NewUsers from "./components/admin-pages/NewUsers";
+import AdminLogin from "./components/admin-pages/AdminLogin";
+import CommentReports from "./components/admin-pages/CommentReports";
+import AccountReports from "./components/admin-pages/AccountReports";
+import SuspendedUsers from "./components/admin-pages/SuspendedUsers";
+import AdminSettings from "./components/admin-pages/AdminSettings";
+import FirstLogin from "./components/admin-pages/FirstLogin";
+import Category from "./components/Category/category";
+import EditAccount from "./components/admin-pages/EditAccount";
 import Main from "./components/Main";
 import Signup from "./components/Signup";
-import SignupBusiness from './components/Signup/indexb';
+import SignupBusiness from "./components/Signup/indexb";
 import Login from "./components/Login";
-import Business from "./components/Business"
+import Business from "./components/Business";
 import EmailVerify from "./components/EmailVerify";
 import ForgotPassword from "./components/ForgotPassword/index";
 import PasswordReset from "./components/PasswordReset";
-import Payment from './components/Payment'
-import Update from './components/Update/Update'
+import Payment from "./components/Payment";
+import Update from "./components/Update/Update";
 import Detail from "./components/Detail";
 import View from "./components/View";
 import Search from "./components/Search";
@@ -36,17 +34,17 @@ import CreatePost from "./components/posts-and-comments/CreatePost";
 import EditPost from "./components/posts-and-comments/EditPost";
 import AllPosts from "./components/posts-and-comments/AllPosts";
 import PostDetails from "./components/posts-and-comments/PostDetails";
-import Report from "./components/Report"
-import AddProject from './components/projects-and-events/AddProject';
-import AllProjects from './components/projects-and-events/AllProjects';
-import AddEvents from './components/projects-and-events/AddEvents';
-import AllEvents from './components/projects-and-events/AllEvents';
+import Report from "./components/Report";
+import AddProject from "./components/projects-and-events/AddProject";
+import AllProjects from "./components/projects-and-events/AllProjects";
+import AddEvents from "./components/projects-and-events/AddEvents";
+import AllEvents from "./components/projects-and-events/AllEvents";
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
-import ViewNotifications from "./components/Notifications/index"
+import ViewNotifications from "./components/Notifications/index";
 
 function App() {
-  const user = localStorage.getItem('token');
-  return( 
+  const user = localStorage.getItem("token");
+  return (
     <Routes>
       <Route path="adminlogin" element={<AdminLogin />}></Route>
       <Route>
@@ -83,14 +81,20 @@ function App() {
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
       <Route path="/report/:id" exact element={<Report />} />
-      <Route path="/manageprojects" element={<ChooseInfluencer />} />    
-      <Route path="/addProject/:influencerID" element={<AddProject/>}/>
+      <Route path="/manageprojects" element={<ChooseInfluencer />} />
+      <Route path="/addProject/:influencerID" element={<AddProject />} />
       <Route path="/allprojects" element={<AllProjects />} />
       <Route path="/viewnotifications" element={<ViewNotifications />}></Route>
-      <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
-      <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
+      <Route
+        path="/addEvents/:projectName/:projectID"
+        element={<AddEvents />}
+      />
+      <Route
+        path="/allEvents/:projectName/:projectID"
+        element={<AllEvents />}
+      />
     </Routes>
   );
-};
+}
 
 export default App;
