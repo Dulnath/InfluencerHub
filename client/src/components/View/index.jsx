@@ -19,7 +19,7 @@ function View() {
     const [lastName, setLastName] = useState();
    const [email, setUserEmail] = useState();
   const [category, setUserCategory] = useState();
-
+  const [showfollow,setShowFollow] = useState(null)
     const { id } = useParams();
 
     let navigate = useNavigate();
@@ -40,8 +40,7 @@ function View() {
        
     }, [])
 
-
-
+    
 
     
         return (
@@ -69,7 +68,7 @@ function View() {
 
                     <React.Fragment>
                         <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} >
-                        <div class="card-deck">
+                        <div class="card-deck" className={styles.card_deck}>
                   <div class="card" className={styles.card}>
    
                   <div class="card-body">  
@@ -89,9 +88,9 @@ function View() {
                         of events; compare or contrast two or more things; classify items into categories; or describe causes and effects. 
                         Regardless of the kind of information they contain, all paragraphs share certain characteristics. One of the most 
                         important of these is a topic sentence.</p></Row> 
-                   <button className={styles.button}>
-                       Follow 
-                    </button> 
+                
+                
+                  
                     <button className={styles.button1} onClick={() => {navigate(`/report`)}}>
                        Report
                      </button> 

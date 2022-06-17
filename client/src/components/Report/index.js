@@ -28,8 +28,8 @@ function CommentForm(props) {
     }
 
     return (
-        <div className="ReportForm">
-            <Card border="dark" className={styles.card}>
+        <div class="ReportForm" className={styles.card}>
+            <Card border="dark">
                 <Form>
                     <Form.Group>
                         <Form.Control as="textarea"
@@ -37,7 +37,7 @@ function CommentForm(props) {
                             placeholder="Add a report description"
                             onChange={(event) => { setDescription(event.target.value) }}>
                         </Form.Control>
-                        <Button className="float-end" variant="dark" onClick={addReport}>Report</Button>
+                        <Button className="float-end" variant="danger" onClick={addReport}>Report</Button>
                     </Form.Group>
                 </Form>
             </Card>           

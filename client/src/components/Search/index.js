@@ -92,7 +92,7 @@ function Search() {
                 data.filter((item)=>item.category==="influencer").map((item, index) => (
                   
                   <div class="card-deck">
-                  <div class="card" className={styles.card}>
+                  <div class="card" className={styles.record}>
    
                   <div class="card-body">  
                  

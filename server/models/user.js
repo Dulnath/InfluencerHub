@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {ObjectId} = mongoose.Schema.Types
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
@@ -12,6 +13,8 @@ const userSchema = new mongoose.Schema({
 	verified: { type: Boolean, default: true },
 	status:{ type: String, required: true },
 	img:{ type: String, required: true },
+	followers:[{type:ObjectId,ref:"User"}],
+    following:[{type:ObjectId,ref:"User"}]
 });
 
 //create user token

@@ -17,6 +17,7 @@ import { DropdownButton } from "react-bootstrap";
 function Business(props) {
     const loggedInUser = localStorage.getItem("token");
     const [fname, setUserName] = useState('');
+	const [showfollow,setShowFollow] = useState(null)
    
     const navigate = useNavigate();
 		

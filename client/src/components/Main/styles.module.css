@@ -53,3 +53,7 @@
     width: 40px;
     border-radius: 50%;
   }
+
+  .main_container{
+	background-color: #ebebeb;
+  }

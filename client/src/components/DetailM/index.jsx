@@ -47,7 +47,7 @@ if(loggedInUser){
                             paddingBottom:"10px"
                         }}
                         ></div>
-            <h1>All Users</h1>
+            <h1>All Businesses</h1>
     
 
             {listOfUsers.map((user,id) => {
