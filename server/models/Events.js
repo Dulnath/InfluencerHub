@@ -4,19 +4,19 @@ const Schema = mongoose.Schema;
 const EventSchema = new mongoose.Schema({
   influencerName: {
     type: String,
-    required: false,
+    required: true,
   },
   influencerID: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
   },
   businessName: {
     type: String,
-    required: false,
+    required: true,
   },
   projectName: {
     type: String,
-    require: false,
+    require: true,
   },
   eventName: {
     type: String,

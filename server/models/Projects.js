@@ -8,7 +8,7 @@ const ProjectSchema = new mongoose.Schema({
   },
   influencerID: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
   },
   businessName: {
     type: String,

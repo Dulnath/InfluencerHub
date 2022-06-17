@@ -34,6 +34,21 @@ router.post("/createEventNotification", (req, res) => {
   });
 });
 
+router.post("/notificationDeleteProject", (req, res) => {
+  let newNotification = new notification(req.body);
+  newNotification.save((err) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: err,
+      });
+    }
+    return res.status(200).json({
+      success: "Notification saved successfully",
+    });
+  });
+});
+
 //save notification when dates of a project is changed
 router.post("/updateProject", (req, res) => {
   let newNotification = new notification(req.body);
