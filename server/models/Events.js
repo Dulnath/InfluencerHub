@@ -1,19 +1,28 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const EventSchema = new mongoose.Schema({
     influencerName: {
         type: String,
-        required: false,
+        required: true,
+    },
+    influencerID: {
+        type: Schema.Types.ObjectId,
+        required: true,
     },
     businessName: {
         type: String,
-        required: false,
+        required: true,
+    },
+    businessID: {
+        type: Schema.Types.ObjectId,
+        required: true,
     },
     projectName: {
         type: String,
-        require: false,
+        require: true,
     },
-    eventName:{
+    eventName: {
         type: String,
         require: true,
     },
@@ -23,11 +32,11 @@ const EventSchema = new mongoose.Schema({
     },
     eventStartDate: {
         type: String,
-        required: false,
+        required: true,
     },
     eventEndDate: {
         type: String,
-        required: false,
+        required: true,
     }
 });
 

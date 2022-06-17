@@ -37,7 +37,6 @@ function EditProject(props) {
 
     return (
         <div className="projectCard">
-            <MainMenu></MainMenu>
             <Card border="dark" >
                 <Card.Header>
                     <div className="projectCardHeader">

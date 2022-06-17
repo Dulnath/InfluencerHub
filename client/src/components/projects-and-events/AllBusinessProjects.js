@@ -6,21 +6,12 @@ import EditProject from './EditProject';
 import MainMenu from '../Main/MainMenu';
 import ParseJwt from '../Utilities/ParseJwt';
 
-function AllProjects() {
+function AllBusinessProjects() {
     const [listOfProjects, setListOfProjects] = useState([]);
-    const [openEdit, setOpenEdit] = useState();
-    const [selected, setSelected] = useState();
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [category, setCategory] = useState();
+    const [openEdit, setOpenEdit] = useState("");
+    const [selected, setSelected] = useState("");
+    const [userID, setUserID] = useState("");
 
-    let name;
-    if(category === 'business'){
-        name = firstName;
-    }else if(category === 'influencer'){
-        name = firstName + " " + lastName;
-    }
-    
     useEffect(() => {
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
@@ -29,9 +20,7 @@ function AllProjects() {
             setListOfProjects(response.data);
         })
         axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((res) => {
-            setFirstName(res.data.firstName);  
-            setLastName(res.data.lastName);
-            setCategory(res.data.category)
+            setUserID(res.data._id);
         })
     }, [])
 
@@ -56,17 +45,29 @@ function AllProjects() {
 
     let navigate = useNavigate();
 
-    const filteredList = listOfProjects.filter((project) => project.businessName === name || project.influencerName === name);
+    const filteredList = listOfProjects.filter((project) => project.businessID === userID)
+
     return (
         <div className='background'>
-            <MainMenu></MainMenu>
+            <MainMenu></MainMenu><br />
             <div id="allProjects">
                 <h1>All Projects</h1>
-
                 {(filteredList.length > 0) ? filteredList.map((project) => {
                     return (
                         <div>
                             <Card className="detailsCard" border="dark">
+                                <div className="details">
+                                    <span className="title">Sent to:</span>
+                                    <span className="data">{project.influencerName}</span><br />
+                                    <span className="title">Status:</span>
+                                    {
+                                        {
+                                            'true': <span className="data" style={{ color: 'green' }}>Accepted</span>,
+                                            'false': <span className="data" style={{ color: 'red' }}>Rejected</span>,
+                                            null: <span className="data" style={{ color: 'gray' }}>Pending</span>
+                                        }[(project.isAccepted)]
+                                    }
+                                </div><br />
                                 <div className="details">
                                     <span className="title">Project Name:</span>
                                     <span className="data">{project.projectName}</span>
@@ -84,10 +85,20 @@ function AllProjects() {
                                     <span className="data">{project.projectEndDate}</span>
                                 </div>
                                 <div>
-                                    <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allEvents/${project.projectName}/${project._id}`) }}>View all events</Button>
-                                    <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/addEvents/${project.projectName}/${project._id}`) }}>Add Event</Button>
+                                    {
+                                        (project.isAccepted === 'true') ?
+                                            <div>
+                                                <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allEvents/${project.projectName}/${project._id}`) }}>View all events</Button>
+                                                <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/addEvents/${project.projectName}/${project._id}`) }}>Add Event</Button>
+                                            </div> : 
+                                            <div>
+                                            <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allEvents/${project.projectName}/${project._id}`) }} disabled>View all events</Button>
+                                            <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/addEvents/${project.projectName}/${project._id}`) }} disabled>Add Event</Button>
+                                        </div> 
+                                    }
                                     <Button className="projectButton2" variant="warning" size="sm" type="submit" onClick={() => editWindow(project._id)}>Edit Project</Button>
                                     <Button className="projectButton2" variant="danger" size="sm" type="submit" onClick={() => handleDelete(project._id)}>Delete Project</Button>
+
                                 </div>
                             </Card>
 
@@ -102,15 +113,14 @@ function AllProjects() {
                     );
                 }) : (
                     <div>
-                        <p>No events have been added yet</p>
+                        <p>No projects have been added yet</p>
                     </div>
                 )
                 }
-
             </div >
         </div>
 
     );
 }
 
-export default AllProjects;
+export default AllBusinessProjects;

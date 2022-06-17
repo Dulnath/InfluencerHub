@@ -38,10 +38,12 @@ import AllPosts from "./components/posts-and-comments/AllPosts";
 import PostDetails from "./components/posts-and-comments/PostDetails";
 import Report from "./components/Report"
 import AddProject from './components/projects-and-events/AddProject';
-import AllProjects from './components/projects-and-events/AllProjects';
+import AllInfluencerProjects from './components/projects-and-events/AllInfluencerProjects';
 import AddEvents from './components/projects-and-events/AddEvents';
 import AllEvents from './components/projects-and-events/AllEvents';
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
+import PendingList from "./components/projects-and-events/PendingList";
+import AllBusinessProjects from "./components/projects-and-events/AllBusinessProjects";
 
 function App() {
   const user = localStorage.getItem('token');
@@ -84,9 +86,11 @@ function App() {
       <Route path="/report/:id" exact element={<Report />} />
       <Route path="/manageprojects" element={<ChooseInfluencer />} />    
       <Route path="/addProject/:influencerID" element={<AddProject/>}/>
-      <Route path="/allprojects" element={<AllProjects />} />
+      <Route path="/allInfluencerprojects" element={<AllInfluencerProjects />} />
+      <Route path="/allBusinessprojects" element={<AllBusinessProjects />} />
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
       <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
+      <Route path="/acceptProjects" element={<PendingList/>}/>
     </Routes>
   );
 };

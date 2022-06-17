@@ -22,6 +22,7 @@ const ProfileView = () => {
     window.location = `/update/${id}`
   }
   const [fname, setFName] = useState("");
+  const [lname, setLName] = useState("");
   const [userType, setUserType] = useState("");
   const { id } = useParams();
 
@@ -34,6 +35,7 @@ const ProfileView = () => {
         .get("http://localhost:5000/api/users/getuser/" + user._id)
         .then((res) => {
           setFName(res.data.firstName);
+          setLName(res.data.lastName);
           setUserType(res.data.category);
         });
     }
@@ -65,13 +67,13 @@ const ProfileView = () => {
           </Col>
           <Col>
             <div style={{ marginTop: "50px", padding: "20px" }}>
-              <h4>{id}</h4>
               <h4>{fname}</h4>
             </div>
           </Col>
 
-
           <Col>
+          {
+            (userType === 'business') ? 
             <button 
             style={{
               border: "solid",
@@ -79,9 +81,20 @@ const ProfileView = () => {
               borderRadius: "10px",
               padding: "10px",
               color: "green",
-            }} onClick={() => { navigate(`/allProjects`) }}>
+            }} onClick={() => { navigate(`/allBusinessProjects`) }}>
+              View Projects
+            </button>:
+            <button 
+            style={{
+              border: "solid",
+              marginTop: "20px",
+              borderRadius: "10px",
+              padding: "10px",
+              color: "green",
+            }} onClick={() => { navigate(`/allInfluencerProjects`) }}>
               View Projects
             </button>
+          }
           </Col>
           <Col>
           {
@@ -96,7 +109,18 @@ const ProfileView = () => {
             }} 
              onClick={() => { navigate(`/manageprojects`) }}>
               Manage Projects
-            </button>: null
+            </button> :
+             <button
+             style={{
+               border: "solid",
+               marginTop: "20px",
+               borderRadius: "10px",
+               padding: "10px",
+               color: "green",
+             }} 
+              onClick={() => { navigate(`/acceptProjects`) }}>
+               Pending projects
+             </button>
           }
             
           </Col>

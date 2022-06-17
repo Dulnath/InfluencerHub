@@ -11,20 +11,28 @@ function AddEvents() {
     const [eventEndDate, setEventEndDate] = useState("");
     const [projectStartDate, setProjectStartDate] = useState("");
     const [projectEndDate, setProjectEndDate] = useState("");
-
+    const [influencerName, setInfluencerName] = useState("");
+    const [businessName, setBusinessName] = useState("");
+    const [influencerID, setInfluencerID] = useState("");
+    const [businessID, setBusinessID] = useState("");
     const { projectName, projectID } = useParams();
 
     // Create an event
     const createEvent = () => {
         Axios.post("http://localhost:5000/createEvent", {
+            influencerName,
+            influencerID,
+            businessName,
+            businessID,
             projectName,
             eventName,
             eventDescription,
             eventStartDate,
             eventEndDate
         }).then((res) => {
-            alert("Event created successfully");
+            //alert("Event created successfully");
             console.log("Event created");
+            navigate(`/allEvents/${projectName}/${projectID}`) 
         });
     }
 
@@ -33,6 +41,10 @@ function AddEvents() {
         Axios.get(`http://localhost:5000/getProject/${projectID}`).then((response) => {
             setProjectStartDate(response.data.project.projectStartDate);
             setProjectEndDate(response.data.project.projectEndDate);
+            setInfluencerName(response.data.project.influencerName);
+            setBusinessName(response.data.project.businessName);
+            setInfluencerID(response.data.project.influencerID);
+            setBusinessID(response.data.project.businessID);
         })
         // eslint-disable-next-line
     }, []);

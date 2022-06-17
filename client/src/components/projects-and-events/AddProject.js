@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, CloseButton, Form, Card } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
@@ -13,40 +13,44 @@ function AddProject() {
     const [businessName, setBusinessName] = useState("");
     const [influencerFirstName, setInfluencerFirstName] = useState("");
     const [influencerLastName, setInfluencerLastName] = useState("");
+    const [businessID, setBusinessID] = useState("");
 
-    const {influencerID} = useParams();
+    const { influencerID } = useParams();
     const influencerName = influencerFirstName + " " + influencerLastName;
     console.log(influencerID);
 
     const createProject = () => {
         Axios.post("http://localhost:5000/createProject", {
             influencerName,
+            influencerID,
             businessName,
             projectName,
+            businessID,
             projectDescription,
             projectStartDate,
-            projectEndDate
+            projectEndDate,
         }).then((res) => {
-            alert("Project created successfully");
             console.log("Project created");
+            navAllProjects();
         });
     }
 
     useEffect(() => {
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
-        Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((res)=>{
+        Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((res) => {
             setBusinessName(res.data.firstName);
+            setBusinessID(res.data._id);
         });
         Axios.get(`http://localhost:5000/api/users/getuser/${influencerID}`).then((res) => {
             setInfluencerFirstName(res.data.firstName);
             setInfluencerLastName(res.data.lastName);
         })
-    },[]);
+    }, []);
 
     let navigate = useNavigate();
 
-    const navAllProjects = () => { navigate("/allProjects") }
+    const navAllProjects = () => { navigate("/allBusinessProjects") }
 
     return (
         <div className='background'>

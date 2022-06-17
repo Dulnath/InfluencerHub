@@ -17,11 +17,6 @@ function ChooseInfluencer() {
 
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        window.location.reload();
-    };
-
     useEffect(() => {
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
@@ -43,7 +38,7 @@ function ChooseInfluencer() {
     if (loggedInUser) {
         return (
             <div className={styles.main_container}>
-                <MainMenu></MainMenu>
+                <MainMenu></MainMenu><br/>
 
                 <h1 style={{textAlign: 'center'}}>Choose a suitable influencer for the project</h1>
                 <h2><button className={styles.white_btn1} onClick={() => { navigate(`/detail`) }}>

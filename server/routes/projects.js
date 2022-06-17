@@ -71,4 +71,31 @@ router.get("/getProject/:id", (req, res) => {
     });
 });
 
+// Accept project
+router.put('/acceptProject/:id', async (req,res)=>{
+    try{
+        console.log('Project accepted');
+        await projectModel.findByIdAndUpdate(req.params.id,{
+            isAccepted:true
+        }), res.json({status: 'ok'})
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+})
+
+// Reject project
+router.put('/rejectProject/:id', async (req,res)=>{
+    try{
+        console.log('Project rejected');
+        await projectModel.findByIdAndUpdate(req.params.id,{
+            isAccepted:false
+        }), res.json({status: 'ok'})
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+})
+
+
 module.exports = router;
