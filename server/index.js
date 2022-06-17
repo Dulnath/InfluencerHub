@@ -3,6 +3,7 @@ require("dotenv").config();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { User } = require("./models/user");
+const { Notifications } = require("./models/notifications")
 const UserCount = require('./models/UserCount');
 const NVUserCount = require('./models/NonVerifiedUserCount')
 const useraccounts = require('./routes/user');
@@ -63,6 +64,16 @@ function getUserCount() {
     });
 }
 
+function deleteNotifications(){
+    Notifications.remove({ Seen: true }, function(err, result) {
+        if (err) {
+          console.err(err);
+        } else {
+          res.json(result);
+        }
+      });
+}
+
 function getNewUserCount() {
     var query = User.find({adminVerified:false});
     var timeNow = FormatDate(Date.now());
@@ -105,6 +116,7 @@ app.listen(port, () => {
     console.log(`server started on port ${port}`);
     //setInterval(getUserCount,60000);
     //setInterval(getNewUserCount,60000);
+    //setInterval(deleteNotifications,60000);
 });
 
 
