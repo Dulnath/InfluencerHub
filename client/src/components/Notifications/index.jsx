@@ -7,7 +7,7 @@ import { Card } from "react-bootstrap";
 import {Container,Row,Col, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import styles from '../../styles/styles.module.css';
+import styles from './styles.module.css';
 function ViewNotifications() {
 
     const [notificationList, setNotificationList] = useState([]);	

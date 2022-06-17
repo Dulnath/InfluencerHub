@@ -57,3 +57,20 @@ body{
     width: 60px;
     border-radius: 50%;
   }
+
+  .btnRed {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 25px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: flex;
+    background-color: #eb1700;
+	float: right;
+    
+}
+
+
