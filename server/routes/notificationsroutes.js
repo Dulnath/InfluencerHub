@@ -1,10 +1,10 @@
 const express = require("express");
-const notification = require("../models/notifications");
+const {Notification}  = require("../models/notifications")
 const router = express.Router();
 
 //save project notifications
 router.post("/createProjectNotification", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -20,7 +20,7 @@ router.post("/createProjectNotification", (req, res) => {
 
 //save event notifications
 router.post("/createEventNotification", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -35,7 +35,7 @@ router.post("/createEventNotification", (req, res) => {
 });
 
 router.post("/notificationDeleteProject", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -51,7 +51,7 @@ router.post("/notificationDeleteProject", (req, res) => {
 
 //save notification when dates of a project is changed
 router.post("/updateProject", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -67,7 +67,7 @@ router.post("/updateProject", (req, res) => {
 
 //save notification when dates of a event is changed
 router.post("/updateEvent", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -83,7 +83,7 @@ router.post("/updateEvent", (req, res) => {
 
 //save notification when a Business makes a payment to an influencer
 router.post("/makepayment", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -99,7 +99,7 @@ router.post("/makepayment", (req, res) => {
 
 //save notification when a Business requests a payment refund from an influencer
 router.post("/requestrefund", (req, res) => {
-  let newNotification = new notification(req.body);
+  let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
       console.log(err);
@@ -114,7 +114,7 @@ router.post("/requestrefund", (req, res) => {
 });
 //retrieve notifications
 router.get("/notifications", (req, res) => {
-  notification.find({}, (err, result) => {
+  Notification.find({}, (err, result) => {
     if (err) {
       res.json(err);
     } else {
@@ -126,7 +126,7 @@ router.get("/notifications", (req, res) => {
 //get a specific notification
 router.get("/notification/:id", (req, res) => {
   let notificationID = req.params.id;
-  notification.findById(notificationID, (err, notification) => {
+  Notification.findById(notificationID, (err, notification) => {
     if (err) {
       return res.status(400).json({ success: false, err });
     }
@@ -138,7 +138,7 @@ router.get("/notification/:id", (req, res) => {
 });
 
 router.put("/notifications/update/:id", (req, res) => {
-  notification.findByIdAndUpdate(
+  Notification.findByIdAndUpdate(
     req.params.id,
     {
       $set: req.body,
