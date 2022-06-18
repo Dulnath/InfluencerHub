@@ -70,5 +70,31 @@ router.delete('/deleteEvent/:id',(req,res) => {
     });
 });
 
+// Accept event
+router.put('/acceptEvent/:id', async (req,res)=>{
+    try{
+        console.log('Event accepted');
+        await eventModel.findByIdAndUpdate(req.params.id,{
+            isAccepted:true
+        }), res.json({status: 'ok'})
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+})
+
+// Reject event
+router.put('/rejectEvent/:id', async (req,res)=>{
+    try{
+        console.log('Event rejected');
+        await eventModel.findByIdAndUpdate(req.params.id,{
+            isAccepted:false
+        }), res.json({status: 'ok'})
+    }catch(err){
+        console.log(err);
+        res.json({status:'error'});
+    }
+})
+
 
 module.exports = router;

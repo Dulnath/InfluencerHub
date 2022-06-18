@@ -1,22 +1,28 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card } from 'react-bootstrap';
 import axios from "axios";
 import EditEvent from './EditEvent';
 import EventCard from "./EventCard";
 import MainMenu from '../Main/MainMenu';
+import ParseJwt from "../Utilities/ParseJwt";
 
-
-function AllEvents() {
+function AllBusinessEvents() {
     const [listOfEvents, setListOfEvents] = useState([]);
     const [openEdit, setOpenEdit] = useState();
     const [selected, setSelected] = useState();
     const [openEventCard, setOpenEventCard] = useState();
+    const [influencerName, setInfluencerName] = useState();
 
     //Retrieve all events
     useEffect(() => {
+        const userToken = localStorage.getItem("token");
+        const user = ParseJwt(userToken);
         axios.get("http://localhost:5000/getEvent").then((response) => {
             setListOfEvents(response.data);
+        })
+        axios.get(`http://localhost:5000/getProject/${projectID}`).then((res) => {
+            setInfluencerName(res.data.project.influencerName);
         })
     }, []);
 
@@ -34,7 +40,7 @@ function AllEvents() {
         setOpenEventCard(!openEventCard);
     }
 
-    // Dekete an event
+    // Delete an event
     const handleDelete = (_id) => {
         axios.delete(`http://localhost:5000/deleteEvent/${_id}`)
             .then((res) => {
@@ -49,18 +55,29 @@ function AllEvents() {
 
     let navigate = useNavigate();
 
-    const filteredList = listOfEvents.filter((event) => event.projectName === projectName);
+    const filteredList = listOfEvents.filter((event) => event.projectID === projectID);
     return (
         <div className="background">
             <MainMenu></MainMenu>
             <div id="allEvents">
                 <h1 style={{ textAlign: "center" }}>{projectName}</h1>
-                <h3>All Events</h3>
+                <h3>All Events</h3><br/>
+                <h4>Influencer name: {influencerName}</h4>
 
                 {filteredList.length > 0 ? (filteredList.map((events) => {
                     return (
                         <div>
                             <Card className="detailsCard" border="dark">
+                            <div className="details">
+                                    <span className="title">Status:</span>
+                                    {
+                                        {
+                                            'true': <span className="data" style={{ color: 'green' }}>Accepted</span>,
+                                            'false': <span className="data" style={{ color: 'red' }}>Rejected</span>,
+                                            null: <span className="data" style={{ color: 'gray' }}>Pending</span>
+                                        }[(events.isAccepted)]
+                                    }
+                                </div><br/>     
                                 <div className="details">
                                     <span className="title">Event Name:</span>
                                     <span className="data">{events.eventName}</span>
@@ -81,6 +98,7 @@ function AllEvents() {
                                     <Button variant="success" size="sm" type="submit" onClick={() => { eventCard(events._id) }}>View Event Card</Button>
                                     <Button className="eventButton" variant="warning" size="sm" type="submit" onClick={() => { editWindow(events._id) }}>Edit Event</Button>
                                     <Button className="eventButton" variant="danger" size="sm" type="submit" onClick={() => { handleDelete(events._id) }}>Delete Event</Button>
+
                                 </div>
                             </Card>
 
@@ -108,7 +126,8 @@ function AllEvents() {
                 )}
 
                 <br />
-                <Button variant="secondary" size="lg" onClick={() => { navigate(`/addEvents/${projectName}/${projectID }`) }}>Add new event</Button>
+
+                <Button variant="secondary" size="lg" onClick={() => { navigate(`/addEvents/${projectName}/${projectID}`) }}>Add new event</Button>
 
             </div>
         </div>
@@ -116,4 +135,4 @@ function AllEvents() {
     );
 }
 
-export default AllEvents;
+export default AllBusinessEvents;

@@ -113,5 +113,5 @@ app.listen(port, () => {
   console.log(`server started on port ${port}`);
   //setInterval(getUserCount,60000);
   //setInterval(getNewUserCount,60000);
-  setInterval(deleteNotifications, 60000);
+  //setInterval(deleteNotifications, 60000);
 });

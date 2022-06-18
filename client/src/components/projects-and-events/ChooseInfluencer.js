@@ -17,6 +17,7 @@ function ChooseInfluencer() {
 
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   useEffect(() => {
     const userToken = localStorage.getItem("token");
     const user = ParseJwt(userToken);
@@ -33,6 +34,30 @@ function ChooseInfluencer() {
       }
     }
   }, []);
+=======
+    useEffect(() => {
+        const userToken = localStorage.getItem("token");
+        const user = ParseJwt(userToken);
+        if (userToken) {
+
+            const response = axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((response) => {
+
+                setUserName(response.data.firstName);
+                setUsrId(response.data._id);
+                setCategory(response.data.category)
+                console.log(response.data._id);
+            })
+            if (response.staus !== 'ok') {
+                setUserName('default');
+            }
+        }
+    }, [])
+
+    if (loggedInUser) {
+        return (
+            <div className={styles.main_container}>
+                <MainMenu></MainMenu><br/>
+>>>>>>> bab79005b245b57974848f870e25ed8ad0214814
 
   if (loggedInUser) {
     return (
