@@ -3,7 +3,6 @@ import axios from 'axios';
 import ParseJwt from '../../utilities/ParseJwt';
 import React, { Component }  from 'react';
 import MainMenu from '../Main/MainMenu';
-import { Card } from "react-bootstrap";
 import {Container,Row,Col, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
