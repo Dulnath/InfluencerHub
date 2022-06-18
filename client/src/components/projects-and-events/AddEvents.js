@@ -15,6 +15,7 @@ function AddEvents() {
     const [businessName, setBusinessName] = useState("");
     const [influencerID, setInfluencerID] = useState("");
     const [businessID, setBusinessID] = useState("");
+
     const { projectName, projectID } = useParams();
 
     // Create an event
@@ -24,6 +25,7 @@ function AddEvents() {
             influencerID,
             businessName,
             businessID,
+            projectID,
             projectName,
             eventName,
             eventDescription,
@@ -32,7 +34,7 @@ function AddEvents() {
         }).then((res) => {
             //alert("Event created successfully");
             console.log("Event created");
-            navigate(`/allEvents/${projectName}/${projectID}`) 
+            navigate(`/allBusinessEvents/${projectName}/${projectID}`) 
         });
     }
 
@@ -59,7 +61,7 @@ function AddEvents() {
                     <Card.Header>
                         <div className="projectCardHeader">
                             Add Event
-                            <CloseButton className="closeButton" onClick={() => { navigate(`/allEvents/${projectName}/${projectID}`) }} />
+                            <CloseButton className="closeButton" onClick={() => { navigate(`/allBusinessEvents/${projectName}/${projectID}`) }} />
                         </div>
                     </Card.Header>
                     <Card.Body className='cardBody'>

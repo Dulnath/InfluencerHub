@@ -18,6 +18,10 @@ const EventSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         required: true,
     },
+    projectID: {
+        type: Schema.Types.ObjectId,
+        required: true,
+    },
     projectName: {
         type: String,
         require: true,
@@ -37,6 +41,11 @@ const EventSchema = new mongoose.Schema({
     eventEndDate: {
         type: String,
         required: true,
+    },
+    isAccepted: {
+        type: String,
+        required: false,
+        default: null,
     }
 });
 

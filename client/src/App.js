@@ -40,10 +40,12 @@ import Report from "./components/Report"
 import AddProject from './components/projects-and-events/AddProject';
 import AllInfluencerProjects from './components/projects-and-events/AllInfluencerProjects';
 import AddEvents from './components/projects-and-events/AddEvents';
-import AllEvents from './components/projects-and-events/AllEvents';
+import AllInfluencerEvents from './components/projects-and-events/AllInfluencerEvents';
+import AllBusinessEvents from "./components/projects-and-events/AllBusinessEvents";
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
 import PendingList from "./components/projects-and-events/PendingList";
 import AllBusinessProjects from "./components/projects-and-events/AllBusinessProjects";
+import PendingEvents from "./components/projects-and-events/PendingEvents";
 
 function App() {
   const user = localStorage.getItem('token');
@@ -89,8 +91,10 @@ function App() {
       <Route path="/allInfluencerprojects" element={<AllInfluencerProjects />} />
       <Route path="/allBusinessprojects" element={<AllBusinessProjects />} />
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
-      <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
+      <Route path="/allInfluencerEvents/:projectName/:projectID" element={<AllInfluencerEvents />} />
+      <Route path="/allBusinessEvents/:projectName/:projectID" element={<AllBusinessEvents />} />
       <Route path="/acceptProjects" element={<PendingList/>}/>
+      <Route path="/acceptEvents/:projectName/:projectID" element={<PendingEvents/>}/>
     </Routes>
   );
 };

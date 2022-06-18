@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import EditProject from './EditProject';
 import MainMenu from '../Main/MainMenu';
 import ParseJwt from '../Utilities/ParseJwt';
 
 function AllInfluencerProjects() {
     const [listOfProjects, setListOfProjects] = useState([]);
-    const [openEdit, setOpenEdit] = useState("");
-    const [selected, setSelected] = useState("");
     const [userID, setUserID] = useState("");
-    const [category, setCategory] = useState("");
 
     useEffect(() => {
         const userToken = localStorage.getItem("token");
@@ -22,7 +18,6 @@ function AllInfluencerProjects() {
         })
         axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((res) => {
             setUserID(res.data._id);
-            setCategory(res.data.category);
         })
     }, [])
 
@@ -59,8 +54,8 @@ function AllInfluencerProjects() {
                                     <span className="data">{project.projectEndDate}</span>
                                 </div>
                                 <div>
-                                    <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allEvents/${project.projectName}/${project._id}`) }}>View all events</Button>
-
+                                    <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allInfluencerEvents/${project.projectName}/${project._id}`) }}>View accepted events</Button>
+                                    <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/acceptEvents/${project.projectName}/${project._id}`) }}>Pending events</Button>
                                 </div>
                             </Card>
                         </div>
