@@ -67,20 +67,6 @@ const ProfileView = () => {
           </Col>
 
           <Col>
-<<<<<<< HEAD
-            <button
-              style={{
-                border: "solid",
-                marginTop: "20px",
-                borderRadius: "10px",
-                padding: "10px",
-                color: "green",
-              }}
-              onClick={() => {
-                navigate(`/allProjects`);
-              }}
-            >
-=======
           {
             (userType === 'business') ? 
             <button 
@@ -101,30 +87,11 @@ const ProfileView = () => {
               padding: "10px",
               color: "green",
             }} onClick={() => { navigate(`/allInfluencerProjects`) }}>
->>>>>>> bab79005b245b57974848f870e25ed8ad0214814
               View Projects
             </button>
           }
           </Col>
           <Col>
-<<<<<<< HEAD
-            {userType === "business" ? (
-              <button
-                style={{
-                  border: "solid",
-                  marginTop: "20px",
-                  borderRadius: "10px",
-                  padding: "10px",
-                  color: "green",
-                }}
-                onClick={() => {
-                  navigate(`/manageprojects`);
-                }}
-              >
-                Manage Projects
-              </button>
-            ) : null}
-=======
           {
             (userType === 'business') ? 
             <button
@@ -151,7 +118,6 @@ const ProfileView = () => {
              </button>
           }
             
->>>>>>> bab79005b245b57974848f870e25ed8ad0214814
           </Col>
           <Col>
             {" "}

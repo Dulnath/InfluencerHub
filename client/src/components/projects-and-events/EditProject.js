@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Card } from "react-bootstrap";
 import axios from "axios";
-<<<<<<< HEAD
-import FormatDateTime from "../../utilities/FormatDateTime";
-=======
 import FormatDateTime from '../../utilities/FormatDateTime'
->>>>>>> bab79005b245b57974848f870e25ed8ad0214814
 
 function EditProject(props) {
   const [projectName, setProjectName] = useState();
@@ -42,29 +38,6 @@ function EditProject(props) {
     // eslint-disable-next-line
   }, []);
 
-<<<<<<< HEAD
-  return (
-    <div className="projectCard">
-      <Card border="dark">
-        <Card.Header>
-          <div className="projectCardHeader">Edit a Project</div>
-        </Card.Header>
-        <Card.Body>
-          <Form>
-            <Form.Group>
-              <h5>Edit Project Name</h5>
-              <Form.Control
-                as="textarea"
-                rows={1}
-                placeholder="Add Project Name"
-                value={projectName}
-                onChange={(event) => {
-                  setProjectName(event.target.value);
-                }}
-              ></Form.Control>
-              <br />
-            </Form.Group>
-=======
     return (
         <div className="projectCard">
             <Card border="dark" >
@@ -84,7 +57,6 @@ function EditProject(props) {
                                 onChange={(event) => { setProjectName(event.target.value) }}>
                             </Form.Control><br />
                         </Form.Group>
->>>>>>> bab79005b245b57974848f870e25ed8ad0214814
 
             <Form.Group>
               <h5>Edit Project Description</h5>
