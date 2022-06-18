@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ProjectSchema = new mongoose.Schema({
   influencerName: {
     type: String,
-    required: false,
+    required: true,
   },
   influencerID: {
     type: Schema.Types.ObjectId,
@@ -12,15 +12,16 @@ const ProjectSchema = new mongoose.Schema({
   },
   businessName: {
     type: String,
-    required: false,
+    required: true,
   },
-  businessId: {
+  businessID: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
   },
   projectName: {
     type: String,
-    require: true,
+    required: true,
+    unique: true,
   },
   projectDescription: {
     type: String,
@@ -28,20 +29,17 @@ const ProjectSchema = new mongoose.Schema({
   },
   projectStartDate: {
     type: String,
-    required: false,
+    required: true,
   },
   projectEndDate: {
     type: String,
-    required: false,
+    required: true,
   },
-  influencerEmail: {
+  isAccepted: {
     type: String,
     required: false,
-  },
-  businessEmail: {
-    type: String,
-    required: false,
-  },
+    default: null,
+  }
 });
 
 module.exports = ProjectModule = mongoose.model("addprojects", ProjectSchema);
