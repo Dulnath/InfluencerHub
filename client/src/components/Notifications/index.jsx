@@ -36,11 +36,11 @@ function ViewNotifications() {
 		{notificationsdisplayed.map((notificationsdisplayed) => {					
 			return (
 			  <div>
-				<Card border="dark">				  
+				 <Container fluid="md" className={styles.record}>				  
 				  <Row>
-                     <Col xs={7} md={10}>{notificationsdisplayed.Notificationmessage}<span className={styles.btnRed} onClick={() => MarkAsRead(notificationsdisplayed._id)}>Mark As Read</span></Col>                       
+                     <Col>{notificationsdisplayed.Notificationmessage}<span className={styles.btn} onClick={() => MarkAsRead(notificationsdisplayed._id)}>Mark As Read</span></Col>                       
                 </Row>                          
-                    </Card>
+                    </Container>
 			  </div>			  
 			);			
 		  }		  
