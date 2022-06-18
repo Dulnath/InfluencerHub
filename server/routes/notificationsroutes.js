@@ -1,5 +1,5 @@
 const express = require("express");
-const {Notification}  = require("../models/notifications")
+const { Notification } = require("../models/notifications");
 const router = express.Router();
 
 //save project notifications

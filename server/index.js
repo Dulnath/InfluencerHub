@@ -3,14 +3,14 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { User } = require("./models/user");
-const { Notification } = require("./models/notifications")
-const UserCount = require('./models/UserCount');
-const NVUserCount = require('./models/NonVerifiedUserCount')
-const useraccounts = require('./routes/user');
-const reports = require('./routes/reports');
-const usercount = require('./routes/usercount');
-const comments = require('./routes/comments')
-const req = require('express/lib/request');
+const { Notification } = require("./models/notifications");
+const UserCount = require("./models/UserCount");
+const NVUserCount = require("./models/NonVerifiedUserCount");
+const useraccounts = require("./routes/user");
+const reports = require("./routes/reports");
+const usercount = require("./routes/usercount");
+const comments = require("./routes/comments");
+const req = require("express/lib/request");
 const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
@@ -66,11 +66,10 @@ function getUserCount() {
   });
 }
 
-function deleteNotifications(){
-    Notification.deleteMany({ Seen:false }, function (err) {
-        if(err) console.log(err);
-        console.log("Successful deletion");
-      });
+function deleteNotifications() {
+  Notification.deleteMany({ Seen: true }, function (err) {
+    if (err) console.log(err);
+  });
 }
 
 function getNewUserCount() {
@@ -111,8 +110,8 @@ app.get("/", function (req, res) {
 });
 
 app.listen(port, () => {
-    console.log(`server started on port ${port}`);
-    //setInterval(getUserCount,60000);
-    //setInterval(getNewUserCount,60000);
-    setInterval(deleteNotifications,60000);
+  console.log(`server started on port ${port}`);
+  //setInterval(getUserCount,60000);
+  //setInterval(getNewUserCount,60000);
+  setInterval(deleteNotifications, 60000);
 });
