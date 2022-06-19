@@ -41,7 +41,7 @@ function AddProject() {
     });
 
     axios
-      .post("http://localhost:5000/createProjectNotification", {
+      .post("http://localhost:5000/createNotification", {
         ReceiverId: influencerID,
         SenderId: user._id,
         Eventhappened: "Invitation for project collaboration",
