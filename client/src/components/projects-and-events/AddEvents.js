@@ -19,6 +19,7 @@ function AddEvents() {
   const [businessID, setBusinessID] = useState("");
 
   const { projectName, projectID } = useParams();
+
   let NotificationTime = new Date().toLocaleString();
 
   const loggedInUser = localStorage.getItem("token");
@@ -134,7 +135,7 @@ function AddEvents() {
                 <input
                   type="date"
                   min={projectStartDate}
-                  max={eventEndDate}
+                  max={projectEndDate}
                   value={eventStartDate}
                   onChange={(event) => {
                     setEventStartDate(event.target.value);
