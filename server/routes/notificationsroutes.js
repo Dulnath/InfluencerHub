@@ -3,6 +3,21 @@ const { Notification } = require("../models/notifications");
 const router = express.Router();
 
 //save project notifications
+router.post("/createNotification", (req, res) => {
+  let newNotification = new Notification(req.body);
+  newNotification.save((err) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: err,
+      });
+    }
+    return res.status(200).json({
+      success: "Notification saved successfully",
+    });
+  });
+});
+
 router.post("/createProjectNotification", (req, res) => {
   let newNotification = new Notification(req.body);
   newNotification.save((err) => {
