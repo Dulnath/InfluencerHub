@@ -109,7 +109,7 @@ const getById = async (req, res) => {
 
 
 const UpdateUser = async (req,res) =>{
-    const {firstName,email,img} = req.body
+    const {firstName,email,img,isFirstLogin,dob,product,address,fblink,instalink} = req.body
     const id = req.params.id
     let user;
     try{
@@ -117,6 +117,12 @@ const UpdateUser = async (req,res) =>{
            firstName,
             email,
             img,
+            isFirstLogin,
+            dob,
+            product,
+            fblink,
+            address,
+            instalink,
            
         });
         user = await user.save();

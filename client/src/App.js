@@ -47,6 +47,7 @@ import FirstLogini from "./components/Main/FirstLogini";
 import PendingList from "./components/projects-and-events/PendingList";
 import AllBusinessProjects from "./components/projects-and-events/AllBusinessProjects";
 import PendingEvents from "./components/projects-and-events/PendingEvents";
+import FirstLoginb from "./components/Business/FirstLoginb";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -90,6 +91,7 @@ function App() {
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
       <Route path="/imagee" element={<Image/>} />
       <Route path="/firstlogini" element={<FirstLogini/>} />
+      <Route path="/firstloginb" element={<FirstLoginb/>} />
       <Route path="/report/:id" exact element={<Report />} />
       <Route path="/manageprojects" element={<ChooseInfluencer />} />
       <Route path="/addProject/:influencerID" element={<AddProject />} />

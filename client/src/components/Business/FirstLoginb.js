@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import ParseJwt from "../Utilities/ParseJwt";
-import { sendForm } from "@emailjs/browser";
+
 
 
 const FirstLogin = () => {
@@ -56,64 +56,40 @@ const FirstLogin = () => {
   console.log("Not uploaded");
   alert("Not uploaded,try again");
  }
- const sendForm = async () => {
-
-  await axios
-    .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
-      dob:date,
-      product:String(option),
-      address:String(address),
-      
-      isFirstlogin:Boolean(false),
-      fblink:String(fblink),
-      instalink:String(instalink),
-    })
-    .then((res) => res.data)
-    .then((data)=>{
-      console.log(data);
-    })
-
  
-
-
-}
        
  
      
   };
+  const sendForm=async() => {
 
-  // useEffect(async () => {
-  //   await axios
-  //     .get(`http://localhost:5000/api/users/getuser/6267fc77942556bbff0c049c`)
-  //     .then((res) => res.data)
-  //     .then((data) => {
-  //       setPhoto(data.img);
-  //     });
-  //   // .then(setUrl(res.data.img))
-  // }, []);
+    await axios
+      .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
+        dob:date,
+        product:option,
+        address:String(address),
+        
+        isFirstlogin:Boolean(false),
+        fblink:String(fblink),
+        instalink:String(instalink),
+      })
+      .then((res) => res.data)
+      .then((data)=>{
+        console.log(data.user);
+      })
+  
+   
+  
+  
+  }
+ 
 const [date, setDate] = useState("")
 const [address, setAddress] = useState("")
 const [option, setOption] = useState("")
 const [fblink, setFblink] = useState("")
 const [instalink, setInstalink] = useState("")
 
-// const sendRequest = async () => {
-//   await axios
-//     .put(`http://localhost:5000/api/users/getuser/${id}`, {
-//       dob: date,
-//       address: address,
-//       product:option,
-//       fblink:fblink,
-//       instalink:instalink
-//     })
-//     .then((res) => res.data);
-// };
 
-// const handleSubmit =(e)=>{
-//   e.preventDefault()
-//   sendRequest();
-  
-// }
   return (
     <div className="container" style={{display:"flex",justifyContent:"center",marginTop:"100px"}}>
       <Container>

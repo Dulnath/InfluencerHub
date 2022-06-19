@@ -29,7 +29,10 @@ const Login = () => {
 			}
 
 			if(user.category==='influencer'&&user.adminVerified===true&&user.isFirstLogin===true){
-				navigate('/firstlogini')
+				navigate('/firstlogini')}
+			else if(user.category==='business'&&user.adminVerified===true&&user.isFirstLogin===true){
+					navigate('/firstloginb')
+
 			}else if(user.category==='influencer'&&user.adminVerified===true&&user.isFirstLogin===false){
 				navigate('/home')
 			}else if(user.category==='business'&&user.adminVerified===true){
