@@ -99,11 +99,11 @@ function CreatePost() {
                   value={PostCategory}
                   onChange={(event) => setPostCategory(event.target.value)}
                 >
-                  <option value="first" selected>
+                  <option value="null" selected>
                     No category
                   </option>
-                  <option value="second">Entertaintment</option>
-                  <option value="third">Product Promotion</option>
+                  <option value="Entertaintment">Entertaintment</option>
+                  <option value="Product Promotion">Product Promotion</option>
                 </Form.Control>
                 <br />
               </Form.Group>
