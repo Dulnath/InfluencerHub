@@ -40,7 +40,7 @@ function AllBusinessProjects() {
   const handleDelete = (_id) => {
     axios.get(`http://localhost:5000/getProject/${_id}`).then((response) => {
       axios
-        .post("http://localhost:5000/createEventNotification", {
+        .post("http://localhost:5000/createNotification", {
           ReceiverId: response.data.project.influencerID,
           SenderId: user._id,
           Eventhappened: "Deletion of a project",
