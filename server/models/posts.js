@@ -13,7 +13,6 @@ const postSchema = new mongoose.Schema({
   PostTopic: {
     type: String,
     required: true,
-    trim: true,
   },
   Postdescription: {
     type: String,
@@ -23,11 +22,12 @@ const postSchema = new mongoose.Schema({
   PostCategory: {
     type: String,
     required: false,
-    trim: true,
   },
   PostImage: {
     type: String,
     required: false,
   },
 });
-module.exports = mongoose.model("Posts", postSchema);
+
+const Post = mongoose.model("Posts", postSchema);
+module.exports = { Post: Post };

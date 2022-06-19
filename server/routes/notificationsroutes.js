@@ -34,7 +34,7 @@ router.post("/createEventNotification", (req, res) => {
   });
 });
 
-router.post("/notificationDeleteProject", (req, res) => {
+router.post("/notificationDeleteProject", async (req, res) => {
   let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
