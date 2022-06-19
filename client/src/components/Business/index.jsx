@@ -1,17 +1,12 @@
 import styles from "./styles.module.css";
 import Search from "../Search";
-import { Outlet, Link } from "react-router-dom";
 import ParseJwt from "../../utilities/ParseJwt";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from '../Login';
-import { useParams, useNavigate} from "react-router-dom";
-import image from "../../images/user.jpg";
-//import user from "../../../../server/models/user";
-import Dropdown from 'react-bootstrap/Dropdown';
-import { DropdownButton } from "react-bootstrap";
+import { useNavigate} from "react-router-dom";
 import MainMenu from "../Main/MainMenu";
 
 function Business(props) {
@@ -23,12 +18,7 @@ function Business(props) {
    
     const navigate = useNavigate();
 	
-	const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-
-    useEffect(() => {
+	useEffect(() => {
 		const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
         if(userToken){
@@ -44,13 +34,8 @@ function Business(props) {
 		if(response.staus!=='ok'){
 			setUserName('default');
 		}
-	}
-        
-       
+	}      
     }, [])
-
-
-
 	if(loggedInUser){
 			return (
 				<div className={styles.main_container}>

@@ -6,9 +6,9 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  PostAuthorID:{
-    type:Schema.Types.ObjectId,
-    required:false,
+  PostAuthorID: {
+    type: Schema.Types.ObjectId,
+    required: true,
   },
   PostTopic: {
     type: String,
@@ -17,6 +17,11 @@ const postSchema = new mongoose.Schema({
   Postdescription: {
     type: String,
     required: true,
+    trim: true,
+  },
+  PostCategory: {
+    type: String,
+    required: false,
   },
   PostImage: {
     type: String,
@@ -24,4 +29,5 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Posts", postSchema);
+const Post = mongoose.model("Posts", postSchema);
+module.exports = { Post: Post };

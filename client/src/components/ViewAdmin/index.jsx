@@ -9,8 +9,7 @@ import styles from "../View/styles.module.css";
 import Login from '../Login/index'
 
 function View() {
-    const loggedInUser = localStorage.getItem("token");
-    const [listOfUsers, setListOfUsers] = useState([]);
+    const loggedInUser = localStorage.getItem("token");    
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setUserEmail] = useState();

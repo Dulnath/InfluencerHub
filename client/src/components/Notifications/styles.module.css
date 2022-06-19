@@ -57,3 +57,27 @@ body{
     width: 60px;
     border-radius: 50%;
   }
+
+  .btn {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 25px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;    
+    display: flex;
+    background-color: #08208bea;
+	float: right;
+    
+}
+
+.record {
+    border-radius: 8px;
+    padding: 2px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(173, 255, 195);
+}
+
+

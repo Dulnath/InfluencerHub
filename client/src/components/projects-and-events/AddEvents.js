@@ -3,6 +3,8 @@ import { Card, CloseButton, Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
 import MainMenu from "../Main/MainMenu";
+import axios from "axios";
+import ParseJwt from "../Utilities/ParseJwt";
 
 function AddEvents() {
   const [eventName, setEventName] = useState("");
@@ -12,9 +14,16 @@ function AddEvents() {
   const [projectStartDate, setProjectStartDate] = useState("");
   const [projectEndDate, setProjectEndDate] = useState("");
   const [influencerName, setInfluencerName] = useState("");
-  const [influencerID, setInfluencerID] = useState("");
   const [businessName, setBusinessName] = useState("");
+  const [influencerID, setInfluencerID] = useState("");
+  const [businessID, setBusinessID] = useState("");
+
   const { projectName, projectID } = useParams();
+
+  let NotificationTime = new Date().toLocaleString();
+
+  const loggedInUser = localStorage.getItem("token");
+  const user = ParseJwt(loggedInUser);
 
   // Create an event
   const createEvent = () => {
@@ -22,15 +31,39 @@ function AddEvents() {
       influencerName,
       influencerID,
       businessName,
+      businessID,
+      projectID,
       projectName,
       eventName,
       eventDescription,
       eventStartDate,
       eventEndDate,
     }).then((res) => {
-      alert("Event created successfully");
       console.log("Event created");
+      navigate(`/allBusinessEvents/${projectName}/${projectID}`);
     });
+
+    axios
+      .post("http://localhost:5000/createEventNotification", {
+        ReceiverId: influencerID,
+        SenderId: user._id,
+        Eventhappened: "Invitation for an event",
+        NotificationTime,
+        Notificationmessage:
+          businessName +
+          " added an event named " +
+          eventName +
+          " to " +
+          projectName +
+          " project from " +
+          eventStartDate +
+          " to " +
+          eventEndDate,
+      })
+      .then((res) => {
+        alert("Notification created successfully");
+        console.log("Notification created");
+      });
   };
 
   // Retrieve data of project
@@ -42,6 +75,7 @@ function AddEvents() {
         setInfluencerName(response.data.project.influencerName);
         setBusinessName(response.data.project.businessName);
         setInfluencerID(response.data.project.influencerID);
+        setBusinessID(response.data.project.businessID);
       }
     );
     // eslint-disable-next-line
@@ -60,7 +94,7 @@ function AddEvents() {
               <CloseButton
                 className="closeButton"
                 onClick={() => {
-                  navigate(`/allEvents/${projectName}/${projectID}`);
+                  navigate(`/allBusinessEvents/${projectName}/${projectID}`);
                 }}
               />
             </div>
@@ -101,7 +135,7 @@ function AddEvents() {
                 <input
                   type="date"
                   min={projectStartDate}
-                  max={eventEndDate}
+                  max={projectEndDate}
                   value={eventStartDate}
                   onChange={(event) => {
                     setEventStartDate(event.target.value);

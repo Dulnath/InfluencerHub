@@ -14,8 +14,14 @@ function AddProject() {
   const [businessName, setBusinessName] = useState("");
   const [influencerFirstName, setInfluencerFirstName] = useState("");
   const [influencerLastName, setInfluencerLastName] = useState("");
+  const [businessID, setBusinessID] = useState("");
+
   const { influencerID } = useParams();
   const influencerName = influencerFirstName + " " + influencerLastName;
+  console.log(influencerID);
+
+  let NotificationTime = new Date().toLocaleString();
+
   const loggedInUser = localStorage.getItem("token");
   const user = ParseJwt(loggedInUser);
 
@@ -25,12 +31,13 @@ function AddProject() {
       influencerID,
       businessName,
       projectName,
+      businessID,
       projectDescription,
       projectStartDate,
       projectEndDate,
     }).then((res) => {
-      alert("Project created successfully");
       console.log("Project created");
+      navAllProjects();
     });
 
     axios
@@ -38,8 +45,15 @@ function AddProject() {
         ReceiverId: influencerID,
         SenderId: user._id,
         Eventhappened: "Invitation for project collaboration",
+        NotificationTime,
         Notificationmessage:
-          businessName + " " + "is inviting you to collaborate on a project",
+          businessName +
+          " is inviting you to collaborate on a project named " +
+          projectName +
+          " from " +
+          projectStartDate +
+          " to " +
+          projectEndDate,
       })
       .then((res) => {
         alert("Notification created successfully");
@@ -51,6 +65,7 @@ function AddProject() {
     Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then(
       (res) => {
         setBusinessName(res.data.firstName);
+        setBusinessID(res.data._id);
       }
     );
     Axios.get(`http://localhost:5000/api/users/getuser/${influencerID}`).then(
@@ -64,7 +79,7 @@ function AddProject() {
   let navigate = useNavigate();
 
   const navAllProjects = () => {
-    navigate("/allProjects");
+    navigate("/allBusinessProjects");
   };
 
   return (
