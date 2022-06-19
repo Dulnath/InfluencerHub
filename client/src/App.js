@@ -87,12 +87,9 @@ function App() {
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
       <Route path="/viewnotifications" element={<ViewNotifications />}></Route>
-
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
-    
       <Route path="/imagee" element={<Image/>} />
       <Route path="/firstlogini" element={<FirstLogini/>} />
-
       <Route path="/report/:id" exact element={<Report />} />
       <Route path="/manageprojects" element={<ChooseInfluencer />} />
       <Route path="/addProject/:influencerID" element={<AddProject />} />
@@ -118,7 +115,6 @@ function App() {
         path="/acceptEvents/:projectName/:projectID"
         element={<PendingEvents />}
       />
-
     </Routes>
   );
 }
