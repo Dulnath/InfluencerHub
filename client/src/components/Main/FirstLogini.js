@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import ParseJwt from "../Utilities/ParseJwt";
 
 
 const FirstLogin = () => {
@@ -12,6 +13,13 @@ const FirstLogin = () => {
   const [url, setUrl] = useState();
  // const [photo, setPhoto] = useState();
   console.log(img);
+
+  const userToken = localStorage.getItem('token');
+
+    const user = ParseJwt(userToken)//{id=d12313123jop121o,email='kumuthu@gmail.com', fname="kumuthu"}
+    
+  
+
 
   const postDetails = async(e) => {
     e.preventDefault();
@@ -33,7 +41,7 @@ const FirstLogin = () => {
   const sendRequest = async () => {
 
     await axios
-      .put(`http://localhost:5000/api/users/getuser/626a3f7e2e0a2fbb4ecb05a2`, {
+      .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
         img: String(url),
       })
       .then((res) => res.data)
