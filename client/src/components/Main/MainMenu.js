@@ -55,9 +55,7 @@ const MainMenu = (props) => {
         <Col>{(category==='influencer')?<Link to={`/home`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>:
               <Link to={`/business`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>}</Col>
         <Col md="auto">
-          <Button onClick={DisplayNotifications}>
-            <BsBellFill />
-          </Button>
+        <BsBellFill className={styles.bellIcon} onClick={DisplayNotifications}/>
         </Col>
         <Col md="auto">
           <div className={styles.dropdown} style={{ background: "#3bb19b", width: "200px", color: "white", fontSize: "20px" }} >
@@ -70,6 +68,8 @@ const MainMenu = (props) => {
                   <Link to={`/profileview/${id}`} >Profile</Link></li>
                 <li className={styles.menu_item}>
                   <Link to={`/update/${id}`} >Settings</Link></li>
+                <li className={styles.menu_item}>
+                  {(category==="influencer")?<Link to={`/allInfluencerProjects`} >Projects</Link>:<Link to={`/allBusinessProjects`} >View Projects</Link>}</li>
               </ul>
             ) :
               (

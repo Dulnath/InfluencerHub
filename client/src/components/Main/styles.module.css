@@ -58,6 +58,10 @@ body{
 	margin: 30px 55% 30px 45%;
 }
 
+.bellIcon{
+	color:white;
+	cursor: pointer;
+}
 
 .image1_img {
     height: 50px;
