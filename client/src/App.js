@@ -41,17 +41,12 @@ import AddEvents from "./components/projects-and-events/AddEvents";
 import AllInfluencerEvents from "./components/projects-and-events/AllInfluencerEvents";
 import AllBusinessEvents from "./components/projects-and-events/AllBusinessEvents";
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
-<<<<<<< HEAD
 import ViewNotifications from "./components/Notifications/index"
 import Image from "./components/Test/Image";
-import FirstLoginb from "./components/Main/FirstLogini";
 import FirstLogini from "./components/Main/FirstLogini";
-=======
 import PendingList from "./components/projects-and-events/PendingList";
 import AllBusinessProjects from "./components/projects-and-events/AllBusinessProjects";
 import PendingEvents from "./components/projects-and-events/PendingEvents";
-import ViewNotifications from "./components/Notifications/index";
->>>>>>> 85c61960bb95ace26509eca40ea92ab4709a93fc
 
 function App() {
   const user = localStorage.getItem("token");
@@ -92,12 +87,12 @@ function App() {
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
       <Route path="/viewnotifications" element={<ViewNotifications />}></Route>
-<<<<<<< HEAD
+
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
-      <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
+    
       <Route path="/imagee" element={<Image/>} />
       <Route path="/firstlogini" element={<FirstLogini/>} />
-=======
+
       <Route path="/report/:id" exact element={<Report />} />
       <Route path="/manageprojects" element={<ChooseInfluencer />} />
       <Route path="/addProject/:influencerID" element={<AddProject />} />
@@ -123,7 +118,7 @@ function App() {
         path="/acceptEvents/:projectName/:projectID"
         element={<PendingEvents />}
       />
->>>>>>> 85c61960bb95ace26509eca40ea92ab4709a93fc
+
     </Routes>
   );
 }
