@@ -97,7 +97,7 @@ function Search(props) {
 
                   <div class="card-body">
 
-                    <img src={image} className={styles.image_img} alt="..." />
+                    <img src={item.img} className={styles.image_img} alt="..." />
                     <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>
                     <Row> <h5>{item.category}</h5></Row>
                     <Row> <h10>{item.email}</h10></Row>

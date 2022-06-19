@@ -20,8 +20,13 @@ const userSchema = new mongoose.Schema({
 	restoreDate:{type:Date,required:false},
 	verified:{type:Boolean,default:false},
 	isActive:{type:Boolean,default:true},
+	dob:{type:Date,required:false},
+	product:{ type: String, required: false },
+	address:{ type: String, required: false },
 	
 	img:{ type: String, required: false },
+	fblink:{ type: String, required: false },
+	instalink:{ type: String, required: false },
 });
 
 //create user token

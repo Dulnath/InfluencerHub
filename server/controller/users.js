@@ -109,13 +109,20 @@ const getById = async (req, res) => {
 
 
 const UpdateUser = async (req,res) =>{
-    const {firstName,email} = req.body
+    const {firstName,email,img,isFirstLogin,dob,product,address,fblink,instalink} = req.body
     const id = req.params.id
     let user;
     try{
         user = await User.findByIdAndUpdate(id,{
            firstName,
             email,
+            img,
+            isFirstLogin,
+            dob,
+            product,
+            fblink,
+            address,
+            instalink,
            
         });
         user = await user.save();

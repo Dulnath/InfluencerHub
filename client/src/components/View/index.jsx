@@ -17,6 +17,7 @@ function View() {
   const [lastName, setLastName] = useState();
   const [email, setUserEmail] = useState();
   const [category, setUserCategory] = useState();
+  const [image, setUserImage] = useState();
   const { id } = useParams(); 
   const navigate = useNavigate();
 
@@ -26,7 +27,8 @@ function View() {
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setUserEmail(response.data.email);
-          setUserCategory(response.data.category);            
+          setUserCategory(response.data.category);    
+          setUserImage(response.data.img);         
       })       
 
   }, [])
