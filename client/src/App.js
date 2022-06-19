@@ -43,6 +43,9 @@ import AddEvents from './components/projects-and-events/AddEvents';
 import AllEvents from './components/projects-and-events/AllEvents';
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
 import ViewNotifications from "./components/Notifications/index"
+import Image from "./components/Test/Image";
+import FirstLoginb from "./components/Main/FirstLogini";
+import FirstLogini from "./components/Main/FirstLogini";
 
 function App() {
   const user = localStorage.getItem('token');
@@ -89,6 +92,8 @@ function App() {
       <Route path="/viewnotifications" element={<ViewNotifications />}></Route>
       <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
       <Route path="/allEvents/:projectName/:projectID" element={<AllEvents />} />
+      <Route path="/imagee" element={<Image/>} />
+      <Route path="/firstlogini" element={<FirstLogini/>} />
     </Routes>
   );
 };
