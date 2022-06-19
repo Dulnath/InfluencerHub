@@ -9,14 +9,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ParseJwt from "../../utilities/ParseJwt";
 import { BsBellFill } from "react-icons/bs";
-import { Button } from "react-bootstrap";
+import { Button,Row,Col } from "react-bootstrap";
 
 const MainMenu = (props) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
 	const [photo,setPhoto] = useState('');
-
+  const [showMenu, setShowMenu] = useState(false)
   useEffect(() => {
     const userToken = localStorage.getItem("token");
     const user = ParseJwt(userToken);
@@ -34,6 +34,12 @@ const MainMenu = (props) => {
     }
   }, []);
 
+  function showDropdownMenu(event) {
+    event.preventDefault();
+    setShowMenu(!showMenu);
+  }
+
+
   const DisplayNotifications = () => {
     navigate(`/viewnotifications`);
   };
@@ -43,37 +49,42 @@ const MainMenu = (props) => {
     navigate("/login");
   };
   return (
-    <nav className={styles.navbar}>
-      <h1>InfluencerHub</h1>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          {fname} &ensp;
-          <img src={photo} className={styles.image1_img} alt="..." />
-        </Dropdown.Toggle>
+    <Row className={styles.navbar}>
+        <Col><h1 className={styles.MenuTitle}>InfluencerHub</h1></Col>
+        <Col md="auto">
+          <Button onClick={DisplayNotifications}>
+            <BsBellFill />
+          </Button>
+        </Col>
+        <Col md="auto">
+          <div className={styles.dropdown} style={{ background: "#3bb19b", width: "200px", color: "white", fontSize: "20px" }} >
+            <div onClick={showDropdownMenu}> {fname} &ensp; <img src={photo} className={styles.image1_img} alt="..." /><div className={styles.button}></div></div>
 
-        <Dropdown.Menu>
-          <Dropdown.Item>
-            <Link to={`/profileview/${id}`}>Profile</Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to={`/update/${id}`}>Settings</Link>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+            {showMenu ? (
+              <ul>
+                <li className={styles.menu_item}>
+                  <Link to={`/profileview/${id}`} >Profile</Link></li>
+                <li className={styles.menu_item}>
+                  <Link to={`/update/${id}`} >Settings</Link></li>
+              </ul>
+            ) :
+              (
+                null
+              )
+            }
 
-      <Button onClick={DisplayNotifications}>
-        <BsBellFill />
-      </Button>
-
-      <button
-        className={styles.white_btn}
-        onClick={() => {
-          handleLogout();
-        }}
-      >
-        Logout
-      </button>
-    </nav>
+          </div>
+        </Col>
+        <Col xs lg="2">
+          <button
+            className={styles.white_btn}
+            onClick={() => {
+              handleLogout();
+            }}
+          >
+            Logout
+          </button></Col>
+      </Row>
   );
 };
 
