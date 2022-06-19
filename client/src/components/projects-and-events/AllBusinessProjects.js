@@ -88,16 +88,18 @@ function AllBusinessProjects() {
                                     {
                                         (project.isAccepted === 'true') ?
                                             <div>
+                                                <Button className="projectButton2" variant="success" size="sm" type="submit" onClick={() => navigate('/payment')}>Pay</Button>
                                                 <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allBusinessEvents/${project.projectName}/${project._id}`) }}>View all events</Button>
                                                 <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/addEvents/${project.projectName}/${project._id}`) }}>Add Event</Button>
+                                                
                                             </div> :
                                             <div>
                                                 <Button className="projectButton1" variant="secondary" size="sm" type="submit" onClick={() => { navigate(`/allBusinessEvents/${project.projectName}/${project._id}`) }} disabled>View all events</Button>
                                                 <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/addEvents/${project.projectName}/${project._id}`) }} disabled>Add Event</Button>
                                             </div>
                                     }
-                                    <Button className="projectButton2" variant="warning" size="sm" type="submit" onClick={() => editWindow(project._id)}>Edit Project</Button>
-                                    <Button className="projectButton2" variant="danger" size="sm" type="submit" onClick={() => handleDelete(project._id)}>Delete Project</Button>
+                                            <Button className="projectButton2" variant="warning" size="sm" type="submit" onClick={() => editWindow(project._id)}>Edit Project</Button>
+                                            <Button className="projectButton2" variant="danger" size="sm" type="submit" onClick={() => handleDelete(project._id)}>Delete Project</Button>      
 
                                 </div>
                             </Card>

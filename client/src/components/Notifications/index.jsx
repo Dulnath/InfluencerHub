@@ -15,16 +15,20 @@ function ViewNotifications() {
 	const token = localStorage.getItem("token");
 	const loggedinuser = ParseJwt(token);
 	
-
-	useEffect(()=> {
+	function loadNotifications(){
 		axios.get("http://localhost:5000/notifications").then((response) => {
 			setNotificationList(response.data);						
-		})		
+		})	
+	}
+
+	useEffect(()=> {
+		loadNotifications()
 	},[])
 
 	function MarkAsRead(_ID){
 		axios.put(`http://localhost:5000/notifications/update/${_ID}`).then((response) => {
             console.log("Notification has been updated");
+			loadNotifications();
         }).catch((error) => {
             console.log(error.response);
         });
