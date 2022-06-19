@@ -53,7 +53,7 @@ if(loggedInUser){
 
                             <div className="card-body">
 
-                                <img src={user.img} className={styles.image_img} alt="..." />
+                                {user.img?<img src={user.img} className={styles.image_img} alt="..." />:<img src={image} className={styles.image_img} alt="..." />}
                                 <h3 class="card-title">{user.firstName + " " + user.lastName}</h3>
                                 <Row> <h5>{user.category}</h5></Row>
                                 <Row> <h10>{user.email}</h10></Row>

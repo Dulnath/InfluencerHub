@@ -125,22 +125,21 @@ function AccountReports() {
                                             <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                         </Row>
                                         <Row>
-                                            <Card.Text><b>Complaints : </b></Card.Text>
-                                            <Col ><ul>
-                                                    <div className={styles.scrollbox_nano}>
+                                            <Card.Text xs lg="1"><b>Complaints : </b></Card.Text>
+                                            <Col ><div className={styles.scrollbox_nano}>
                                                         {data.description.map((desc, index) => {
                                                             return (
-                                                            <Container fluid="md" className={styles.record}>
+                                                            <li>
+                                                                <Container fluid="md" className={styles.record}>
                                                                     <Row>
                                                                         <Col xs={4} md={4}><b>Id </b> : {index}</Col>
                                                                         <Col xs={4} md={4}><b>Desc </b> : {desc}</Col>
                                                                     </Row>
                                                              </Container>
+                                                            </li>
                                                             )
                                                         })}
-                                                    </div>
-                                                    
-                                                </ul></Col>
+                                                    </div></Col>
                                                 
                                         </Row>
                                         <Row>
