@@ -15,6 +15,7 @@ const MainMenu = (props) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
+	const [photo,setPhoto] = useState('');
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
@@ -25,6 +26,7 @@ const MainMenu = (props) => {
         .then((response) => {
           setUserName(response.data.firstName);
           setId(response.data._id);
+          setPhoto(response.data.img)
         });
       if (response.staus !== "ok") {
         setUserName("default");
@@ -46,7 +48,7 @@ const MainMenu = (props) => {
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           {fname} &ensp;
-          <img src={image} className={styles.image1_img} alt="..." />
+          <img src={photo} className={styles.image1_img} alt="..." />
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

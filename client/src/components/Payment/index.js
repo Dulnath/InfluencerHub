@@ -19,6 +19,24 @@ export default function Payment() {
                   ],
                });
             },
+<<<<<<< HEAD
+onApprove: async (data, actions) => {
+const order = await actions.order.capture();
+console.log(order);
+},
+onError: (err) => {
+console.log(err);
+},
+})
+.render(paypal.current);
+}, []);
+return (
+<div className ="container" style={{justifyContent:"center",display:"flex",width:"800px"}}>
+<div ref={paypal}></div>
+</div>
+);
+}
+=======
             onApprove: async (data, actions) => {
                const order = await actions.order.capture();
                console.log(order);
@@ -38,3 +56,4 @@ export default function Payment() {
       </div>
    );
 }
+>>>>>>> 85c61960bb95ace26509eca40ea92ab4709a93fc
