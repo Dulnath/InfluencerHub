@@ -123,11 +123,7 @@ function AdminSettings(){
                 <hr />
             </div>
                 <Container>
-                    <Accordion defaultActiveKey="1" className={styles.accordion}>
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header >Register new Admin</Accordion.Header>
-                        <Accordion.Body>
-                            <Container>
+                <Container>
                                 <Form ref={form} onSubmit={(e)=>{
                                     registerUser(e)
                                 }}>
@@ -186,9 +182,6 @@ function AdminSettings(){
                                     </Row>
                                 </Form>
                             </Container>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
                 
                 <Link to='/editaccount' className='text-decoration-none'>
                 <div className="d-grid gap-2">

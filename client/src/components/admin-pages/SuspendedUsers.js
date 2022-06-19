@@ -137,7 +137,7 @@ function SuspendedUsers(){
                             return(
                                 <React.Fragment style={{padding:"10px"}} key={data._id}>
                                     <Card className={styles.record}>
-                                    <img src={image} className={styles.image1_img} alt="..."/>
+                                    {data.img?<img src={data.img} className={styles.image1_img} alt="..."/>:<img src={image} className={styles.image1_img} alt="..."/>}
                                         <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                         <Card.Body>
                                                <RenderMessage uRestoreDate={data.restoreDate}/>

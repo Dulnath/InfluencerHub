@@ -44,7 +44,7 @@ function AllUsers(){
                                                             <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
                                                             <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
                                                             <Col xs={4} md={3}><b>Email </b> : {data.email}</Col>
-                                                            <Col xs={4} md={3}><img src={image} className={styles.imageList_img} alt="..."/></Col>
+                                                            <Col xs={4} md={3}>{data.img?<img src={data.img} className={styles.imageList_img} alt="..."/>:<img src={image} className={styles.imageList_img} alt="..."/>}</Col>
                                                         </Row>
                                                     </Container>
                                                 </React.Fragment>

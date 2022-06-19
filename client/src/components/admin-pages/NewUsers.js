@@ -87,7 +87,6 @@ function NewUsers(){
                                     return (
                                         <React.Fragment key={data._id}>
                                             <Card className={styles.record} >
-                                                <Row><Col sm={8}><img src={image} className={styles.image1_img} alt="..."/></Col></Row>
                                                 <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
                                                 <Card.Body>
                                                     <RenderType userType={data.category} />
