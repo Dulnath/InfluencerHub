@@ -20,6 +20,8 @@ function AddProject() {
   const influencerName = influencerFirstName + " " + influencerLastName;
   console.log(influencerID);
 
+  let NotificationTime = new Date().toLocaleString();
+
   const loggedInUser = localStorage.getItem("token");
   const user = ParseJwt(loggedInUser);
 
@@ -43,8 +45,15 @@ function AddProject() {
         ReceiverId: influencerID,
         SenderId: user._id,
         Eventhappened: "Invitation for project collaboration",
+        NotificationTime,
         Notificationmessage:
-          businessName + " " + "is inviting you to collaborate on a project",
+          businessName +
+          " is inviting you to collaborate on a project named " +
+          projectName +
+          " from " +
+          projectStartDate +
+          " to " +
+          projectEndDate,
       })
       .then((res) => {
         alert("Notification created successfully");
