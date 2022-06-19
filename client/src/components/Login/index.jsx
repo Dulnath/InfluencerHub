@@ -28,7 +28,9 @@ const Login = () => {
 				return;
 			}
 
-			if(user.category==='influencer'&&user.adminVerified===true){
+			if(user.category==='influencer'&&user.adminVerified===true&&user.isFirstLogin===true){
+				navigate('/firstlogini')
+			}else if(user.category==='influencer'&&user.adminVerified===true&&user.isFirstLogin===false){
 				navigate('/home')
 			}else if(user.category==='business'&&user.adminVerified===true){
 				navigate('/business')
