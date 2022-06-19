@@ -91,7 +91,7 @@ function AddEvents() {
                                 <input
                                     type="date"
                                     min={projectStartDate}
-                                    max={eventEndDate}
+                                    max={projectEndDate}
                                     value={eventStartDate}
                                     onChange={(event) => { setEventStartDate(event.target.value) }} />
                             </div><br />

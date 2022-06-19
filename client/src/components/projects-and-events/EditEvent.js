@@ -4,7 +4,6 @@ import axios from "axios";
 import FormatDateTime from '../../utilities/FormatDateTime'
 import MainMenu from '../Main/MainMenu';
 
-
 function EditEvent(props) {
     const [eventName, setEventName] = useState();
     const [eventDescription, setEventDescription] = useState();
@@ -45,7 +44,6 @@ function EditEvent(props) {
 
     return (
         <div>
-            <MainMenu></MainMenu>
             <div className="projectCard">
                 <Card border="dark" >
                     <Card.Header>
