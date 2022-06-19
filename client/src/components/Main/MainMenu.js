@@ -16,6 +16,7 @@ const MainMenu = (props) => {
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
 	const [photo,setPhoto] = useState('');
+  const [category,setCategory] = useState('');
   const [showMenu, setShowMenu] = useState(false)
   useEffect(() => {
     const userToken = localStorage.getItem("token");
@@ -26,7 +27,8 @@ const MainMenu = (props) => {
         .then((response) => {
           setUserName(response.data.firstName);
           setId(response.data._id);
-          setPhoto(response.data.img)
+          setPhoto(response.data.img);
+          setCategory(response.data.category);
         });
       if (response.staus !== "ok") {
         setUserName("default");
@@ -50,7 +52,8 @@ const MainMenu = (props) => {
   };
   return (
     <Row className={styles.navbar}>
-        <Col><h1 className={styles.MenuTitle}>InfluencerHub</h1></Col>
+        <Col>{(category==='influencer')?<Link to={`/home`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>:
+              <Link to={`/business`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>}</Col>
         <Col md="auto">
           <Button onClick={DisplayNotifications}>
             <BsBellFill />
@@ -58,7 +61,8 @@ const MainMenu = (props) => {
         </Col>
         <Col md="auto">
           <div className={styles.dropdown} style={{ background: "#3bb19b", width: "200px", color: "white", fontSize: "20px" }} >
-            <div onClick={showDropdownMenu}> {fname} &ensp; <img src={photo} className={styles.image1_img} alt="..." /><div className={styles.button}></div></div>
+            <div onClick={showDropdownMenu}> {fname} &ensp; {photo?
+            <img src={photo} className={styles.image1_img} alt="..." />:<img src={image} className={styles.image1_img} alt="..." />}<div className={styles.button}></div></div>
 
             {showMenu ? (
               <ul>

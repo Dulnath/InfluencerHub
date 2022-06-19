@@ -17,6 +17,24 @@
 
 }
 
+.card {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%;
+    margin: 0px auto 10px auto;
+  }
+  
+  .card:hover {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  animation-name: example;
+  animation-duration: 0.25s;
+  border-left: 8px solid #95fdcb;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
 .main {
     display: flex;
     height: 100vh;
@@ -61,12 +79,12 @@ ul li {
   }
 
   .card {
-    background-color:  #c7f6b6;
+    background-color:  #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 20px;
     padding: 40px;
-    width: 70%;
-    margin: 0px 10px 5px 10px;
+    width: 30%;
+    margin: 0px 10px 15px 10px;
 }
 
 .card:hover {

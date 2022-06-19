@@ -54,7 +54,7 @@ function Search(props) {
 
  
   return (
-    <div class="container">
+    <div className="container">
       <form
         style={{
           margin: "auto",
@@ -93,9 +93,9 @@ function Search(props) {
           data.map((item, index) => (
             (item.category !== 'admin' && item.adminVerified && item.category !== props.category) ? (              
               <div>
-                <div class="card">
+                <div className={styles.card}>
 
-                  <div class="card-body">
+                  <div className="card-body">
 
                     <img src={item.img} className={styles.image_img} alt="..." />
                     <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>

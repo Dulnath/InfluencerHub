@@ -56,8 +56,8 @@ const Update = () => {
   return (
     <div>
     <MainMenu></MainMenu>
-    <div className="" style={{display:"flex",justifyContent:"left",width:"800px",marginLeft:"100px"}}>
-    {inputs!=null?(<>
+    <div style={{background:"white",height:"100vh",padding:"40px"}}>
+    {inputs!=null?(<Container>
       
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -90,7 +90,7 @@ const Update = () => {
       <Button variant="primary" type="submit">
         Update
       </Button>
-    </Form></>):(<>
+    </Form></Container>):(<>
       <h2>asdasd</h2>
       </>)}
     </div>

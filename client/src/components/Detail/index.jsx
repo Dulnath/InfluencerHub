@@ -48,34 +48,25 @@ if(loggedInUser){
                if(user.category!=='admin'&&user.category!==userMain.category){
                 return (
 
-                    <React.Fragment>
-                        <CardGroup>
-                            <Card>
-                                <Container fluid="md" className='p-3 mb-2 border border-primary rounded' style={{ border: '2px solid #000000', paddingTop: "5px", paddingBottom: "5px", paddingLeft: "5px" }} key={user._id}>
+                    <div styles={{display:"flex"}}>
+                        <Container fluid="md" className={styles.card} key={user._id}>
 
-                                    <div class="card-deck">
-                                        <div class="card" className={styles.card}>
+                            <div className="card-body">
 
-                                            <div class="card-body">
+                                <img src={user.img} className={styles.image_img} alt="..." />
+                                <h3 class="card-title">{user.firstName + " " + user.lastName}</h3>
+                                <Row> <h5>{user.category}</h5></Row>
+                                <Row> <h10>{user.email}</h10></Row>
+                                <Row>
+                                    <Col xs={3} md={2}><b> <button className="btn btn-success"
+                                        onClick={() => { navigate(`/view/${user._id}`) }}
+                                    >View
+                                    </button> </b></Col>
+                                </Row>
+                            </div>
+                        </Container>
+                    </div>
 
-                                                <img src={user.img} className={styles.image_img} alt="..." />
-                                                <h3 class="card-title">{user.firstName + " " + user.lastName}</h3>
-                                                <Row> <h5>{user.category}</h5></Row>
-                                                <Row> <h10>{user.email}</h10></Row>
-                                                <Row>
-                                                    <Col xs={3} md={2}><b> <button className="btn btn-success"
-                                                        onClick={() => { navigate(`/view/${user._id}`) }}
-                                                    >View
-                                                    </button> </b></Col>
-                                                </Row>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Container>
-                            </Card>
-                        </CardGroup>
-                    </React.Fragment>
-    
                 );
                }else{
                 return(
