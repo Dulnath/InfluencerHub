@@ -10,16 +10,15 @@ function CreatePost() {
   const [PostTopic, setTopic] = useState();
   const [Postdescription, setDescription] = useState();
   const [PostImage, setPostImage] = useState();
+  const [PostCategory, setPostCategory] = useState();
   const [error, setErrorMsg] = useState();
   const [success, setSuccessMsg] = useState();
 
   const CreatePost = async () => {
     let formValid = fieldValidation();
-
     if (!formValid) {
       return;
     }
-
     const loggedInUser = localStorage.getItem("token");
     const user = ParseJwt(loggedInUser);
     const response = await fetch("http://localhost:5000/post/save", {
@@ -30,22 +29,20 @@ function CreatePost() {
       body: JSON.stringify({
         PostTopic,
         Postdescription,
+        PostCategory,
         PostImage,
         PostAuthorID: user._id,
       }),
     });
-
     const data = await response.json();
 
     if (data.status === "ok") {
       console.log("Post created successfully");
-      // navigate('../dashboard');
       setSuccessMsg("Sucessfully created new post");
     } else {
       setErrorMsg("The post was not posted");
     }
   };
-
   function fieldValidation() {
     if (!PostTopic && !Postdescription) {
       setErrorMsg("Please fill Post Topic and Post Description!");
@@ -60,7 +57,6 @@ function CreatePost() {
       return true;
     }
   }
-
   return (
     <div>
       <MainMenu></MainMenu>
@@ -83,7 +79,6 @@ function CreatePost() {
                 ></Form.Control>
                 <br />
               </Form.Group>
-
               <Form.Group>
                 <h5>Post Description</h5>
                 <Form.Control
@@ -96,7 +91,22 @@ function CreatePost() {
                 ></Form.Control>
                 <br />
               </Form.Group>
-
+              <Form.Group>
+                <h5>Post Category</h5>
+                <Form.Control
+                  as="select"
+                  name="state"
+                  value={PostCategory}
+                  onChange={(event) => setPostCategory(event.target.value)}
+                >
+                  <option value="first" selected>
+                    No category
+                  </option>
+                  <option value="second">Entertaintment</option>
+                  <option value="third">Product Promotion</option>
+                </Form.Control>
+                <br />
+              </Form.Group>
               <h5>Attach image</h5>
               <input
                 type="file"
@@ -119,7 +129,6 @@ function CreatePost() {
                 {success && <div className={styles.success_msg}>{success}</div>}
               </Row>
             </Form>
-
             <Card.Footer
               style={{
                 display: "flex",

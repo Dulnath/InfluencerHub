@@ -10,6 +10,7 @@ router.post("/post/save", postValidation, async (req, res) => {
     await Post.create({
       PostTopic: req.body.PostTopic,
       Postdescription: req.body.Postdescription,
+      PostCategory: req.body.PostCategory,
       PostImage: req.body.PostImage,
       PostAuthorID: req.body.PostAuthorID,
     });
