@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Form, Card } from "react-bootstrap";
 import axios from "axios";
+import MainMenu from "../Main/MainMenu";
 
 function EditPost() {
   const [PostTopic, setTopic] = useState();
@@ -31,6 +32,7 @@ function EditPost() {
 
   return (
     <div>
+      <MainMenu></MainMenu>
       <div className="editPostCard">
         <Card border="dark">
           <Card.Header>
