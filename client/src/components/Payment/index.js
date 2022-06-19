@@ -29,7 +29,7 @@ console.log(err);
 .render(paypal.current);
 }, []);
 return (
-<div>
+<div className ="container" style={{justifyContent:"center",display:"flex",width:"800px"}}>
 <div ref={paypal}></div>
 </div>
 );
