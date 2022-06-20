@@ -41,7 +41,7 @@ function Business(props) {
 				<div>
 					<MainMenu></MainMenu>
 			<div style={{display:"flex",justifyContent:"center",alignContent:"center",margin:"50px"}}>
-			<h4><button style={{backgroundColor:"yellow",padding:"30px",borderStyle:"solid",borderRadius:"30px"}} onClick={() => {navigate(`/detail`)}}>
+			<h4><button style={{background:"#3bb19b",color:"white",padding:"30px",borderStyle:"solid",borderRadius:"30px"}} onClick={() => {navigate(`/detail`)}}>
 							View All influencers
 						</button></h4></div>
 					

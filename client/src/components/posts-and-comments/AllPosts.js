@@ -54,7 +54,7 @@ function AllPosts(props) {
 
   if (listOfPosts.length !== 0) {
     return (
-      <Container>
+      <Container styles={{background:"#e6e6e6"}}>
         <h1>Posts</h1>
         <hr/>
         <button
@@ -76,7 +76,7 @@ function AllPosts(props) {
                       className="text-decoration-none"
                     >
                       <Card.Header>
-                        <b>{posts.PostTopic}</b>
+                        <h3>{posts.PostTopic}</h3>
                       </Card.Header>
                     </Link>
                     <Row>
@@ -186,6 +186,7 @@ function AllPosts(props) {
     return (
       <div className="background">
         <h1>Posts</h1>
+        <hr />
         <button
           className={styles.btnGreen}
           onClick={() => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { Card, Button, Col, Row } from "react-bootstrap";
+import { Card, Button, Col, Row,Container } from "react-bootstrap";
 import styles from "./styles.module.css";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -53,7 +53,7 @@ function AllPostsExternal(props) {
 
   if (listOfPosts.length !== 0) {
     return (
-      <div className="background">
+      <Container styles={{background:"#e6e6e6"}}>
         <h1>Posts</h1>
         <hr />
         {listOfPosts.map((posts, id) => {
@@ -150,14 +150,15 @@ function AllPostsExternal(props) {
             </div>
           );
         })}
-      </div>
+      </Container>
     );
   } else {
     return (
-      <div className="background">
+      <Container>
         <h1>Posts</h1>
+        <hr />
         <p>This user has no posts</p>
-      </div>
+      </Container>
     );
   }
 }

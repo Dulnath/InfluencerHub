@@ -9,7 +9,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ParseJwt from "../../utilities/ParseJwt";
 import { BsBellFill } from "react-icons/bs";
+
 import { MdOutlineLogout } from "react-icons/md";
+
 import { Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 
@@ -131,11 +133,12 @@ const MainMenu = (props) => {
                 )}
               </li>
               <li
+                className={styles.menu_item}
                 onClick={() => {
                   handleLogout();
                 }}
               >
-                Log out <MdOutlineLogout />
+                Logout
               </li>
             </ul>
           ) : null}
