@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CloseButton, Form, Button } from "react-bootstrap";
+import { Card, CloseButton, Form, Button, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
 import MainMenu from "../Main/MainMenu";
@@ -17,6 +17,8 @@ function AddEvents() {
   const [businessName, setBusinessName] = useState("");
   const [influencerID, setInfluencerID] = useState("");
   const [businessID, setBusinessID] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { projectName, projectID } = useParams();
 
@@ -26,22 +28,50 @@ function AddEvents() {
   const user = ParseJwt(loggedInUser);
 
   // Create an event
-  const createEvent = () => {
-    Axios.post("http://localhost:5000/createEvent", {
-      influencerName,
-      influencerID,
-      businessName,
-      businessID,
-      projectID,
-      projectName,
-      eventName,
-      eventDescription,
-      eventStartDate,
-      eventEndDate,
-    }).then((res) => {
+  const createEvent = async () => {
+    let formValid = fieldValidation();
+
+    if (!formValid) {
+      return;
+    }
+
+    const response = await fetch("http://localhost:5000/createEvent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        influencerName,
+        influencerID,
+        businessName,
+        businessID,
+        projectID,
+        projectName,
+        eventName,
+        eventDescription,
+        eventStartDate,
+        eventEndDate
+      }),
+    }, navAllBusinessEvents());
+
+    const data = await response.json();
+
+    console.log(data.status);
+    if (data.status === "ok") {
       console.log("Event created");
-      navigate(`/allBusinessEvents/${projectName}/${projectID}`);
-    });
+      setSuccessMessage("Sent project to influencer");
+    } else {
+      setErrorMessage("Event was not created");
+    }
+
+    function fieldValidation() {
+      if (!eventName || !eventDescription || !eventStartDate || !eventEndDate) {
+        setErrorMessage("Please fill all fields");
+        return false;
+      } else {
+        return true;
+      }
+    }
 
     axios
       .post("http://localhost:5000/createNotification", {
@@ -61,7 +91,6 @@ function AddEvents() {
           eventEndDate,
       })
       .then((res) => {
-        alert("Notification created successfully");
         console.log("Notification created");
       });
   };
@@ -78,10 +107,13 @@ function AddEvents() {
         setBusinessID(response.data.project.businessID);
       }
     );
-    // eslint-disable-next-line
   }, []);
 
   let navigate = useNavigate();
+
+  const navAllBusinessEvents = () => {
+    navigate(`/allBusinessEvents/${projectName}/${projectID}`);
+  };
 
   return (
     <div className="background">
@@ -159,6 +191,16 @@ function AddEvents() {
               </div>
               <br />
             </Form>
+            <Row>
+              {errorMessage &&
+                <div className='error_msg'>
+                  {errorMessage}
+                </div>}
+              {successMessage &&
+                <div className='success_msg'>
+                  {successMessage}
+                </div>}
+            </Row>
           </Card.Body>
 
           <Card.Footer className="cardFooter">

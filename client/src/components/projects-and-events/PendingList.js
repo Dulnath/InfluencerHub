@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import MainMenu from "../Main/MainMenu";
 import ParseJwt from "../Utilities/ParseJwt";
 
@@ -11,6 +12,8 @@ function PendingList() {
 
   const userToken = localStorage.getItem("token");
   const user = ParseJwt(userToken);
+
+  let navigate = useNavigate();
 
   let NotificationTime = new Date().toLocaleString();
 
@@ -97,7 +100,7 @@ function PendingList() {
                 <Card className="detailsCard" border="dark">
                   <div className="details">
                     <span className="title">Project created by:</span>
-                    <span className="data">{project.businessName}</span>
+                    <span className="data"><a href="#/" onClick={() => {navigate(`/view/${project.businessID}`)}}>{project.businessName}</a></span>
                   </div>
                   <br />
                   <div className="details">
