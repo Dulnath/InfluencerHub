@@ -13,15 +13,25 @@ export default function Payment() {
                         description: "Cool looking table",
                         amount: {
                            currency_code: "USD",
-                           value: 650.0,
+                           value: 5.0,
+                        },
+                        payee: {
+                           email_address:'sb-jbv3l17277353@personal.example.com'
                         },
                      },
                   ],
+                
                });
             },
             onApprove: async (data, actions) => {
                const order = await actions.order.capture();
                console.log(order);
+               console.log("eeee");
+              // console.log({...order});
+              console.log(order.purchase_units);
+              const q=order.purchase_units
+              console.log("ki");
+              console.log(q[0].payee.email_address);
             },
             onError: (err) => {
                console.log(err);
@@ -32,7 +42,7 @@ export default function Payment() {
    return (
       <div>
          <MainMenu></MainMenu>
-      <div className="container" style={{ justifyContent: "center", margin:"auto",padding:"0% 3% 0% 3%", width: "60%",height:"120vh" }}>
+      <div className="container" style={{ justifyContent: "center", margin:"auto",padding:"10%", width: "60%",height:"100vh" }}>
          <div ref={paypal} style={{margin:"auto", padding:"5%"}}></div>
       </div>
       </div>
