@@ -46,7 +46,7 @@ const ProfileView = () => {
   }, []);
 
   return (
-    <div className="main_container">
+    <div style={{background:"#e6e6e6"}}>
       <MainMenu></MainMenu>
       <Container className={styles.mainContainer}>
         <Row>

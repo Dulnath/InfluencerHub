@@ -51,7 +51,8 @@ router.post('/addComment', async (req, res) => {
             postId: req.body.postID,
             responseTo: req.body.responseTo,
             comment: req.body.comment,
-            time: req.body.commentTime
+            time: req.body.commentTime,
+            image: req.body.image
         })
         res.json({ status: 'ok' })
     } catch (err) {

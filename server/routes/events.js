@@ -1,15 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const eventModel = require('../models/Events');
+const { eventModel } = require('../models/Events');
+const eventValidation = require('../controller/event.validator');
+const errorFunction = require('../../client/src/utilities/errorfunction');
 
 // Add an event
-router.post("/createEvent", async (req, res) => {
-    const event = req.body;
-    const newEvent = new eventModel(event);
-    await newEvent.save();
-
-    res.json(event);
-});
+router.post('/createEvent', eventValidation, async (req, res) => {
+    try {
+        await eventModel.create({
+            influencerName: req.body.influencerName,
+            influencerID: req.body.influencerID,
+            businessName: req.body.businessName,
+            businessID: req.body.businessID,
+            projectID: req.body.projectID,
+            projectName: req.body.projectName,
+            eventName: req.body.eventName,
+            eventDescription: req.body.eventDescription,
+            eventStartDate: req.body.eventStartDate,
+            eventEndDate: req.body.eventEndDate,
+        })
+        res.json({ status: 'ok' })
+    } catch (err) {
+        res.json({ status: 'error' });
+        console.log(err);
+        return res.json(errorFunction(true, "Error creating project"));
+    }
+})
 
 // Retrieve all events
 router.get("/getEvent", (req, res) => {

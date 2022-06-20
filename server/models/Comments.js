@@ -33,7 +33,12 @@ const CommentSchema = new Schema({
     isEdited: {
         type: Boolean,
         default: null
-    }
+    },
+    image: {
+        type: String,
+        required: false,
+        
+    } 
 });
 
 module.exports = CommentsModule = mongoose.model("comments", CommentSchema);

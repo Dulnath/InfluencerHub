@@ -106,7 +106,7 @@ const Update = () => {
       
   }
   return (
-    <div>
+    <div style={{background:"#e6e6e6",height:"100vh"}}>
     <MainMenu></MainMenu>
     <div className="" style={{display:"flex",justifyContent:"left",width:"800px",marginLeft:"100px"}}>
     {inputs!=null?(<>

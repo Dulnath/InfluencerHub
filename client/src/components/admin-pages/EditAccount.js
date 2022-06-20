@@ -43,7 +43,7 @@ function EditAccount(){
 
     function fieldValidation(){
         let strongRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)
-        let phoneRegex = new RegExp(/^[0-9\b]+$/)
+        let phoneRegex = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/i)
 
         let passwordValid = false
         if(!password){
