@@ -184,7 +184,8 @@ function AdminSettings() {
                     </Container>
                 </Container>
                 <div className={styles.heading}>
-                    <h3 >Register New admin</h3>
+                    <br />
+                    <h3 >Personalise your account</h3>
                     <hr />
                 </div>
                 <Link to='/editaccount' className='text-decoration-none'>

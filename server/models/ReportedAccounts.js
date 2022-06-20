@@ -26,6 +26,10 @@ const ReportedAccountSchema = new Schema({
         type:String,
         required:false
     },
+    businessName:{
+        type:String,
+        required:false
+    },
     phoneNo: {
         type:String,
         required:false
