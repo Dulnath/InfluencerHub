@@ -66,6 +66,27 @@ function PendingEvents() {
   };
 
   const rejectEvent = (id) => {
+    axios.get(`http://localhost:5000/getEvent/${id}`).then((response) => {
+      axios
+        .post("http://localhost:5000/createNotification", {
+          ReceiverId: response.data.event.businessID,
+          SenderId: user._id,
+          Eventhappened: "Rejection of an Event",
+          NotificationTime,
+          Notificationmessage:
+            response.data.event.influencerName +
+            " has rejected the event named " +
+            response.data.event.eventName +
+            " of " +
+            response.data.event.projectName +
+            " project",
+        })
+        .then((res) => {
+          alert("Notification created successfully");
+          console.log("Notification created");
+        });
+    });
+
     axios.put(`http://localhost:5000/rejectEvent/${id}`, {}).then(() => {
       console.log("Event has been rejected");
     });
