@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 //business signup form
 const Signupb = () => {
 	const [repassword,setRepassword] = useState(null);
+	const [msg, setMsg] = useState("");
 	const [data, setData] = useState({
 		businessName: "",
 		businessAddress: "",
@@ -29,7 +30,8 @@ const Signupb = () => {
 			try {
 				const url = "http://localhost:5000/api/users";
 				const { data: res } = await axios.post(url, data);
-				navigate("/login");
+				setMsg(res.message);
+			//	navigate("/login");
 				console.log(res.message);
 			} catch (error) {
 				if (
@@ -103,6 +105,7 @@ const Signupb = () => {
 							style={{"autoComplete":"off"}}
 						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
+						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>
