@@ -156,6 +156,17 @@ function AllBusinessProjects() {
                         >
                           Add Event
                         </Button>
+                        <Button
+                          className="projectButton2"
+                          variant="success"
+                          size="sm"
+                          type="submit"
+                          onClick={() => {
+                            navigate(
+                              `/payment`
+                            );
+                          }}
+                        >Pay</Button>
                       </div>
                     ) : (
                       <div>
@@ -198,6 +209,7 @@ function AllBusinessProjects() {
                     >
                       Edit Project
                     </Button>
+                    
                     <Button
                       className="projectButton2"
                       variant="danger"
@@ -207,9 +219,10 @@ function AllBusinessProjects() {
                     >
                       Delete Project
                     </Button>
+                    
                   </div>
                 </Card>
-
+                          //Edit Project
                 {selected === project._id
                   ? openEdit && (
                       <div>
