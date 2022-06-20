@@ -48,3 +48,47 @@
     width: 70%;
     margin: 0px 10px 5px 10px;
 }
+
+.profileImg {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+margin:50px 20px 20px 20px;
+padding: 0px;
+border:solid 10px;
+color: #3bb19b ;
+}
+
+.mainContainer{
+background:#c9fff5;
+margin: 0px auto 5% auto;
+padding: 10px;
+box-shadow: 0 5px 10px #3bb19b, 0 10px 10px #3bb19b;
+border-radius: 0px 0px 10px 15px;
+}
+
+.nameTagdiv{
+margin:auto;
+padding: 10px; 
+
+}
+
+.postContainer{
+margin: 30px auto auto auto;
+}
+
+.nameTag{
+padding: 10px;
+font-size: 50px;
+font-style: bold;
+color: #1b7061;
+margin: 20px;
+}
+
+.infoTag{
+  padding: 5px;
+font-size: 19px;
+font-style: bold;
+color: #1b7061;
+margin: auto 20px auto 30px;
+}
