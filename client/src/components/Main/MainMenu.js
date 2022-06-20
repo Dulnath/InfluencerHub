@@ -18,6 +18,7 @@ const MainMenu = (props) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
+  const [businessName,setBusinessName] = useState("");
   const [photo, setPhoto] = useState("");
   const [category, setCategory] = useState("");
   const [showMenu, setShowMenu] = useState(false);
@@ -51,6 +52,7 @@ const MainMenu = (props) => {
           setUserName(response.data.businessName);
           setId(response.data._id);
           setPhoto(response.data.img);
+          setBusinessName(response.data.businessName);
           setCategory(response.data.category);
         });
       if (response.staus !== "ok") {
@@ -93,7 +95,7 @@ const MainMenu = (props) => {
         </Col>
         <Col md="auto">
           <div className={styles.dropdown} style={{ background: "#3bb19b", width: "200px", color: "white", fontSize: "20px" }} >
-            <div onClick={showDropdownMenu}> {fname} &ensp; {photo?
+            <div onClick={showDropdownMenu}> {(!businessName)? fname  : businessName} &ensp;{photo?
             <img src={photo} className={styles.image1_img} alt="..." />:<img src={image} className={styles.image1_img} alt="..." />}<div className={styles.button}></div></div>
 
 {showMenu ? (

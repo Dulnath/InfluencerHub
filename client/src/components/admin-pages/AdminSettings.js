@@ -35,7 +35,7 @@ function AdminSettings() {
 
     function fieldValidation() {
         let emailRegex = new RegExp(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-        let phoneRegex = new RegExp(/^[0-9\b]+$/)
+        let phoneRegex = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/i)
         let emailValid = emailRegex.test(email)
         let phoneValid = phoneRegex.test(contactNo)
         console.log(emailValid + " " + phoneValid)

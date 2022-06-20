@@ -40,7 +40,7 @@ function View() {
 
     if (loggedInUser) {
 
-        const filteredList = listOfRatings.filter((a) => a.ratingGivenTo.includes(`${id}`));
+        const filteredList = listOfRatings.filter((a) => a.ratingGivenTo === id);
         let r = filteredList.map((item) => item.rating)
 
         console.log(filteredList);

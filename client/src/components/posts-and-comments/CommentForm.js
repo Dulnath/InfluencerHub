@@ -8,12 +8,14 @@ function CommentForm(props) {
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [category, setCategory] = useState();
+    const [image, setImage] = useState();
 
     const addComment = (event) => {
         event.preventDefault();
 
         let commentTime = new Date().toLocaleString();
         let postID = props.postID;
+        const userImage = image;
 
         let commentAuthor;
         if (category === 'business') {
@@ -26,13 +28,15 @@ function CommentForm(props) {
             commentAuthor,
             postID,
             comment,
-            commentTime
-        }).then((res) => {
+            commentTime,
+            image:userImage
+        }).then(() => {
             setComment("");
             console.log("Comment saved successfully");
         });
     }
 
+    console.log('a=' + image);
     useEffect(() => {
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
@@ -40,6 +44,7 @@ function CommentForm(props) {
             setFirstName(res.data.firstName);
             setLastName(res.data.lastName);
             setCategory(res.data.category);
+            setImage(res.data.img);
         });
     }, []);
 
