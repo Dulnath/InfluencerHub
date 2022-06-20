@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CloseButton, Form, Button } from 'react-bootstrap';
+import { Card, CloseButton, Form, Button, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import MainMenu from '../Main/MainMenu';
@@ -21,23 +21,7 @@ function AddEvents() {
     const { projectName, projectID } = useParams();
 
     // Create an event
-    const createEvent = () => {
-        Axios.post("http://localhost:5000/createEvent", {
-            influencerName,
-            influencerID,
-            businessName,
-            businessID,
-            projectID,
-            projectName,
-            eventName,
-            eventDescription,
-            eventStartDate,
-            eventEndDate
-        }).then((res) => {
-            //alert("Event created successfully");
-            console.log("Event created");
-            navigate(`/allBusinessEvents/${projectName}/${projectID}`)
-        });
+    const createEvent = async() => {
 
         let formValid = fieldValidation();
 
@@ -75,9 +59,6 @@ function AddEvents() {
     }
 
 
-    const createProject = async () => {
-
-    }
     // Retrieve data of project
     useEffect(() => {
         Axios.get(`http://localhost:5000/getProject/${projectID}`).then((response) => {
