@@ -1,6 +1,38 @@
 import React, { useRef, useEffect } from "react";
 import MainMenu from "../Main/MainMenu";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
+import ParseJwt from "../Utilities/ParseJwt";
+
+
+
 export default function Payment() {
+   const id =useParams().id;
+   const userToken = localStorage.getItem("token");
+   const user = ParseJwt(userToken);
+   let NotificationTime = new Date().toLocaleString();
+   const NotifyInfluencer = (_id) => {
+      axios.get(`http://localhost:5000/getProject/${_id}`).then((response) => {
+        axios
+          .post("http://localhost:5000/createNotification", {
+            ReceiverId: response.data.project.influencerID,
+            SenderId: user._id,
+            Eventhappened: "Payment to a project",
+            NotificationTime,
+            Notificationmessage:
+              response.data.project.businessName +
+              " paid you for " +
+              response.data.project.projectName +
+              " project",
+          })
+          .then((res) => {
+            alert("Notification created successfully");
+            console.log("Notification created");
+          });
+      });
+    };
+
    const paypal = useRef();
    useEffect(() => {
       window.paypal
@@ -32,6 +64,8 @@ export default function Payment() {
               const q=order.purchase_units
               console.log("ki");
               console.log(q[0].payee.email_address);
+           
+             NotifyInfluencer(id);
             },
             onError: (err) => {
                console.log(err);

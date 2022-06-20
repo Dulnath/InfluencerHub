@@ -77,10 +77,10 @@ function CommentForm(props) {
                     <Form.Group>
                         <Form.Control as="textarea"
                             value={description}
-                            placeholder="Add a report description"
+                            placeholder="Why you report this user? Describe the reason. Add no more than 50 words"
                             onChange={(event) => { setDescription(event.target.value) }}>
                         </Form.Control>
-                        <Button className="float-end" variant="dark" onClick={addReport}>Report</Button>
+                        <Button className="float-end" variant="danger" onClick={addReport}>Report</Button>
                     </Form.Group>
                 </Form>
             </Card>           

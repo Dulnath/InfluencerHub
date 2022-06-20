@@ -195,8 +195,8 @@ function AllBusinessProjects() {
                           size="sm"
                           type="submit"
                           onClick={() => {
-                            NotifyInfluencer(project._id);
-                            navigate(`/payment`);
+                     
+                            navigate(`/payment/${project._id}`);
                           }}
                         >
                           Pay
