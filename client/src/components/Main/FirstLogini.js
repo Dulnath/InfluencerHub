@@ -67,8 +67,7 @@ const navigate =useNavigate()
         dob:date,
         product:String(option),
         address:String(address),
-        
-        isFirstlogin:Boolean(false),
+        isFirstlogin:false,
         fblink:String(fblink),
         instalink:String(instalink),
       } ,navigate("/home"))
