@@ -10,6 +10,8 @@ import axios from "axios";
 import ParseJwt from "../../utilities/ParseJwt";
 import { BsBellFill } from "react-icons/bs";
 import { Button,Row,Col } from "react-bootstrap";
+import {MdOutlineLogout } from 'react-icons/md';
+
 
 const MainMenu = (props) => {
   const navigate = useNavigate();
@@ -77,7 +79,7 @@ const MainMenu = (props) => {
                     handleLogout();
                   }}
                 >
-                  Logout
+               < MdOutlineLogout/> Logout
                 </button></li>
               </ul>
             ) :
