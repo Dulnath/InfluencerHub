@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { Card, Button, Col, Row } from "react-bootstrap";
+import { Card, Button, Col, Row, Container } from "react-bootstrap";
 import styles from "./styles.module.css";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -54,8 +54,9 @@ function AllPosts(props) {
 
   if (listOfPosts.length !== 0) {
     return (
-      <div className="background">
+      <Container>
         <h1>Posts</h1>
+        <hr/>
         <button
           className={styles.btnGreen}
           onClick={() => {
@@ -68,7 +69,7 @@ function AllPosts(props) {
           return (
             <div key={posts._id}>
               <div className="postDescription">
-                <Card className={styles.record}>
+                <Card className={styles.recordPosts}>
                   <Card.Body>
                     <Link
                       to={`/post/${posts._id}`}
@@ -179,7 +180,7 @@ function AllPosts(props) {
             </div>
           );
         })}
-      </div>
+      </Container>
     );
   } else {
     return (
