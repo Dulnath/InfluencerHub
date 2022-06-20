@@ -46,7 +46,7 @@ function Search(props) {
     .get(`http://localhost:5000/api/users/search/${newval}`)
     .then((response)=>{
       setData(response.data)
-      setValue("");
+      //setValue("");
     })
     .catch((err)=>console.log(err));
   };
