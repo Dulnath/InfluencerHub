@@ -25,6 +25,7 @@ const ProfileView = () => {
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
   const [userType, setUserType] = useState("");
+  const [businessName,setBusinessName] = useState("");
   const { id } = useParams();
   const [image, setUserImage] = useState();
 
@@ -40,7 +41,7 @@ const ProfileView = () => {
           setLName(res.data.lastName);
           setUserType(res.data.category);
           setUserImage(res.data.img)
-          
+          setBusinessName(res.data.businessName);
         });
     }
   }, []);
@@ -58,7 +59,7 @@ const ProfileView = () => {
           </Col>
           <Col md="auto">
             <div className={styles.nameTagdiv}>
-              <p className={styles.nameTag}>{fname+" "+lname}</p>
+              {(!businessName)?<p className={styles.nameTag}>{fname+" "+lname}</p>:<p className={styles.nameTag}>{businessName}</p>}
             </div>
           </Col>
         </Row>
