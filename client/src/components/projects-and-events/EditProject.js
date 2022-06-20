@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Card } from "react-bootstrap";
 import axios from "axios";
-import FormatDateTime from '../../utilities/FormatDateTime'
+import FormatDateTime from "../../utilities/FormatDateTime";
+import ParseJwt from "../Utilities/ParseJwt";
 
 function EditProject(props) {
   const [projectName, setProjectName] = useState();
@@ -9,8 +10,33 @@ function EditProject(props) {
   const [projectStartDate, setProjectStartDate] = useState();
   const [projectEndDate, setProjectEndDate] = useState();
 
+  let NotificationTime = new Date().toLocaleString();
+
+  const loggedInUser = localStorage.getItem("token");
+  const user = ParseJwt(loggedInUser);
+
   // Edit a project
   const editProject = () => {
+    axios
+      .get(`http://localhost:5000/getProject/${props.projectID}`)
+      .then((response) => {
+        axios
+          .post("http://localhost:5000/createNotification", {
+            ReceiverId: response.data.project.influencerID,
+            SenderId: user._id,
+            Eventhappened: "Edition of a Project",
+            NotificationTime,
+            Notificationmessage:
+              response.data.project.businessName +
+              " edited project named " +
+              response.data.project.projectName,
+          })
+          .then((res) => {
+            alert("Notification created successfully");
+            console.log("Notification created");
+          });
+      });
+
     axios
       .put(`http://localhost:5000/updateProject/${props.projectID}`, {
         projectName,
@@ -38,25 +64,27 @@ function EditProject(props) {
     // eslint-disable-next-line
   }, []);
 
-    return (
-        <div className="projectCard">
-            <Card border="dark" >
-                <Card.Header>
-                    <div className="projectCardHeader">
-                        Edit a Project
-                    </div>
-                </Card.Header>
-                <Card.Body>
-                    <Form>
-                        <Form.Group>
-                            <h5>Edit Project Name</h5>
-                            <Form.Control as="textarea"
-                                rows={1}
-                                placeholder='Add Project Name'
-                                value={projectName}
-                                onChange={(event) => { setProjectName(event.target.value) }}>
-                            </Form.Control><br />
-                        </Form.Group>
+  return (
+    <div className="projectCard">
+      <Card border="dark">
+        <Card.Header>
+          <div className="projectCardHeader">Edit a Project</div>
+        </Card.Header>
+        <Card.Body>
+          <Form>
+            <Form.Group>
+              <h5>Edit Project Name</h5>
+              <Form.Control
+                as="textarea"
+                rows={1}
+                placeholder="Add Project Name"
+                value={projectName}
+                onChange={(event) => {
+                  setProjectName(event.target.value);
+                }}
+              ></Form.Control>
+              <br />
+            </Form.Group>
 
             <Form.Group>
               <h5>Edit Project Description</h5>
@@ -75,16 +103,8 @@ function EditProject(props) {
             <h5>Edit Project Duration</h5>
 
             <div>
-              <div className="dates">
-                <Form.Label>Start Date</Form.Label>
-                <br />
-                <Form.Control
-                  as="textarea"
-                  rows={1}
-                  value={FormatDateTime(projectStartDate)}
-                ></Form.Control>
-              </div>
-
+              <Form.Label>Start Date</Form.Label>
+              <br />
               <input
                 type="date"
                 min={new Date().toISOString().split("T")[0]}
@@ -96,18 +116,9 @@ function EditProject(props) {
               />
             </div>
             <br />
-
             <div>
-              <div className="dates">
-                <Form.Label>End Date</Form.Label>
-                <br />
-                <Form.Control
-                  as="textarea"
-                  rows={1}
-                  value={FormatDateTime(projectEndDate)}
-                ></Form.Control>
-              </div>
-
+              <Form.Label>End Date</Form.Label>
+              <br />
               <input
                 type="date"
                 min={projectStartDate}

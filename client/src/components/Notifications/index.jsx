@@ -26,12 +26,21 @@ function ViewNotifications() {
 	},[])
 
 	function MarkAsRead(_ID){
-		axios.put(`http://localhost:5000/notifications/update/${_ID}`).then((response) => {
+		axios.put(`http://localhost:5000/notification/update/${_ID}`).then((response) => {
             console.log("Notification has been updated");
 			loadNotifications();
         }).catch((error) => {
             console.log(error.response);
         });
+
+		axios.delete(`http://localhost:5000/notification/delete/${_ID}`).then((res) => {
+      		console.log(res);
+     	 console.log(res.data);
+
+		  loadNotifications();
+    	});
+
+		
 	};	
 	const notificationsdisplayed = notificationList.filter((notifications) => notifications.ReceiverId === loggedinuser._id)
 	
@@ -60,7 +69,7 @@ function ViewNotifications() {
 				  <Row>
                      <Col>{sortedList.Notificationmessage}<span className={styles.btn} onClick={() => MarkAsRead(sortedList._id)}>Mark As Read</span></Col>                       
                 </Row>                          
-                    </Container>
+                </Container>
 			  </div>			  
 			);			
 		  }		  

@@ -2,8 +2,8 @@ const express = require("express");
 const { Notification } = require("../models/notifications");
 const router = express.Router();
 
-//save project notifications
-router.post("/createProjectNotification", (req, res) => {
+//save notifications
+router.post("/createNotification", (req, res) => {
   let newNotification = new Notification(req.body);
   newNotification.save((err) => {
     if (err) {
@@ -18,100 +18,6 @@ router.post("/createProjectNotification", (req, res) => {
   });
 });
 
-//save event notifications
-router.post("/createEventNotification", (req, res) => {
-  let newNotification = new Notification(req.body);
-  newNotification.save((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: "Notification saved successfully",
-    });
-  });
-});
-
-router.post("/notificationDeleteProject", async (req, res) => {
-  let newNotification = new Notification(req.body);
-  newNotification.save((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: "Notification saved successfully",
-    });
-  });
-});
-
-//save notification when dates of a project is changed
-router.post("/updateProject", (req, res) => {
-  let newNotification = new Notification(req.body);
-  newNotification.save((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: "Notification saved successfully",
-    });
-  });
-});
-
-//save notification when dates of a event is changed
-router.post("/updateEvent", (req, res) => {
-  let newNotification = new Notification(req.body);
-  newNotification.save((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: "Notification saved successfully",
-    });
-  });
-});
-
-//save notification when a Business makes a payment to an influencer
-router.post("/makepayment", (req, res) => {
-  let newNotification = new Notification(req.body);
-  newNotification.save((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: "Notification saved successfully",
-    });
-  });
-});
-
-//save notification when a Business requests a payment refund from an influencer
-router.post("/requestrefund", (req, res) => {
-  let newNotification = new Notification(req.body);
-  newNotification.save((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: "Notification saved successfully",
-    });
-  });
-});
 //retrieve notifications
 router.get("/notifications", (req, res) => {
   Notification.find({}, (err, result) => {
@@ -137,18 +43,36 @@ router.get("/notification/:id", (req, res) => {
   });
 });
 
-router.put("/notifications/update/:id", (req, res) => {
+//update a notification as read
+router.put("/notification/update/:id", (req, res) => {
   Notification.findByIdAndUpdate(
     req.params.id,
     {
       $set: req.body,
       Seen: true,
     },
-    (err, notification) => {
+    (err, Notification) => {
       if (err) {
         return res.status(400).json({ error: err });
       }
       return res.status(200).json({ success: "Updated Successfully" });
+    }
+  );
+});
+
+router.delete("/notification/delete/:id", (req, res) => {
+  Notification.findByIdAndRemove(req.params.id).exec(
+    (err, deletedNotification) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Delete unsuccessful",
+          err,
+        });
+      }
+      return res.json({
+        message: "Delete successful",
+        deletedNotification,
+      });
     }
   );
 });

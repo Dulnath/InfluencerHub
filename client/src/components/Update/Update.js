@@ -108,6 +108,7 @@ const Update = () => {
   return (
     <div>
     <MainMenu></MainMenu>
+<<<<<<< HEAD
     <div className="" style={{display:"flex",justifyContent:"left",width:"800px",marginLeft:"100px"}}>
     {inputs!=null?(<>
       <Container>
@@ -135,6 +136,10 @@ const Update = () => {
     
       </form>
    
+=======
+    <div style={{background:"white",height:"100vh",padding:"40px"}}>
+    {inputs!=null?(<Container>
+>>>>>>> 0386236a9114737ba35db119685babc9ca642469
       
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -167,6 +172,7 @@ const Update = () => {
       <Button variant="primary" type="submit">
         Update
       </Button>
+<<<<<<< HEAD
     </Form>
       
       </Col>
@@ -175,6 +181,9 @@ const Update = () => {
    
       </Container>
      </>):(<>
+=======
+    </Form></Container>):(<>
+>>>>>>> 0386236a9114737ba35db119685babc9ca642469
       <h2>asdasd</h2>
       </>)}
     </div>

@@ -34,7 +34,7 @@ function Main(props) {
 			<div className={styles.main_container}>
 				
 				<MainMenu></MainMenu>
-				<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+				<h2><button className={styles.white_btn1} onClick={() => {navigate(`/detail`)}}>
 						View All Businesses
 					</button></h2>
 				<Search category={category}/>

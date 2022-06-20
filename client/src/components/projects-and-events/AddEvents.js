@@ -44,7 +44,7 @@ function AddEvents() {
     });
 
     axios
-      .post("http://localhost:5000/createEventNotification", {
+      .post("http://localhost:5000/createNotification", {
         ReceiverId: influencerID,
         SenderId: user._id,
         Eventhappened: "Invitation for an event",
