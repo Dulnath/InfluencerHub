@@ -67,7 +67,7 @@ const MainMenu = (props) => {
                 <li className={styles.menu_item}>
                   <Link to={`/profileview/${id}`} >Profile</Link></li>
                 <li className={styles.menu_item}>
-                  <Link to={`/update/${id}`} >Settings</Link></li>
+                {category==='infliencer'?<Link to={`/update/${id}`} >Settings</Link>:<Link to={`/updateb/${id}`} >Settings</Link>}</li>
                 <li className={styles.menu_item}>
                   {(category==="influencer")?<Link to={`/allInfluencerProjects`} >Projects</Link>:<Link to={`/allBusinessProjects`} >View Projects</Link>}</li>
               </ul>
