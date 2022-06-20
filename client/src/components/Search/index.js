@@ -98,7 +98,7 @@ function Search(props) {
                   <div className="card-body">
 
                     {item.img?<img src={item.img} className={styles.image_img} alt="..." />:<img src={image} className={styles.image_img} alt="..." />}
-                    <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>
+                    {(item.firstName||item.lastName)?<h3 class="card-title">{item.firstName + " " + item.lastName}</h3>:<h3 class="card-title">{item.businessName}</h3>}
                     <Row> <h5>{item.category}</h5></Row>
                     <Row> <h10>{item.email}</h10></Row>
                     <button className={styles.button}

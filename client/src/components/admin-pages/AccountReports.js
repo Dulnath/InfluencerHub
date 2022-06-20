@@ -118,7 +118,7 @@ function AccountReports() {
                             <React.Fragment key={data._id}>
                                 <Card className={styles.record}>
                                 {data.img?<img src={data.img} className={styles.image1_img} alt="..."/>:<img src={image} className={styles.image1_img} alt="..."/>}
-                                    <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
+                                    <Card.Header> {(data.firstName==='N/A')?<b>{data.businessName}</b>:<b>{data.firstName + " " + data.lastName}</b>} </Card.Header>
                                     <Card.Body>
                                         <RenderType userType={data.category}></RenderType>
                                         <Row>

@@ -15,6 +15,7 @@ function View() {
   const loggedInUser = localStorage.getItem("token");  
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
+  const [businessName,setBusinessName] = useState('');
   const [email, setUserEmail] = useState();
   const [category, setUserCategory] = useState();
   const [imageUsr, setUserImage] = useState();
@@ -29,6 +30,7 @@ function View() {
           setUserEmail(response.data.email);
           setUserCategory(response.data.category);    
           setUserImage(response.data.img);         
+          setBusinessName(response.data.businessName);
       })       
 
   }, [])
@@ -42,7 +44,8 @@ function View() {
                     <Container className={styles.mainContainer}>
                             {imageUsr?<img src={imageUsr} className={styles.profileImg } alt="..." />:<img src={image}  className={styles.profileImg } alt="..." />}
                         <hr />
-                        <Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{firstName + " " + lastName}</h3></Row>
+                        {(firstName||lastName)?<Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{firstName + " " + lastName}</h3></Row>:
+                        <Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{businessName}</h3></Row>}
                         <Row> <h5 className={styles.infoTag}>Category : {category}</h5></Row>
                         <Row> <h10 className={styles.infoTag}>Email: {email}</h10></Row>
                      <button className={styles.button1} onClick={()=>{navigate(`/report/${id}`)}}>

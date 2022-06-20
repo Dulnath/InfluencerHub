@@ -9,6 +9,8 @@ import CommentReports from "../admin-pages/CommentReports";
 function CommentForm(props) {
     const [description, setDescription] = useState('');
     const [firstName, setFirstName] = useState('');
+    const [businessName,setBusinessName] = useState('');
+    const [lastName,setLastName] = useState('');
     const [email, setUserEmail] = useState('');
     const [category, setUserCategory] = useState();
     const { id } = useParams();
@@ -19,12 +21,20 @@ function CommentForm(props) {
         axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
             console.log(response.data);
             setFirstName(response.data.firstName);
+            setLastName(response.data.lastName);
             setUserEmail(response.data.email);
             setUserCategory(response.data.category);
+            setBusinessName(response.data.businessName);
         })
 
         if(!firstName){
             setFirstName('N/A')
+        }
+        if(!businessName){
+            setBusinessName('N/A')
+        }
+        if(!lastName){
+            setLastName(' ');
         }
 
     }, [])
@@ -40,6 +50,8 @@ function CommentForm(props) {
         axios.post('http://localhost:5000/api/users/report', {
             accountID:id,
             firstName,
+            lastName,
+            businessName,
             description,
             email,
             category,

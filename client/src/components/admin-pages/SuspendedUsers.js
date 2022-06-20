@@ -138,7 +138,7 @@ function SuspendedUsers(){
                                 <React.Fragment style={{padding:"10px"}} key={data._id}>
                                     <Card className={styles.record}>
                                     {data.img?<img src={data.img} className={styles.image1_img} alt="..."/>:<img src={image} className={styles.image1_img} alt="..."/>}
-                                        <Card.Header> <b>{data.firstName + " " + data.lastName}</b> </Card.Header>
+                                        <Card.Header> {(!data.firstName||!data.lastName)?<b>{data.businessName}</b>:<b>{data.firstName + " " + data.lastName}</b>} </Card.Header>
                                         <Card.Body>
                                                <RenderMessage uRestoreDate={data.restoreDate}/>
                                                <RenderType userType={data.category}/>
@@ -146,8 +146,7 @@ function SuspendedUsers(){
                                                     <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                                 </Row>
                                                 <Row>
-                                                    <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
-                                                    <Col sm={5}></Col>
+                                                    <Col xs lg="10"></Col>
                                                     <Col>
                                                         <RenderRestoreBtn uid={data._id} uRestoreDate={data.restoreDate} uFname={data.firstName} uEmail={data.email}/>
                                                     </Col>
