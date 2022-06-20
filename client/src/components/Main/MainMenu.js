@@ -70,6 +70,15 @@ const MainMenu = (props) => {
                 {category==='infliencer'?<Link to={`/update/${id}`} >Settings</Link>:<Link to={`/updateb/${id}`} >Settings</Link>}</li>
                 <li className={styles.menu_item}>
                   {(category==="influencer")?<Link to={`/allInfluencerProjects`} >Projects</Link>:<Link to={`/allBusinessProjects`} >View Projects</Link>}</li>
+                  <li >
+                  <button
+                  
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                >
+                  Logout
+                </button></li>
               </ul>
             ) :
               (
@@ -79,15 +88,7 @@ const MainMenu = (props) => {
 
           </div>
         </Col>
-        <Col xs lg="2">
-          <button
-            className={styles.white_btn}
-            onClick={() => {
-              handleLogout();
-            }}
-          >
-            Logout
-          </button></Col>
+  
       </Row>
   );
 };
