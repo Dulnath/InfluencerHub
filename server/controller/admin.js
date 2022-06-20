@@ -224,7 +224,6 @@ const approveUser = async(req,res) => {
         await User.findByIdAndUpdate(req.params.id,{
             isActive:req.body.isActive,
             adminVerified:req.body.adminVerified,
-            isFirstLogin:'false'
         }), res.json({status: 'ok'})
     }catch(err){
         console.log(err);

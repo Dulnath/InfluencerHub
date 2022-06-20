@@ -46,7 +46,7 @@ function Search(props) {
     .get(`http://localhost:5000/api/users/search/${newval}`)
     .then((response)=>{
       setData(response.data)
-      setValue("");
+      //setValue("");
     })
     .catch((err)=>console.log(err));
   };
@@ -91,7 +91,7 @@ function Search(props) {
           </Table>
         ) : (
           data.map((item, index) => (
-            (item.category !== 'admin' && item.adminVerified && item.category !== props.category) ? (              
+            (item.category !== 'admin' && item.adminVerified && item.category !== props.category&&item.isActive) ? (              
               <div>
                 <div className={styles.card}>
 
