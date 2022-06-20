@@ -9,15 +9,33 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ParseJwt from "../../utilities/ParseJwt";
 import { BsBellFill } from "react-icons/bs";
-import { Button,Row,Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
 
 const MainMenu = (props) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
-	const [photo,setPhoto] = useState('');
-  const [category,setCategory] = useState('');
-  const [showMenu, setShowMenu] = useState(false)
+  const [photo, setPhoto] = useState("");
+  const [category, setCategory] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+
+  function NotificationCount() {
+    const token = localStorage.getItem("token");
+    const loggedinuser = ParseJwt(token);
+    const [notificationList, setNotificationList] = useState([]);
+
+    useEffect(() => {
+      axios.get("http://localhost:5000/notifications").then((response) => {
+        setNotificationList(response.data);
+      });
+    }, []);
+    const notificationsdisplayed = notificationList.filter(
+      (notifications) => notifications.ReceiverId === loggedinuser._id
+    );
+    return notificationsdisplayed.length;
+  }
+
   useEffect(() => {
     const userToken = localStorage.getItem("token");
     const user = ParseJwt(userToken);
@@ -41,7 +59,6 @@ const MainMenu = (props) => {
     setShowMenu(!showMenu);
   }
 
-
   const DisplayNotifications = () => {
     navigate(`/viewnotifications`);
   };
@@ -52,43 +69,77 @@ const MainMenu = (props) => {
   };
   return (
     <Row className={styles.navbar}>
-        <Col>{(category==='influencer')?<Link to={`/home`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>:
-              <Link to={`/business`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>}</Col>
-        <Col md="auto">
-        <BsBellFill className={styles.bellIcon} onClick={DisplayNotifications}/>
-        </Col>
-        <Col md="auto">
-          <div className={styles.dropdown} style={{ background: "#3bb19b", width: "200px", color: "white", fontSize: "20px" }} >
-            <div onClick={showDropdownMenu}> {fname} &ensp; {photo?
-            <img src={photo} className={styles.image1_img} alt="..." />:<img src={image} className={styles.image1_img} alt="..." />}<div className={styles.button}></div></div>
-
-            {showMenu ? (
-              <ul>
-                <li className={styles.menu_item}>
-                  <Link to={`/profileview/${id}`} >Profile</Link></li>
-                <li className={styles.menu_item}>
-                  <Link to={`/update/${id}`} >Settings</Link></li>
-                <li className={styles.menu_item}>
-                  {(category==="influencer")?<Link to={`/allInfluencerProjects`} >Projects</Link>:<Link to={`/allBusinessProjects`} >View Projects</Link>}</li>
-              </ul>
-            ) :
-              (
-                null
-              )
-            }
-
+      <Col>
+        {category === "influencer" ? (
+          <Link to={`/home`}>
+            <h1 className={styles.MenuTitle}>InfluencerHub</h1>
+          </Link>
+        ) : (
+          <Link to={`/business`}>
+            <h1 className={styles.MenuTitle}>InfluencerHub</h1>
+          </Link>
+        )}
+      </Col>
+      <Col md="auto">
+        <Badge pill bg="danger">
+          {NotificationCount()}
+        </Badge>
+        <BsBellFill
+          className={styles.bellIcon}
+          onClick={DisplayNotifications}
+        ></BsBellFill>
+      </Col>
+      <Col md="auto">
+        <div
+          className={styles.dropdown}
+          style={{
+            background: "#3bb19b",
+            width: "200px",
+            color: "white",
+            fontSize: "20px",
+          }}
+        >
+          <div onClick={showDropdownMenu}>
+            {" "}
+            {fname} &ensp;{" "}
+            {photo ? (
+              <img src={photo} className={styles.image1_img} alt="..." />
+            ) : (
+              <img src={image} className={styles.image1_img} alt="..." />
+            )}
+            <div className={styles.button}></div>
           </div>
-        </Col>
-        <Col xs lg="2">
-          <button
-            className={styles.white_btn}
-            onClick={() => {
-              handleLogout();
-            }}
-          >
-            Logout
-          </button></Col>
-      </Row>
+
+          {showMenu ? (
+            <ul>
+              <li className={styles.menu_item}>
+                <Link to={`/profileview/${id}`}>Profile</Link>
+              </li>
+              <li className={styles.menu_item}>
+                <Link to={`/update/${id}`}>Settings</Link>
+              </li>
+              <li className={styles.menu_item}>
+                {category === "influencer" ? (
+                  <Link to={`/allInfluencerProjects`}>Projects</Link>
+                ) : (
+                  <Link to={`/allBusinessProjects`}>View Projects</Link>
+                )}
+              </li>
+            </ul>
+          ) : null}
+        </div>
+      </Col>
+      <Col xs lg="2">
+        <button
+          className={styles.white_btn}
+          onClick={() => {
+            handleLogout();
+          }}
+        >
+          Logout
+        </button>
+      </Col>
+    </Row>
   );
 };
 

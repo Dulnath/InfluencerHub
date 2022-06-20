@@ -20,28 +20,22 @@ function ViewNotifications() {
 			setNotificationList(response.data);						
 		})	
 	}
-
 	useEffect(()=> {
-		loadNotifications()
+		loadNotifications();
 	},[])
 
 	function MarkAsRead(_ID){
-		axios.put(`http://localhost:5000/notification/update/${_ID}`).then((response) => {
-            console.log("Notification has been updated");
-			loadNotifications();
-        }).catch((error) => {
-            console.log(error.response);
-        });
-
 		axios.delete(`http://localhost:5000/notification/delete/${_ID}`).then((res) => {
       		console.log(res);
      	 console.log(res.data);
-
-		  loadNotifications();
-    	});
-
-		
-	};	
+		 
+		 loadNotifications();
+    	});	
+		useEffect(()=> {
+			loadNotifications();
+		},[])
+	};
+	
 	const notificationsdisplayed = notificationList.filter((notifications) => notifications.ReceiverId === loggedinuser._id)
 	
 	let sortedList;
@@ -75,6 +69,9 @@ function ViewNotifications() {
 		  }		  
 		  )}
 		  </div>
+		
+
 		  )
 }
+ 
 export default ViewNotifications;
