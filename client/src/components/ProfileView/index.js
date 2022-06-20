@@ -14,12 +14,18 @@ const ProfileView = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    window.location = `/update/${id}`;
+    if(userType==="influencer"){
+      window.location = `/update/${id}`;
+    }else{
+      window.location = `/updateb/${id}`;
+    }
+   
   };
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
   const [userType, setUserType] = useState("");
   const { id } = useParams();
+  const [image, setUserImage] = useState();
 
   useEffect(() => {
     const userToken = localStorage.getItem("token"); //dpasfjfwa.adaisoixfn.sdfawsfcopi
@@ -32,6 +38,8 @@ const ProfileView = () => {
           setFName(res.data.firstName);
           setLName(res.data.lastName);
           setUserType(res.data.category);
+          setUserImage(res.data.img)
+          
         });
     }
   }, []);
@@ -56,7 +64,7 @@ const ProfileView = () => {
             >
               <img
                 style={{ height: "250px", width: "250px" }}
-                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                src={image}
               />
             </div>
           </Col>

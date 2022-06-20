@@ -48,6 +48,7 @@ import PendingList from "./components/projects-and-events/PendingList";
 import AllBusinessProjects from "./components/projects-and-events/AllBusinessProjects";
 import PendingEvents from "./components/projects-and-events/PendingEvents";
 import FirstLoginb from "./components/Business/FirstLoginb";
+import Updateb from "./components/Update/Updateb";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -95,6 +96,7 @@ function App() {
       <Route path="/report/:id" exact element={<Report />} />
       <Route path="/manageprojects" element={<ChooseInfluencer />} />
       <Route path="/addProject/:influencerID" element={<AddProject />} />
+      <Route path="/updateb/:id" element={<Updateb />} />
       <Route
         path="/allInfluencerprojects"
         element={<AllInfluencerProjects />}

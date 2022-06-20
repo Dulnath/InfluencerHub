@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import ParseJwt from "../Utilities/ParseJwt";
+import { useNavigate } from "react-router-dom";
 
 
 
 const FirstLogin = () => {
-
+    const navigate = useNavigate();
  // const loggedInUser = localStorage.getItem('token')
 
   
@@ -66,17 +67,19 @@ const FirstLogin = () => {
     await axios
       .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
         dob:date,
-        product:option,
+        product:String(option),
         address:String(address),
         
         isFirstlogin:Boolean(false),
         fblink:String(fblink),
         instalink:String(instalink),
-      })
+      },       navigate("/home"))
       .then((res) => res.data)
       .then((data)=>{
-        console.log(data.user);
+        console.log(data);
       })
+ 
+      
   
    
   
@@ -96,11 +99,11 @@ const [instalink, setInstalink] = useState("")
         <Row>
           <Col>
             <div className="container">
-            <h2>We need more details about you</h2>
+            <h2>We need more details about your business</h2>
               <form onSubmit={postDetails}>
               <div style={{margin:"50px",backgroundColor:"",width:"500px",marginLeft:"0px"}}>
             
-              <h5>Upload a profile picture</h5>
+              <h5>Upload a  picture</h5>
               <input
                 type="file"
              
@@ -121,24 +124,19 @@ const [instalink, setInstalink] = useState("")
         </Row>
         <Row>
           <Form  onSubmit={sendForm}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Date of birth</Form.Label>
-              <Form.Control  
-              value={date}
-              onChange={(e)=>setDate(e.target.value)} type="date" placeholder="Enter date of birth" />
-            </Form.Group>
+           
 
            
            
           <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Address</Form.Label>
+          <Form.Label> Business Address</Form.Label>
           <Form.Control
           value={address} 
           onChange={(e)=>setAddress(e.target.value)}
           type="text" placeholder="Enter your address line 1" />
      
         </Form.Group>
-        <Form.Label>Select which products you are going to market</Form.Label>
+        <Form.Label>Your business is about</Form.Label>
         <Form.Select onChange={(e)=>setOption(e.target.value)} aria-label="Default select example">
         
         
@@ -150,22 +148,15 @@ const [instalink, setInstalink] = useState("")
  
       </Form.Select>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Facebook link</Form.Label>
+        <Form.Label>Business website</Form.Label>
         <Form.Control 
         value={fblink}
         onChange={(e)=>setFblink(e.target.value)}
-        type="text" placeholder="url" />
+        type="text" placeholder="enter url" />
         
         
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Instagram link</Form.Label>
-      <Form.Control
-      value={instalink}
-      onChange={(e)=>{setInstalink(e.target.value)}}
-      type="text" placeholder="url" />
- 
-    </Form.Group>
+     
             
             <Button variant="primary" type="submit">
               Submit

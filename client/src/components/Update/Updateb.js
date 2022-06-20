@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import MainMenu from "../Main/MainMenu";
 
-const Update = () => {
+const Updateb = () => {
     const navigate = useNavigate();
     const id = useParams().id;
     const [inputs, setInputs] = useState(null);
@@ -113,8 +113,8 @@ const Update = () => {
       <Container>
       <Row>
       <Col>
-      <div style={{backgroundColor:"grey"}}>
-      <img src={inputs.img} style={{width:"100%",height:"40%"}}/>
+      <div>
+      <img src={inputs.img} style={{ height: "250px", width: "250px",margin:"50px",borderRadius:"50px" }}/>
       
      </div>
       </Col>
@@ -122,7 +122,7 @@ const Update = () => {
       <form onSubmit={postDetails}>
       <div style={{margin:"50px",backgroundColor:"",width:"auto",marginLeft:"0px"}}>
     
-      <h5>Edit profile picture</h5>
+      <h5>Edit profile businesss logo picture</h5>
       <input
         type="file"
      
@@ -183,4 +183,4 @@ const Update = () => {
   );
 };
 
-export default Update;
+export default Updateb;
