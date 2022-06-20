@@ -31,9 +31,6 @@ function ViewNotifications() {
 		 
 		 loadNotifications();
     	});	
-		useEffect(()=> {
-			loadNotifications();
-		},[])
 	};
 	
 	const notificationsdisplayed = notificationList.filter((notifications) => notifications.ReceiverId === loggedinuser._id)
