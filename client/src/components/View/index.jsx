@@ -59,7 +59,7 @@ function View() {
                     <Container className={styles.mainContainer}>
                             {imageUsr?<img src={imageUsr} className={styles.profileImg } alt="..." />:<img src={image}  className={styles.profileImg } alt="..." />}
                         <hr />
-                        {(!businessName)?<Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{businessName}</h3></Row>:
+                        {(!businessName)?<Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{firstName}</h3></Row>:
                         <Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{businessName}</h3></Row>}
                         {
                             (filteredList.length > 0) ?
