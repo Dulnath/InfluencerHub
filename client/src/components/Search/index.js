@@ -91,7 +91,7 @@ function Search(props) {
           </Table>
         ) : (
           data.map((item, index) => (
-            (item.category !== 'admin' && item.adminVerified && item.category !== props.category) ? (              
+            (item.category !== 'admin' && item.adminVerified && item.category !== props.category&&item.isActive) ? (              
               <div>
                 <div className={styles.card}>
 
