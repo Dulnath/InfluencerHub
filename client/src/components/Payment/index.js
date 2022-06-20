@@ -32,7 +32,7 @@ export default function Payment() {
    return (
       <div>
          <MainMenu></MainMenu>
-      <div className="container" style={{ justifyContent: "center", margin:"auto",padding:"10%", width: "60%",height:"100vh" }}>
+      <div className="container" style={{ justifyContent: "center", margin:"auto",padding:"0% 3% 0% 3%", width: "60%",height:"120vh" }}>
          <div ref={paypal} style={{margin:"auto", padding:"5%"}}></div>
       </div>
       </div>
