@@ -55,6 +55,24 @@ function PendingList() {
   };
 
   const rejectProject = (id) => {
+    axios.get(`http://localhost:5000/getProject/${id}`).then((response) => {
+      axios
+        .post("http://localhost:5000/createNotification", {
+          ReceiverId: response.data.project.businessID,
+          SenderId: user._id,
+          Eventhappened: "Rejection of a Project",
+          NotificationTime,
+          Notificationmessage:
+            response.data.project.influencerName +
+            " has rejected the project named " +
+            response.data.project.projectName,
+        })
+        .then((res) => {
+          alert("Notification created successfully");
+          console.log("Notification created");
+        });
+    });
+
     axios.put(`http://localhost:5000/rejectProject/${id}`, {}).then(() => {
       console.log("Project has been rejected");
     });
