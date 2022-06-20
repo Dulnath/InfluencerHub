@@ -18,7 +18,6 @@ function AddProject() {
 
   const { influencerID } = useParams();
   const influencerName = influencerFirstName + " " + influencerLastName;
-  console.log(influencerID);
 
   let NotificationTime = new Date().toLocaleString();
 

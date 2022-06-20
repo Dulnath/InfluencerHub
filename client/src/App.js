@@ -41,15 +41,15 @@ import AddEvents from "./components/projects-and-events/AddEvents";
 import AllInfluencerEvents from "./components/projects-and-events/AllInfluencerEvents";
 import AllBusinessEvents from "./components/projects-and-events/AllBusinessEvents";
 import ChooseInfluencer from "./components/projects-and-events/ChooseInfluencer";
-import ViewNotifications from "./components/Notifications/index"
+import ViewNotifications from "./components/Notifications/index";
 import Image from "./components/Test/Image";
 import FirstLogini from "./components/Main/FirstLogini";
 import PendingList from "./components/projects-and-events/PendingList";
 import AllBusinessProjects from "./components/projects-and-events/AllBusinessProjects";
 import PendingEvents from "./components/projects-and-events/PendingEvents";
 import FirstLoginb from "./components/Business/FirstLoginb";
-import Updateb from "./components/Update/Updateb";
 
+import Updateb from "./components/Update/Updateb";
 function App() {
   const user = localStorage.getItem("token");
   return (
@@ -89,10 +89,13 @@ function App() {
       <Route path="/editpost/:id" element={<EditPost />}></Route>
       <Route path="/post/:id" element={<PostDetails />}></Route>
       <Route path="/viewnotifications" element={<ViewNotifications />}></Route>
-      <Route path="/addEvents/:projectName/:projectID" element={<AddEvents />} />
-      <Route path="/imagee" element={<Image/>} />
-      <Route path="/firstlogini" element={<FirstLogini/>} />
-      <Route path="/firstloginb" element={<FirstLoginb/>} />
+      <Route
+        path="/addEvents/:projectName/:projectID"
+        element={<AddEvents />}
+      />
+      <Route path="/imagee" element={<Image />} />
+      <Route path="/firstlogini" element={<FirstLogini />} />
+      <Route path="/firstloginb" element={<FirstLoginb />} />
       <Route path="/report/:id" exact element={<Report />} />
       <Route path="/manageprojects" element={<ChooseInfluencer />} />
       <Route path="/addProject/:influencerID" element={<AddProject />} />
@@ -115,6 +118,7 @@ function App() {
         element={<AllBusinessEvents />}
       />
       <Route path="/acceptProjects" element={<PendingList />} />
+
       <Route
         path="/acceptEvents/:projectName/:projectID"
         element={<PendingEvents />}

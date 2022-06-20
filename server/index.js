@@ -3,7 +3,6 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { User } = require("./models/user");
-const { Notification } = require("./models/notifications");
 const UserCount = require("./models/UserCount");
 const NVUserCount = require("./models/NonVerifiedUserCount");
 const useraccounts = require("./routes/user");
@@ -20,7 +19,6 @@ const commentsRoute = require("./routes/comments");
 const projectRoutes = require("./routes/projects");
 const eventRoutes = require("./routes/events");
 const notificationRoutes = require("./routes/notificationsroutes");
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
