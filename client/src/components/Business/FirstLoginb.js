@@ -66,13 +66,10 @@ const FirstLogin = () => {
 
     await axios
       .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
-        dob:date,
         product:String(option),
         address:String(address),
-        
         isFirstlogin:Boolean(false),
         fblink:String(fblink),
-        instalink:String(instalink),
       },       navigate("/home"))
       .then((res) => res.data)
       .then((data)=>{

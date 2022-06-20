@@ -146,10 +146,7 @@ const Update = () => {
         <Form.Label>email</Form.Label>
         <Form.Control type="email" placeholder="email"  onChange={handleChange}  value ={inputs.email} name="email"/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>age</Form.Label>
-        <Form.Control type="email" placeholder="age"  onChange={handleChange}  name="email"/>
-      </Form.Group>
+     
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>DOB</Form.Label>
         <Form.Control type="date" placeholder="date of birth"  onChange={handleChange}   name="email"/>

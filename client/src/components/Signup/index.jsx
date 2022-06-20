@@ -18,6 +18,7 @@ const Signup = () => {
 		category:'influencer'
 	});
 	const [error, setError] = useState("");
+	const [msg, setMsg] = useState("");
 	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -33,7 +34,8 @@ const Signup = () => {
 		try {
 			const url = "http://localhost:5000/api/users";
 			const { data: res } = await axios.post(url, data);
-			navigate("/login");
+			setMsg(res.message);
+		//	navigate("/login");
 			console.log(res.message);
 		} catch (error) {
 			if (
@@ -100,6 +102,7 @@ const Signup = () => {
 
 
 						{error && <div className={styles.error_msg}>{error}</div>}
+						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>
