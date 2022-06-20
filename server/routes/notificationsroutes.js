@@ -44,7 +44,7 @@ router.get("/notification/:id", (req, res) => {
 });
 
 //update a notification as read
-router.put("/notifications/update/:id", (req, res) => {
+router.put("/notification/update/:id", (req, res) => {
   Notification.findByIdAndUpdate(
     req.params.id,
     {
@@ -56,6 +56,23 @@ router.put("/notifications/update/:id", (req, res) => {
         return res.status(400).json({ error: err });
       }
       return res.status(200).json({ success: "Updated Successfully" });
+    }
+  );
+});
+
+router.delete("/notification/delete/:id", (req, res) => {
+  Notification.findByIdAndRemove(req.params.id).exec(
+    (err, deletedNotification) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Delete unsuccessful",
+          err,
+        });
+      }
+      return res.json({
+        message: "Delete successful",
+        deletedNotification,
+      });
     }
   );
 });
