@@ -9,15 +9,36 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ParseJwt from "../../utilities/ParseJwt";
 import { BsBellFill } from "react-icons/bs";
-import { Button,Row,Col } from "react-bootstrap";
+
+import {MdOutlineLogout } from 'react-icons/md';
+
+import { Row, Col } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
 
 const MainMenu = (props) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
-	const [photo,setPhoto] = useState('');
-  const [category,setCategory] = useState('');
-  const [showMenu, setShowMenu] = useState(false)
+  const [photo, setPhoto] = useState("");
+  const [category, setCategory] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+
+  function NotificationCount() {
+    const token = localStorage.getItem("token");
+    const loggedinuser = ParseJwt(token);
+    const [notificationList, setNotificationList] = useState([]);
+
+    useEffect(() => {
+      axios.get("http://localhost:5000/notifications").then((response) => {
+        setNotificationList(response.data);
+      });
+    }, []);
+    const notificationsdisplayed = notificationList.filter(
+      (notifications) => notifications.ReceiverId === loggedinuser._id
+    );
+    return notificationsdisplayed.length;
+  }
+
   useEffect(() => {
     const userToken = localStorage.getItem("token");
     const user = ParseJwt(userToken);
@@ -41,7 +62,6 @@ const MainMenu = (props) => {
     setShowMenu(!showMenu);
   }
 
-
   const DisplayNotifications = () => {
     navigate(`/viewnotifications`);
   };
@@ -55,6 +75,9 @@ const MainMenu = (props) => {
         <Col>{(category==='influencer')?<Link to={`/home`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>:
               <Link to={`/business`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>}</Col>
         <Col md="auto">
+        <Badge pill bg="danger">
+        {NotificationCount()}
+      </Badge>
         <BsBellFill className={styles.bellIcon} onClick={DisplayNotifications}/>
         </Col>
         <Col md="auto">
@@ -81,9 +104,11 @@ const MainMenu = (props) => {
             }
 
           </div>
-        </Col>
+
+          
+      </Col>
   
-      </Row>
+    </Row>
   );
 };
 
