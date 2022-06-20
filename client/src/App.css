@@ -137,6 +137,11 @@ html{
     margin-right: 10px;
 }
 
+.details .feedback{
+  position: absolute;
+  right: 3%;
+}
+
 .detailsCard {
     padding: 2%;
     padding-top: 3%;
@@ -189,4 +194,26 @@ html{
     padding: 8px;
 }
 
-/* color: #94FFD4 */
+.error_msg {
+  width: 370px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 14px;
+  background-color: #f34646;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  animation: showNotification 10000ms ease-out forwards;
+}
+
+.success_msg {
+  width: 370px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 14px;
+  background-color: #29c743;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  animation: showNotification 2000ms ease-out forwards;
+}
