@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import EditProject from "./EditProject";
 import MainMenu from "../Main/MainMenu";
 import ParseJwt from "../Utilities/ParseJwt";
-import Axios from "axios";
 
 function AllBusinessProjects() {
   const [listOfProjects, setListOfProjects] = useState([]);
@@ -69,6 +68,27 @@ function AllBusinessProjects() {
   };
 
   let navigate = useNavigate();
+
+  const NotifyInfluencer = (_id) => {
+    axios.get(`http://localhost:5000/getProject/${_id}`).then((response) => {
+      axios
+        .post("http://localhost:5000/createNotification", {
+          ReceiverId: response.data.project.influencerID,
+          SenderId: user._id,
+          Eventhappened: "Payment to a project",
+          NotificationTime,
+          Notificationmessage:
+            response.data.project.businessName +
+            " paid you for " +
+            response.data.project.projectName +
+            " project",
+        })
+        .then((res) => {
+          alert("Notification created successfully");
+          console.log("Notification created");
+        });
+    });
+  };
 
   const filteredList = listOfProjects.filter(
     (project) => project.businessID === userID
@@ -162,6 +182,7 @@ function AllBusinessProjects() {
                           size="sm"
                           type="submit"
                           onClick={() => {
+                            NotifyInfluencer(project._id);
                             navigate(`/payment`);
                           }}
                         >
