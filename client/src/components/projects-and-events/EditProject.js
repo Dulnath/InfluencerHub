@@ -32,7 +32,6 @@ function EditProject(props) {
               response.data.project.projectName,
           })
           .then((res) => {
-            alert("Notification created successfully");
             console.log("Notification created");
           });
       });

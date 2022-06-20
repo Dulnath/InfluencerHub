@@ -59,7 +59,6 @@ function AllBusinessEvents() {
             " project",
         })
         .then((res) => {
-          alert("Notification created successfully");
           console.log("Notification created");
         });
 

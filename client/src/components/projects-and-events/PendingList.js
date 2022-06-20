@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import MainMenu from "../Main/MainMenu";
 import ParseJwt from "../Utilities/ParseJwt";
 
@@ -44,7 +44,6 @@ function PendingList() {
             response.data.project.projectName,
         })
         .then((res) => {
-          alert("Notification created successfully");
           console.log("Notification created");
         });
     });
@@ -71,7 +70,6 @@ function PendingList() {
             response.data.project.projectName,
         })
         .then((res) => {
-          alert("Notification created successfully");
           console.log("Notification created");
         });
     });
@@ -100,7 +98,16 @@ function PendingList() {
                 <Card className="detailsCard" border="dark">
                   <div className="details">
                     <span className="title">Project created by:</span>
-                    <span className="data"><a href="#/" onClick={() => {navigate(`/view/${project.businessID}`)}}>{project.businessName}</a></span>
+                    <span className="data">
+                      <a
+                        href="#/"
+                        onClick={() => {
+                          navigate(`/view/${project.businessID}`);
+                        }}
+                      >
+                        {project.businessName}
+                      </a>
+                    </span>
                   </div>
                   <br />
                   <div className="details">
