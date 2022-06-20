@@ -9,8 +9,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ParseJwt from "../../utilities/ParseJwt";
 import { BsBellFill } from "react-icons/bs";
-
-import {MdOutlineLogout } from 'react-icons/md';
+import {MdOutlineLogout,MdOutlineSettings,MdOutlineWorkOutline,MdOutlineAccountCircle } from 'react-icons/md';
 
 import { Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
@@ -85,23 +84,35 @@ const MainMenu = (props) => {
             <div onClick={showDropdownMenu}> {fname} &ensp; {photo?
             <img src={photo} className={styles.image1_img} alt="..." />:<img src={image} className={styles.image1_img} alt="..." />}<div className={styles.button}></div></div>
 
-            {showMenu ? (
-              <ul>
-                <li className={styles.menu_item}>
-                  <Link to={`/profileview/${id}`} >Profile</Link></li>
-                <li className={styles.menu_item}>
-                {category==='infliencer'?<Link to={`/update/${id}`} >Settings</Link>:<Link to={`/updateb/${id}`} >Settings</Link>}</li>
-                <li className={styles.menu_item}>
-                  {(category==="influencer")?<Link to={`/allInfluencerProjects`} >Projects</Link>:<Link to={`/allBusinessProjects`} >View Projects</Link>}</li>
-                  <li className={styles.menu_item} onClick={() => {
-                    handleLogout();
-                  }}>Logout</li>
-              </ul>
-            ) :
-              (
-                null
-              )
-            }
+{showMenu ? (
+            <ul>
+              <li className={styles.menu_item}>
+                <Link to={`/profileview/${id}`}><MdOutlineAccountCircle/>&ensp;Profile</Link>
+              </li>
+              <li className={styles.menu_item}>
+                {category === "infliencer" ? (
+                  <Link to={`/update/${id}`}><MdOutlineSettings/>&ensp;Settings</Link>
+                ) : (
+                  <Link to={`/updateb/${id}`}><MdOutlineSettings/>&ensp;Settings</Link>
+                )}
+              </li>
+              <li className={styles.menu_item}>
+                {category === "influencer" ? (
+                  <Link to={`/allInfluencerProjects`}><MdOutlineWorkOutline/>&ensp;View Projects</Link>
+                ) : (
+                  <Link to={`/allBusinessProjects`}><MdOutlineWorkOutline/>&ensp;View Projects</Link>
+                )}
+              </li>
+              <li className={styles.menu_item}
+                onClick={() => {
+                  handleLogout();
+                }}
+              ><MdOutlineLogout />&ensp;
+                Log out 
+              </li>
+            </ul>
+          ) : null}
+
 
           </div>
 
