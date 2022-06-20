@@ -71,9 +71,18 @@ const MainMenu = (props) => {
   };
   return (
     <Row className={styles.navbar}>
-        <Col>{(category==='influencer')?<Link to={`/home`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>:
-              <Link to={`/business`} ><h1 className={styles.MenuTitle}>InfluencerHub</h1></Link>}</Col>
-        <Col md="auto">
+      <Col>
+        {category === "influencer" ? (
+          <Link to={`/home`}>
+            <h1 className={styles.MenuTitle}>InfluencerHub</h1>
+          </Link>
+        ) : (
+          <Link to={`/business`}>
+            <h1 className={styles.MenuTitle}>InfluencerHub</h1>
+          </Link>
+        )}
+      </Col>
+      <Col md="auto">
         <Badge pill bg="danger">
         {NotificationCount()}
       </Badge>
@@ -112,13 +121,8 @@ const MainMenu = (props) => {
               </li>
             </ul>
           ) : null}
-
-
-          </div>
-
-          
+        </div>
       </Col>
-  
     </Row>
   );
 };
