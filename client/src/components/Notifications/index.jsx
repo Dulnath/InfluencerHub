@@ -63,7 +63,7 @@ function ViewNotifications() {
 				  <Row>
                      <Col>{sortedList.Notificationmessage}<span className={styles.btn} onClick={() => MarkAsRead(sortedList._id)}>Mark As Read</span></Col>                       
                 </Row>                          
-                    </Container>
+                </Container>
 			  </div>			  
 			);			
 		  }		  

@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 	dob:{type:Date,required:false},
 	product:{ type: String, required: false },
 	address:{ type: String, required: false },
-	
+	weblink:{ type: String, required: false },
 	img:{ type: String, required: false },
 	fblink:{ type: String, required: false },
 	instalink:{ type: String, required: false },

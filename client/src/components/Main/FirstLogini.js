@@ -3,10 +3,11 @@ import axios from "axios";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import ParseJwt from "../Utilities/ParseJwt";
 import { sendForm } from "@emailjs/browser";
+import { useNavigate } from "react-router-dom";
 
 
-const FirstLogin = () => {
-
+const FirstLogini = () => {
+const navigate =useNavigate()
  // const loggedInUser = localStorage.getItem('token')
 
   
@@ -56,31 +57,32 @@ const FirstLogin = () => {
   console.log("Not uploaded");
   alert("Not uploaded,try again");
  }
- const sendForm = async () => {
-
-  await axios
-    .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
-      dob:date,
-      product:String(option),
-      address:String(address),
-      
-      isFirstlogin:Boolean(false),
-      fblink:String(fblink),
-      instalink:String(instalink),
-    })
-    .then((res) => res.data)
-    .then((data)=>{
-      console.log(data);
-    })
-
- 
-
-
-}
-       
  
      
   };
+  const sendForm = async () => {
+
+    await axios
+      .put(`http://localhost:5000/api/users/getuser/${user._id}`, {
+        dob:date,
+        product:String(option),
+        address:String(address),
+        
+        isFirstlogin:Boolean(false),
+        fblink:String(fblink),
+        instalink:String(instalink),
+      } ,navigate("/home"))
+      .then((res) => res.data)
+      .then((data)=>{
+        console.log(data);
+      })
+  
+   
+  
+  
+  }
+         
+   
 
   // useEffect(async () => {
   //   await axios
@@ -206,4 +208,4 @@ const [instalink, setInstalink] = useState("")
     </div>
   );
 };
-export default FirstLogin;
+export default FirstLogini;
