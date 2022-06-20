@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, CloseButton, Form, Card } from 'react-bootstrap'
+import { Button, CloseButton, Form, Card, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import MainMenu from '../Main/MainMenu';
@@ -14,25 +14,44 @@ function AddProject() {
     const [influencerFirstName, setInfluencerFirstName] = useState("");
     const [influencerLastName, setInfluencerLastName] = useState("");
     const [businessID, setBusinessID] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const { influencerID } = useParams();
     const influencerName = influencerFirstName + " " + influencerLastName;
-    console.log(influencerID);
 
-    const createProject = () => {
-        Axios.post("http://localhost:5000/createProject", {
-            influencerName,
-            influencerID,
-            businessName,
-            projectName,
-            businessID,
-            projectDescription,
-            projectStartDate,
-            projectEndDate,
-        }).then((res) => {
-            console.log("Project created");
-            navAllProjects();
-        });
+    const createProject = async () => {
+        let formValid = fieldValidation();
+
+        if (!formValid) {
+            return;
+        }
+
+        const response = await fetch("http://localhost:5000/createProject", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                influencerName,
+                influencerID,
+                businessName,
+                projectName,
+                businessID,
+                projectDescription,
+                projectStartDate,
+                projectEndDate,
+            }),            
+        }, navAllProjects());
+
+        function fieldValidation(){
+            if (!projectName || !projectDescription || !projectStartDate || !projectEndDate) {
+                setErrorMessage("Please fill all fields");
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     useEffect(() => {
@@ -105,6 +124,16 @@ function AddProject() {
                             </div><br />
                         </Form>
 
+                        <Row>
+                            {errorMessage &&
+                                <div className='error_msg'>
+                                    {errorMessage}
+                                </div>}
+                            {successMessage &&
+                                <div className='success_msg'>
+                                    {successMessage}
+                                </div>}
+                        </Row>
                     </Card.Body>
 
                     <Card.Footer className='cardFooter'>

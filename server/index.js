@@ -18,6 +18,7 @@ const postRoutes = require("./routes/posts");
 const commentsRoute = require('./routes/comments');
 const projectRoutes = require('./routes/projects');
 const eventRoutes = require('./routes/events');
+const ratingRoutes = require('./routes/ratings');
 
 const app = express();
 app.use(bodyParser.json());
@@ -37,6 +38,7 @@ app.use(postRoutes);
 app.use(commentsRoute);
 app.use(projectRoutes);
 app.use(eventRoutes);
+app.use(ratingRoutes);
 
 app.use(express.json());
 app.use(cors())

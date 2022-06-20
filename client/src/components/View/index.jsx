@@ -9,8 +9,8 @@ import styles from "./styles.module.css";
 import Login from '../Login/index'
 import AllPostsExternal from '../posts-and-comments/AllPostsExternal';
 import MainMenu from '../Main/MainMenu';
+import { FaStar } from 'react-icons/fa';
 
-//test comment
 function View() {
     const loggedInUser = localStorage.getItem("token");
     const [listOfUsers, setListOfUsers] = useState([]);
@@ -18,8 +18,11 @@ function View() {
     const [lastName, setLastName] = useState();
     const [email, setUserEmail] = useState();
     const [category, setUserCategory] = useState();
+    const [listOfRatings, setListOfRatings] = useState([]);
     const { id } = useParams();
+
     const navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
 
@@ -28,13 +31,25 @@ function View() {
             setUserEmail(response.data.email);
             setUserCategory(response.data.category);
         })
+        axios.get("http://localhost:5000/getRatings").then((response) => {
+            setListOfRatings(response.data);
 
+        })
     }, [])
 
-
     if (loggedInUser) {
-        return (
 
+        const filteredList = listOfRatings.filter((a) => a.ratingGivenTo.includes(`${id}`));
+        let r = filteredList.map((item) => item.rating)
+
+        let sum = 0;
+        for (let num of r) {
+            sum = sum + num
+        }
+        let val = 0;
+        val = sum / filteredList.length;
+
+        return (
             <div id="allUsers">
                 <MainMenu></MainMenu>
                 <div>
@@ -49,9 +64,21 @@ function View() {
                         }}
                     ></div>
                     <div className={styles.profile}>
-                            <img src={image} className={styles.image_img} alt="..." />
+                        <img src={image} className={styles.image_img} alt="..." />
                         <hr />
                         <Row><h3 className="card-title">{firstName + " " + lastName}</h3></Row>
+                        {
+                            (filteredList.length > 0) ?
+                                <div>
+                                    <FaStar
+                                        size={50}
+                                        color='#FFD700'
+                                    />
+                                    <h4>{val} / 5</h4>
+                                </div>: null
+
+                        }
+
                         <Row> <h5>{category}</h5></Row>
                         <Row> <h10>{email}</h10></Row>
                         <Row><p>A paragraph is a series of sentences that are organized and coherent, and are all related to a single topic.
@@ -64,8 +91,6 @@ function View() {
                     <AllPostsExternal id={id}></AllPostsExternal>
                 </Container>
             </div >
-
-
         );
     } else {
         return (

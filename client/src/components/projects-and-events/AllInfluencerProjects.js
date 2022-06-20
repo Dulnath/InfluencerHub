@@ -3,11 +3,14 @@ import axios from 'axios';
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import MainMenu from '../Main/MainMenu';
+import Ratings from '../Ratings/Ratings';
 import ParseJwt from '../Utilities/ParseJwt';
 
 function AllInfluencerProjects() {
     const [listOfProjects, setListOfProjects] = useState([]);
     const [userID, setUserID] = useState("");
+    const [openRatings, setOpenRatings] = useState("");
+    const [selected, setSelected] = useState();
 
     useEffect(() => {
         const userToken = localStorage.getItem("token");
@@ -20,6 +23,13 @@ function AllInfluencerProjects() {
             setUserID(res.data._id);
         })
     }, [])
+
+    // Open ratings window
+    const ratingsWindow = (id) => {
+        setSelected(id);
+        setOpenRatings(!openRatings);
+    }
+
 
     let navigate = useNavigate();
 
@@ -36,6 +46,12 @@ function AllInfluencerProjects() {
                                 <div className="details">
                                     <span className="title">Created by:</span>
                                     <span className="data">{project.businessName}</span><br />
+                                    {
+                                        (project.isAccepted === 'true' && project.isRated === false) ?
+
+                                            <span className='feedback'><a href="#/" onClick={() => { ratingsWindow(project._id) }}>Feedback</a></span>
+                                            : null
+                                    }
                                 </div><br/>
                                 <div className="details">
                                     <span className="title">Project Name:</span>
@@ -58,6 +74,13 @@ function AllInfluencerProjects() {
                                     <Button className="projectButton1" variant="success" size="sm" type="submit" onClick={() => { navigate(`/acceptEvents/${project.projectName}/${project._id}`) }}>Pending events</Button>
                                 </div>
                             </Card>
+
+                            {(selected === project._id) ?
+                                openRatings &&
+                                <div>
+                                    <Ratings projectID={project._id} category='influencer' />
+                                </div> : null
+                            }
                         </div>
                     );
                 }) : (

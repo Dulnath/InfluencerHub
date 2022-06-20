@@ -102,9 +102,11 @@ a {
   padding-left: 1%;
   font-weight: 500;
 }
+
 html{
     background-color:#ADFFC3;
 }
+
 .projectCard,
 .eventCard {
     padding: 10%;
@@ -135,6 +137,11 @@ html{
 .details .title {
     font-weight: bold;
     margin-right: 10px;
+}
+
+.details .feedback{
+  position: absolute;
+  right: 3%;
 }
 
 .detailsCard {
@@ -189,4 +196,26 @@ html{
     padding: 8px;
 }
 
-/* color: #94FFD4 */
+.error_msg {
+  width: 370px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 14px;
+  background-color: #f34646;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  animation: showNotification 10000ms ease-out forwards;
+}
+
+.success_msg {
+  width: 370px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 14px;
+  background-color: #29c743;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  animation: showNotification 2000ms ease-out forwards;
+}

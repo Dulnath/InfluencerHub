@@ -39,6 +39,11 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: false,
     default: null,
+  },
+  isRated: {
+    type: Boolean,
+    required: false,
+    default: false,
   }
 });
 

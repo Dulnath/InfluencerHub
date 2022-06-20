@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CloseButton, Form, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
@@ -15,6 +15,8 @@ function AddEvents() {
     const [businessName, setBusinessName] = useState("");
     const [influencerID, setInfluencerID] = useState("");
     const [businessID, setBusinessID] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const { projectName, projectID } = useParams();
 
@@ -34,10 +36,48 @@ function AddEvents() {
         }).then((res) => {
             //alert("Event created successfully");
             console.log("Event created");
-            navigate(`/allBusinessEvents/${projectName}/${projectID}`) 
+            navigate(`/allBusinessEvents/${projectName}/${projectID}`)
         });
+
+        let formValid = fieldValidation();
+
+        if (!formValid) {
+            return;
+        }
+
+        const response = await fetch("http://localhost:5000/createEvent", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                influencerName,
+                influencerID,
+                businessName,
+                businessID,
+                projectID,
+                projectName,
+                eventName,
+                eventDescription,
+                eventStartDate,
+                eventEndDate
+            }),
+        }, navigate(`/allBusinessEvents/${projectName}/${projectID}`));
+
+        function fieldValidation() {
+            if (!eventName || !eventDescription || !eventStartDate || !eventEndDate) {
+                setErrorMessage("Please fill all fields");
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
+
+    const createProject = async () => {
+
+    }
     // Retrieve data of project
     useEffect(() => {
         Axios.get(`http://localhost:5000/getProject/${projectID}`).then((response) => {
@@ -108,6 +148,16 @@ function AddEvents() {
 
                         </Form>
 
+                        <Row>
+                            {errorMessage &&
+                                <div className='error_msg'>
+                                    {errorMessage}
+                                </div>}
+                            {successMessage &&
+                                <div className='success_msg'>
+                                    {successMessage}
+                                </div>}
+                        </Row>
                     </Card.Body>
 
                     <Card.Footer className="cardFooter">
