@@ -52,6 +52,16 @@ function AddProject() {
                 return true;
             }
         }
+
+        const data = await response.json();
+
+        console.log(data.status);
+        if (data.status === "ok") {
+            console.log("Project created");
+            setSuccessMessage("Sent project to influencer");
+        } else {
+            setErrorMessage("Project was not created");
+        }
     }
 
     useEffect(() => {

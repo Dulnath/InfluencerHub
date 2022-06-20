@@ -21,7 +21,6 @@ const ProjectSchema = new mongoose.Schema({
   projectName: {
     type: String,
     required: true,
-    unique: true,
   },
   projectDescription: {
     type: String,
@@ -47,4 +46,5 @@ const ProjectSchema = new mongoose.Schema({
   }
 });
 
-module.exports = ProjectModule = mongoose.model("addprojects", ProjectSchema);
+const project = mongoose.model("addprojects", ProjectSchema);
+module.exports = { projectModel: project }

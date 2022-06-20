@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Card, Button } from 'react-bootstrap';
 import axios from "axios";
 import FormatDateTime from '../../utilities/FormatDateTime'
@@ -92,14 +92,7 @@ function EditEvent(props) {
                             </div><br />
 
                             <div>
-                                <div className="dates">
-                                    <Form.Label>End Date</Form.Label><br />
-                                    <Form.Control as="textarea"
-                                        rows={1}
-                                        value={FormatDateTime(eventEndDate)}>
-                                    </Form.Control>
-                                </div>
-
+                                <Form.Label>End Date</Form.Label><br />
                                 <input
                                     type="date"
                                     min={eventStartDate}

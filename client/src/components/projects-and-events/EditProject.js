@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Card } from 'react-bootstrap'
 import axios from "axios";
 import FormatDateTime from '../../utilities/FormatDateTime'
@@ -67,14 +67,7 @@ function EditProject(props) {
                         <h5>Edit Project Duration</h5>
 
                         <div>
-                            <div className="dates">
-                                <Form.Label>Start Date</Form.Label><br />
-                                <Form.Control as="textarea"
-                                    rows={1}
-                                    value={FormatDateTime(projectStartDate)}>
-                                </Form.Control>
-                            </div>
-
+                            <Form.Label>Start Date</Form.Label><br />
                             <input
                                 type="date"
                                 min={new Date().toISOString().split('T')[0]}
@@ -103,7 +96,7 @@ function EditProject(props) {
                     <Card.Footer style={{ paddingLeft: '50%' }}>
                         <Button variant="warning" size="lg" type="submit" onClick={editProject}>Edit Project</Button>
                     </Card.Footer>
-                    
+
                 </Card.Body>
             </Card>
 

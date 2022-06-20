@@ -1,15 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const projectModel = require('../models/Projects');
+const { projectModel } = require('../models/Projects');
+const projectValidation = require('../controller/project.validator');
+const errorFunction = require('../../client/src/utilities/errorfunction');
 
 // Add a project
-router.post("/createProject", async (req, res) => {
-    const project = req.body;
-    const newProject = new projectModel(project);
-    await newProject.save();
-
-    res.json(project);
-});
+router.post('/createProject', projectValidation, async (req, res) => {
+    try {
+        await projectModel.create({
+            influencerName: req.body.influencerName,
+            influencerID: req.body.influencerID,
+            businessName: req.body.businessName,
+            businessID: req.body.businessID,
+            projectName: req.body.projectName,
+            projectDescription: req.body.projectDescription,
+            projectStartDate: req.body.projectStartDate,
+            projectEndDate: req.body.projectEndDate,
+        })
+        res.json({ status: 'ok' })
+    } catch (err) {
+        res.json({ status: 'error' });
+        console.log(err);
+        return res.json(errorFunction(true, "Error creating project"));
+    }
+})
 
 // Retrieve all projects
 router.get('/getProjects', (req, res) => {
@@ -27,15 +41,15 @@ router.put('/updateProject/:id', (req, res) => {
     projectModel.findByIdAndUpdate(
         req.params.id,
         {
-            $set:req.body
+            $set: req.body
         },
-        (err,updatedProject) => {
-            if(err){
-                return res.status(400).json({error:err});
+        (err, updatedProject) => {
+            if (err) {
+                return res.status(400).json({ error: err });
             }
 
             return res.status(200).json({
-                success:"Updated succesfully"
+                success: "Updated succesfully"
             });
         }
     );
@@ -72,41 +86,41 @@ router.get("/getProject/:id", (req, res) => {
 });
 
 // Accept project
-router.put('/acceptProject/:id', async (req,res)=>{
-    try{
+router.put('/acceptProject/:id', async (req, res) => {
+    try {
         console.log('Project accepted');
-        await projectModel.findByIdAndUpdate(req.params.id,{
-            isAccepted:true
-        }), res.json({status: 'ok'})
-    }catch(err){
+        await projectModel.findByIdAndUpdate(req.params.id, {
+            isAccepted: true
+        }), res.json({ status: 'ok' })
+    } catch (err) {
         console.log(err);
-        res.json({status:'error'});
+        res.json({ status: 'error' });
     }
 })
 
 // Reject project
-router.put('/rejectProject/:id', async (req,res)=>{
-    try{
+router.put('/rejectProject/:id', async (req, res) => {
+    try {
         console.log('Project rejected');
-        await projectModel.findByIdAndUpdate(req.params.id,{
-            isAccepted:false
-        }), res.json({status: 'ok'})
-    }catch(err){
+        await projectModel.findByIdAndUpdate(req.params.id, {
+            isAccepted: false
+        }), res.json({ status: 'ok' })
+    } catch (err) {
         console.log(err);
-        res.json({status:'error'});
+        res.json({ status: 'error' });
     }
 })
 
 // Add a rating
-router.put('/ratingAdded/:id', async(req,res) => {
-    try{
+router.put('/ratingAdded/:id', async (req, res) => {
+    try {
         console.log('Rating Added');
-        await projectModel.findByIdAndUpdate(req.params.id,{
-            isRated:true
-        }), res.json({status: 'ok'})
-    }catch(err){
+        await projectModel.findByIdAndUpdate(req.params.id, {
+            isRated: true
+        }), res.json({ status: 'ok' })
+    } catch (err) {
         console.log(err);
-        res.json({status:'error'});
+        res.json({ status: 'error' });
     }
 })
 
