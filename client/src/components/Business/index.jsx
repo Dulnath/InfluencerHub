@@ -38,12 +38,13 @@ function Business(props) {
     }, [])
 	if(loggedInUser){
 			return (
-				<div className={styles.main_container}>
+				<div>
 					<MainMenu></MainMenu>
-			
-					<h2><button className={styles.white_btn1}  onClick={() => {navigate(`/detail`)}}>
+			<div style={{display:"flex",justifyContent:"center",alignContent:"center",margin:"50px"}}>
+			<h4><button style={{backgroundColor:"yellow",padding:"30px",borderStyle:"solid",borderRadius:"30px"}} onClick={() => {navigate(`/detail`)}}>
 							View All influencers
-						</button></h2>
+						</button></h4></div>
+					
 					<Search category={category}/>
 			
 				</div>
