@@ -4,6 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import EditProject from "./EditProject";
 import MainMenu from "../Main/MainMenu";
+import Ratings from "../Ratings/Ratings";
 import ParseJwt from "../Utilities/ParseJwt";
 
 function AllBusinessProjects() {
@@ -11,6 +12,7 @@ function AllBusinessProjects() {
   const [openEdit, setOpenEdit] = useState("");
   const [selected, setSelected] = useState("");
   const [userID, setUserID] = useState("");
+  const [openRatings, setOpenRatings] = useState("");
 
   const userToken = localStorage.getItem("token");
   const user = ParseJwt(userToken);
@@ -67,28 +69,13 @@ function AllBusinessProjects() {
     setListOfProjects(newList);
   };
 
-  let navigate = useNavigate();
-
-  const NotifyInfluencer = (_id) => {
-    axios.get(`http://localhost:5000/getProject/${_id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.project.influencerID,
-          SenderId: user._id,
-          Eventhappened: "Payment to a project",
-          NotificationTime,
-          Notificationmessage:
-            response.data.project.businessName +
-            " paid you for " +
-            response.data.project.projectName +
-            " project",
-        })
-        .then((res) => {
-          alert("Notification created successfully");
-          console.log("Notification created");
-        });
-    });
+  // Open ratings window
+  const ratingsWindow = (id) => {
+    setSelected(id);
+    setOpenRatings(!openRatings);
   };
+
+  let navigate = useNavigate();
 
   const filteredList = listOfProjects.filter(
     (project) => project.businessID === userID
@@ -108,6 +95,19 @@ function AllBusinessProjects() {
                   <div className="details">
                     <span className="title">Sent to:</span>
                     <span className="data">{project.influencerName}</span>
+                    {project.isAccepted === "true" &&
+                    project.isRated === false ? (
+                      <span className="feedback">
+                        <a
+                          href="#/"
+                          onClick={() => {
+                            ratingsWindow(project._id);
+                          }}
+                        >
+                          Feedback
+                        </a>
+                      </span>
+                    ) : null}
                     <br />
                     <span className="title">Status:</span>
                     {
@@ -182,8 +182,7 @@ function AllBusinessProjects() {
                           size="sm"
                           type="submit"
                           onClick={() => {
-                            NotifyInfluencer(project._id);
-                            navigate(`/payment`);
+                            navigate(`/payment/${project._id}`);
                           }}
                         >
                           Pay
@@ -246,6 +245,14 @@ function AllBusinessProjects() {
                   ? openEdit && (
                       <div>
                         <EditProject projectID={project._id} />
+                      </div>
+                    )
+                  : null}
+
+                {selected === project._id
+                  ? openRatings && (
+                      <div>
+                        <Ratings projectID={project._id} category="business" />
                       </div>
                     )
                   : null}

@@ -84,8 +84,10 @@ router.post('/report', async (req, res) => {
             await ReportedAccounts.create({
                 accountID: req.body.accountID,
                 firstName: req.body.firstName,
+                lastName:req.body.lastName,
+                businessName:req.body.businessName,
                 email: req.body.email,
-                $push:{description:[req.body.description]},
+                description:req.body.description,
                 category:req.body.category,
                 date: req.body.date
             })

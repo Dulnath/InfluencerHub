@@ -15,6 +15,7 @@ import {
   MdOutlineWorkOutline,
   MdOutlineAccountCircle,
 } from "react-icons/md";
+
 import { Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 
@@ -22,6 +23,7 @@ const MainMenu = (props) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [fname, setUserName] = useState("");
+  const [businessName, setBusinessName] = useState("");
   const [photo, setPhoto] = useState("");
   const [category, setCategory] = useState("");
   const [showMenu, setShowMenu] = useState(false);
@@ -49,9 +51,13 @@ const MainMenu = (props) => {
       const response = axios
         .get(`http://localhost:5000/api/users/getuser/${user._id}`)
         .then((response) => {
-          setUserName(response.data.firstName);
+          if (response.data.category == "influencer")
+            setUserName(response.data.firstName);
+          else if (response.data.category == "business")
+            setUserName(response.data.businessName);
           setId(response.data._id);
           setPhoto(response.data.img);
+          setBusinessName(response.data.businessName);
           setCategory(response.data.category);
         });
       if (response.staus !== "ok") {
@@ -107,7 +113,7 @@ const MainMenu = (props) => {
         >
           <div onClick={showDropdownMenu}>
             {" "}
-            {fname} &ensp;{" "}
+            {!businessName ? fname : businessName} &ensp;
             {photo ? (
               <img src={photo} className={styles.image1_img} alt="..." />
             ) : (

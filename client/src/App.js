@@ -81,7 +81,7 @@ function App() {
       <Route path="/viewadmin/:id" exact element={<ViewAdmin />} />
       <Route path="/filter" exact element={<Filter />} />
       <Route path="/business" exact element={<Business />} />
-      <Route path="/payment" exact element={<Payment />} />
+      <Route path="/payment/:id" exact element={<Payment />} />
       <Route path="/update/:id" element={<Update />} />
       <Route path="/profileview/:id" exact element={<ProfileView />} />
       <Route path="/allposts" element={<AllPosts />}></Route>

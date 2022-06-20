@@ -46,7 +46,7 @@ function Search(props) {
     .get(`http://localhost:5000/api/users/search/${newval}`)
     .then((response)=>{
       setData(response.data)
-      setValue("");
+      //setValue("");
     })
     .catch((err)=>console.log(err));
   };
@@ -91,14 +91,14 @@ function Search(props) {
           </Table>
         ) : (
           data.map((item, index) => (
-            (item.category !== 'admin' && item.adminVerified && item.category !== props.category) ? (              
+            (item.category !== 'admin' && item.adminVerified && item.category !== props.category&&item.isActive) ? (              
               <div>
                 <div className={styles.card}>
 
                   <div className="card-body">
 
                     {item.img?<img src={item.img} className={styles.image_img} alt="..." />:<img src={image} className={styles.image_img} alt="..." />}
-                    <h3 class="card-title">{item.firstName + " " + item.lastName}</h3>
+                    {(item.firstName||item.lastName)?<h3 class="card-title">{item.firstName + " " + item.lastName}</h3>:<h3 class="card-title">{item.businessName}</h3>}
                     <Row> <h5>{item.category}</h5></Row>
                     <Row> <h10>{item.email}</h10></Row>
                     <button className={styles.button}

@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReportDescription from './ReportDescription';
 import Reply from './Reply';
 import EditComment from './EditComment';
+import styles from '../../styles/styles.module.css';
 
 function ReplyList(props) {
     const [replyList, setReplyList] = useState([]);
@@ -60,9 +61,15 @@ function ReplyList(props) {
                         <div >
                             <Card className="comment">
                                 <div>
-                                    <div className="avatar">
-                                        <Image src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" fluid="true" roundedCircle="true"></Image>
-                                    </div>
+                                {
+                                        replies.image ?
+                                            <div className="avatar">
+                                                <Image src={replies.image} fluid="true" roundedCircle="true" className={styles.imageList_img}></Image>
+                                            </div> :
+                                            <div className="avatar">
+                                                <Image src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" fluid="true" roundedCircle="true" className={styles.imageList_img}></Image>
+                                            </div>
+                                    }
                                     <p className="userName" style={{ fontWeight: "bold" }}>{replies.commentAuthor}</p>
                                     <p className="replyDateTime">{replies.time}</p>
                                     {(replies.isEdited === true) ?

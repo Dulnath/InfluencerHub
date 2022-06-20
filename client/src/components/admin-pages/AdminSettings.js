@@ -35,7 +35,7 @@ function AdminSettings() {
 
     function fieldValidation() {
         let emailRegex = new RegExp(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-        let phoneRegex = new RegExp(/^[0-9\b]+$/)
+        let phoneRegex = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/i)
         let emailValid = emailRegex.test(email)
         let phoneValid = phoneRegex.test(contactNo)
         console.log(emailValid + " " + phoneValid)
@@ -184,7 +184,8 @@ function AdminSettings() {
                     </Container>
                 </Container>
                 <div className={styles.heading}>
-                    <h3 >Register New admin</h3>
+                    <br />
+                    <h3 >Personalise your account</h3>
                     <hr />
                 </div>
                 <Link to='/editaccount' className='text-decoration-none'>

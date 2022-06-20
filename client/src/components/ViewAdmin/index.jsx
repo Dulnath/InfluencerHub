@@ -16,6 +16,7 @@ function View() {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setUserEmail] = useState();
+  const [businessName,setBusinessName] = useState();
   const [category, setUserCategory] = useState();
   const [imageUsr, setUserImage] = useState();
   const { id } = useParams(); 
@@ -28,7 +29,8 @@ function View() {
           setLastName(response.data.lastName);
           setUserEmail(response.data.email);
           setUserCategory(response.data.category);    
-          setUserImage(response.data.img);         
+          setUserImage(response.data.img);
+          setBusinessName(response.data.businessName);         
       })       
 
   }, [])
@@ -42,7 +44,7 @@ function View() {
                     <Container className={styles.mainContainer}>
                             {imageUsr?<img src={imageUsr} className={styles.profileImg } alt="..." />:<img src={image}  className={styles.profileImg } alt="..." />}
                         <hr />
-                        <Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{firstName + " " + lastName}</h3></Row>
+                        <Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{(!businessName)?firstName + " " + lastName:businessName}</h3></Row>
                         <Row> <h5 className={styles.infoTag}>Category : {category}</h5></Row>
                         <Row> <h10 className={styles.infoTag}>Email: {email}</h10></Row>
                     </Container>

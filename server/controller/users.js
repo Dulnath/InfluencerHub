@@ -117,7 +117,7 @@ const UpdateUser = async (req,res) =>{
            firstName,
             email,
             img,
-            isFirstLogin,
+            isFirstLogin:false,
             dob,
             product,
             fblink,
