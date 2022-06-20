@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import axios from "axios";
 import FormatDateTime from "../../utilities/FormatDateTime";
-import MainMenu from "../Main/MainMenu";
 import ParseJwt from "../Utilities/ParseJwt";
 
 function EditEvent(props) {
