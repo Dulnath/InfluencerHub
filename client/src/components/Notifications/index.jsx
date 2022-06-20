@@ -51,10 +51,10 @@ function ViewNotifications() {
         sortedList = notificationsdisplayed.sort((a, b) => new Date(a.NotificationTime) - new Date(b.NotificationTime))
     }
 	return(
-		<div>
+		<div style={{height:"100vh",background:"#e6e6e6"}}>
 		<MainMenu></MainMenu>
 		<div>
-                <DropdownButton variant="success" title="Sort By">
+                <DropdownButton variant="success" title="Sort By" style={{margin:"30px"}}>
                     <Dropdown.Item onClick={() => setNewestFirst(true)}>Newest First</Dropdown.Item>
                     <Dropdown.Item onClick={() => setNewestFirst(false)}>Oldest first</Dropdown.Item>
                 </DropdownButton>

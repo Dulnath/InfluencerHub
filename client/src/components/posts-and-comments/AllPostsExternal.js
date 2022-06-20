@@ -53,7 +53,7 @@ function AllPostsExternal(props) {
 
   if (listOfPosts.length !== 0) {
     return (
-      <Container>
+      <Container styles={{background:"#e6e6e6"}}>
         <h1>Posts</h1>
         <hr />
         {listOfPosts.map((posts, id) => {
@@ -156,6 +156,7 @@ function AllPostsExternal(props) {
     return (
       <Container>
         <h1>Posts</h1>
+        <hr />
         <p>This user has no posts</p>
       </Container>
     );

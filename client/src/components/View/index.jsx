@@ -36,7 +36,7 @@ function View() {
     if (loggedInUser) {
         return (
 
-            <div id="allUsers">
+            <div id="allUsers" style={{height:"100vh",background:"#e6e6e6"}}>
                 <MainMenu></MainMenu>
                 <div>
                     <Container className={styles.mainContainer}>

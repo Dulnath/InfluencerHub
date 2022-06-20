@@ -70,15 +70,9 @@ const MainMenu = (props) => {
                 {category==='infliencer'?<Link to={`/update/${id}`} >Settings</Link>:<Link to={`/updateb/${id}`} >Settings</Link>}</li>
                 <li className={styles.menu_item}>
                   {(category==="influencer")?<Link to={`/allInfluencerProjects`} >Projects</Link>:<Link to={`/allBusinessProjects`} >View Projects</Link>}</li>
-                  <li >
-                  <button
-                  
-                  onClick={() => {
+                  <li className={styles.menu_item} onClick={() => {
                     handleLogout();
-                  }}
-                >
-                  Logout
-                </button></li>
+                  }}>Logout</li>
               </ul>
             ) :
               (

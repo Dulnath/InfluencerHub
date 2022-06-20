@@ -39,7 +39,7 @@ function AllUsers(){
                                         if(data.category==='influencer'){
                                             return (
                                                 <React.Fragment key={data._id}>
-                                                    <Container fluid="md" className={styles.record} onClick={() => { navigate(`/viewadmin/${data._id}`) }}>
+                                                    <Container fluid="md" className={styles.record} onClick={() => { navigate(`/viewadmin/${data._id}`) }} style={{cursor:"pointer"}}>
                                                         <Row>
                                                             <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
                                                             <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
@@ -69,7 +69,7 @@ function AllUsers(){
                                         if(data.category==='business'){
                                             return (
                                                 <React.Fragment key={data._id}>
-                                                    <Container fluid="md" className={styles.record} onClick={() => { navigate(`/viewadmin/${data._id}`) }}>
+                                                    <Container fluid="md" className={styles.record} onClick={() => { navigate(`/viewadmin/${data._id}`) }} style={{cursor:"pointer"}}>
                                                         <Row>
                                                         <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
                                                             <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
@@ -101,9 +101,10 @@ function AllUsers(){
                                                 <React.Fragment key={data._id}>
                                                     <Container fluid="md" className={styles.record}>
                                                         <Row>
-                                                        <Col xs={4} md={3}><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
-                                                            <Col xs={4} md={3}><b>Type </b> : {data.category}</Col>
-                                                            <Col xs={4} md={3}><b>Email </b> : {data.email}</Col>
+                                                        <Col xs lg="6"><b>Name </b> : {data.firstName + " " + data.lastName}</Col>
+                                                            <Col md="auto"><b>Type </b> : {data.category}</Col>
+                                                            <Col md="auto"><b>Email </b> : {data.email}</Col>
+                                                            <Col md="auto"><b>ContactNo </b> : {data.phoneNo}</Col>
                                                         </Row>
                                                     </Container>
                                                 </React.Fragment>
