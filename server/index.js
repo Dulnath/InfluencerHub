@@ -22,7 +22,6 @@ const notificationRoutes = require("./routes/notificationsroutes");
 const ratingRoutes = require('./routes/ratings');
 const paymentRoutes =require("./routes/payments")
 
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
