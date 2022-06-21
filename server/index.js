@@ -21,7 +21,7 @@ const eventRoutes = require("./routes/events");
 const notificationRoutes = require("./routes/notificationsroutes");
 const ratingRoutes = require('./routes/ratings');
 const paymentRoutes =require("./routes/payments")
-const ratingRoutes = require("./routes/ratings");
+
 
 const app = express();
 app.use(bodyParser.json());

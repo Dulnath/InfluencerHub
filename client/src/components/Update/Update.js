@@ -83,6 +83,9 @@ const Update = () => {
       .put(`http://localhost:5000/api/users/getuser/${id}`, {
         firstName: String(inputs.firstName),
         email: String(inputs.email),
+        lastName:String(inputs.lastName),
+        fblink:String(inputs.fblink),
+        instalink:String(inputs.instalink),
       })
       .then((res) => res.data);
   };
@@ -92,7 +95,7 @@ const Update = () => {
     if(inputs.category==='business'){
       navigate('/business');
     }else{
-      navigate('/')
+      navigate('/home')
     }
   };
   const handleChange = (e) => {
@@ -138,20 +141,23 @@ const Update = () => {
       
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Name</Form.Label>
+        <Form.Label>FirstName</Form.Label>
         <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
       </Form.Group>
-
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label>Last name</Form.Label>
+      <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.lastName}  name="lastName"/>
+    </Form.Group>
 
      
     
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>Address</Form.Label>
-        <Form.Control type="email" placeholder="address"  onChange={handleChange} name="email"/>
+        <Form.Control type="text" placeholder="address"  onChange={handleChange}  value={inputs.address}  name="address"/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>Website</Form.Label>
-        <Form.Control type="email" placeholder="website url"  onChange={handleChange}   name="email"/>
+        <Form.Label>facebook link</Form.Label>
+        <Form.Control type="text" placeholder="url"  onChange={handleChange}   value={inputs.fblink}   name="fblink"/>
       </Form.Group>
 
     

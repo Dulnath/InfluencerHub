@@ -31,21 +31,26 @@ const Signup = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const url = "http://localhost:5000/api/users";
-			const { data: res } = await axios.post(url, data);
-			setMsg(res.message);
-		//	navigate("/login");
-			console.log(res.message);
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
+		if(data.password===repassword){
+			try {
+				const url = "http://localhost:5000/api/users";
+				const { data: res } = await axios.post(url, data);
+				setMsg(res.message);
+			//	navigate("/login");
+				console.log(res.message);
+			} catch (error) {
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status <= 500
+				) {
+					setError(error.response.data.message);
+				}
 			}
+		}else{
+			alert("Password mismatch")
 		}
+	
 	};
 
 	return (
@@ -98,6 +103,15 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
+						<input
+						type="password"
+						placeholder="confirm password"
+						name="password"
+						onChange={(e)=>{setRepassword(e.target.value)}}
+						value={repassword}
+						required
+						className={styles.input}
+					/>
 
 
 

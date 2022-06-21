@@ -81,7 +81,7 @@ const Updateb = () => {
   const sendRequest = async () => {
     await axios
       .put(`http://localhost:5000/api/users/getuser/${id}`, {
-        businessName: String(inputs.firstName),
+        businessName: String(inputs.businessName),
         lastName:String(inputs.lastName),
         
       })
@@ -139,26 +139,16 @@ const Updateb = () => {
       
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Name" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Last Name</Form.Label>
-      <Form.Control type="text" placeholder="Name" onChange={handleChange}  value={inputs.lastName}  name="firstName"/>
-    </Form.Group>
-     
-  
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>DOB</Form.Label>
-        <Form.Control type="date" placeholder="date of birth"  onChange={handleChange}   name="email"/>
+        <Form.Label>BusinessName</Form.Label>
+        <Form.Control type="text" placeholder="Name" onChange={handleChange}  value={inputs.businessName}  name="firstName"/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>Address</Form.Label>
-        <Form.Control type="email" placeholder="address" value={inputs.address} onChange={handleChange} name="email"/>
+        <Form.Control type="text" placeholder="address" value={inputs.address} onChange={handleChange} name="email"/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>website url</Form.Label>
-        <Form.Control type="email" placeholder="website url"  onChange={handleChange}   name="email"/>
+        <Form.Control type="text" placeholder="website url"  onChange={handleChange}   name="fblink"/>
       </Form.Group>
 
     
