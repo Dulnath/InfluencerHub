@@ -72,7 +72,7 @@ const ProfileView = () => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <div className="buttons">
         <Col xs lg="3"></Col>
         <Col md="auto">
           {
@@ -120,7 +120,7 @@ const ProfileView = () => {
             Payments
           </button>
         </Col>
-        </Row>
+        </div>
       </Container>
       <Container className={styles.postContainer}>
         <AllPosts id={id}></AllPosts>
