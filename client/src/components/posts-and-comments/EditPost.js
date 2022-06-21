@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Form, Card } from "react-bootstrap";
+import { Button, Form, Card, Row } from "react-bootstrap";
 import axios from "axios";
 import MainMenu from "../Main/MainMenu";
+import styles from "../../styles/styles.module.css";
 
 function EditPost() {
   const [PostTopic, setTopic] = useState();
   const [Postdescription, setDescription] = useState();
   const [PostCategory, setPostCategory] = useState();
+  const [error, setErrorMsg] = useState();
+  const [success, setSuccessMsg] = useState();
 
   const { id } = useParams();
 
   const EditPost = () => {
+    let formValid = fieldValidation();
+    if (!formValid) {
+      return;
+    }
     axios
       .put(`http://localhost:5000/post/update/${id}`, {
         PostTopic,
@@ -19,7 +26,7 @@ function EditPost() {
         PostCategory,
       })
       .then((res) => {
-        alert("Post edited successfully");
+        setSuccessMsg("Post edited successfully");
       });
   };
   useEffect(() => {
@@ -29,6 +36,23 @@ function EditPost() {
       setPostCategory(res.data.post.PostCategory);
     });
   }, []);
+
+  function fieldValidation() {
+    if (!PostTopic && !Postdescription) {
+      setErrorMsg(
+        "Please fill Post Topic and Post Description or else delete the post!"
+      );
+      return false;
+    } else if (!PostTopic) {
+      setErrorMsg("Please fill in the Post Topic!");
+      return false;
+    } else if (!Postdescription) {
+      setErrorMsg("Please fill in the Post Description!");
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   return (
     <div>
@@ -83,6 +107,10 @@ function EditPost() {
                 </Form.Control>
                 <br />
               </Form.Group>
+              <Row className={styles.form_container}>
+                {error && <div className={styles.error_msg}>{error}</div>}
+                {success && <div className={styles.success_msg}>{success}</div>}
+              </Row>
             </Form>
 
             <Card.Footer
