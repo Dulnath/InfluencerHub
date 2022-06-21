@@ -7,7 +7,7 @@ import ParseJwt from "../Utilities/ParseJwt";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 const Payment = () => {
-  const id = useParams();
+  const id = useParams().id;
 
   const userToken = localStorage.getItem("token");
   const user = ParseJwt(userToken);
@@ -35,29 +35,8 @@ const Payment = () => {
     console.log("hello");
 
     console.log(user._id);
-    const userToken = localStorage.getItem("token");
-    const loggeduser = ParseJwt(userToken);
-    let NotificationTime = new Date().toLocaleString();
     axios.get(`http://localhost:5000/getProject/${id}`).then((response) => {
       console.log(response.data);
-
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.project.influencerID,
-          SenderId: loggeduser._id,
-          Eventhappened: "Payment to a project",
-          NotificationTime,
-          Notificationmessage:
-            response.data.project.businessName +
-            " paid you for " +
-            response.data.project.projectName +
-            " project",
-        })
-        .then((res) => {
-          console.log("Notification created");
-          alert("Notification created successfully");
-        });
-
       axios.post("http://localhost:5000/createPayment", {
         amount: order.purchase_units[0].amount.value,
         bid: user._id,
