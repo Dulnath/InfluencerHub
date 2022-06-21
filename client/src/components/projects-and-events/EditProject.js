@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Card } from "react-bootstrap";
+import { Button, Form, Card, Row } from "react-bootstrap";
 import axios from "axios";
-import FormatDateTime from "../../utilities/FormatDateTime";
 import ParseJwt from "../Utilities/ParseJwt";
 
 function EditProject(props) {
@@ -9,6 +8,8 @@ function EditProject(props) {
   const [projectDescription, setProjectDescription] = useState();
   const [projectStartDate, setProjectStartDate] = useState();
   const [projectEndDate, setProjectEndDate] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   let NotificationTime = new Date().toLocaleString();
 
@@ -17,6 +18,12 @@ function EditProject(props) {
 
   // Edit a project
   const editProject = () => {
+
+    let formValid = fieldValidation();
+    if (!formValid) {
+      return;
+    }
+
     axios
       .get(`http://localhost:5000/getProject/${props.projectID}`)
       .then((response) => {
@@ -44,9 +51,18 @@ function EditProject(props) {
         projectEndDate,
       })
       .then((res) => {
-        alert("Project has been edited.");
+        setSuccessMessage("Project has been edited");
         console.log("Project edited");
       });
+
+    function fieldValidation() {
+      if (!projectName || !projectDescription || !projectStartDate || !projectEndDate) {
+        setErrorMessage("Please fill all fields");
+        return false;
+      } else {
+        return true;
+      }
+    }
   };
 
   // Retrieve a specific project
@@ -129,6 +145,17 @@ function EditProject(props) {
             </div>
             <br />
           </Form>
+
+          <Row>
+            {errorMessage &&
+              <div className='error_msg'>
+                {errorMessage}
+              </div>}
+            {successMessage &&
+              <div className='success_msg'>
+                {successMessage}
+              </div>}
+          </Row>
 
           <Card.Footer style={{ paddingLeft: "50%" }}>
             <Button
