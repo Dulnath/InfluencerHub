@@ -94,7 +94,7 @@ function NewUsers(){
                                                         <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                                     </Row>
                                                     <Row>
-                                                        <Col sm={4}></Col>
+                                                        <Col xs lg="9"></Col>
                                                         <Col>
                                                             <span className={styles.btnRed} onClick={() => deleteNewUsers(data._id)}>Reject</span>
                                                             <span className={styles.btnGreen} onClick={() => approveUser(data._id)}>Approve</span>

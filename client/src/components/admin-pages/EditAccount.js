@@ -44,8 +44,16 @@ function EditAccount(){
     function fieldValidation(){
         let strongRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)
         let phoneRegex = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/i)
-
+        let stringRegex = new RegExp(/^[a-zA-Z]*$/i)
+        let fnameValid = stringRegex.test(fname);
+        let lnameValid = stringRegex.test(lname);
         let passwordValid = false
+
+        if(!fnameValid||!lnameValid){
+            setErrorMsg("First Name & Last name cannot contain spaces or numbers");
+            return false;
+        }
+
         if(!password){
             console.log('password empty')
             passwordValid = true
@@ -67,7 +75,7 @@ function EditAccount(){
             setErrorMsg('Both phone number and new password is not valid')
         }
 
-        if(passwordValid && phoneValid){
+        if(passwordValid && phoneValid&&fnameValid &&lnameValid){
             return true
         }else{
             return false
