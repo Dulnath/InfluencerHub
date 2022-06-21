@@ -52,7 +52,6 @@ function PendingEvents() {
             " project",
         })
         .then((res) => {
-          alert("Notification created successfully");
           console.log("Notification created");
         });
     });
@@ -82,7 +81,6 @@ function PendingEvents() {
             " project",
         })
         .then((res) => {
-          alert("Notification created successfully");
           console.log("Notification created");
         });
     });

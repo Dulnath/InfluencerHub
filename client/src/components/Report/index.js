@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Form,Row } from 'react-bootstrap';
 import axios from 'axios';
 import styles from "./styles.module.css";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,6 +13,8 @@ function CommentForm(props) {
     const [lastName,setLastName] = useState('');
     const [email, setUserEmail] = useState('');
     const [category, setUserCategory] = useState();
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -43,7 +45,10 @@ function CommentForm(props) {
     
     const addReport = (event) => {
         event.preventDefault();
-        
+        let formValid = fieldValidation();
+        if (!formValid) {
+            return;
+          }
         
 
         let time = new Date().toLocaleString();
@@ -62,14 +67,23 @@ function CommentForm(props) {
             console.log(res);
             if(res.statusText === "OK"){
                 console.log("Reported successfully");
+                setSuccessMessage("Reported the user successfully");
                 navigate(-1);
             }else{
-                console.log("Something went wrong")
+                console.log("Something went wrong");
+                setErrorMessage("Report was not created");
             }
             
         });
     }
-
+    function fieldValidation() {
+        if (!description ) {
+          setErrorMessage("Please fill the description");
+          return false;
+        } else {
+          return true;
+        }
+      }
     return (
         <div className="ReportForm">
             <Card border="dark" className={styles.card}>
@@ -80,6 +94,16 @@ function CommentForm(props) {
                             placeholder="Why you report this user? Describe the reason. Add no more than 50 words"
                             onChange={(event) => { setDescription(event.target.value) }}>
                         </Form.Control>
+                        <Row>
+              {errorMessage &&
+                <div className='error_msg'>
+                  {errorMessage}
+                </div>}
+              {successMessage &&
+                <div className='success_msg'>
+                  {successMessage}
+                </div>}
+            </Row>
                         <Button className="float-end" variant="danger" onClick={addReport}>Report</Button>
                     </Form.Group>
                 </Form>
