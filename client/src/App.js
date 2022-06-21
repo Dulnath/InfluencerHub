@@ -49,6 +49,8 @@ import AllBusinessProjects from "./components/projects-and-events/AllBusinessPro
 import PendingEvents from "./components/projects-and-events/PendingEvents";
 import FirstLoginb from "./components/Business/FirstLoginb";
 import Updateb from "./components/Update/Updateb";
+import Paymenti from "./components/Payment/Paymenti";
+import Paymentb from "./components/Payment/Paymentb";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -97,6 +99,8 @@ function App() {
       <Route path="/manageprojects" element={<ChooseInfluencer />} />
       <Route path="/addProject/:influencerID" element={<AddProject />} />
       <Route path="/updateb/:id" element={<Updateb />} />
+      <Route path="/paymenti/:id" element={<Paymenti/>} />
+      <Route path="/paymentb/:id" element={<Paymentb/>} />
       <Route
         path="/allInfluencerprojects"
         element={<AllInfluencerProjects />}

@@ -21,7 +21,7 @@ const projectRoutes = require("./routes/projects");
 const eventRoutes = require("./routes/events");
 const notificationRoutes = require("./routes/notificationsroutes");
 const ratingRoutes = require('./routes/ratings');
-
+const paymentRoutes =require("./routes/payments")
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -42,6 +42,7 @@ app.use(projectRoutes);
 app.use(eventRoutes);
 app.use(notificationRoutes);
 app.use(ratingRoutes);
+app.use(paymentRoutes);
 
 app.use(express.json());
 app.use(cors());

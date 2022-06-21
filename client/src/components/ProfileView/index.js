@@ -22,6 +22,15 @@ const ProfileView = () => {
     }
    
   };
+  const handlePayment = (e) => {
+    e.preventDefault();
+    if(userType==="influencer"){
+      window.location = `/paymenti/${id}`;
+    }else{
+      window.location = `/paymentb/${id}`;
+    }
+   
+  };
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
   const [userType, setUserType] = useState("");
@@ -101,6 +110,15 @@ const ProfileView = () => {
               Edit profile
             </button>
           </Col>
+          <Col md="auto">
+          {" "}
+          <button
+            onClick={handlePayment}
+            className={styles.profileBtnEdit}
+          >
+            Payments
+          </button>
+        </Col>
         </Row>
       </Container>
       <Container className={styles.postContainer}>

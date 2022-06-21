@@ -81,8 +81,9 @@ const Updateb = () => {
   const sendRequest = async () => {
     await axios
       .put(`http://localhost:5000/api/users/getuser/${id}`, {
-        firstName: String(inputs.firstName),
-        email: String(inputs.email),
+        businessName: String(inputs.firstName),
+        lastName:String(inputs.lastName),
+        
       })
       .then((res) => res.data);
   };
@@ -139,24 +140,21 @@ const Updateb = () => {
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
+        <Form.Control type="text" placeholder="Name" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
       </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>email</Form.Label>
-        <Form.Control type="email" placeholder="email"  onChange={handleChange}  value ={inputs.email} name="email"/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>age</Form.Label>
-        <Form.Control type="email" placeholder="age"  onChange={handleChange}  name="email"/>
-      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label>Last Name</Form.Label>
+      <Form.Control type="text" placeholder="Name" onChange={handleChange}  value={inputs.lastName}  name="firstName"/>
+    </Form.Group>
+     
+  
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>DOB</Form.Label>
         <Form.Control type="date" placeholder="date of birth"  onChange={handleChange}   name="email"/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>address</Form.Label>
-        <Form.Control type="email" placeholder="address"  onChange={handleChange} name="email"/>
+        <Form.Label>Address</Form.Label>
+        <Form.Control type="email" placeholder="address" value={inputs.address} onChange={handleChange} name="email"/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>website url</Form.Label>

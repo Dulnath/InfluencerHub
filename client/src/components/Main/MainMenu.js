@@ -46,9 +46,9 @@ const MainMenu = (props) => {
       const response = axios
         .get(`http://localhost:5000/api/users/getuser/${user._id}`)
         .then((response) => {
-          if(response.data.category=="influencer")
+          if(response.data.category==="influencer")
           setUserName(response.data.firstName);
-          else if(response.data.category=="business")
+          else if(response.data.category==="business")
           setUserName(response.data.businessName);
           setId(response.data._id);
           setPhoto(response.data.img);

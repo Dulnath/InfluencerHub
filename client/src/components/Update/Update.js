@@ -142,21 +142,15 @@ const Update = () => {
         <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>email</Form.Label>
-        <Form.Control type="email" placeholder="email"  onChange={handleChange}  value ={inputs.email} name="email"/>
-      </Form.Group>
+
      
+    
       <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>DOB</Form.Label>
-        <Form.Control type="date" placeholder="date of birth"  onChange={handleChange}   name="email"/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>address</Form.Label>
+        <Form.Label>Address</Form.Label>
         <Form.Control type="email" placeholder="address"  onChange={handleChange} name="email"/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
-        <Form.Label>website url</Form.Label>
+        <Form.Label>Website</Form.Label>
         <Form.Control type="email" placeholder="website url"  onChange={handleChange}   name="email"/>
       </Form.Group>
 
