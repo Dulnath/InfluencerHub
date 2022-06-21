@@ -3,6 +3,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { User } = require("./models/user");
+const { Notification } = require("./models/notifications");
 const UserCount = require("./models/UserCount");
 const NVUserCount = require("./models/NonVerifiedUserCount");
 const useraccounts = require("./routes/user");
@@ -87,6 +88,12 @@ function getNewUserCount() {
   });
 }
 
+function deleteNotifications() {
+  Notification.deleteMany({ Seen: true }, function (err) {
+    if (err) console.log(err);
+  });
+}
+
 function FormatDate(date) {
   var d = new Date(date),
     month = "" + (d.getMonth() + 1),
@@ -106,6 +113,7 @@ app.get("/", function (req, res) {
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
-  //setInterval(getUserCount,60000);
-  //setInterval(getNewUserCount,60000);
+  setInterval(getUserCount,600000);
+  setInterval(getNewUserCount,600000);
+  //setInterval(deleteNotifications, 600000);
 });

@@ -94,7 +94,6 @@ function NewUsers(){
                                                         <Card.Text as={Col}><b>Email </b> : {data.email}</Card.Text>
                                                     </Row>
                                                     <Row>
-                                                        <Card.Text as={Col}><b>Contact Number </b> : {data.phoneNo}</Card.Text>
                                                         <Col sm={4}></Col>
                                                         <Col>
                                                             <span className={styles.btnRed} onClick={() => deleteNewUsers(data._id)}>Reject</span>

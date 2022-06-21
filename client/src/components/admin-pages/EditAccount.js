@@ -60,7 +60,7 @@ function EditAccount(){
             setErrorMsg('phone number invalid')
         }
         if(!passwordValid){
-            setErrorMsg('password must contain upper-case, lowe-case and numbers')
+            setErrorMsg('password must contain upper-case, lowe-case letters, numbers and special characters')
         }
 
         if(!passwordValid && !phoneValid){
