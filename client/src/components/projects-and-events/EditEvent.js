@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import { Form, Card, Button, Row } from "react-bootstrap";
 import axios from "axios";
-import FormatDateTime from "../../utilities/FormatDateTime";
 import ParseJwt from "../Utilities/ParseJwt";
 
 function EditEvent(props) {
@@ -11,6 +10,8 @@ function EditEvent(props) {
   const [eventEndDate, setEventEndDate] = useState();
   const [projectStartDate, setProjectStartDate] = useState();
   const [projectEndDate, setProjectEndDate] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   let NotificationTime = new Date().toLocaleString();
 
@@ -18,6 +19,12 @@ function EditEvent(props) {
   const user = ParseJwt(loggedInUser);
   // Edit an event
   const editEvent = () => {
+
+    let formValid = fieldValidation();
+    if (!formValid) {
+      return;
+    }
+
     axios
       .get(`http://localhost:5000/getEvent/${props.eventID}`)
       .then((response) => {
@@ -48,9 +55,19 @@ function EditEvent(props) {
         eventEndDate,
       })
       .then((res) => {
-        alert("Event has been edited");
+        setSuccessMessage("Project has been edited");
         console.log("Event edited");
       });
+
+    function fieldValidation() {
+      if (!eventName || !eventDescription || !eventStartDate || !eventEndDate) {
+        setErrorMessage("Please fill all fields");
+        return false;
+      } else {
+        return true;
+      }
+    }
+
   };
 
   useEffect(() => {
@@ -111,16 +128,8 @@ function EditEvent(props) {
 
               <h5>Edit Event Duration</h5>
               <div>
-                <div className="dates">
-                  <Form.Label>Start Date</Form.Label>
-                  <br />
-                  <Form.Control
-                    as="textarea"
-                    rows={1}
-                    value={FormatDateTime(eventStartDate)}
-                  ></Form.Control>
-                </div>
-
+                <Form.Label>Start Date</Form.Label>
+                <br />
                 <input
                   type="date"
                   min={projectStartDate}
@@ -134,16 +143,8 @@ function EditEvent(props) {
               <br />
 
               <div>
-                <div className="dates">
-                  <Form.Label>End Date</Form.Label>
-                  <br />
-                  <Form.Control
-                    as="textarea"
-                    rows={1}
-                    value={FormatDateTime(eventEndDate)}
-                  ></Form.Control>
-                </div>
-
+                <Form.Label>End Date</Form.Label>
+                <br />
                 <input
                   type="date"
                   min={eventStartDate}
@@ -156,6 +157,17 @@ function EditEvent(props) {
               </div>
               <br />
             </Form>
+            <Row>
+              {errorMessage &&
+                <div className='error_msg'>
+                  {errorMessage}
+                </div>}
+              {successMessage &&
+                <div className='success_msg'>
+                  {successMessage}
+                </div>}
+            </Row>
+
 
             <Card.Footer style={{ paddingLeft: "50%" }}>
               <Button

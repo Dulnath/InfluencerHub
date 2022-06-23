@@ -1,4 +1,4 @@
-import MainMenu from '../Main/MainMenu';
+import MainMenu from "../Main/MainMenu";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom"
@@ -6,10 +6,7 @@ import { useParams } from "react-router-dom";
 import ParseJwt from "../Utilities/ParseJwt";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
-
-
-const Payment =() =>{
-
+const Payment = () => {
 useEffect(()=>{
 paymentRequest()
 },[])
@@ -81,24 +78,45 @@ console.log(name);
 
     
   };
- 
+
   return (
-   <div>
-   <MainMenu/>
-   <div style={{display:"flex",justifyContent:"center",flexDirection:"column",marginLeft:"450px",marginTop:"100px"}}>
- 
-   <div> <input type="text" value={doller}  onChange={(e)=>setDoller(e.target.value)} placeholder="Enter the amount"/></div>
-  <div> <input type="text" value={pypl}  onChange={(e)=>setPypl(e.target.value)} placeholder="Enter the influencers paypal email address"/></div>
-  <div>
-  <PayPalButton
-  createOrder={(data, actions) => createOrder(data, actions)}
-  onApprove={(data, actions) => onApprove(data, actions)}
-  
-/></div>
-  
-   </div></div>
-  
-  
+    <div>
+      <MainMenu />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          marginLeft: "450px",
+          marginTop: "100px",
+        }}
+      >
+        <div>
+          {" "}
+          <input
+            type="text"
+            value={doller}
+            onChange={(e) => setDoller(e.target.value)}
+            placeholder="Enter the amount"
+          />
+        </div>
+        <div>
+          {" "}
+          <input
+            type="text"
+            value={pypl}
+            onChange={(e) => setPypl(e.target.value)}
+            placeholder="Enter the influencers paypal email address"
+          />
+        </div>
+        <div>
+          <PayPalButton
+            createOrder={(data, actions) => createOrder(data, actions)}
+            onApprove={(data, actions) => onApprove(data, actions)}
+          />
+        </div>
+      </div>
+    </div>
   );
-}
+};
 export default Payment;
