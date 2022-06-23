@@ -1,6 +1,6 @@
 import MainMenu from '../Main/MainMenu';
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom"
 import { useParams } from "react-router-dom";
 import ParseJwt from "../Utilities/ParseJwt";
@@ -9,12 +9,46 @@ const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 
 const Payment =() =>{
+
+useEffect(()=>{
+paymentRequest()
+},[])
+
+  const paymentRequest = async (order) => {
+    await axios
+      .get(`http://localhost:5000/getProject/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        axios.post("http://localhost:5000/createPayment", {
+          amount: doller,
+          bid: user._id,
+          iid: response.data.project.influencerID,
+          paidto: response.data.project.influencerName,
+          paidby: response.data.project.businessName,
+        
+          project: response.data.project.projectName,
+        }).then((res)=>{
+          console.log(res.data.dfd);
+          axios.get(`http://localhost:5000/api/users/getuser/${res.data.dfd}`).then((res)=>{
+            console.log(res.data);
+            //console.log(res.data.firstName);
+            setName(res.data.instalink)
+  
+          })
+        })
+      //  console.log(response.data.project.influencerID);
+     
+      });
+  };
+ 
    const id =useParams().id
 
    const userToken = localStorage.getItem("token");
   const user = ParseJwt(userToken);  
-const [doller, setDoller] = useState("");
+const [doller, setDoller] = useState(0);
+const [name, setName] = useState("");
 const [pypl, setPypl] = useState("");
+console.log(name);
   const createOrder = (data, actions) => {
     return actions.order.create({
       purchase_units: [
@@ -23,7 +57,7 @@ const [pypl, setPypl] = useState("");
             value: doller,
           },
           payee: {
-            email_address: pypl
+            email_address: name
           }
         },
       ],
@@ -37,38 +71,13 @@ const [pypl, setPypl] = useState("");
    console.log("hello");
 
    console.log(user._id);
-   axios.get(`http://localhost:5000/getProject/${id}`).then((response) => {
-    
-
-          console.log(response.data);
-          axios.post('http://localhost:5000/createPayment',{
-            amount:order.purchase_units[0].amount.value,
-            bid:user._id,
-            iid:response.data.project.influencerID,
-            paidto:response.data.project.influencerName,
-            paidby:response.data.project.businessName,
-            time:order.purchase_units[0].amount.value,
-            project:response.data.project.projectName,
-         })
-               console.log(response.data.project.influencerID);
-               axios.get(`http://localhost:5000/api/users/getuser/${response.data.project.influencerID}`).then((response)=>{
-                  console.log(response.data);
-               })
-         })
-      
-       
-      
-      
-    
-
-  
+      alert("Payment done succesfully")
    console.log(order.purchase_units[0].amount.value);
   
+    return actions.order.capture(
 
-
-
-  
-    return actions.order.capture();
+      paymentRequest(order)
+    );
 
     
   };

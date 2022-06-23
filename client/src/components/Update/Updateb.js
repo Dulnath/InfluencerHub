@@ -10,6 +10,7 @@ const Updateb = () => {
     const [inputs, setInputs] = useState(null);
     const [img, setImg] = useState();
     const [url, setUrl] = useState();
+    const [phoneNo, setPhoneNo] = useState();
     console.log(id);
     useEffect(() => {
         const fetchHandler = async () => {
@@ -79,14 +80,22 @@ const Updateb = () => {
 
 
   const sendRequest = async () => {
-    await axios
+    const str = /^[A-Za-z]+$/
+    if(!str.test(inputs.firstName)){
+alert("Names should include only letters")
+    }
+    else{
+      await axios
       .put(`http://localhost:5000/api/users/getuser/${id}`, {
         businessName: String(inputs.businessName),
         lastName:String(inputs.lastName),
+        phoneNo:Number(inputs.phoneNo),
+        address:String(inputs.address),
         
       })
       .then((res) => res.data);
   };
+    }
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest()
@@ -144,11 +153,15 @@ const Updateb = () => {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>Address</Form.Label>
-        <Form.Control type="text" placeholder="address" value={inputs.address} onChange={handleChange} name="email"/>
+        <Form.Control type="text" placeholder="address" value={inputs.address} onChange={handleChange} name="address"/>
       </Form.Group>
+      <Form.Group className="mb-3" >
+      <Form.Label>Contact number<noframes></noframes></Form.Label>
+      <Form.Control type="number" placeholder="Contact number" onChange={handleChange}  value={inputs.phoneNo}  name="phoneNo"/>
+    </Form.Group> 
       <Form.Group className="mb-3" controlId="formBasicPassword" >
         <Form.Label>website url</Form.Label>
-        <Form.Control type="text" placeholder="website url"  onChange={handleChange}   name="fblink"/>
+        <Form.Control type="text" placeholder="website url"  onChange={handleChange}    value={inputs.fblink} name="fblink"/>
       </Form.Group>
 
     

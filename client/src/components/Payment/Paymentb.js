@@ -37,7 +37,7 @@ const Paymentb = () => {
       <div style={{height:"100vh",background:"#e6e6e6"}}>
       <MainMenu></MainMenu>
   {notificationsdisplayed.map((p)=>(
-    <div>{p.paidby}</div>
+    <div style={{width:"800px",height:"50px",backgroundColor:"white",color:"green",borderRadius:"5px",margin:"10px"}}> You have made a payment of {p.amount}$ to {p.paidto} for completing {p.project}</div>
   ))}
    
         </div>
