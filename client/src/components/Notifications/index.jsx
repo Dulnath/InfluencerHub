@@ -41,6 +41,7 @@ function ViewNotifications() {
     } else {
         sortedList = notificationsdisplayed.sort((a, b) => new Date(a.NotificationTime) - new Date(b.NotificationTime))
     }
+	
 		return(
 		<div style={{height:"100vh",background:"#e6e6e6"}}>
 		<MainMenu></MainMenu>
@@ -67,6 +68,7 @@ function ViewNotifications() {
 		  )}
 			</div>
 )
+	
 }
  
 export default ViewNotifications;

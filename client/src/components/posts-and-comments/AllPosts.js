@@ -35,6 +35,7 @@ function AllPosts(props) {
     axios.delete(`http://localhost:5000/post/delete/${_id}`).then((res) => {
       console.log(res);
       console.log(res.data);
+      alert("You have deleted the post successfully");
     });
 
     const newList = listOfPosts.filter((posts) => posts._id !== _id);
@@ -54,9 +55,9 @@ function AllPosts(props) {
 
   if (listOfPosts.length !== 0) {
     return (
-      <Container styles={{background:"#e6e6e6"}}>
+      <Container styles={{ background: "#e6e6e6" }}>
         <h1>Posts</h1>
-        <hr/>
+        <hr />
         <button
           className={styles.btnGreen}
           onClick={() => {
