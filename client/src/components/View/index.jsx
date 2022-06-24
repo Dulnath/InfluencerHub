@@ -50,7 +50,7 @@ function View() {
         }
         let val = 0;
         val = sum / filteredList.length;
-
+        //let rating = 
         return (
 
             <div id="allUsers" style={{height:"100vh",background:"#e6e6e6"}}>
@@ -68,7 +68,7 @@ function View() {
                                         size={50}
                                         color='#FFD700'
                                     />
-                                    <h4>{val} / 5</h4>
+                                    <h4>{Math.round(val * 10 + Number.EPSILON)/10} / 5</h4>
                                 </div>: null
 
                         }                       

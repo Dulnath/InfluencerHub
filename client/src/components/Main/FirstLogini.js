@@ -195,9 +195,7 @@ const [instalink, setInstalink] = useState("")
             <Button variant="primary" type="submit">
               Submit
             </Button>
-<h2>{option}</h2>
-<h2>{fblink}</h2>
-<h2>{instalink}</h2>
+
           </Form>
         </Row>
         <Row></Row>

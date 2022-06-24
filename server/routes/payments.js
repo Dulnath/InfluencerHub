@@ -18,7 +18,7 @@ router.post('/createPayment', async(req, res) => {
             amount:amount
         })
 await payment.save();
-        res.json({ status: 'ok' })
+        res.json({ status: 'ok',dfd:`${payment.influencerId}` })
     } catch (err) {
         res.json({ status: 'error' });
         console.log(err);

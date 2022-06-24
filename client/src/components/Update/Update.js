@@ -10,6 +10,7 @@ const Update = () => {
     const [inputs, setInputs] = useState(null);
     const [img, setImg] = useState();
     const [url, setUrl] = useState();
+    const [phoneNo, setPhoneNo] = useState();
     console.log(id);
     useEffect(() => {
         const fetchHandler = async () => {
@@ -68,6 +69,7 @@ const Update = () => {
  }else{
   console.log("Not uploaded");
   alert("Not uploaded,try again");
+  return
  }
  
      
@@ -79,16 +81,23 @@ const Update = () => {
 
 
   const sendRequest = async () => {
-    await axios
+    const str = /^[A-Za-z]+$/
+    if(!str.test(inputs.firstName)){
+alert("Names should only contain letters")
+    }else{
+      await axios
       .put(`http://localhost:5000/api/users/getuser/${id}`, {
         firstName: String(inputs.firstName),
         email: String(inputs.email),
+        phoneNo: String(inputs.phoneNo),
         lastName:String(inputs.lastName),
         fblink:String(inputs.fblink),
         instalink:String(inputs.instalink),
       })
       .then((res) => res.data);
   };
+    }
+    
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest()
@@ -142,16 +151,19 @@ const Update = () => {
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>FirstName</Form.Label>
-        <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
+        <Form.Control type="text" placeholder="First name" onChange={handleChange}  value={inputs.firstName}  name="firstName"/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" >
       <Form.Label>Last name</Form.Label>
-      <Form.Control type="text" placeholder="Enter email" onChange={handleChange}  value={inputs.lastName}  name="lastName"/>
+      <Form.Control type="text" placeholder="Last name" onChange={handleChange}  value={inputs.lastName}  name="lastName"/>
     </Form.Group>
 
-     
+    <Form.Group className="mb-3" >
+    <Form.Label>Contact number<noframes></noframes></Form.Label>
+    <Form.Control type="number" placeholder="Contact number" onChange={handleChange}  value={inputs.phoneNo}  name="phoneNo"/>
+  </Form.Group> 
     
-      <Form.Group className="mb-3" controlId="formBasicPassword" >
+      <Form.Group className="mb-3"  >
         <Form.Label>Address</Form.Label>
         <Form.Control type="text" placeholder="address"  onChange={handleChange}  value={inputs.address}  name="address"/>
       </Form.Group>
