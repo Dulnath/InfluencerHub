@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
 	fblink:{ type: String, required: false },
 	instalink:{ type: String, required: false },
 	paypal:{ type: String, required: false },
+	rating:{ type: Number, required: false },
 });
 
 //create user token

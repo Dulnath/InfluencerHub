@@ -24,8 +24,7 @@ function AllBusinessProjects() {
     axios.get("http://localhost:5000/getProjects").then((response) => {
       setListOfProjects(response.data);
     });
-    axios
-      .get(`http://localhost:5000/api/users/getuser/${user._id}`)
+    axios.get(`http://localhost:5000/api/users/getuser/${user._id}`)
       .then((res) => {
         setUserID(res.data._id);
       });
@@ -61,8 +60,6 @@ function AllBusinessProjects() {
       });
     });
 
-    // eslint-disable-next-line
-
     const newList = listOfProjects.filter((project) => project._id !== _id);
     alert("Project was deleted");
     setListOfProjects(newList);
@@ -95,7 +92,7 @@ function AllBusinessProjects() {
                     <span className="title">Sent to:</span>
                     <span className="data">{project.influencerName}</span>
                     {project.isAccepted === "true" &&
-                    project.isRated === false ? (
+                      project.isRatedBusiness === false ? (
                       <span className="feedback">
                         <a
                           href="#/"
@@ -242,18 +239,18 @@ function AllBusinessProjects() {
                 </Card>
                 {selected === project._id
                   ? openEdit && (
-                      <div>
-                        <EditProject projectID={project._id} />
-                      </div>
-                    )
+                    <div>
+                      <EditProject projectID={project._id} />
+                    </div>
+                  )
                   : null}
 
                 {selected === project._id
                   ? openRatings && (
-                      <div>
-                        <Ratings projectID={project._id} category="business" />
-                      </div>
-                    )
+                    <div>
+                      <Ratings projectID={project._id} category="business" />
+                    </div>
+                  )
                   : null}
               </div>
             );

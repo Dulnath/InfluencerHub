@@ -19,7 +19,8 @@ function View() {
   const [email, setUserEmail] = useState();
   const [category, setUserCategory] = useState();
   const [imageUsr, setUserImage] = useState();
-  const [listOfRatings, setListOfRatings] = useState([]);
+  const [rating, setRating] = useState();
+  
   const { id } = useParams(); 
   const navigate = useNavigate();
 
@@ -32,25 +33,12 @@ function View() {
           setUserCategory(response.data.category);    
           setUserImage(response.data.img);         
           setBusinessName(response.data.businessName);
+          setRating(response.data.rating);
       })       
-      axios.get("http://localhost:5000/getRatings").then((response) => {
-        setListOfRatings(response.data);
-    })
   }, [])
 
     if (loggedInUser) {
-
-        const filteredList = listOfRatings.filter((a) => a.ratingGivenTo === id);
-        let r = filteredList.map((item) => item.rating)
-
-        console.log(filteredList);
-        let sum = 0;
-        for (let num of r) {
-            sum = sum + num
-        }
-        let val = 0;
-        val = sum / filteredList.length;
-        //let rating = 
+        
         return (
 
             <div id="allUsers" style={{height:"100vh",background:"#e6e6e6"}}>
@@ -62,13 +50,13 @@ function View() {
                         {(!businessName)?<Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{firstName+" "+lastName}</h3></Row>:
                         <Row className={styles.nameTagdiv}><h3 className={styles.nameTag}>{businessName}</h3></Row>}
                         {
-                            (filteredList.length > 0) ?
+                            (rating > 0) ?
                                 <div style={{paddingLeft:'40px'}}>
                                     <FaStar
                                         size={50}
                                         color='#FFD700'
                                     />
-                                    <h4>{Math.round(val * 10 + Number.EPSILON)/10} / 5</h4>
+                                    <h4>{rating} / 5</h4>
                                 </div>: null
 
                         }                       

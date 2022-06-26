@@ -46,9 +46,9 @@ function AllInfluencerProjects() {
                                     <span className="title">Created by:</span>
                                     <span className="data">{project.businessName}</span><br />
                                     {
-                                        (project.isAccepted === 'true' && project.isRated === false) ?
+                                        (project.isRatedInfluencer === false) ?
 
-                                            <span className='feedback'><a href="#/" onClick={() => { ratingsWindow(project._id) }}>Feedback</a></span>
+                                            (<span className='feedback'><a href="#/" onClick={() => { ratingsWindow(project._id) }}>Feedback</a></span>)
                                             : null
                                     }
                                 </div><br/>

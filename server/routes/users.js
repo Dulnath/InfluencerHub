@@ -7,9 +7,6 @@ const bcrypt = require("bcrypt");
 const userModel= require("../models/user");
 const ReportedAccounts = require('../models/ReportedAccounts');
 
-
-
-
 //search user using firstName
 router.get("/search/:key",async(req,res)=>{
 	//console.log(req.params.key)
@@ -101,6 +98,24 @@ router.post('/report', async (req, res) => {
     
 })
 
+// Add rating to user schema
+router.put('/addRating/:id', (req, res) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        {
+            rating: req.body.rating
+        },
+        (err) => {
+            if(err){
+                return res.status(400).json({error:err});
+            }
+
+            return res.status(200).json({
+                success:"Updated succesfully"
+            });
+        }
+    )
+})
 
 //User.find( { $or: [ { category: "Influencer" || "influencer"} ] } )
 const {

@@ -39,7 +39,12 @@ const ProjectSchema = new mongoose.Schema({
     required: false,
     default: null,
   },
-  isRated: {
+  isRatedInfluencer: {
+    type: Boolean,
+    required: false,
+    default: false,
+  }, 
+  isRatedBusiness: {
     type: Boolean,
     required: false,
     default: false,

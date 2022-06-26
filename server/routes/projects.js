@@ -111,17 +111,31 @@ router.put('/rejectProject/:id', async (req,res)=>{
     }
 })
 
-// Add a rating
-router.put('/ratingAdded/:id', async (req, res) => {
+// Add a rating by influencer
+router.put('/ratingAddedInfluencer/:id', async (req, res) => {
     try {
         console.log('Rating Added');
         await projectModel.findByIdAndUpdate(req.params.id, {
-            isRated: true
+            isRatedInfluencer: true
         }), res.json({ status: 'ok' })
     } catch (err) {
         console.log(err);
         res.json({ status: 'error' });
     }
 })
+
+// Add a rating by business
+router.put('/ratingAddedBusiness/:id', async (req, res) => {
+    try {
+        console.log('Rating Added');
+        await projectModel.findByIdAndUpdate(req.params.id, {
+            isRatedBusiness: true
+        }), res.json({ status: 'ok' })
+    } catch (err) {
+        console.log(err);
+        res.json({ status: 'error' });
+    }
+})
+
 
 module.exports = router;
