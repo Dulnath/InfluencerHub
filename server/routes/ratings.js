@@ -34,7 +34,7 @@ router.post('/addRatingInfluencer', async(req, res) => {
     try {
         await RatingsModel.create({
             ratingGivenTo:req.body.businessID,
-            ratingAddedBy:req.body.InfluencerID,
+            ratingAddedBy:req.body.influencerID,
             raterCategory:req.body.category,
             rating:req.body.currentValue
         })

@@ -13,6 +13,18 @@ function Ratings(props) {
     const [hoverValue, setHoverValue] = useState();
     const [influencerID, setInfluencerID] = useState();
     const [businessID, setBusinessID] = useState();
+    const [listOfRatings, setListOfRatings] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/getProject/${props.projectID}`).then((res) => {
+            setInfluencerID(res.data.project.influencerID);
+            setBusinessID(res.data.project.businessID);
+        })
+        axios.get('http://localhost:5000/getRatings').then((res) => {
+            setListOfRatings(res.data);
+        })
+    }, []);
+
 
     const stars = Array(5).fill(0);
     let category = props.category;
@@ -29,43 +41,71 @@ function Ratings(props) {
         setHoverValue();
     }
 
-    useEffect(() => {
-        axios.get(`http://localhost:5000/getProject/${props.projectID}`).then((res) => {
-            setInfluencerID(res.data.project.influencerID);
-            setBusinessID(res.data.project.businessID);
-        })
-    }, []);
+    console.log("list", listOfRatings);
+    let id;
+    if (props.category === 'influencer') {
+        id = businessID;
+    } else if (props.category === 'business') {
+        id = influencerID;
+    }
 
     function addRating(event) {
         event.preventDefault();
-        if(props.category === 'business'){
+        if (props.category === 'business') {
             axios.post("http://localhost:5000/addRatingBusiness", {
-            businessID,
-            influencerID,
-            category,
-            currentValue
-        }).then((res) => {
-            console.log("Sent succcessfully");
-        });
-        }else if (props.category === 'influencer'){
+                businessID,
+                influencerID,
+                category,
+                currentValue
+            }).then((res) => {
+                console.log("Sent succcessfully");
+            });
+
+            axios.put(`http://localhost:5000/ratingAddedBusiness/${props.projectID}`, {
+            }).then(() => {
+                console.log("Rating has been added");
+            })
+        } else if (props.category === 'influencer') {
             axios.post("http://localhost:5000/addRatingInfluencer", {
-            businessID,
-            influencerID,
-            category,
-            currentValue
-        }).then((res) => {
-            console.log("Sent succcessfully");
-        });
+                businessID,
+                influencerID,
+                category,
+                currentValue
+            }).then((res) => {
+                console.log("Sent succcessfully");
+            });
+
+            axios.put(`http://localhost:5000/ratingAddedInfluencer/${props.projectID}`, {
+            }).then(() => {
+                console.log("Rating has been added");
+            })
         }
 
-        axios.put(`http://localhost:5000/ratingAdded/${props.projectID}`,{
-        }).then(() => {
-            console.log("Rating has been added");
-        })
+        const filter = listOfRatings.filter((a) => a.ratingGivenTo === id);
+        let r = filter.map((item) => item.rating)
 
-        console.log("rating = " + currentValue);
+        r.push(currentValue);
+
+        console.log("filter", r);
+        let sum = 0;
+        for (let num of r) {
+            sum = sum + num
+        }
+        let val = 0;
+        let rating = 0
+        val = sum / r.length;
+
+        rating = Math.round(val * 10 + Number.EPSILON) / 10
+
+        axios.put(`http://localhost:5000/api/users/addRating/${id}`, {
+            rating
+        }).then(() => {
+            console.log("Rating added to user profile");
+        })
     }
     console.log("currentValue = " + currentValue);
+
+
 
     return (
         <div className="page">

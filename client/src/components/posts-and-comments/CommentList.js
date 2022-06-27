@@ -51,7 +51,6 @@ function CommentList(props) {
             setCommentList(response.data);
             console.log(response.data);
         })
-
     }, [])
 
     const filteredList = commentList.filter((comments) => comments.responseTo === null && comments.isVisible === true && comments.postId === props.postID)
