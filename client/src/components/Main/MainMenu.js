@@ -1,6 +1,6 @@
 import React from "react";
 import image from "../../images/user.jpg";
-import { Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -33,14 +33,13 @@ const MainMenu = (props) => {
     const [notificationList, setNotificationList] = useState([]);
 
     useEffect(() => {
-      axios.get("http://localhost:5000/notifications").then((response) => {
-        setNotificationList(response.data);
-      });
+      axios
+        .get(`http://localhost:5000/notification/${loggedinuser._id}`)
+        .then((response) => {
+          setNotificationList(response.data);
+        });
     }, []);
-    const notificationsdisplayed = notificationList.filter(
-      (notifications) => notifications.ReceiverId === loggedinuser._id
-    );
-    return notificationsdisplayed.length;
+    return notificationList.length;
   }
 
   useEffect(() => {
@@ -50,10 +49,10 @@ const MainMenu = (props) => {
       const response = axios
         .get(`http://localhost:5000/api/users/getuser/${user._id}`)
         .then((response) => {
-          if(response.data.category==="influencer")
-          setUserName(response.data.firstName);
-          else if(response.data.category==="business")
-          setUserName(response.data.businessName);
+          if (response.data.category === "influencer")
+            setUserName(response.data.firstName);
+          else if (response.data.category === "business")
+            setUserName(response.data.businessName);
           setId(response.data._id);
           setPhoto(response.data.img);
           setBusinessName(response.data.businessName);

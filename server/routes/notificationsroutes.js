@@ -29,35 +29,15 @@ router.get("/notifications", (req, res) => {
   });
 });
 
-//get a specific notification
+//get notifications of a specific user
 router.get("/notification/:id", (req, res) => {
-  let notificationID = req.params.id;
-  Notification.findById(notificationID, (err, notification) => {
+  Notification.find({ ReceiverId: req.params.id }, (err, result) => {
     if (err) {
-      return res.status(400).json({ success: false, err });
+      res.json(err);
+    } else {
+      res.json(result);
     }
-    return res.status(200).json({
-      success: true,
-      notification,
-    });
   });
-});
-
-//update a notification as read
-router.put("/notification/update/:id", (req, res) => {
-  Notification.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: req.body,
-      Seen: true,
-    },
-    (err, Notification) => {
-      if (err) {
-        return res.status(400).json({ error: err });
-      }
-      return res.status(200).json({ success: "Updated Successfully" });
-    }
-  );
 });
 
 router.delete("/notification/delete/:id", (req, res) => {

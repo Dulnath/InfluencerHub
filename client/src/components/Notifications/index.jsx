@@ -16,7 +16,7 @@ function ViewNotifications() {
 	const loggedinuser = ParseJwt(token);
 	
 	function loadNotifications(){
-		axios.get("http://localhost:5000/notifications").then((response) => {
+		axios.get(`http://localhost:5000/notification/${loggedinuser._id}`).then((response) => {
 			setNotificationList(response.data);						
 		})	
 	}
@@ -33,13 +33,11 @@ function ViewNotifications() {
     	});	
 	};
 	
-	const notificationsdisplayed = notificationList.filter((notifications) => notifications.ReceiverId === loggedinuser._id)
-	
 	let sortedList;
     if (newestFirst === true) {
-        sortedList = notificationsdisplayed.sort((a, b) => new Date(b.NotificationTime) - new Date(a.NotificationTime));
+        sortedList = notificationList.sort((a, b) => new Date(b.NotificationTime) - new Date(a.NotificationTime));
     } else {
-        sortedList = notificationsdisplayed.sort((a, b) => new Date(a.NotificationTime) - new Date(b.NotificationTime))
+        sortedList = notificationList.sort((a, b) => new Date(a.NotificationTime) - new Date(b.NotificationTime))
     }
 	
 		return(
