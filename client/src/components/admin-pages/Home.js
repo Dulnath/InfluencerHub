@@ -15,6 +15,18 @@ function Home() {
     const [comRepCount,setComRepCount] = useState();
     const [newUseCount,setNewUseCount] = useState();
 
+    function getNewUserCount(){
+        axios.get('http://localhost:5000/api/useraccounts/newusrcount').then(res => {
+            setNewUseCount(res.data.count);
+        })
+    }
+    
+    useEffect(()=>{
+        getAccountReportCount()
+        getCommentReportCount()        
+        getNewUserCount()
+    },[])
+
     function getAccountReportCount() {
         axios.get('http://localhost:5000/api/reports/accrepcount').then(res => {
             setAccRepCount(res.data.count);
@@ -26,17 +38,9 @@ function Home() {
             setComRepCount(res.data.count);
         })
     }
-    function getNewUserCount(){
-        axios.get('http://localhost:5000/api/useraccounts/newusrcount').then(res => {
-            setNewUseCount(res.data.count);
-        })
-    }
+    
 
-    useEffect(()=>{
-        getAccountReportCount()
-        getCommentReportCount()        
-        getNewUserCount()
-    },[])
+    
 
     if (loggedInUser) {
         return (

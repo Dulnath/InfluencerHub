@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import {Container, Button, Form} from 'react-bootstrap'
 import AdminLogin from '../Login/index'
 import ParseJwt from '../../utilities/ParseJwt';
+import styles from '../../styles/styles.module.css';
 
 function FirstLogin(){
     const navigate = useNavigate();
     const [passwordNew, setPassword] = useState('');
     const [passwordRep, setPasswordRep] = useState('');
     const loggedInUser = localStorage.getItem("token")
-
+    const [error, setErrorMsg] = useState('');
     useEffect(()=>{
         setPassword('');
         setPasswordRep('');
@@ -18,11 +19,15 @@ function FirstLogin(){
 
     async function updatePassoword(event){
         event.preventDefault()
-
         const userToken = localStorage.getItem("token");
         const user = ParseJwt(userToken);
         console.log(user);
-        
+        let strongRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)
+        let passwordValid = strongRegex.test(passwordNew);
+        if(!passwordValid){
+            setErrorMsg('password must contain upper-case, lowe-case letters, numbers and special characters')
+            return;
+        }
         if(passwordNew===passwordRep){
             const response = await fetch(`http://localhost:5000/api/useraccounts/firstlogin/${user._id}`, {
                 method: 'PUT',
@@ -38,7 +43,7 @@ function FirstLogin(){
             localStorage.clear();
             console.log(data)
             if (data.status === 'ok') {
-                navigate('/'); 
+                navigate('/login'); 
                 console.log('password updated');
             }else if(data.status === 'duplicate'){
                 console.log('new password cannot be same as old password') 
@@ -79,6 +84,7 @@ function FirstLogin(){
                         <Button variant="primary" type="submit">
                             Update and login
                         </Button>
+                        {error && <div className={styles.error_msg}>{error}</div>}
                     </Form>
                 </Container>
             </div>

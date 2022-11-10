@@ -36,15 +36,23 @@ function AdminSettings() {
     function fieldValidation() {
         let emailRegex = new RegExp(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
         let phoneRegex = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/i)
+        let stringRegex = new RegExp(/^[a-zA-Z]*$/i)
+        let fnameValid = stringRegex.test(fname);
+        let lnameValid = stringRegex.test(lname);
         let emailValid = emailRegex.test(email)
         let phoneValid = phoneRegex.test(contactNo)
         console.log(emailValid + " " + phoneValid)
+
+        if(!fnameValid||!lnameValid){
+            setErrorMsg("First Name & Last name cannot contain spaces or numbers");
+            return false;
+        }
 
         if (!phoneValid) {
             setErrorMsg('phone number invalid')
         }
 
-        if (emailValid && phoneValid) {
+        if (emailValid && phoneValid && fnameValid && lnameValid) {
             return true
         } else {
             return false

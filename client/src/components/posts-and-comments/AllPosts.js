@@ -66,7 +66,7 @@ function AllPosts(props) {
         >
           Create New Post
         </button>
-        {listOfPosts.map((posts, id) => {
+        {listOfPosts.map((posts, id) => {//listofPayments.map((payments)=>{})
           return (
             <div key={posts._id}>
               <div className="postDescription">
@@ -86,7 +86,7 @@ function AllPosts(props) {
                     <br />
                     <div className="image">
                       <img
-                        src={`${posts.PostImage}`}
+                        src={`${posts.PostImage}`}//src={`${payments.image}`}
                         alt=""
                         width="500"
                         height="300"

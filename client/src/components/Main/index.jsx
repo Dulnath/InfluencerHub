@@ -21,12 +21,14 @@ function Main(props) {
 
 	//By this,we are retrieving the firstName of user
 	useEffect(() => {
-		const userToken = localStorage.getItem("token");
-		const user = ParseJwt(userToken);
-		axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((response) => {
-				setId(response.data._id);
-				setCategory(response.data.category)
-			})
+		if(loggedInUser){
+			const userToken = localStorage.getItem("token");
+			const user = ParseJwt(userToken);
+			axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((response) => {
+					setId(response.data._id);
+					setCategory(response.data.category)
+				})
+		}
 	}, [])
 
 	if(loggedInUser){

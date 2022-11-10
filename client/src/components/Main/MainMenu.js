@@ -104,7 +104,7 @@ const MainMenu = (props) => {
           className={styles.dropdown}
           style={{
             background: "#3bb19b",
-            width: "200px",
+            width: "220px",
             color: "white",
             fontSize: "20px",
           }}
