@@ -39,7 +39,7 @@ function AllPosts(props) {
     });
 
     const newList = listOfPosts.filter((posts) => posts._id !== _id);
-    alert("Post was deleted");
+
     setListOfPosts(newList);
   }
 
@@ -66,7 +66,8 @@ function AllPosts(props) {
         >
           Create New Post
         </button>
-        {listOfPosts.map((posts, id) => {//listofPayments.map((payments)=>{})
+        {listOfPosts.map((posts, id) => {
+          //listofPayments.map((payments)=>{})
           return (
             <div key={posts._id}>
               <div className="postDescription">
@@ -86,7 +87,7 @@ function AllPosts(props) {
                     <br />
                     <div className="image">
                       <img
-                        src={`${posts.PostImage}`}//src={`${payments.image}`}
+                        src={`${posts.PostImage}`} //src={`${payments.image}`}
                         alt=""
                         width="500"
                         height="300"
