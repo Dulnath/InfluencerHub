@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import axios from "axios"
 import Menu from './Menu';
 import { Container, Card, Col, Row } from 'react-bootstrap'
@@ -9,6 +9,7 @@ import styles from '../../styles/styles.module.css';
 import FormatDate from '../../utilities/FormatDate';
 import emailjs from '@emailjs/browser';
 import image from "../../images/user.jpg";
+import ParseJwt from '../Utilities/ParseJwt';
 
 function RenderType(props) {
     let type = props.userType
@@ -30,14 +31,14 @@ function RenderType(props) {
 function AccountReports() {
     const [data, setApiData] = useState([]);
     const loggedInUser = localStorage.getItem("token");
-
+    const user = ParseJwt(loggedInUser);
     function sendEmail(uData){
         let data = {
             firstName:uData.firstName,
             lastName:uData.lastName,
             Email:uData.email,
             Subject:"IncluencerHub Account Suspension",
-            Message:"This is to inform you that your influencerHub account has been suspended for 1 week"
+            Message:"This is to inform you that your influencerHub account has been suspended for 1 week",
         }
         emailjs.send('gmail', 'template_kr4q4vl', data, 'user_n4zSmO5iVS8LRqNYkq1XA')
         .then((result) => {
@@ -70,7 +71,8 @@ function AccountReports() {
 
         console.log(data._id);
         console.log(data.accountID);
-
+        const loggedInUser = localStorage.getItem("token");
+        const user = ParseJwt(loggedInUser);
         const today = new Date(FormatDate(Date.now()));
         const restoreDay = new Date(today);
         restoreDay.setDate(restoreDay.getDate() + 7);
@@ -85,7 +87,8 @@ function AccountReports() {
             body: JSON.stringify({
                 suspendedDate: today,
                 restoreDate: restoreDay,
-                isActive: false
+                isActive: false,
+                verify:user.category
             }),
         })
         const resData = await response.json();

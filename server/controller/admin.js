@@ -192,16 +192,22 @@ const editAccount = async(req,res) =>{
     }
 }
 
+
+
 const suspendAccount = async(req,res) =>{
-    try{
-        console.log('account suspended');
-        await User.findByIdAndUpdate(req.params.id,{
-            suspendedDate:req.body.suspendedDate,
-            restoreDate:req.body.restoreDate,
-            isActive:req.body.isActive
-        }), res.json({status: 'ok'})
-    }catch(err){
-        console.log(err);
+    if(req.body.category === 'admin'){
+        try{
+            console.log('account suspended');
+            await User.findByIdAndUpdate(req.params.id,{
+                suspendedDate:req.body.suspendedDate,
+                restoreDate:req.body.restoreDate,
+                isActive:req.body.isActive
+            }), res.json({status: 'ok'})
+        }catch(err){
+            console.log(err);
+            res.json({status:'error'});
+        }
+    }else{
         res.json({status:'error'});
     }
 }
