@@ -35,24 +35,28 @@ function AddEvents() {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/createEvent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${process.env.REACT_APP_BASEURL}/createEvent`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          influencerName,
+          influencerID,
+          businessName,
+          businessID,
+          projectID,
+          projectName,
+          eventName,
+          eventDescription,
+          eventStartDate,
+          eventEndDate,
+        }),
       },
-      body: JSON.stringify({
-        influencerName,
-        influencerID,
-        businessName,
-        businessID,
-        projectID,
-        projectName,
-        eventName,
-        eventDescription,
-        eventStartDate,
-        eventEndDate
-      }),
-    }, navAllBusinessEvents());
+      navAllBusinessEvents()
+    );
 
     const data = await response.json();
 
@@ -74,7 +78,7 @@ function AddEvents() {
     }
 
     axios
-      .post("http://localhost:5000/createNotification", {
+      .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
         ReceiverId: influencerID,
         SenderId: user._id,
         Eventhappened: "Invitation for an event",
@@ -97,7 +101,7 @@ function AddEvents() {
 
   // Retrieve data of project
   useEffect(() => {
-    Axios.get(`http://localhost:5000/getProject/${projectID}`).then(
+    Axios.get(`${process.env.REACT_APP_BASEURL}/getProject/${projectID}`).then(
       (response) => {
         setProjectStartDate(response.data.project.projectStartDate);
         setProjectEndDate(response.data.project.projectEndDate);
@@ -192,14 +196,10 @@ function AddEvents() {
               <br />
             </Form>
             <Row>
-              {errorMessage &&
-                <div className='error_msg'>
-                  {errorMessage}
-                </div>}
-              {successMessage &&
-                <div className='success_msg'>
-                  {successMessage}
-                </div>}
+              {errorMessage && <div className="error_msg">{errorMessage}</div>}
+              {successMessage && (
+                <div className="success_msg">{successMessage}</div>
+              )}
             </Row>
           </Card.Body>
 

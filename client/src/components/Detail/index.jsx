@@ -18,7 +18,7 @@ function Detail() {
  
    // const category= localStorage.getItem("token");
     useEffect(() => {
-        axios.get("http://localhost:5000/api/useraccounts").then((response) => {
+        axios.get(`${process.env.REACT_APP_BASEURL}/api/useraccounts`).then((response) => {
              setListOfUsers(response.data);
              console.log(response.data);
         })

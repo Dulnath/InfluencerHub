@@ -24,15 +24,17 @@ export default function PostDetails() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/post/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_BASEURL}/post/${id}`).then((res) => {
       setTopic(res.data.post.PostTopic);
       setDescription(res.data.post.Postdescription);
       setPostImage(res.data.post.PostImage);
     });
-    axios.get("http://localhost:5000/getComments").then((response) => {
-      setCommentList(response.data);
-      console.log(response.data);
-    })
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getComments`)
+      .then((response) => {
+        setCommentList(response.data);
+        console.log(response.data);
+      });
   });
 
   return (
@@ -40,7 +42,7 @@ export default function PostDetails() {
       <div className="postDescription">
         <Card border="dark">
           <Card.Header>
-            <p style={{ fontWeight: 'bold' }}>{PostTopic}</p>
+            <p style={{ fontWeight: "bold" }}>{PostTopic}</p>
           </Card.Header>
           <Card.Body>
             <p>{Postdescription}</p>
@@ -52,13 +54,15 @@ export default function PostDetails() {
                 height="300"
                 loading="eager"
               ></img>
-            </div><br/>
+            </div>
+            <br />
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-around",
-              }}>
+              }}
+            >
               <Button
                 variant="outline-success"
                 size="lg"
@@ -71,40 +75,39 @@ export default function PostDetails() {
               </Button>
             </div>
           </Card.Body>
-          <Card.Footer style={{ backgroundColor: '#E8FAEA' }}>
-          <div >
-            {
-              openCommentForm && (
+          <Card.Footer style={{ backgroundColor: "#E8FAEA" }}>
+            <div>
+              {openCommentForm && (
                 <div>
                   <CommentForm postID={id} />
                 </div>
-              )
-            }
+              )}
 
-            {commentList.filter((comment) => comment.postId === id && comment.isVisible === true).length > 0 ? (
-              <p
-                style={{
-                  fontWeight: "500",
-                  textDecorationLine: "underline",
-                  marginLeft: '2%'
-                }}
-              >
-                <a href="#/" onClick={() => viewComments()}>View Comments</a>
-              </p>
-            ) : null}
+              {commentList.filter(
+                (comment) => comment.postId === id && comment.isVisible === true
+              ).length > 0 ? (
+                <p
+                  style={{
+                    fontWeight: "500",
+                    textDecorationLine: "underline",
+                    marginLeft: "2%",
+                  }}
+                >
+                  <a href="#/" onClick={() => viewComments()}>
+                    View Comments
+                  </a>
+                </p>
+              ) : null}
 
-            {openComments && (
-              <div style={{ marginLeft: '2%' }}>
-                <CommentList postID={id} />
-              </div>
-            )}
-          </div>
+              {openComments && (
+                <div style={{ marginLeft: "2%" }}>
+                  <CommentList postID={id} />
+                </div>
+              )}
+            </div>
           </Card.Footer>
-          
-
         </Card>
       </div>
-
     </div>
   );
 }

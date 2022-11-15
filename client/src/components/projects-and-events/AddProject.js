@@ -33,22 +33,26 @@ function AddProject() {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/createProject", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${process.env.REACT_APP_BASEURL}/createProject`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          influencerName,
+          influencerID,
+          businessName,
+          projectName,
+          businessID,
+          projectDescription,
+          projectStartDate,
+          projectEndDate,
+        }),
       },
-      body: JSON.stringify({
-        influencerName,
-        influencerID,
-        businessName,
-        projectName,
-        businessID,
-        projectDescription,
-        projectStartDate,
-        projectEndDate,
-      }),
-    }, navAllProjects());
+      navAllProjects()
+    );
 
     const data = await response.json();
 
@@ -61,7 +65,12 @@ function AddProject() {
     }
 
     function fieldValidation() {
-      if (!projectName || !projectDescription || !projectStartDate || !projectEndDate) {
+      if (
+        !projectName ||
+        !projectDescription ||
+        !projectStartDate ||
+        !projectEndDate
+      ) {
         setErrorMessage("Please fill all fields");
         return false;
       } else {
@@ -70,38 +79,38 @@ function AddProject() {
     }
 
     axios
-    .post("http://localhost:5000/createNotification", {
-      ReceiverId: influencerID,
-      SenderId: user._id,
-      Eventhappened: "Invitation for project collaboration",
-      NotificationTime,
-      Notificationmessage:
-        businessName +
-        " is inviting you to collaborate on a project named " +
-        projectName +
-        " from " +
-        projectStartDate +
-        " to " +
-        projectEndDate,
-    })
-    .then((res) => {
-      console.log("Notification created");
-    });
+      .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+        ReceiverId: influencerID,
+        SenderId: user._id,
+        Eventhappened: "Invitation for project collaboration",
+        NotificationTime,
+        Notificationmessage:
+          businessName +
+          " is inviting you to collaborate on a project named " +
+          projectName +
+          " from " +
+          projectStartDate +
+          " to " +
+          projectEndDate,
+      })
+      .then((res) => {
+        console.log("Notification created");
+      });
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then(
-      (res) => {
-        setBusinessName(res.data.firstName);
-        setBusinessID(res.data._id);
-      }
-    );
-    Axios.get(`http://localhost:5000/api/users/getuser/${influencerID}`).then(
-      (res) => {
-        setInfluencerFirstName(res.data.firstName);
-        setInfluencerLastName(res.data.lastName);
-      }
-    );
+    Axios.get(
+      `${process.env.REACT_APP_BASEURL}/api/users/getuser/${user._id}`
+    ).then((res) => {
+      setBusinessName(res.data.firstName);
+      setBusinessID(res.data._id);
+    });
+    Axios.get(
+      `${process.env.REACT_APP_BASEURL}/api/users/getuser/${influencerID}`
+    ).then((res) => {
+      setInfluencerFirstName(res.data.firstName);
+      setInfluencerLastName(res.data.lastName);
+    });
   }, []);
 
   let navigate = useNavigate();
@@ -182,14 +191,10 @@ function AddProject() {
             </Form>
 
             <Row>
-              {errorMessage &&
-                <div className='error_msg'>
-                  {errorMessage}
-                </div>}
-              {successMessage &&
-                <div className='success_msg'>
-                  {successMessage}
-                </div>}
+              {errorMessage && <div className="error_msg">{errorMessage}</div>}
+              {successMessage && (
+                <div className="success_msg">{successMessage}</div>
+              )}
             </Row>
           </Card.Body>
 

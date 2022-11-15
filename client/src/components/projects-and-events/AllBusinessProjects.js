@@ -21,10 +21,13 @@ function AllBusinessProjects() {
 
   useEffect(() => {
     // Retrieve all projects
-    axios.get("http://localhost:5000/getProjects").then((response) => {
-      setListOfProjects(response.data);
-    });
-    axios.get(`http://localhost:5000/api/users/getuser/${user._id}`)
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getProjects`)
+      .then((response) => {
+        setListOfProjects(response.data);
+      });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/api/users/getuser/${user._id}`)
       .then((res) => {
         setUserID(res.data._id);
       });
@@ -38,27 +41,31 @@ function AllBusinessProjects() {
 
   // Delete a project
   const handleDelete = (_id) => {
-    axios.get(`http://localhost:5000/getProject/${_id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.project.influencerID,
-          SenderId: user._id,
-          Eventhappened: "Deletion of a project",
-          NotificationTime,
-          Notificationmessage:
-            response.data.project.businessName +
-            " deleted " +
-            response.data.project.projectName,
-        })
-        .then((res) => {
-          console.log("Notification created");
-        });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${_id}`)
+      .then((response) => {
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+            ReceiverId: response.data.project.influencerID,
+            SenderId: user._id,
+            Eventhappened: "Deletion of a project",
+            NotificationTime,
+            Notificationmessage:
+              response.data.project.businessName +
+              " deleted " +
+              response.data.project.projectName,
+          })
+          .then((res) => {
+            console.log("Notification created");
+          });
 
-      axios.delete(`http://localhost:5000/deleteProject/${_id}`).then((res) => {
-        console.log(res);
-        console.log(res.data);
+        axios
+          .delete(`${process.env.REACT_APP_BASEURL}/deleteProject/${_id}`)
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+          });
       });
-    });
 
     const newList = listOfProjects.filter((project) => project._id !== _id);
     alert("Project was deleted");
@@ -92,7 +99,7 @@ function AllBusinessProjects() {
                     <span className="title">Sent to:</span>
                     <span className="data">{project.influencerName}</span>
                     {project.isAccepted === "true" &&
-                      project.isRatedBusiness === false ? (
+                    project.isRatedBusiness === false ? (
                       <span className="feedback">
                         <a
                           href="#/"
@@ -239,18 +246,18 @@ function AllBusinessProjects() {
                 </Card>
                 {selected === project._id
                   ? openEdit && (
-                    <div>
-                      <EditProject projectID={project._id} />
-                    </div>
-                  )
+                      <div>
+                        <EditProject projectID={project._id} />
+                      </div>
+                    )
                   : null}
 
                 {selected === project._id
                   ? openRatings && (
-                    <div>
-                      <Ratings projectID={project._id} category="business" />
-                    </div>
-                  )
+                      <div>
+                        <Ratings projectID={project._id} category="business" />
+                      </div>
+                    )
                   : null}
               </div>
             );

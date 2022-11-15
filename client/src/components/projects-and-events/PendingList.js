@@ -19,11 +19,13 @@ function PendingList() {
 
   let name = firstName + " " + lastName;
   useEffect(() => {
-    axios.get("http://localhost:5000/getProjects").then((response) => {
-      setListOfProjects(response.data);
-    });
     axios
-      .get(`http://localhost:5000/api/users/getuser/${user._id}`)
+      .get(`${process.env.REACT_APP_BASEURL}/getProjects`)
+      .then((response) => {
+        setListOfProjects(response.data);
+      });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/api/users/getuser/${user._id}`)
       .then((res) => {
         setFirstName(res.data.firstName);
         setLastName(res.data.lastName);
@@ -31,52 +33,60 @@ function PendingList() {
   }, []);
 
   const acceptProject = (id) => {
-    axios.get(`http://localhost:5000/getProject/${id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.project.businessID,
-          SenderId: user._id,
-          Eventhappened: "Acception of a Project",
-          NotificationTime,
-          Notificationmessage:
-            response.data.project.influencerName +
-            " has accepted the project named " +
-            response.data.project.projectName,
-        })
-        .then((res) => {
-          console.log("Notification created");
-        });
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${id}`)
+      .then((response) => {
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+            ReceiverId: response.data.project.businessID,
+            SenderId: user._id,
+            Eventhappened: "Acception of a Project",
+            NotificationTime,
+            Notificationmessage:
+              response.data.project.influencerName +
+              " has accepted the project named " +
+              response.data.project.projectName,
+          })
+          .then((res) => {
+            console.log("Notification created");
+          });
+      });
 
-    axios.put(`http://localhost:5000/acceptProject/${id}`, {}).then(() => {
-      console.log("Project has been accepted");
-    });
+    axios
+      .put(`${process.env.REACT_APP_BASEURL}/acceptProject/${id}`, {})
+      .then(() => {
+        console.log("Project has been accepted");
+      });
 
     const newList = listOfProjects.filter((project) => project._id !== id);
     setListOfProjects(newList);
   };
 
   const rejectProject = (id) => {
-    axios.get(`http://localhost:5000/getProject/${id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.project.businessID,
-          SenderId: user._id,
-          Eventhappened: "Rejection of a Project",
-          NotificationTime,
-          Notificationmessage:
-            response.data.project.influencerName +
-            " has rejected the project named " +
-            response.data.project.projectName,
-        })
-        .then((res) => {
-          console.log("Notification created");
-        });
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${id}`)
+      .then((response) => {
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+            ReceiverId: response.data.project.businessID,
+            SenderId: user._id,
+            Eventhappened: "Rejection of a Project",
+            NotificationTime,
+            Notificationmessage:
+              response.data.project.influencerName +
+              " has rejected the project named " +
+              response.data.project.projectName,
+          })
+          .then((res) => {
+            console.log("Notification created");
+          });
+      });
 
-    axios.put(`http://localhost:5000/rejectProject/${id}`, {}).then(() => {
-      console.log("Project has been rejected");
-    });
+    axios
+      .put(`${process.env.REACT_APP_BASEURL}/rejectProject/${id}`, {})
+      .then(() => {
+        console.log("Project has been rejected");
+      });
 
     const newList = listOfProjects.filter((project) => project._id !== id);
     setListOfProjects(newList);

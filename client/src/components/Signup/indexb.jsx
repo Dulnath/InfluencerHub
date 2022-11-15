@@ -28,10 +28,9 @@ const Signupb = () => {
 		if(data.password===repassword)
 		{
 			try {
-				const url = "http://localhost:5000/api/users";
+				const url = `${process.env.REACT_APP_BASEURL}/api/users`;
 				const { data: res } = await axios.post(url, data);
 				setMsg(res.message);
-			//	navigate("/login");
 				console.log(res.message);
 			} catch (error) {
 				if (

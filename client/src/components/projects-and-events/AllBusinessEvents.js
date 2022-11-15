@@ -19,12 +19,14 @@ function AllBusinessEvents() {
   let NotificationTime = new Date().toLocaleString();
   //Retrieve all events
   useEffect(() => {
-    axios.get("http://localhost:5000/getEvent").then((response) => {
+    axios.get(`${process.env.REACT_APP_BASEURL}/getEvent`).then((response) => {
       setListOfEvents(response.data);
     });
-    axios.get(`http://localhost:5000/getProject/${projectID}`).then((res) => {
-      setInfluencerName(res.data.project.influencerName);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${projectID}`)
+      .then((res) => {
+        setInfluencerName(res.data.project.influencerName);
+      });
   }, []);
 
   const { projectName, projectID } = useParams();
@@ -43,30 +45,34 @@ function AllBusinessEvents() {
 
   // Delete an event
   const handleDelete = (_id) => {
-    axios.get(`http://localhost:5000/getEvent/${_id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.event.influencerID,
-          SenderId: user._id,
-          Eventhappened: "Deletion of an event",
-          NotificationTime,
-          Notificationmessage:
-            response.data.event.businessName +
-            " deleted " +
-            response.data.event.eventName +
-            " event of " +
-            response.data.event.projectName +
-            " project",
-        })
-        .then((res) => {
-          console.log("Notification created");
-        });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getEvent/${_id}`)
+      .then((response) => {
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+            ReceiverId: response.data.event.influencerID,
+            SenderId: user._id,
+            Eventhappened: "Deletion of an event",
+            NotificationTime,
+            Notificationmessage:
+              response.data.event.businessName +
+              " deleted " +
+              response.data.event.eventName +
+              " event of " +
+              response.data.event.projectName +
+              " project",
+          })
+          .then((res) => {
+            console.log("Notification created");
+          });
 
-      axios.delete(`http://localhost:5000/deleteEvent/${_id}`).then((res) => {
-        console.log(res);
-        console.log(res.data);
+        axios
+          .delete(`${process.env.REACT_APP_BASEURL}/deleteEvent/${_id}`)
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+          });
       });
-    });
 
     const newList = listOfEvents.filter((event) => event._id !== _id);
     alert("Event was deleted");

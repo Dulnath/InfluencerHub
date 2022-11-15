@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { Card, Button, Col, Row,Container } from "react-bootstrap";
+import { Card, Button, Col, Row, Container } from "react-bootstrap";
 import styles from "./styles.module.css";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -14,15 +14,19 @@ function AllPostsExternal(props) {
   const [selected, setSelected] = useState();
 
   function getPosts(uid) {
-    axios.get(`http://localhost:5000/posts/${uid}`).then((response) => {
-      setListOfPosts(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/posts/${uid}`)
+      .then((response) => {
+        setListOfPosts(response.data);
+      });
   }
 
   function getComments() {
-    axios.get(`http://localhost:5000/getComments`).then((response) => {
-      setListOfComments(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getComments`)
+      .then((response) => {
+        setListOfComments(response.data);
+      });
   }
 
   useEffect(() => {
@@ -31,10 +35,12 @@ function AllPostsExternal(props) {
   }, []);
 
   function onDelete(_id) {
-    axios.delete(`http://localhost:5000/post/delete/${_id}`).then((res) => {
-      console.log(res);
-      console.log(res.data);
-    });
+    axios
+      .delete(`${process.env.REACT_APP_BASEURL}/post/delete/${_id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
 
     const newList = listOfPosts.filter((posts) => posts._id !== _id);
     alert("Post was deleted");
@@ -53,7 +59,7 @@ function AllPostsExternal(props) {
 
   if (listOfPosts.length !== 0) {
     return (
-      <Container styles={{background:"#e6e6e6"}}>
+      <Container styles={{ background: "#e6e6e6" }}>
         <h1>Posts</h1>
         <hr />
         {listOfPosts.map((posts, id) => {

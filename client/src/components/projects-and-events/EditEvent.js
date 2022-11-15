@@ -19,17 +19,16 @@ function EditEvent(props) {
   const user = ParseJwt(loggedInUser);
   // Edit an event
   const editEvent = () => {
-
     let formValid = fieldValidation();
     if (!formValid) {
       return;
     }
 
     axios
-      .get(`http://localhost:5000/getEvent/${props.eventID}`)
+      .get(`${process.env.REACT_APP_BASEURL}/getEvent/${props.eventID}`)
       .then((response) => {
         axios
-          .post("http://localhost:5000/createNotification", {
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
             ReceiverId: response.data.event.influencerID,
             SenderId: user._id,
             Eventhappened: "Edition of an Event",
@@ -48,7 +47,7 @@ function EditEvent(props) {
       });
 
     axios
-      .put(`http://localhost:5000/updateEvent/${props.eventID}`, {
+      .put(`${process.env.REACT_APP_BASEURL}/updateEvent/${props.eventID}`, {
         eventName,
         eventDescription,
         eventStartDate,
@@ -67,21 +66,22 @@ function EditEvent(props) {
         return true;
       }
     }
-
   };
 
   useEffect(() => {
     // Retrieve a specific event
-    axios.get(`http://localhost:5000/getEvent/${props.eventID}`).then((res) => {
-      setEventName(res.data.event.eventName);
-      setEventDescription(res.data.event.eventDescription);
-      setEventStartDate(res.data.event.eventStartDate);
-      setEventEndDate(res.data.event.eventEndDate);
-      console.log(res.data.event);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getEvent/${props.eventID}`)
+      .then((res) => {
+        setEventName(res.data.event.eventName);
+        setEventDescription(res.data.event.eventDescription);
+        setEventStartDate(res.data.event.eventStartDate);
+        setEventEndDate(res.data.event.eventEndDate);
+        console.log(res.data.event);
+      });
     // Retrieve a specific project
     axios
-      .get(`http://localhost:5000/getProject/${props.projectID}`)
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${props.projectID}`)
       .then((response) => {
         setProjectStartDate(response.data.project.projectStartDate);
         setProjectEndDate(response.data.project.projectEndDate);
@@ -158,16 +158,11 @@ function EditEvent(props) {
               <br />
             </Form>
             <Row>
-              {errorMessage &&
-                <div className='error_msg'>
-                  {errorMessage}
-                </div>}
-              {successMessage &&
-                <div className='success_msg'>
-                  {successMessage}
-                </div>}
+              {errorMessage && <div className="error_msg">{errorMessage}</div>}
+              {successMessage && (
+                <div className="success_msg">{successMessage}</div>
+              )}
             </Row>
-
 
             <Card.Footer style={{ paddingLeft: "50%" }}>
               <Button

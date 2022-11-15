@@ -17,11 +17,11 @@ function PendingEvents() {
   let NotificationTime = new Date().toLocaleString();
   //Retrieve all events
   useEffect(() => {
-    axios.get("http://localhost:5000/getEvent").then((response) => {
+    axios.get(`${process.env.REACT_APP_BASEURL}/getEvent`).then((response) => {
       setListOfEvents(response.data);
     });
     axios
-      .get(`http://localhost:5000/getProject/${projectID}`)
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${projectID}`)
       .then((response) => {
         setBusinessName(response.data.project.businessName);
       });
@@ -36,58 +36,66 @@ function PendingEvents() {
   };
 
   const acceptEvent = (id) => {
-    axios.get(`http://localhost:5000/getEvent/${id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.event.businessID,
-          SenderId: user._id,
-          Eventhappened: "Acception of an Event",
-          NotificationTime,
-          Notificationmessage:
-            response.data.event.influencerName +
-            " has accepted the event named " +
-            response.data.event.eventName +
-            " of " +
-            response.data.event.projectName +
-            " project",
-        })
-        .then((res) => {
-          console.log("Notification created");
-        });
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getEvent/${id}`)
+      .then((response) => {
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+            ReceiverId: response.data.event.businessID,
+            SenderId: user._id,
+            Eventhappened: "Acception of an Event",
+            NotificationTime,
+            Notificationmessage:
+              response.data.event.influencerName +
+              " has accepted the event named " +
+              response.data.event.eventName +
+              " of " +
+              response.data.event.projectName +
+              " project",
+          })
+          .then((res) => {
+            console.log("Notification created");
+          });
+      });
 
-    axios.put(`http://localhost:5000/acceptEvent/${id}`, {}).then(() => {
-      console.log("Event has been accepted");
-    });
+    axios
+      .put(`${process.env.REACT_APP_BASEURL}/acceptEvent/${id}`, {})
+      .then(() => {
+        console.log("Event has been accepted");
+      });
 
     const newList = listOfEvents.filter((event) => event._id !== id);
     setListOfEvents(newList);
   };
 
   const rejectEvent = (id) => {
-    axios.get(`http://localhost:5000/getEvent/${id}`).then((response) => {
-      axios
-        .post("http://localhost:5000/createNotification", {
-          ReceiverId: response.data.event.businessID,
-          SenderId: user._id,
-          Eventhappened: "Rejection of an Event",
-          NotificationTime,
-          Notificationmessage:
-            response.data.event.influencerName +
-            " has rejected the event named " +
-            response.data.event.eventName +
-            " of " +
-            response.data.event.projectName +
-            " project",
-        })
-        .then((res) => {
-          console.log("Notification created");
-        });
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getEvent/${id}`)
+      .then((response) => {
+        axios
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
+            ReceiverId: response.data.event.businessID,
+            SenderId: user._id,
+            Eventhappened: "Rejection of an Event",
+            NotificationTime,
+            Notificationmessage:
+              response.data.event.influencerName +
+              " has rejected the event named " +
+              response.data.event.eventName +
+              " of " +
+              response.data.event.projectName +
+              " project",
+          })
+          .then((res) => {
+            console.log("Notification created");
+          });
+      });
 
-    axios.put(`http://localhost:5000/rejectEvent/${id}`, {}).then(() => {
-      console.log("Event has been rejected");
-    });
+    axios
+      .put(`${process.env.REACT_APP_BASEURL}/rejectEvent/${id}`, {})
+      .then(() => {
+        console.log("Event has been rejected");
+      });
 
     const newList = listOfEvents.filter((event) => event._id !== id);
     setListOfEvents(newList);

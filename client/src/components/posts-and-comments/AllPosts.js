@@ -15,15 +15,19 @@ function AllPosts(props) {
   const navigate = useNavigate();
 
   function getPosts(uid) {
-    axios.get(`http://localhost:5000/posts/${uid}`).then((response) => {
-      setListOfPosts(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/posts/${uid}`)
+      .then((response) => {
+        setListOfPosts(response.data);
+      });
   }
 
   function getComments() {
-    axios.get(`http://localhost:5000/getComments`).then((response) => {
-      setListOfComments(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/getComments`)
+      .then((response) => {
+        setListOfComments(response.data);
+      });
   }
 
   useEffect(() => {
@@ -32,11 +36,13 @@ function AllPosts(props) {
   }, []);
 
   function onDelete(_id) {
-    axios.delete(`http://localhost:5000/post/delete/${_id}`).then((res) => {
-      console.log(res);
-      console.log(res.data);
-      alert("You have deleted the post successfully");
-    });
+    axios
+      .delete(`${process.env.REACT_APP_BASEURL}/post/delete/${_id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        alert("You have deleted the post successfully");
+      });
 
     const newList = listOfPosts.filter((posts) => posts._id !== _id);
 

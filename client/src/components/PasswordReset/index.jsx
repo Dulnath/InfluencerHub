@@ -9,7 +9,7 @@ const PasswordReset = () => {
 	const [msg, setMsg] = useState("");
 	const [error, setError] = useState("");
 	const param = useParams();
-	const url = `http://localhost:5000/api/password-reset/${param.id}/${param.token}`;
+	const url = `${process.env.REACT_APP_BASEURL}/api/password-reset/${param.id}/${param.token}`;
 
 	//to check whether url is valid or not
 	useEffect(() => {

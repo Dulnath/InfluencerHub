@@ -24,7 +24,7 @@ function Main(props) {
 		if(loggedInUser){
 			const userToken = localStorage.getItem("token");
 			const user = ParseJwt(userToken);
-			axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((response) => {
+			axios.get(`${process.env.REACT_APP_BASEURL}/api/users/getuser/${user._id}`).then((response) => {
 					setId(response.data._id);
 					setCategory(response.data.category)
 				})

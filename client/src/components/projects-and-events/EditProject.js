@@ -18,17 +18,16 @@ function EditProject(props) {
 
   // Edit a project
   const editProject = () => {
-
     let formValid = fieldValidation();
     if (!formValid) {
       return;
     }
 
     axios
-      .get(`http://localhost:5000/getProject/${props.projectID}`)
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${props.projectID}`)
       .then((response) => {
         axios
-          .post("http://localhost:5000/createNotification", {
+          .post(`${process.env.REACT_APP_BASEURL}/createNotification`, {
             ReceiverId: response.data.project.influencerID,
             SenderId: user._id,
             Eventhappened: "Edition of a Project",
@@ -44,19 +43,27 @@ function EditProject(props) {
       });
 
     axios
-      .put(`http://localhost:5000/updateProject/${props.projectID}`, {
-        projectName,
-        projectDescription,
-        projectStartDate,
-        projectEndDate,
-      })
+      .put(
+        `${process.env.REACT_APP_BASEURL}/updateProject/${props.projectID}`,
+        {
+          projectName,
+          projectDescription,
+          projectStartDate,
+          projectEndDate,
+        }
+      )
       .then((res) => {
         setSuccessMessage("Project has been edited");
         console.log("Project edited");
       });
 
     function fieldValidation() {
-      if (!projectName || !projectDescription || !projectStartDate || !projectEndDate) {
+      if (
+        !projectName ||
+        !projectDescription ||
+        !projectStartDate ||
+        !projectEndDate
+      ) {
         setErrorMessage("Please fill all fields");
         return false;
       } else {
@@ -68,7 +75,7 @@ function EditProject(props) {
   // Retrieve a specific project
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/getProject/${props.projectID}`)
+      .get(`${process.env.REACT_APP_BASEURL}/getProject/${props.projectID}`)
       .then((res) => {
         setProjectName(res.data.project.projectName);
         setProjectDescription(res.data.project.projectDescription);
@@ -147,14 +154,10 @@ function EditProject(props) {
           </Form>
 
           <Row>
-            {errorMessage &&
-              <div className='error_msg'>
-                {errorMessage}
-              </div>}
-            {successMessage &&
-              <div className='success_msg'>
-                {successMessage}
-              </div>}
+            {errorMessage && <div className="error_msg">{errorMessage}</div>}
+            {successMessage && (
+              <div className="success_msg">{successMessage}</div>
+            )}
           </Row>
 
           <Card.Footer style={{ paddingLeft: "50%" }}>

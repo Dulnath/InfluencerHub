@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import image from "../../images/user.jpg";
-import { Table,Row} from "react-bootstrap";
+import { Table, Row } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 function Search(props) {
@@ -16,20 +16,19 @@ function Search(props) {
     loadUsersData();
   }, []);
 
-  const loadAllUsers = async () =>{
-    axios.get('http://localhost:5000/api/useraccounts').then(res=>{
-            setData(res.data);
-    })
-  }
+  const loadAllUsers = async () => {
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/api/useraccounts`)
+      .then((res) => {
+        setData(res.data);
+      });
+  };
   const loadUsersData = async () => {
-       let newval= value.toLowerCase();
-        return await axios
-          .get(
-            `http://localhost:5000/api/users/search/${newval}`
-           
-          )
-          .then((response) =>  setData(response.data))
-          .catch((err) => console.log(err));
+    let newval = value.toLowerCase();
+    return await axios
+      .get(`${process.env.REACT_APP_BASEURL}/api/users/search/${newval}`)
+      .then((response) => setData(response.data))
+      .catch((err) => console.log(err));
   };
 
   //reset button
@@ -41,18 +40,17 @@ function Search(props) {
   //search button
   const handleSearch = async (e) => {
     e.preventDefault();
-    let newval= value.toLowerCase();
+    let newval = value.toLowerCase();
     return await axios
-    .get(`http://localhost:5000/api/users/search/${newval}`)
-    .then((response)=>{
-      setData(response.data)
-      //setValue("");
-    })
-    .catch((err)=>console.log(err));
+      .get(`${process.env.REACT_APP_BASEURL}/api/users/search/${newval}`)
+      .then((response) => {
+        setData(response.data);
+        //setValue("");
+      })
+      .catch((err) => console.log(err));
   };
-  console.log('test')
+  console.log("test");
 
- 
   return (
     <div className="container">
       <form
@@ -72,15 +70,19 @@ function Search(props) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <button type="submit" class="btn btn-success">Search</button>
+        <button type="submit" class="btn btn-success">
+          Search
+        </button>
 
-        <button type="submit" class="btn btn-primary" onClick={() => handleReset()}>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          onClick={() => handleReset()}
+        >
           Reset
         </button>
       </form>
       <div style={{ marginTop: "100px" }}>
-
-
         {data.length === 0 ? (
           <Table className="align-center mb-0">
             <tr>
@@ -90,33 +92,54 @@ function Search(props) {
             </tr>
           </Table>
         ) : (
-          data.map((item, index) => (
-            (item.category !== 'admin' && item.adminVerified && item.category !== props.category&&item.isActive) ? (              
+          data.map((item, index) =>
+            item.category !== "admin" &&
+            item.adminVerified &&
+            item.category !== props.category &&
+            item.isActive ? (
               <div>
                 <div className={styles.card}>
-
                   <div className="card-body">
-
-                    {item.img?<img src={item.img} className={styles.image_img} alt="..." />:<img src={image} className={styles.image_img} alt="..." />}
-                    {(item.firstName||item.lastName)?<h3 class="card-title">{item.firstName + " " + item.lastName}</h3>:<h3 class="card-title">{item.businessName}</h3>}
-                    <Row> <h5>{item.category}</h5></Row>
-                    <Row> <h10>{item.email}</h10></Row>
-                    <button className={styles.button}
-                      onClick={() => { navigate(`/view/${item._id}`) }}
-                    >View
-
+                    {item.img ? (
+                      <img
+                        src={item.img}
+                        className={styles.image_img}
+                        alt="..."
+                      />
+                    ) : (
+                      <img src={image} className={styles.image_img} alt="..." />
+                    )}
+                    {item.firstName || item.lastName ? (
+                      <h3 class="card-title">
+                        {item.firstName + " " + item.lastName}
+                      </h3>
+                    ) : (
+                      <h3 class="card-title">{item.businessName}</h3>
+                    )}
+                    <Row>
+                      {" "}
+                      <h5>{item.category}</h5>
+                    </Row>
+                    <Row>
+                      {" "}
+                      <h10>{item.email}</h10>
+                    </Row>
+                    <button
+                      className={styles.button}
+                      onClick={() => {
+                        navigate(`/view/${item._id}`);
+                      }}
+                    >
+                      View
                     </button>
-
                   </div>
                 </div>
               </div>
             ) : (
               <div></div>
             )
-          ))
+          )
         )}
-          
- 
 
         <div
           style={{
@@ -125,18 +148,10 @@ function Search(props) {
             maxWidth: "250px",
             alignContent: "center",
           }}
-        >
-       
-        </div>
+        ></div>
       </div>
-     
     </div>
   );
-  
-
-  
 }
 
 export default Search;
-
-

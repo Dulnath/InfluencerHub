@@ -25,7 +25,7 @@ function View() {
   const navigate = useNavigate();
 
   useEffect(() => {
-      axios.get(`http://localhost:5000/api/users/getuser/${id}`).then((response) => {
+      axios.get(`${process.env.REACT_APP_BASEURL}/api/users/getuser/${id}`).then((response) => {
 
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);

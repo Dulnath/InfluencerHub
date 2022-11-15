@@ -23,7 +23,7 @@ function Business(props) {
         const user = ParseJwt(userToken);
         if(userToken){
 		
-			const response = axios.get(`http://localhost:5000/api/users/getuser/${user._id}`).then((response) => {
+			const response = axios.get(`${process.env.REACT_APP_BASEURL}/api/users/getuser/${user._id}`).then((response) => {
 			
             setUserName(response.data.firstName);
 			setUsrId(response.data._id);

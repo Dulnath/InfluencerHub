@@ -20,7 +20,7 @@ function EditPost() {
       return;
     }
     axios
-      .put(`http://localhost:5000/post/update/${id}`, {
+      .put(`${process.env.REACT_APP_BASEURL}/post/update/${id}`, {
         PostTopic,
         Postdescription,
         PostCategory,
@@ -30,7 +30,7 @@ function EditPost() {
       });
   };
   useEffect(() => {
-    axios.get(`http://localhost:5000/post/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_BASEURL}/post/${id}`).then((res) => {
       setTopic(res.data.post.PostTopic);
       setDescription(res.data.post.Postdescription);
       setPostCategory(res.data.post.PostCategory);

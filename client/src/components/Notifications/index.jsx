@@ -16,7 +16,7 @@ function ViewNotifications() {
 	const loggedinuser = ParseJwt(token);
 	
 	function loadNotifications(){
-		axios.get(`http://localhost:5000/notification/${loggedinuser._id}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_BASEURL}/notification/${loggedinuser._id}`).then((response) => {
 			setNotificationList(response.data);						
 		})	
 	}
@@ -25,7 +25,7 @@ function ViewNotifications() {
 	},[])
 
 	function MarkAsRead(_ID){
-		axios.delete(`http://localhost:5000/notification/delete/${_ID}`).then((res) => {
+		axios.delete(`${process.env.REACT_APP_BASEURL}/notification/delete/${_ID}`).then((res) => {
       		console.log(res);
      	 console.log(res.data);
 		 

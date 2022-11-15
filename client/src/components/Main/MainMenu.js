@@ -34,7 +34,9 @@ const MainMenu = (props) => {
 
     useEffect(() => {
       axios
-        .get(`http://localhost:5000/notification/${loggedinuser._id}`)
+        .get(
+          `${process.env.REACT_APP_BASEURL}/notification/${loggedinuser._id}`
+        )
         .then((response) => {
           setNotificationList(response.data);
         });
@@ -47,7 +49,7 @@ const MainMenu = (props) => {
     const user = ParseJwt(userToken);
     if (userToken) {
       const response = axios
-        .get(`http://localhost:5000/api/users/getuser/${user._id}`)
+        .get(`${process.env.REACT_APP_BASEURL}/api/users/getuser/${user._id}`)
         .then((response) => {
           if (response.data.category === "influencer")
             setUserName(response.data.firstName);

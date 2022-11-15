@@ -21,7 +21,7 @@ function CreatePost() {
     }
     const loggedInUser = localStorage.getItem("token");
     const user = ParseJwt(loggedInUser);
-    const response = await fetch("http://localhost:5000/post/save", {
+    const response = await fetch(`${process.env.REACT_APP_BASEURL}/post/save`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
